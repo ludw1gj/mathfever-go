@@ -1,0 +1,27 @@
+<p>Find the Total Surface Area of a cylinder, with the equation:<br>
+TSA = tsa of 2 circles + tsa of curved surface<br>
+TSA = 2 π r<sup>2</sup> + 2 π rh</p>
+
+<p>r is the radius and h is the height. A cylinder consists of two circles and a curved surface. Find the tsa of
+one of the circles and multiply that by 2, find the the tsa of the curved surface, and then add those two together.
+</p>
+
+<p>Where r = {{ .Radius }}, and h = {{ .Height }}:<br>
+Find the tsa of the two circles:<br>
+2 π r<sup>2</sup><br>
+2 &times π &times {{ .Radius }}<sup>2</sup><br>
+2 &times π &times {{ .RadiusSqr }}<br>
+{{ .CirclesArea }}</p>
+
+<p>Find the tsa of curved surface:<br>
+2 π rh<br>
+2 &times π &times {{ .Radius }} &times {{ .Height }}<br>
+2 &times π &times {{ .RH }}<br>
+{{ .CurvedSurfaceArea }}</p>
+
+<p>Add the two surface areas together:<br>
+{{ .CirclesArea }} + {{ .CurvedSurfaceArea }}<br>
+{{ .TSA }}</p>
+
+<p>Therefore:<br>
+The total surface tsa of a cylinder with the radius of {{ .Radius }}, and a height of {{ .Height }} equals {{ .TSA }}.</p>

@@ -1,0 +1,25 @@
+<p>Find the Total Surface Area of a square based triangle, with the equation:<br>
+TSA = tsa of the square + tsa of 4 triangles<br>
+TSA = b<sup>2</sup> + 4 &times (1/2bh)<br>
+TSA = b<sup>2</sup> + 2bh</p>
+
+<p>b is the base length, and h is the height.</p>
+
+<p>Where b = {{ .BaseLength }}, and h = {{ .Height }}:<br>
+Area of the square:<br>
+b<sup>2</sup><br>
+{{ .BaseLength }}<sup>2</sup><br>
+{{ .SquareArea }}</p>
+
+<p>Area of 4 triangles:<br>
+2bh<br>
+2 &times {{ .BaseLength }} &times {{ .Height }}<br>
+{{ .FourTrianglesArea }}</p>
+
+<p>Add the two surface areas together:<br>
+{{ .SquareArea }} + {{ .FourTrianglesArea }}<br>
+{{ .TSA }}</p>
+
+<p>Therefore:<br>
+The total surface tsa of a square based triangle with the base length of {{ .BaseLength }}, and a height is {{ .Height }}
+equals {{ .TSA }}.</p>

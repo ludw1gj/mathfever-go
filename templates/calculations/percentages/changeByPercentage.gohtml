@@ -1,0 +1,23 @@
+<p>Where the {{ .Noun }} in Percentage is {{ .Percentage }}%, and the Number is {{ .Number }}:</p>
+
+<p>Calculate using the equation shown below:<br>
+(Number &#xf7; 100) &times Percentage + Number<br>
+({{ .Number }} &#xf7; 100) &times {{ .Percentage }} + {{ .Number }}</p>
+
+<p>Find 1% of {{ .Number}}:<br>
+Number &#xf7; 100<br>
+{{ .Number }} &#xf7; 100<br>
+{{ .OnePercent }}</p>
+
+<p>Multiply the one percent value by {{ .Percentage }} to find {{ .Percentage }}% of {{ .Number }}:<br>
+{{ .OnePercent }} &times Percentage<br>
+{{ .OnePercent }} &times {{ .Percentage }}<br>
+{{ .AddValue }}</p>
+
+<p>The value {{ .AddValue }} is {{ .Percentage }}% of {{ .Number }}, add it to the Number to get the final answer:<br>
+{{ .AddValue }} + Number<br>
+{{ .AddValue }} + {{ .Number }}<br>
+{{ .Answer }}</p>
+
+<p>Therefore:<br>
+{{ .Number}} {{ .Noun }}d by {{ .Percentage }}% is {{ .Answer }}.</p>

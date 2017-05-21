@@ -1,0 +1,14 @@
+<p>Find the Total Surface Area of a cube, with the equation:<br>
+TSA = 6L<sup>2</sup></p>
+
+<p>L is the length of each side of the cube. The surface tsa of a single side is a square, thus L &times L, which
+is the same as L<sup>2</sup>. Since all of the sides are the same, and there are 6 sides, you times L<sup>2</sup> by
+6.</p>
+
+<p>Where L = {{ .Length }}:<br>
+TSA = 6 &times {{ .Length }}<sup>2</sup><br>
+TSA = 6 &times {{ .LengthSqr }}<br>
+TSA = {{ .TSA }}</p>
+
+<p>Therefore:<br>
+The total surface tsa of a cube with the length of {{ .Length }} equals {{ .TSA }}.</p>

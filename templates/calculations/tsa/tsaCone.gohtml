@@ -1,0 +1,24 @@
+<p>Find the Total Surface Area of a cone, with the equation:<br>
+TSA = tsa of the base (circle) + tsa of the curved surface<br>
+TSA = π r<sup>2</sup> + π rS<br>
+
+<p>r is the radius and S is the Slant Height.</p>
+
+<p>Where r = {{ .Radius }} and S = {{ .SlantHeight }}:<br>
+Find the tsa of the base:<br>
+π r<sup>2</sup><br>
+π &times {{ .Radius }}<sup>2</sup><br>
+{{ .BaseArea }}</p>
+
+<p>Find the tsa of the curved surface:<br>
+π rS<br>
+π &times {{ .Radius }} &times {{ .SlantHeight }}<br>
+{{ .CurvedSurfaceArea }}</p>
+
+<p>Add the two surface areas together:<br>
+{{ .BaseArea }} + {{ .CurvedSurfaceArea }}<br>
+{{ .TSA }}</p>
+
+<p>Therefore:<br>
+The total surface tsa of a cone with the radius of {{ .Radius }} and a slant height of {{ .SlantHeight }}
+equals {{ .TSA }}.</p>

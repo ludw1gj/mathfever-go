@@ -1,0 +1,21 @@
+<p>Where Original Number is {{ .Number }}, and the New Number is {{ .NewNumber }}:</p>
+
+<p>Calculate using the equation shown below:<br>
+((New Number - Original Number) &#xf7; Original Number) &times 100<br>
+
+<p>Find the change in value between the two numbers:<br>
+New Number - Original Number<br>
+{{ .NewNumber }} - {{ .Number }}<br>
+{{ .Change }}</p>
+
+<p>Find the decimalised version of the percentage change using the change in value:<br>
+{{ .Change }} &#xf7; Original Number<br>
+{{ .Change }} &#xf7; {{ .Number }}<br>
+{{ .DecimalisedPercentage }}</p>
+
+<p>Convert decimalised percentage to percentage to get the final answer:<br>
+{{ .DecimalisedPercentage }} &times 100<br>
+{{ .Answer }}</p>
+
+<p>Therefore:<br>
+The percentage of change from {{ .Number }} to {{ .NewNumber }} is {{ .Answer }}%.</p>

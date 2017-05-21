@@ -1,0 +1,14 @@
+<p>Find the Total Surface Area of a rectangular prism, with the equation:<br>
+TSA = 2(WH + LW + LH)</p>
+
+<p>A rectangular prism has a surface tsa of six rectangles. Two sides of each: width &times height, length &times
+width, and length &times height. That would be 2WH + 2LW + 2LH, which would be the same as 2(WH + LW + LH).</p>
+
+<p>Where H = 2, L = 4, W = 3:<br>
+TSA = 2({{ .Width }} × {{ .Height }} + {{ .Length }} × {{ .Width }} + {{ .Length }} × {{ .Height }})<br>
+TSA = 2({{ .Add }})<br>
+TSA = {{ .TSA }}</p>
+
+<p>Therefore:<br>
+The total surface tsa of a rectangular prism with the height of {{ .Height }}, a length of {{ .Length }}, and a width of
+{{ .Width }} is equal to {{ .TSA }}.</p>
