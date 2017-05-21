@@ -33,7 +33,8 @@ func CalculationsAPIHandler(w http.ResponseWriter, r *http.Request) {
 
 		}
 	}
-	NotFoundHandler(w, r)
+	http.Error(w, "Error 404: api route not found", http.StatusNotFound)
+
 }
 
 func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input api.InputType, jsonErr string) {
