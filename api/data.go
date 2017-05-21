@@ -17,7 +17,7 @@ type Calculation struct {
 	Name               string  `json:"name"`
 	URL                string  `json:"url"`
 	Input              []Input `json:"input"`
-	Example            template.HTML `json:"body"`
+	Example            template.HTML `json:"example"`
 	InputStructAddress InputType        `json:"input_struct_address"`
 }
 
@@ -141,7 +141,7 @@ func percentagesCategory() Category {
 		&changeByPercentageInput{},
 	}
 	NumberFromPercentageData := Calculation{
-		"Number from a Percentage",
+		"Get Number from a Percentage",
 		"/percentages/number-from-percentage",
 		createInputs(numberFromPercentageInput{}),
 		makeTemplateHTML(calculations.NumberFromPercentage(600, 752)),

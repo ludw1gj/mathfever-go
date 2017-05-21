@@ -3,9 +3,9 @@ package api
 import (
 	"bytes"
 	"fmt"
-	"reflect"
 	"html/template"
 	"log"
+	"reflect"
 )
 
 func createJSONError(inputParams InputType) (s string) {
@@ -25,9 +25,14 @@ func createJSONError(inputParams InputType) (s string) {
 func createInputs(inputParams InputType) (inputs []Input) {
 	val := reflect.ValueOf(inputParams)
 	for i := 0; i < val.Type().NumField(); i++ {
-		data := Input{
-			val.Type().Field(i).Name,
-			val.Type().Field(i).Tag.Get("json"),
+		var data Input
+		if val.Type().Field(i).Tag.Get("name") == "" {
+			log.Fatalf("Error: %s struct does not have 'name' tag", val.Type().Name())
+		} else {
+			data = Input{
+				val.Type().Field(i).Tag.Get("name"),
+				val.Type().Field(i).Tag.Get("json"),
+			}
 		}
 		inputs = append(inputs, data)
 	}

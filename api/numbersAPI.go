@@ -3,17 +3,17 @@ package api
 import "github.com/spottywolf/mathfever/api/calculations"
 
 type isPrimeInput struct {
-	Number int `json:"number"`
+	Number int `json:"number" name:"Number"`
 }
 
 type highestCommonFactorInput struct {
-	Num1 int `json:"num_1"`
-	Num2 int `json:"num_2"`
+	Num1 int `json:"num_1" name:"First Number"`
+	Num2 int `json:"num_2" name:"Second Number"`
 }
 
 type lowestCommonMultipleInput struct {
-	Num1 int `json:"num_1"`
-	Num2 int `json:"num_2"`
+	Num1 int `json:"num_1" name:"First Number"`
+	Num2 int `json:"num_2" name:"Second Number"`
 }
 
 func (i isPrimeInput) Execute() (string, error) {

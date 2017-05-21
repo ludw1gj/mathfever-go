@@ -3,27 +3,27 @@ package api
 import "github.com/spottywolf/mathfever/api/calculations"
 
 type binaryToDecimalInput struct {
-	Binary string `json:"binary"`
+	Binary string `json:"binary" name:"Binary"`
 }
 
 type binaryToHexadecimalInput struct {
-	Binary string `json:"binary"`
+	Binary string `json:"binary" name:"Binary"`
 }
 
 type decimalToBinaryInput struct {
-	Decimal string `json:"decimal"`
+	Decimal string `json:"decimal" name:"Decimal"`
 }
 
 type decimalToHexadecimalInput struct {
-	Decimal string `json:"decimal"`
+	Decimal string `json:"decimal" name:"Decimal"`
 }
 
 type hexadecimalToBinaryInput struct {
-	Hexadecimal string `json:"hexadecimal"`
+	Hexadecimal string `json:"hexadecimal" name:"Hexadecimal"`
 }
 
 type hexadecimalToDecimalInput struct {
-	Hexadecimal string `json:"hexadecimal"`
+	Hexadecimal string `json:"hexadecimal" name:"Hexadecimal"`
 }
 
 func (i binaryToDecimalInput) Execute() (string, error) {

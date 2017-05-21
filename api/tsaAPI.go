@@ -3,37 +3,37 @@ package api
 import "github.com/spottywolf/mathfever/api/calculations"
 
 type tsaPythagoreanTheoremInput struct {
-	SideA float64 `json:"side_a"`
-	SideB float64 `json:"side_b"`
+	SideA float64 `json:"side_a" name:"Side A"`
+	SideB float64 `json:"side_b" name:"Side B"`
 }
 
 type tsaConeInput struct {
-	Radius      float64 `json:"radius"`
-	SlantHeight float64 `json:"slant_height"`
+	Radius      float64 `json:"radius" name:"Radius"`
+	SlantHeight float64 `json:"slant_height" name:"Slant Height"`
 }
 
 type tsaCubeInput struct {
-	Length float64 `json:"length"`
+	Length float64 `json:"length" name:"Length"`
 }
 
 type tsaCylinderInput struct {
-	Radius float64 `json:"radius"`
-	Height float64 `json:"height"`
+	Radius float64 `json:"radius" name:"Radius"`
+	Height float64 `json:"height" name:"Height"`
 }
 
 type tsaRectangularPrismInput struct {
-	Height float64 `json:"height"`
-	Length float64 `json:"length"`
-	Width  float64 `json:"width"`
+	Height float64 `json:"height" name:"Height"`
+	Length float64 `json:"length" name:"Length"`
+	Width  float64 `json:"width" name:"Width"`
 }
 
 type tsaSphereInput struct {
-	Radius float64 `json:"radius"`
+	Radius float64 `json:"radius" name:"Radius"`
 }
 
 type tsaSquareBaseTriangleInput struct {
-	BaseLength float64 `json:"base_length"`
-	Height     float64 `json:"height"`
+	BaseLength float64 `json:"base_length" name:"Base Length"`
+	Height     float64 `json:"height" name:"Height"`
 }
 
 func (i tsaPythagoreanTheoremInput) Execute() (string, error) {
