@@ -10,7 +10,7 @@ import (
 	"github.com/spottywolf/mathfever/api"
 )
 
-type clientInputError struct {
+type errorJSON struct {
 	Error string `json:"error"`
 }
 
@@ -33,18 +33,19 @@ func CalculationsAPIHandler(w http.ResponseWriter, r *http.Request) {
 
 		}
 	}
-	http.Error(w, "Error 404: api route not found", http.StatusNotFound)
-
+	var buf bytes.Buffer
+	json.NewEncoder(&buf).Encode(errorJSON{"error 404: api route not found"})
+	http.Error(w, buf.String(), http.StatusNotFound)
 }
 
-func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input api.InputType, jsonErr string) {
+func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input api.InputType, jsonInvalidErr string) {
 	w.Header().Set("Content-Type", "application/json")
 
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&input)
 	if err != nil {
 		var buf bytes.Buffer
-		json.NewEncoder(&buf).Encode(clientInputError{jsonErr})
+		json.NewEncoder(&buf).Encode(errorJSON{jsonInvalidErr})
 		http.Error(w, buf.String(), http.StatusBadRequest)
 		return
 	}
@@ -52,7 +53,9 @@ func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input api.Inp
 
 	s, err := input.Execute()
 	if err != nil {
-		json.NewEncoder(w).Encode(clientInputError{err.Error()})
+		var buf bytes.Buffer
+		json.NewEncoder(&buf).Encode(errorJSON{err.Error()})
+		http.Error(w, buf.String(), http.StatusInternalServerError)
 		return
 	}
 	json.NewEncoder(w).Encode(serverOutput{s})
