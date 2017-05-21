@@ -29,52 +29,58 @@ var (
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	err := indexTpl.Execute(w, api.CategoryData)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		ErrorHandler(w, r)
 	}
 }
 
 func AboutHandler(w http.ResponseWriter, r *http.Request) {
 	err := aboutTpl.Execute(w, nil)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
+		ErrorHandler(w, r)
 	}
 }
 
 func HelpHandler(w http.ResponseWriter, r *http.Request) {
 	err := helpTpl.Execute(w, nil)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
+		ErrorHandler(w, r)
 	}
 }
 
 func PrivacyHandler(w http.ResponseWriter, r *http.Request) {
 	err := privacyTpl.Execute(w, nil)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
+		ErrorHandler(w, r)
 	}
 }
 
 func TermsHandler(w http.ResponseWriter, r *http.Request) {
 	err := termsTpl.Execute(w, nil)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
+		ErrorHandler(w, r)
 	}
 }
 
 func MessageBoardHandler(w http.ResponseWriter, r *http.Request) {
 	err := messageBoardTpl.Execute(w, nil)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
+		ErrorHandler(w, r)
 	}
 }
 
 func ConversionTableHandler(w http.ResponseWriter, r *http.Request) {
 	err := conversionTableTpl.Execute(w, nil)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
+		ErrorHandler(w, r)
 	}
 }
-
 
 func CategoriesHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
@@ -86,6 +92,7 @@ func CategoriesHandler(w http.ResponseWriter, r *http.Request) {
 			err := categoriesTpl.Execute(w, categ)
 			if err != nil {
 				log.Println(err)
+				ErrorHandler(w, r)
 			}
 			return
 		}
@@ -111,7 +118,8 @@ func CalculationsHandler(w http.ResponseWriter, r *http.Request) {
 					}
 					err := calculationTpl.Execute(w, data)
 					if err != nil {
-						log.Print(err)
+						log.Println(err)
+						ErrorHandler(w, r)
 					}
 					return
 				}

@@ -14,11 +14,11 @@ type Category struct {
 }
 
 type Calculation struct {
-	Name               string  `json:"name"`
-	URL                string  `json:"url"`
-	Input              []Input `json:"input"`
+	Name               string        `json:"name"`
+	URL                string        `json:"url"`
+	Input              []Input       `json:"input"`
 	Example            template.HTML `json:"example"`
-	InputStructAddress InputType        `json:"input_struct_address"`
+	InputStructAddress InputType     `json:"input_struct_address"`
 }
 
 type Input struct {
@@ -146,7 +146,6 @@ func percentagesCategory() Category {
 		createInputs(numberFromPercentageInput{}),
 		makeTemplateHTML(calculations.NumberFromPercentage(600, 752)),
 		&numberFromPercentageInput{},
-
 	}
 	PercentageChangeData := Calculation{
 		"Find Percentage Difference of Two Numbers",
@@ -154,7 +153,6 @@ func percentagesCategory() Category {
 		createInputs(percentageChangeInput{}),
 		makeTemplateHTML(calculations.PercentageChange(400, 540)),
 		&percentageChangeInput{},
-
 	}
 	PercentageFromNumberData := Calculation{
 		"Find Percentage of a Number",
@@ -162,7 +160,6 @@ func percentagesCategory() Category {
 		createInputs(percentageFromNumberInput{}),
 		makeTemplateHTML(calculations.PercentageFromNumber(585, 900)),
 		&percentageFromNumberInput{},
-
 	}
 	percentages := Category{
 		"Percentages",
@@ -192,7 +189,6 @@ func tsaCategory() Category {
 		createInputs(tsaConeInput{}),
 		makeTemplateHTML(calculations.TsaCone(3, 5)),
 		&tsaConeInput{},
-
 	}
 	CubeData := Calculation{
 		"Cube",
@@ -200,7 +196,6 @@ func tsaCategory() Category {
 		createInputs(tsaCubeInput{}),
 		makeTemplateHTML(calculations.TsaCube(3)),
 		&tsaCubeInput{},
-
 	}
 	CylinderData := Calculation{
 		"Cylinder",
@@ -208,7 +203,6 @@ func tsaCategory() Category {
 		createInputs(tsaCylinderInput{}),
 		makeTemplateHTML(calculations.TsaCylinder(2, 5)),
 		&tsaCylinderInput{},
-
 	}
 	RectangularPrismData := Calculation{
 		"Rectangular Prism",
@@ -216,7 +210,6 @@ func tsaCategory() Category {
 		createInputs(tsaRectangularPrismInput{}),
 		makeTemplateHTML(calculations.TsaRectangularPrism(2, 4, 3)),
 		&tsaRectangularPrismInput{},
-
 	}
 	SphereData := Calculation{
 		"Sphere",
@@ -224,7 +217,6 @@ func tsaCategory() Category {
 		createInputs(tsaSphereInput{}),
 		makeTemplateHTML(calculations.TsaSphere(1)),
 		&tsaSphereInput{},
-
 	}
 	SquareBasedTriangleData := Calculation{
 		"Square Based Triangle",
@@ -232,7 +224,6 @@ func tsaCategory() Category {
 		createInputs(tsaSquareBaseTriangleInput{}),
 		makeTemplateHTML(calculations.TsaSquareBaseTriangle(4, 6)),
 		&tsaSquareBaseTriangleInput{},
-
 	}
 	totalSurfaceArea := Category{
 		"Total Surface Area",
