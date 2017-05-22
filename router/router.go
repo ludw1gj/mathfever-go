@@ -14,12 +14,12 @@ func init() {
 	Router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public"))))
 
 	// Site Handler
-	Router.HandleFunc("/", indexHandler)
-	Router.HandleFunc("/about", aboutHandler)
-	Router.HandleFunc("/help", helpHandler)
-	Router.HandleFunc("/privacy", privacyHandler)
-	Router.HandleFunc("/terms", termsHandler)
-	Router.HandleFunc("/message-board", messageBoardHandler)
+	Router.HandleFunc("/", indexHandler).Name("index")
+	Router.HandleFunc("/about", aboutHandler).Name("about")
+	Router.HandleFunc("/help", helpHandler).Name("help")
+	Router.HandleFunc("/privacy", privacyHandler).Name("privacy")
+	Router.HandleFunc("/terms", termsHandler).Name("terms")
+	Router.HandleFunc("/message-board", messageBoardHandler).Name("message-board")
 	Router.HandleFunc("/networking/conversion-table", conversionTableHandler)
 	Router.HandleFunc("/{category}", categoriesHandler)
 	Router.HandleFunc("/{category}/{calculation}", calculationsHandler)

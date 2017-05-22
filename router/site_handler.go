@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	baseTpl = template.Must(template.ParseFiles("template/site/base.html"))
+	baseTpl = template.Must(template.New("base.html").Funcs(FuncMap).ParseFiles("template/site/base.html"))
 
 	indexTpl           = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/index.html"))
 	aboutTpl           = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/about.html"))
