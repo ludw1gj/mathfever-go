@@ -1,0 +1,12 @@
+[Unit]
+Description=Mathfever.xyz Website
+After=network.target
+
+[Service]
+WorkingDirectory=/srv/mathfever/
+ExecStart=/srv/mathfever/mathfever
+StandardOutput=syslog
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
