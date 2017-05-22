@@ -3,11 +3,12 @@ package router
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strings"
 
 	"github.com/gorilla/mux"
-	"github.com/spottywolf/mathfever/api"
+	"github.com/spottywolf/mathfever/model"
 )
 
 type errorJSON struct {
@@ -18,15 +19,17 @@ type serverOutput struct {
 	Content string `json:"content"`
 }
 
-func CalculationsAPIHandler(w http.ResponseWriter, r *http.Request) {
+func calculationsAPIHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
 	vars := mux.Vars(r)
 	category := vars["category"]
 	calculation := vars["calculation"]
-	for _, categ := range api.CategoryData {
+	for _, categ := range model.CategoryData {
 		if category == strings.Split(categ.URL, "/")[1] {
 			for _, calc := range categ.Calculations {
 				if calculation == strings.Split(calc.URL, "/")[2] {
-					calculationsAPIHelper(w, r, calc.InputStructAddress, calc.InputStructAddress.JsonError())
+					calc.InputStructAddress.HandleAPI(w, r)
 					return
 				}
 			}
@@ -35,28 +38,6 @@ func CalculationsAPIHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	var buf bytes.Buffer
 	json.NewEncoder(&buf).Encode(errorJSON{"error 404: api route not found"})
-	http.Error(w, buf.String(), http.StatusNotFound)
-}
-
-func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input api.InputType, jsonInvalidErr string) {
-	w.Header().Set("Content-Type", "application/json")
-
-	decoder := json.NewDecoder(r.Body)
-	err := decoder.Decode(&input)
-	if err != nil {
-		var buf bytes.Buffer
-		json.NewEncoder(&buf).Encode(errorJSON{jsonInvalidErr})
-		http.Error(w, buf.String(), http.StatusBadRequest)
-		return
-	}
-	defer r.Body.Close()
-
-	s, err := input.Execute()
-	if err != nil {
-		var buf bytes.Buffer
-		json.NewEncoder(&buf).Encode(errorJSON{err.Error()})
-		http.Error(w, buf.String(), http.StatusInternalServerError)
-		return
-	}
-	json.NewEncoder(w).Encode(serverOutput{s})
+	w.WriteHeader(http.StatusNotFound)
+	fmt.Fprint(w, buf.String())
 }

@@ -11,22 +11,22 @@ func init() {
 	Router = mux.NewRouter()
 
 	// Static Files Handler
-	Router.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets"))))
+	Router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public"))))
 
 	// Site Handler
-	Router.HandleFunc("/", IndexHandler)
-	Router.HandleFunc("/about", AboutHandler)
-	Router.HandleFunc("/help", HelpHandler)
-	Router.HandleFunc("/privacy", PrivacyHandler)
-	Router.HandleFunc("/terms", TermsHandler)
-	Router.HandleFunc("/message-board", MessageBoardHandler)
-	Router.HandleFunc("/networking/conversion-table", ConversionTableHandler)
-	Router.HandleFunc("/{category}", CategoriesHandler)
-	Router.HandleFunc("/{category}/{calculation}", CalculationsHandler)
+	Router.HandleFunc("/", indexHandler)
+	Router.HandleFunc("/about", aboutHandler)
+	Router.HandleFunc("/help", helpHandler)
+	Router.HandleFunc("/privacy", privacyHandler)
+	Router.HandleFunc("/terms", termsHandler)
+	Router.HandleFunc("/message-board", messageBoardHandler)
+	Router.HandleFunc("/networking/conversion-table", conversionTableHandler)
+	Router.HandleFunc("/{category}", categoriesHandler)
+	Router.HandleFunc("/{category}/{calculation}", calculationsHandler)
 
 	// API Handler
-	Router.HandleFunc("/api/{category}/{calculation}", CalculationsAPIHandler).Methods("POST")
+	Router.HandleFunc("/api/{category}/{calculation}", calculationsAPIHandler).Methods("POST")
 
 	// Not Found Handler
-	Router.NotFoundHandler = http.HandlerFunc(NotFoundHandler)
+	Router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
 }

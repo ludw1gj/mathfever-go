@@ -1,4 +1,4 @@
-package calculations
+package calculation
 
 import "math"
 
@@ -30,14 +30,14 @@ func TSAPythagoreanTheorem(a float64, b float64) (string, error) {
 		AB     float64
 		Answer float64
 	}{
-		Round(a, .5, 2),
-		Round(b, .5, 2),
-		Round(aSqr, .5, 2),
-		Round(bSqr, .5, 2),
-		Round(ab, .5, 2),
-		Round(answer, .5, 2),
+		round(a, .5, 2),
+		round(b, .5, 2),
+		round(aSqr, .5, 2),
+		round(bSqr, .5, 2),
+		round(ab, .5, 2),
+		round(answer, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/tsa/pythagoreanTheorem.gohtml", data)
+	return parseTemplate("./template/calculation/tsa/pythagoreanTheorem.gohtml", data)
 }
 
 func TsaCone(radius float64, slantHeight float64) (string, error) {
@@ -59,13 +59,13 @@ func TsaCone(radius float64, slantHeight float64) (string, error) {
 		CurvedSurfaceArea float64
 		TSA               float64
 	}{
-		Round(radius, .5, 2),
-		Round(slantHeight, .5, 2),
-		Round(baseArea, .5, 2),
-		Round(curvedSurfaceArea, .5, 2),
-		Round(tsa, .5, 2),
+		round(radius, .5, 2),
+		round(slantHeight, .5, 2),
+		round(baseArea, .5, 2),
+		round(curvedSurfaceArea, .5, 2),
+		round(tsa, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/tsa/tsaCone.gohtml", data)
+	return parseTemplate("./template/calculation/tsa/tsaCone.gohtml", data)
 }
 
 func TsaCube(length float64) (string, error) {
@@ -81,11 +81,11 @@ func TsaCube(length float64) (string, error) {
 		LengthSqr float64
 		TSA       float64
 	}{
-		Round(length, .5, 2),
-		Round(lengthSqr, .5, 2),
-		Round(tsa, .5, 2),
+		round(length, .5, 2),
+		round(lengthSqr, .5, 2),
+		round(tsa, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/tsa/tsaCube.gohtml", data)
+	return parseTemplate("./template/calculation/tsa/tsaCube.gohtml", data)
 }
 
 func TsaCylinder(radius float64, height float64) (string, error) {
@@ -110,15 +110,15 @@ func TsaCylinder(radius float64, height float64) (string, error) {
 		CurvedSurfaceArea float64
 		TSA               float64
 	}{
-		Round(radius, .5, 2),
-		Round(height, .5, 2),
-		Round(radiusSqr, .5, 2),
-		Round(circlesArea, .5, 2),
-		Round(rh, .5, 2),
-		Round(curvedSurfaceArea, .5, 2),
-		Round(tsa, .5, 2),
+		round(radius, .5, 2),
+		round(height, .5, 2),
+		round(radiusSqr, .5, 2),
+		round(circlesArea, .5, 2),
+		round(rh, .5, 2),
+		round(curvedSurfaceArea, .5, 2),
+		round(tsa, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/tsa/tsaCylinder.gohtml", data)
+	return parseTemplate("./template/calculation/tsa/tsaCylinder.gohtml", data)
 }
 
 func TsaRectangularPrism(height float64, length float64, width float64) (string, error) {
@@ -136,13 +136,13 @@ func TsaRectangularPrism(height float64, length float64, width float64) (string,
 		Add    float64
 		TSA    float64
 	}{
-		Round(height, .5, 2),
-		Round(length, .5, 2),
-		Round(width, .5, 2),
-		Round(add, .5, 2),
-		Round(tsa, .5, 2),
+		round(height, .5, 2),
+		round(length, .5, 2),
+		round(width, .5, 2),
+		round(add, .5, 2),
+		round(tsa, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/tsa/tsaRectangularPrism.gohtml", data)
+	return parseTemplate("./template/calculation/tsa/tsaRectangularPrism.gohtml", data)
 }
 
 func TsaSphere(radius float64) (string, error) {
@@ -156,10 +156,10 @@ func TsaSphere(radius float64) (string, error) {
 		Radius float64
 		TSA    float64
 	}{
-		Round(radius, .5, 2),
-		Round(tsa, .5, 2),
+		round(radius, .5, 2),
+		round(tsa, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/tsa/tsaSphere.gohtml", data)
+	return parseTemplate("./template/calculation/tsa/tsaSphere.gohtml", data)
 }
 
 func TsaSquareBaseTriangle(baseLength float64, height float64) (string, error) {
@@ -180,11 +180,11 @@ func TsaSquareBaseTriangle(baseLength float64, height float64) (string, error) {
 		FourTrianglesArea float64
 		TSA               float64
 	}{
-		Round(baseLength, .5, 2),
-		Round(height, .5, 2),
-		Round(squareArea, .5, 2),
-		Round(fourTrianglesArea, .5, 2),
-		Round(tsa, .5, 2),
+		round(baseLength, .5, 2),
+		round(height, .5, 2),
+		round(squareArea, .5, 2),
+		round(fourTrianglesArea, .5, 2),
+		round(tsa, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/tsa/tsaSquareBaseTriangle.gohtml", data)
+	return parseTemplate("./template/calculation/tsa/tsaSquareBaseTriangle.gohtml", data)
 }

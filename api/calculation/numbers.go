@@ -1,4 +1,4 @@
-package calculations
+package calculation
 
 import (
 	"bytes"

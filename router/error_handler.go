@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
+func notFoundHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	err := notFoundTpl.Execute(w, nil)
 	if err != nil {
@@ -13,7 +13,7 @@ func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func ErrorHandler(w http.ResponseWriter, r *http.Request) {
+func errorHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	err := errorTpl.Execute(w, nil)
 	if err != nil {

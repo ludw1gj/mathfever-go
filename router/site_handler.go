@@ -7,111 +7,111 @@ import (
 	"strings"
 
 	"github.com/gorilla/mux"
-	"github.com/spottywolf/mathfever/api"
+	"github.com/spottywolf/mathfever/model"
 )
 
 var (
-	baseTpl = template.Must(template.ParseFiles("templates/site/base.html"))
+	baseTpl = template.Must(template.ParseFiles("template/site/base.html"))
 
-	indexTpl           = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/index.html"))
-	aboutTpl           = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/about.html"))
-	helpTpl            = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/help.html"))
-	privacyTpl         = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/privacy.html"))
-	termsTpl           = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/terms.html"))
-	messageBoardTpl    = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/message-board.html"))
-	conversionTableTpl = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/conversion-table.html"))
-	categoriesTpl      = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/category.html"))
-	calculationTpl     = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/calculation.html"))
-	notFoundTpl        = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/404.html"))
-	errorTpl           = template.Must(template.Must(baseTpl.Clone()).ParseFiles("templates/site/error.html"))
+	indexTpl           = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/index.html"))
+	aboutTpl           = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/about.html"))
+	helpTpl            = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/help.html"))
+	privacyTpl         = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/privacy.html"))
+	termsTpl           = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/terms.html"))
+	messageBoardTpl    = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/message-board.html"))
+	conversionTableTpl = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/conversion-table.html"))
+	categoriesTpl      = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/category.html"))
+	calculationTpl     = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/calculation.html"))
+	notFoundTpl        = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/404.html"))
+	errorTpl           = template.Must(template.Must(baseTpl.Clone()).ParseFiles("template/site/error.html"))
 )
 
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	err := indexTpl.Execute(w, api.CategoryData)
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	err := indexTpl.Execute(w, model.CategoryData)
 	if err != nil {
 		log.Println(err)
-		ErrorHandler(w, r)
+		errorHandler(w, r)
 	}
 }
 
-func AboutHandler(w http.ResponseWriter, r *http.Request) {
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
 	err := aboutTpl.Execute(w, nil)
 	if err != nil {
 		log.Println(err)
-		ErrorHandler(w, r)
+		errorHandler(w, r)
 	}
 }
 
-func HelpHandler(w http.ResponseWriter, r *http.Request) {
+func helpHandler(w http.ResponseWriter, r *http.Request) {
 	err := helpTpl.Execute(w, nil)
 	if err != nil {
 		log.Println(err)
-		ErrorHandler(w, r)
+		errorHandler(w, r)
 	}
 }
 
-func PrivacyHandler(w http.ResponseWriter, r *http.Request) {
+func privacyHandler(w http.ResponseWriter, r *http.Request) {
 	err := privacyTpl.Execute(w, nil)
 	if err != nil {
 		log.Println(err)
-		ErrorHandler(w, r)
+		errorHandler(w, r)
 	}
 }
 
-func TermsHandler(w http.ResponseWriter, r *http.Request) {
+func termsHandler(w http.ResponseWriter, r *http.Request) {
 	err := termsTpl.Execute(w, nil)
 	if err != nil {
 		log.Println(err)
-		ErrorHandler(w, r)
+		errorHandler(w, r)
 	}
 }
 
-func MessageBoardHandler(w http.ResponseWriter, r *http.Request) {
+func messageBoardHandler(w http.ResponseWriter, r *http.Request) {
 	err := messageBoardTpl.Execute(w, nil)
 	if err != nil {
 		log.Println(err)
-		ErrorHandler(w, r)
+		errorHandler(w, r)
 	}
 }
 
-func ConversionTableHandler(w http.ResponseWriter, r *http.Request) {
+func conversionTableHandler(w http.ResponseWriter, r *http.Request) {
 	err := conversionTableTpl.Execute(w, nil)
 	if err != nil {
 		log.Println(err)
-		ErrorHandler(w, r)
+		errorHandler(w, r)
 	}
 }
 
-func CategoriesHandler(w http.ResponseWriter, r *http.Request) {
+func categoriesHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	category := vars["category"]
 
-	categories := api.CategoryData
+	categories := model.CategoryData
 	for _, categ := range categories {
 		if category == strings.Split(categ.URL, "/")[1] {
 			err := categoriesTpl.Execute(w, categ)
 			if err != nil {
 				log.Println(err)
-				ErrorHandler(w, r)
+				errorHandler(w, r)
 			}
 			return
 		}
 	}
-	NotFoundHandler(w, r)
+	notFoundHandler(w, r)
 }
 
-func CalculationsHandler(w http.ResponseWriter, r *http.Request) {
+func calculationsHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	category := vars["category"]
 	calculation := vars["calculation"]
 
-	for _, categ := range api.CategoryData {
+	for _, categ := range model.CategoryData {
 		if category == strings.Split(categ.URL, "/")[1] {
 			for _, calc := range categ.Calculations {
 				if calculation == strings.Split(calc.URL, "/")[2] {
 					data := struct {
-						api.Category
-						api.Calculation
+						model.Category
+						model.Calculation
 					}{
 						categ,
 						calc,
@@ -119,7 +119,7 @@ func CalculationsHandler(w http.ResponseWriter, r *http.Request) {
 					err := calculationTpl.Execute(w, data)
 					if err != nil {
 						log.Println(err)
-						ErrorHandler(w, r)
+						errorHandler(w, r)
 					}
 					return
 				}
@@ -127,5 +127,5 @@ func CalculationsHandler(w http.ResponseWriter, r *http.Request) {
 
 		}
 	}
-	NotFoundHandler(w, r)
+	notFoundHandler(w, r)
 }

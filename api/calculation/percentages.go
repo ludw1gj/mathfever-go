@@ -1,4 +1,4 @@
-package calculations
+package calculation
 
 func ChangeByPercentage(n float64, p float64) (string, error) {
 	/*
@@ -28,14 +28,14 @@ func ChangeByPercentage(n float64, p float64) (string, error) {
 		Noun       string
 		Answer     float64
 	}{
-		Round(n, .5, 2),
-		Round(p, .5, 2),
-		Round(onePercent, .5, 2),
-		Round(addValue, .5, 2),
+		round(n, .5, 2),
+		round(p, .5, 2),
+		round(onePercent, .5, 2),
+		round(addValue, .5, 2),
 		noun,
-		Round(answer, .5, 2),
+		round(answer, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/percentages/changeByPercentage.gohtml", data)
+	return parseTemplate("./template/calculation/percentages/changeByPercentage.gohtml", data)
 }
 
 func NumberFromPercentage(p float64, n float64) (string, error) {
@@ -52,12 +52,12 @@ func NumberFromPercentage(p float64, n float64) (string, error) {
 		Divided    float64
 		Answer     float64
 	}{
-		Round(p, .5, 2),
-		Round(n, .5, 2),
-		Round(divided, .5, 2),
-		Round(answer, .5, 2),
+		round(p, .5, 2),
+		round(n, .5, 2),
+		round(divided, .5, 2),
+		round(answer, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/percentages/numberFromPercentage.gohtml", data)
+	return parseTemplate("./template/calculation/percentages/numberFromPercentage.gohtml", data)
 }
 
 func PercentageChange(n float64, newN float64) (string, error) {
@@ -76,13 +76,13 @@ func PercentageChange(n float64, newN float64) (string, error) {
 		DecimalisedPercentage float64
 		Answer                float64
 	}{
-		Round(n, .5, 2),
-		Round(newN, .5, 2),
-		Round(change, .5, 2),
-		Round(decimalisedPercentage, .5, 2),
-		Round(answer, .5, 2),
+		round(n, .5, 2),
+		round(newN, .5, 2),
+		round(change, .5, 2),
+		round(decimalisedPercentage, .5, 2),
+		round(answer, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/percentages/percentageChange.gohtml", data)
+	return parseTemplate("./template/calculation/percentages/percentageChange.gohtml", data)
 }
 
 func PercentageFromNumber(n float64, totalN float64) (string, error) {
@@ -99,10 +99,10 @@ func PercentageFromNumber(n float64, totalN float64) (string, error) {
 		DecimalisedPercentage float64
 		Answer                float64
 	}{
-		Round(n, .5, 2),
-		Round(totalN, .5, 2),
-		Round(decimalisedPercentage, .5, 2),
-		Round(answer, .5, 2),
+		round(n, .5, 2),
+		round(totalN, .5, 2),
+		round(decimalisedPercentage, .5, 2),
+		round(answer, .5, 2),
 	}
-	return parseTemplate("./templates/calculations/percentages/percentageFromNumber.gohtml", data)
+	return parseTemplate("./template/calculation/percentages/percentageFromNumber.gohtml", data)
 }

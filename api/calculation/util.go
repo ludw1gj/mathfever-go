@@ -1,4 +1,4 @@
-package calculations
+package calculation
 
 import (
 	"bytes"
@@ -23,7 +23,7 @@ func parseTemplate(filename string, data interface{}) (s string, err error) {
 	return b.String(), nil
 }
 
-func Round(val float64, roundOn float64, places int) (newVal float64) {
+func round(val float64, roundOn float64, places int) (newVal float64) {
 	var round float64
 	pow := math.Pow(10, float64(places))
 	digit := pow * val
@@ -38,15 +38,3 @@ func Round(val float64, roundOn float64, places int) (newVal float64) {
 	newVal = round / pow
 	return
 }
-
-/*
-buf := &bytes.Buffer{}
-err := tmpl.Execute(buf, data)
-if err != nil {
-    // Send back error message, for example:
-    http.Error(w, "Hey, Request was bad!", http.StatusBadRequest) // HTTP 400 status
-} else {
-    // No error, send the content, HTTP 200 response status implied
-    buf.WriteTo(w)
-}
-*/

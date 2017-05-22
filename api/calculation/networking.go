@@ -1,7 +1,8 @@
-package calculations
+package calculation
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"log"
 	"math"
@@ -9,14 +10,20 @@ import (
 )
 
 func validateBinary(binary string) error {
+	if len(binary) == 0 {
+		return errors.New("error: invalid or no input")
+	}
 	_, err := strconv.ParseInt(binary, 2, 0)
-	if err != nil || len(binary) == 0 {
+	if err != nil {
 		return fmt.Errorf("incorrect input: is not a binary number - %s", binary)
 	}
 	return nil
 }
 
 func validateHexadecimal(hexadecimal string) error {
+	if len(hexadecimal) == 0 {
+		return errors.New("error: invalid or no input")
+	}
 	_, err := strconv.ParseInt(hexadecimal, 16, 0)
 	if err != nil || len(hexadecimal) == 0 {
 		return fmt.Errorf("incorrect input: is not a hexadecimal number - %s", hexadecimal)
@@ -70,7 +77,7 @@ func BinaryToDecimal(binary string) (s string, err error) {
 		proofSteps,
 		answer,
 	}
-	return parseTemplate("./templates/calculations/networking/binaryToDecimal.gohtml", data)
+	return parseTemplate("./template/calculation/networking/binaryToDecimal.gohtml", data)
 }
 
 // BinaryToHexadecimal converts a binary value to a hexadecimal value, detailing each step of how a person would go
@@ -120,7 +127,7 @@ func BinaryToHexadecimal(binary string) (s string, err error) {
 		proof.String(),
 		answer.String(),
 	}
-	return parseTemplate("./templates/calculations/networking/binaryToHexadecimal.gohtml", data)
+	return parseTemplate("./template/calculation/networking/binaryToHexadecimal.gohtml", data)
 }
 
 func DecimalToBinary(decimal string) (string, error) {
@@ -182,7 +189,7 @@ func decimalToBinaryHexadecimal(decimal string, base int) (s string, err error) 
 		remaindersHex,
 		answer.String(),
 	}
-	return parseTemplate("./templates/calculations/networking/decimalToBinaryHexadecimal.gohtml", data)
+	return parseTemplate("./template/calculation/networking/decimalToBinaryHexadecimal.gohtml", data)
 }
 
 func HexadecimalToBinary(hexadecimal string) (s string, err error) {
@@ -229,7 +236,7 @@ func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 		binaries.String(),
 		answer,
 	}
-	return parseTemplate("./templates/calculations/networking/hexadecimalToBinary.gohtml", data)
+	return parseTemplate("./template/calculation/networking/hexadecimalToBinary.gohtml", data)
 }
 
 func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
@@ -280,5 +287,5 @@ func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
 		proof2,
 		result,
 	}
-	return parseTemplate("./templates/calculations/networking/hexadecimalToDecimal.gohtml", data)
+	return parseTemplate("./template/calculation/networking/hexadecimalToDecimal.gohtml", data)
 }

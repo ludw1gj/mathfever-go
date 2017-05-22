@@ -1,75 +1,127 @@
 package api
 
-import "github.com/spottywolf/mathfever/api/calculations"
+import (
+	"net/http"
 
-type binaryToDecimalInput struct {
+	"github.com/spottywolf/mathfever/api/calculation"
+)
+
+type BinaryToDecimalInput struct {
 	Binary string `json:"binary" name:"Binary"`
 }
 
-type binaryToHexadecimalInput struct {
+type BinaryToHexadecimalInput struct {
 	Binary string `json:"binary" name:"Binary"`
 }
 
-type decimalToBinaryInput struct {
+type DecimalToBinaryInput struct {
 	Decimal string `json:"decimal" name:"Decimal"`
 }
 
-type decimalToHexadecimalInput struct {
+type DecimalToHexadecimalInput struct {
 	Decimal string `json:"decimal" name:"Decimal"`
 }
 
-type hexadecimalToBinaryInput struct {
+type HexadecimalToBinaryInput struct {
 	Hexadecimal string `json:"hexadecimal" name:"Hexadecimal"`
 }
 
-type hexadecimalToDecimalInput struct {
+type HexadecimalToDecimalInput struct {
 	Hexadecimal string `json:"hexadecimal" name:"Hexadecimal"`
 }
 
-func (i binaryToDecimalInput) Execute() (string, error) {
-	return calculations.BinaryToDecimal(i.Binary)
+func (i BinaryToDecimalInput) Execute() (s string, err error) {
+	err = validateJSONInputs(i)
+	if err != nil {
+		return
+	}
+	return calculation.BinaryToDecimal(i.Binary)
 }
 
-func (i binaryToHexadecimalInput) Execute() (string, error) {
-	return calculations.BinaryToHexadecimal(i.Binary)
+func (i BinaryToHexadecimalInput) Execute() (s string, err error) {
+	err = validateJSONInputs(i)
+	if err != nil {
+		return
+	}
+	return calculation.BinaryToHexadecimal(i.Binary)
 }
 
-func (i decimalToBinaryInput) Execute() (string, error) {
-	return calculations.DecimalToBinary(i.Decimal)
+func (i DecimalToBinaryInput) Execute() (s string, err error) {
+	err = validateJSONInputs(i)
+	if err != nil {
+		return
+	}
+	return calculation.DecimalToBinary(i.Decimal)
 }
 
-func (i decimalToHexadecimalInput) Execute() (string, error) {
-	return calculations.DecimalToHexadecimal(i.Decimal)
+func (i DecimalToHexadecimalInput) Execute() (s string, err error) {
+	err = validateJSONInputs(i)
+	if err != nil {
+		return
+	}
+	return calculation.DecimalToHexadecimal(i.Decimal)
 }
 
-func (i hexadecimalToBinaryInput) Execute() (string, error) {
-	return calculations.HexadecimalToBinary(i.Hexadecimal)
+func (i HexadecimalToBinaryInput) Execute() (s string, err error) {
+	err = validateJSONInputs(i)
+	if err != nil {
+		return
+	}
+	return calculation.HexadecimalToBinary(i.Hexadecimal)
 }
 
-func (i hexadecimalToDecimalInput) Execute() (string, error) {
-	return calculations.HexadecimalToDecimal(i.Hexadecimal)
+func (i HexadecimalToDecimalInput) Execute() (s string, err error) {
+	err = validateJSONInputs(i)
+	if err != nil {
+		return
+	}
+	return calculation.HexadecimalToDecimal(i.Hexadecimal)
 }
 
-func (i binaryToDecimalInput) JsonError() string {
-	return createJSONError(i)
+func (i BinaryToDecimalInput) JsonError() error {
+	return genJSONErr(i)
 }
 
-func (i binaryToHexadecimalInput) JsonError() string {
-	return createJSONError(i)
+func (i BinaryToHexadecimalInput) JsonError() error {
+	return genJSONErr(i)
 }
 
-func (i decimalToBinaryInput) JsonError() string {
-	return createJSONError(i)
+func (i DecimalToBinaryInput) JsonError() error {
+	return genJSONErr(i)
 }
 
-func (i decimalToHexadecimalInput) JsonError() string {
-	return createJSONError(i)
+func (i DecimalToHexadecimalInput) JsonError() error {
+	return genJSONErr(i)
 }
 
-func (i hexadecimalToBinaryInput) JsonError() string {
-	return createJSONError(i)
+func (i HexadecimalToBinaryInput) JsonError() error {
+	return genJSONErr(i)
 }
 
-func (i hexadecimalToDecimalInput) JsonError() string {
-	return createJSONError(i)
+func (i HexadecimalToDecimalInput) JsonError() error {
+	return genJSONErr(i)
+}
+
+func (i BinaryToDecimalInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
+	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+}
+
+func (i BinaryToHexadecimalInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
+	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+}
+
+func (i DecimalToBinaryInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
+	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+}
+
+func (i DecimalToHexadecimalInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
+	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+}
+
+func (i HexadecimalToBinaryInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
+	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+}
+
+func (i HexadecimalToDecimalInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
+	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
 }
