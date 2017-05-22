@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"github.com/spottywolf/mathfever/api/calculation"
+	"github.com/spottywolf/mathfever/api/math"
 )
 
 type TsaPythagoreanTheoremInput struct {
@@ -45,7 +45,7 @@ func (i TsaPythagoreanTheoremInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.TSAPythagoreanTheorem(i.SideA, i.SideB)
+	return math.TSAPythagoreanTheorem(i.SideA, i.SideB)
 }
 
 func (i TsaConeInput) Execute() (s string, err error) {
@@ -53,7 +53,7 @@ func (i TsaConeInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.TsaCone(i.Radius, i.SlantHeight)
+	return math.TsaCone(i.Radius, i.SlantHeight)
 }
 
 func (i TsaCubeInput) Execute() (s string, err error) {
@@ -61,7 +61,7 @@ func (i TsaCubeInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.TsaCube(i.Length)
+	return math.TsaCube(i.Length)
 }
 
 func (i TsaCylinderInput) Execute() (s string, err error) {
@@ -69,7 +69,7 @@ func (i TsaCylinderInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.TsaCylinder(i.Radius, i.Height)
+	return math.TsaCylinder(i.Radius, i.Height)
 }
 
 func (i TsaRectangularPrismInput) Execute() (s string, err error) {
@@ -77,7 +77,7 @@ func (i TsaRectangularPrismInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.TsaRectangularPrism(i.Height, i.Length, i.Width)
+	return math.TsaRectangularPrism(i.Height, i.Length, i.Width)
 }
 
 func (i TsaSphereInput) Execute() (s string, err error) {
@@ -85,7 +85,7 @@ func (i TsaSphereInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.TsaSphere(i.Radius)
+	return math.TsaSphere(i.Radius)
 }
 
 func (i TsaSquareBaseTriangleInput) Execute() (s string, err error) {
@@ -93,7 +93,7 @@ func (i TsaSquareBaseTriangleInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.TsaSquareBaseTriangle(i.BaseLength, i.Height)
+	return math.TsaSquareBaseTriangle(i.BaseLength, i.Height)
 }
 
 func (i TsaPythagoreanTheoremInput) JsonError() error {
@@ -124,29 +124,29 @@ func (i TsaSquareBaseTriangleInput) JsonError() error {
 }
 
 func (i TsaPythagoreanTheoremInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i TsaConeInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i TsaCubeInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i TsaCylinderInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i TsaRectangularPrismInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i TsaSphereInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i TsaSquareBaseTriangleInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }

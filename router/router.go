@@ -25,7 +25,7 @@ func init() {
 	Router.HandleFunc("/{category}/{calculation}", calculationsHandler)
 
 	// API Handler
-	Router.HandleFunc("/api/{category}/{calculation}", calculationsAPIHandler).Methods("POST")
+	Router.HandleFunc("/api/{category}/{calculation}", calculationsAPIHandler)
 
 	// Not Found Handler
 	Router.NotFoundHandler = http.HandlerFunc(notFoundHandler)

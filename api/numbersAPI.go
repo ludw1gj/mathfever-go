@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"github.com/spottywolf/mathfever/api/calculation"
+	"github.com/spottywolf/mathfever/api/math"
 )
 
 type IsPrimeInput struct {
@@ -25,7 +25,7 @@ func (i IsPrimeInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.IsPrime(i.Number), nil
+	return math.IsPrime(i.Number), nil
 }
 
 func (i HighestCommonFactorInput) Execute() (s string, err error) {
@@ -33,7 +33,7 @@ func (i HighestCommonFactorInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.HighestCommonFactor(i.Num1, i.Num2), nil
+	return math.HighestCommonFactor(i.Num1, i.Num2), nil
 }
 
 func (i LowestCommonMultipleInput) Execute() (s string, err error) {
@@ -41,7 +41,7 @@ func (i LowestCommonMultipleInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.LowestCommonMultiple(i.Num1, i.Num2), nil
+	return math.LowestCommonMultiple(i.Num1, i.Num2), nil
 }
 
 func (i IsPrimeInput) JsonError() error {
@@ -56,13 +56,13 @@ func (i LowestCommonMultipleInput) JsonError() error {
 }
 
 func (i IsPrimeInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i HighestCommonFactorInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i LowestCommonMultipleInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }

@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"github.com/spottywolf/mathfever/api/calculation"
+	"github.com/spottywolf/mathfever/api/math"
 )
 
 type BinaryToDecimalInput struct {
@@ -35,7 +35,7 @@ func (i BinaryToDecimalInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.BinaryToDecimal(i.Binary)
+	return math.BinaryToDecimal(i.Binary)
 }
 
 func (i BinaryToHexadecimalInput) Execute() (s string, err error) {
@@ -43,7 +43,7 @@ func (i BinaryToHexadecimalInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.BinaryToHexadecimal(i.Binary)
+	return math.BinaryToHexadecimal(i.Binary)
 }
 
 func (i DecimalToBinaryInput) Execute() (s string, err error) {
@@ -51,7 +51,7 @@ func (i DecimalToBinaryInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.DecimalToBinary(i.Decimal)
+	return math.DecimalToBinary(i.Decimal)
 }
 
 func (i DecimalToHexadecimalInput) Execute() (s string, err error) {
@@ -59,7 +59,7 @@ func (i DecimalToHexadecimalInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.DecimalToHexadecimal(i.Decimal)
+	return math.DecimalToHexadecimal(i.Decimal)
 }
 
 func (i HexadecimalToBinaryInput) Execute() (s string, err error) {
@@ -67,7 +67,7 @@ func (i HexadecimalToBinaryInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.HexadecimalToBinary(i.Hexadecimal)
+	return math.HexadecimalToBinary(i.Hexadecimal)
 }
 
 func (i HexadecimalToDecimalInput) Execute() (s string, err error) {
@@ -75,7 +75,7 @@ func (i HexadecimalToDecimalInput) Execute() (s string, err error) {
 	if err != nil {
 		return
 	}
-	return calculation.HexadecimalToDecimal(i.Hexadecimal)
+	return math.HexadecimalToDecimal(i.Hexadecimal)
 }
 
 func (i BinaryToDecimalInput) JsonError() error {
@@ -103,25 +103,25 @@ func (i HexadecimalToDecimalInput) JsonError() error {
 }
 
 func (i BinaryToDecimalInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i BinaryToHexadecimalInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i DecimalToBinaryInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i DecimalToHexadecimalInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i HexadecimalToBinaryInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i HexadecimalToDecimalInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }

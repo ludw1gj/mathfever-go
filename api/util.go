@@ -7,47 +7,35 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+	"github.com/spottywolf/mathfever/common"
 )
 
-type InputType interface {
+type Input interface {
 	Execute() (string, error)
 	JsonError() error
 	HandleAPI(http.ResponseWriter, *http.Request)
 }
 
-type errorJSON struct {
-	Error string `json:"error"`
-}
-
-type serverOutput struct {
-	Content string `json:"content"`
-}
-
-func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input InputType, jsonInvalidErr string) {
-	writeJSONErr := func(err string, httpErrCode int) {
-		var buf bytes.Buffer
-		json.NewEncoder(&buf).Encode(errorJSON{err})
-		w.WriteHeader(httpErrCode)
-		fmt.Fprint(w, buf.String())
-	}
-
+func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Input, jsonInvalidErr error) {
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&input)
 	if err != nil {
-		writeJSONErr(jsonInvalidErr, http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(common.ErrorJSON{jsonInvalidErr.Error()})
 		return
 	}
 	defer r.Body.Close()
 
 	s, err := input.Execute()
 	if err != nil {
-		writeJSONErr(err.Error(), http.StatusInternalServerError)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(common.ErrorJSON{err.Error()})
 		return
 	}
-	json.NewEncoder(w).Encode(serverOutput{s})
+	json.NewEncoder(w).Encode(common.ContentJSON{s})
 }
 
-func genJSONErr(inputParams InputType) error {
+func genJSONErr(inputParams Input) error {
 	val := reflect.ValueOf(inputParams)
 
 	var buf bytes.Buffer
@@ -65,7 +53,7 @@ func genJSONErr(inputParams InputType) error {
 	return errors.New(buf.String())
 }
 
-func validateJSONInputs(input InputType) (err error) {
+func validateJSONInputs(input Input) (err error) {
 	val := reflect.ValueOf(input)
 	v := reflect.Indirect(val)
 	for i := 0; i < v.Type().NumField(); i++ {

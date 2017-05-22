@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	"github.com/spottywolf/mathfever/api/calculation"
+	"github.com/spottywolf/mathfever/api/math"
 )
 
 type ChangeByPercentageInput struct {
@@ -27,19 +27,19 @@ type PercentageFromNumberInput struct {
 }
 
 func (i ChangeByPercentageInput) Execute() (string, error) {
-	return calculation.ChangeByPercentage(i.Number, i.Percentage)
+	return math.ChangeByPercentage(i.Number, i.Percentage)
 }
 
 func (i NumberFromPercentageInput) Execute() (string, error) {
-	return calculation.NumberFromPercentage(i.Percentage, i.Number)
+	return math.NumberFromPercentage(i.Percentage, i.Number)
 }
 
 func (i PercentageChangeInput) Execute() (string, error) {
-	return calculation.PercentageChange(i.Number, i.NewNumber)
+	return math.PercentageChange(i.Number, i.NewNumber)
 }
 
 func (i PercentageFromNumberInput) Execute() (string, error) {
-	return calculation.PercentageFromNumber(i.Number, i.TotalNumber)
+	return math.PercentageFromNumber(i.Number, i.TotalNumber)
 }
 
 func (i ChangeByPercentageInput) JsonError() error {
@@ -58,17 +58,17 @@ func (i PercentageFromNumberInput) JsonError() error {
 }
 
 func (i ChangeByPercentageInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i NumberFromPercentageInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i PercentageChangeInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
 
 func (i PercentageFromNumberInput) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError().Error())
+	calculationsAPIHelper(w, r, &i, i.JsonError())
 }
