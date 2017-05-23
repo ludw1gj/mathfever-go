@@ -10,7 +10,7 @@ import (
 )
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-	err := homeTpl.ExecuteTemplate(w, "base.html", model.CategoryData)
+	err := homeTpl.ExecuteTemplate(w, "base.gohtml", model.CategoryData)
 	if err != nil {
 		log.Println(err)
 		errorHandler(w, r)
@@ -18,7 +18,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	err := aboutTpl.ExecuteTemplate(w, "base.html", nil)
+	err := aboutTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
 		errorHandler(w, r)
@@ -26,7 +26,7 @@ func aboutHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func helpHandler(w http.ResponseWriter, r *http.Request) {
-	err := helpTpl.ExecuteTemplate(w, "base.html", nil)
+	err := helpTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
 		errorHandler(w, r)
@@ -34,7 +34,7 @@ func helpHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func privacyHandler(w http.ResponseWriter, r *http.Request) {
-	err := privacyTpl.ExecuteTemplate(w, "base.html", nil)
+	err := privacyTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
 		errorHandler(w, r)
@@ -42,7 +42,7 @@ func privacyHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func termsHandler(w http.ResponseWriter, r *http.Request) {
-	err := termsTpl.ExecuteTemplate(w, "base.html", nil)
+	err := termsTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
 		errorHandler(w, r)
@@ -50,7 +50,7 @@ func termsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func messageBoardHandler(w http.ResponseWriter, r *http.Request) {
-	err := messageBoardTpl.ExecuteTemplate(w, "base.html", nil)
+	err := messageBoardTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
 		errorHandler(w, r)
@@ -58,7 +58,7 @@ func messageBoardHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func conversionTableHandler(w http.ResponseWriter, r *http.Request) {
-	err := conversionTableTpl.ExecuteTemplate(w, "base.html", nil)
+	err := conversionTableTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
 		errorHandler(w, r)
@@ -72,7 +72,7 @@ func categoriesHandler(w http.ResponseWriter, r *http.Request) {
 	categories := model.CategoryData
 	for _, categ := range categories {
 		if category == strings.Split(categ.URL, "/")[1] {
-			err := categoriesTpl.ExecuteTemplate(w, "base.html", categ)
+			err := categoriesTpl.ExecuteTemplate(w, "base.gohtml", categ)
 			if err != nil {
 				log.Println(err)
 				errorHandler(w, r)
@@ -99,7 +99,7 @@ func calculationsHandler(w http.ResponseWriter, r *http.Request) {
 						categ,
 						calc,
 					}
-					err := calculationTpl.ExecuteTemplate(w, "base.html", data)
+					err := calculationTpl.ExecuteTemplate(w, "base.gohtml", data)
 					if err != nil {
 						log.Println(err)
 						errorHandler(w, r)

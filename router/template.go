@@ -34,72 +34,72 @@ func loadTemplates() {
 		{
 			&homeTpl,
 			"home",
-			"home.html",
+			"home.gohtml",
 			"",
 		},
 		{
 			&aboutTpl,
 			"about",
-			"about.html",
+			"about.gohtml",
 			"",
 		},
 		{
 			&helpTpl,
 			"help",
-			"help.html",
+			"help.gohtml",
 			"",
 		},
 		{
 			&privacyTpl,
 			"privacy",
-			"privacy.html",
+			"privacy.gohtml",
 			"",
 		},
 		{
 			&termsTpl,
 			"terms",
-			"terms.html",
+			"terms.gohtml",
 			"",
 		},
 		{
 			&messageBoardTpl,
 			"message-board",
-			"message-board.html",
+			"message-board.gohtml",
 			"",
 		},
 		{
 			&conversionTableTpl,
 			"conversion-table",
-			"conversion-table.html",
+			"conversion-table.gohtml",
 			"",
 		},
 		{
 			&categoriesTpl,
 			"category",
-			"category.html",
+			"category.gohtml",
 			"",
 		},
 		{
 			&calculationTpl,
 			"calculation",
-			"calculation.html",
+			"calculation.gohtml",
 			"",
 		},
 		{
 			&notFoundTpl,
 			"404",
-			"404.html",
+			"404.gohtml",
 			"",
 		},
 		{
 			&errorTpl,
 			"error",
-			"error.html",
+			"error.gohtml",
 			"",
 		},
 	}
 	for i := range pubTpls {
-		pubTpls[i].baseFile = filepath.Join(templateDir, "base.html")
+		pubTpls[i].baseFile = filepath.Join(templateDir, "base.gohtml")
 	}
 
 	tpls := make([]templateLoader, 0, len(pubTpls))
