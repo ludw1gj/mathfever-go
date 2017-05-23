@@ -14,7 +14,7 @@ func init() {
 	Router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public"))))
 
 	// Site Handler
-	Router.HandleFunc("/", indexHandler).Name("index")
+	Router.HandleFunc("/", homeHandler).Name("home")
 	Router.HandleFunc("/about", aboutHandler).Name("about")
 	Router.HandleFunc("/help", helpHandler).Name("help")
 	Router.HandleFunc("/privacy", privacyHandler).Name("privacy")

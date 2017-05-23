@@ -1,13 +1,17 @@
 package router
 
-import "html/template"
+import (
+	"html/template"
+	"log"
+)
 
 var FuncMap = template.FuncMap{
-	"genRoute": func(name string, params ...string) string {
-		url, err := Router.Get(name).URL(params...)
-		if err == nil {
-			return url.String()
+	"genRoute": func(name string) string {
+		url, err := Router.Get(name).URL()
+		if err != nil {
+			log.Printf(err.Error())
+			return "error"
 		}
-		return "error"
+		return url.String()
 	},
 }
