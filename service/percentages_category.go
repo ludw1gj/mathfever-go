@@ -42,33 +42,18 @@ func (i PercentageFromNumberService) Execute() (string, error) {
 	return math.PercentageFromNumber(i.Number, i.TotalNumber)
 }
 
-func (i ChangeByPercentageService) JsonError() error {
-	return genJsonErr(i)
-}
-func (i NumberFromPercentageService) JsonError() error {
-	return genJsonErr(i)
-}
-
-func (i PercentageChangeService) JsonError() error {
-	return genJsonErr(i)
-}
-
-func (i PercentageFromNumberService) JsonError() error {
-	return genJsonErr(i)
-}
-
 func (i ChangeByPercentageService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
 
 func (i NumberFromPercentageService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
 
 func (i PercentageChangeService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
 
 func (i PercentageFromNumberService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
