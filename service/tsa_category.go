@@ -70,7 +70,7 @@ func (i TsaSquareBaseTriangleService) Execute() (s string, err error) {
 }
 
 func (i TsaPythagoreanTheoremService) JsonError() error {
-	return genJsonErr(i)
+	return genJsonError(i)
 }
 
 func (i TsaPythagoreanTheoremService) HandleAPI(w http.ResponseWriter, r *http.Request) {

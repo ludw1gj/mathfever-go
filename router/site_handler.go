@@ -13,7 +13,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	err := homeTpl.ExecuteTemplate(w, "base.gohtml", model.CategoryData)
 	if err != nil {
 		log.Println(err)
-		errorHandler(w, r)
+		serverErrorHandler(w, r)
 	}
 }
 
@@ -21,7 +21,7 @@ func aboutHandler(w http.ResponseWriter, r *http.Request) {
 	err := aboutTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
-		errorHandler(w, r)
+		serverErrorHandler(w, r)
 	}
 }
 
@@ -29,7 +29,7 @@ func helpHandler(w http.ResponseWriter, r *http.Request) {
 	err := helpTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
-		errorHandler(w, r)
+		serverErrorHandler(w, r)
 	}
 }
 
@@ -37,7 +37,7 @@ func privacyHandler(w http.ResponseWriter, r *http.Request) {
 	err := privacyTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
-		errorHandler(w, r)
+		serverErrorHandler(w, r)
 	}
 }
 
@@ -45,7 +45,7 @@ func termsHandler(w http.ResponseWriter, r *http.Request) {
 	err := termsTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
-		errorHandler(w, r)
+		serverErrorHandler(w, r)
 	}
 }
 
@@ -53,7 +53,7 @@ func messageBoardHandler(w http.ResponseWriter, r *http.Request) {
 	err := messageBoardTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
-		errorHandler(w, r)
+		serverErrorHandler(w, r)
 	}
 }
 
@@ -61,7 +61,7 @@ func conversionTableHandler(w http.ResponseWriter, r *http.Request) {
 	err := conversionTableTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
-		errorHandler(w, r)
+		serverErrorHandler(w, r)
 	}
 }
 
@@ -75,7 +75,7 @@ func categoriesHandler(w http.ResponseWriter, r *http.Request) {
 			err := categoriesTpl.ExecuteTemplate(w, "base.gohtml", categ)
 			if err != nil {
 				log.Println(err)
-				errorHandler(w, r)
+				serverErrorHandler(w, r)
 			}
 			return
 		}
@@ -102,7 +102,7 @@ func calculationsHandler(w http.ResponseWriter, r *http.Request) {
 					err := calculationTpl.ExecuteTemplate(w, "base.gohtml", data)
 					if err != nil {
 						log.Println(err)
-						errorHandler(w, r)
+						serverErrorHandler(w, r)
 					}
 					return
 				}

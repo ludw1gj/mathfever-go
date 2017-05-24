@@ -21,7 +21,7 @@ func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Service
 	err := decoder.Decode(&input)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(common.ErrorJson{genJsonErr(input).Error()})
+		json.NewEncoder(w).Encode(common.ErrorJson{genJsonError(input).Error()})
 		return
 	}
 	defer r.Body.Close()
@@ -52,22 +52,22 @@ func validateJsonInput(input Service) error {
 		switch v.Field(i).Type().Kind() {
 		case reflect.String:
 			if v.Field(i).String() == "" {
-				return genJsonErr(input)
+				return genJsonError(input)
 			}
 		case reflect.Int:
 			if v.Field(i).Int() == 0 {
-				return genJsonErr(input)
+				return genJsonError(input)
 			}
 		case reflect.Float64:
 			if v.Field(i).Float() == 0 {
-				return genJsonErr(input)
+				return genJsonError(input)
 			}
 		}
 	}
 	return nil
 }
 
-func genJsonErr(input Service) error {
+func genJsonError(input Service) error {
 	val := reflect.ValueOf(input)
 	v := reflect.Indirect(val)
 

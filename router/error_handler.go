@@ -10,11 +10,11 @@ func notFoundHandler(w http.ResponseWriter, r *http.Request) {
 	err := notFoundTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
 		log.Println(err)
-		errorHandler(w, r)
+		serverErrorHandler(w, r)
 	}
 }
 
-func errorHandler(w http.ResponseWriter, r *http.Request) {
+func serverErrorHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusInternalServerError)
 	err := errorTpl.ExecuteTemplate(w, "base.gohtml", nil)
 	if err != nil {
