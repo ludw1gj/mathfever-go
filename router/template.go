@@ -62,14 +62,14 @@ func loadTemplates() {
 		},
 		{
 			&messageBoardTpl,
-			"message-board",
-			"message-board.gohtml",
+			"message_board",
+			"message_board.gohtml",
 			"",
 		},
 		{
 			&conversionTableTpl,
-			"conversion-table",
-			"conversion-table.gohtml",
+			"conversion_table",
+			"conversion_table.gohtml",
 			"",
 		},
 		{
@@ -86,14 +86,14 @@ func loadTemplates() {
 		},
 		{
 			&notFoundTpl,
-			"404",
-			"404.gohtml",
+			"not_found",
+			"not_found.gohtml",
 			"",
 		},
 		{
 			&errorTpl,
 			"error",
-			"error.gohtml",
+			"server_error.gohtml",
 			"",
 		},
 	}
