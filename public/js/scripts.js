@@ -4,7 +4,7 @@
 // * AJAX *
 // ********
 /**
- * This function submits an ajax request of content-type json to the 'old-api' route
+ * This function submits an ajax request of content-type json to the 'api' route
  * @param {Object} data
  * A Form Element which has been serialized by serializeFormObj function
  */

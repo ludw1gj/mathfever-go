@@ -1,4 +1,4 @@
-package api
+package service
 
 import (
 	"bytes"
@@ -10,13 +10,13 @@ import (
 	"github.com/spottywolf/mathfever/common"
 )
 
-type Input interface {
+type Service interface {
 	Execute() (string, error)
 	JsonError() error
 	HandleAPI(http.ResponseWriter, *http.Request)
 }
 
-func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Input, jsonInvalidErr error) {
+func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Service, jsonInvalidErr error) {
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&input)
 	if err != nil {
@@ -35,25 +35,7 @@ func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Input, 
 	json.NewEncoder(w).Encode(common.ContentJSON{s})
 }
 
-func genJSONErr(inputParams Input) error {
-	val := reflect.ValueOf(inputParams)
-
-	var buf bytes.Buffer
-	fmt.Fprint(&buf, "invalid json: json must be {")
-
-	for i := 0; i < val.Type().NumField(); i++ {
-		fmt.Fprintf(&buf, `"%s": %s, `,
-			val.Type().Field(i).Tag.Get("json"),
-			val.Type().Field(i).Type)
-	}
-
-	buf.Truncate(len(buf.String()) - 2)
-	fmt.Fprint(&buf, "}")
-
-	return errors.New(buf.String())
-}
-
-func validateJSONInputs(input Input) (err error) {
+func validateJsonInput(input Service) (err error) {
 	val := reflect.ValueOf(input)
 	v := reflect.Indirect(val)
 	for i := 0; i < v.Type().NumField(); i++ {
@@ -73,4 +55,22 @@ func validateJSONInputs(input Input) (err error) {
 		}
 	}
 	return nil
+}
+
+func genJsonErr(input Service) error {
+	val := reflect.ValueOf(input)
+
+	var buf bytes.Buffer
+	fmt.Fprint(&buf, "invalid json: json must be {")
+
+	for i := 0; i < val.Type().NumField(); i++ {
+		fmt.Fprintf(&buf, `"%s": %s, `,
+			val.Type().Field(i).Tag.Get("json"),
+			val.Type().Field(i).Type)
+	}
+
+	buf.Truncate(len(buf.String()) - 2)
+	fmt.Fprint(&buf, "}")
+
+	return errors.New(buf.String())
 }

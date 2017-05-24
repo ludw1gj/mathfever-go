@@ -4,16 +4,16 @@ import (
 	"html/template"
 	"log"
 	"reflect"
-	"github.com/spottywolf/mathfever/api"
-	"github.com/spottywolf/mathfever/api/math"
+	"github.com/spottywolf/mathfever/service"
+	"github.com/spottywolf/mathfever/service/math"
 )
 
 type Calculation struct {
-	Name               string        `json:"name"`
-	URL                string        `json:"url"`
-	Input              []inputInfo       `json:"input"`
-	Example            template.HTML `json:"example"`
-	InputStructAddress api.Input     `json:"input_struct_address"`
+	Name    string        `json:"name"`
+	URL     string        `json:"url"`
+	Input   []inputInfo       `json:"input"`
+	Example template.HTML `json:"example"`
+	Service service.Service     `json:"service"`
 }
 
 type inputInfo struct {
@@ -22,165 +22,165 @@ type inputInfo struct {
 }
 
 func networkingCalculations() (c []Calculation) {
-	BinaryToDecimalData := Calculation{
+	binaryToDecimalData := Calculation{
 		"Binary to Decimal",
 		"/networking/binary-to-decimal",
-		genInput(api.BinaryToDecimalInput{}),
+		genInput(service.BinaryToDecimalService{}),
 		genTemplateHTML(math.BinaryToDecimal("10101")),
-		api.BinaryToDecimalInput{},
+		service.BinaryToDecimalService{},
 	}
-	BinaryToHexadecimalData := Calculation{
+	binaryToHexadecimalData := Calculation{
 		"Binary to Hexadecimal",
 		"/networking/binary-to-hexadecimal",
-		genInput(api.BinaryToHexadecimalInput{}),
+		genInput(service.BinaryToHexadecimalService{}),
 		genTemplateHTML(math.BinaryToHexadecimal("10111")),
-		api.BinaryToHexadecimalInput{},
+		service.BinaryToHexadecimalService{},
 	}
-	DecimalToBinaryData := Calculation{
+	decimalToBinaryData := Calculation{
 		"Decimal to Binary",
 		"/networking/decimal-to-binary",
-		genInput(api.DecimalToBinaryInput{}),
+		genInput(service.DecimalToBinaryService{}),
 		genTemplateHTML(math.DecimalToBinary("21")),
-		api.DecimalToBinaryInput{},
+		service.DecimalToBinaryService{},
 	}
-	DecimalToHexadecimalData := Calculation{
+	decimalToHexadecimalData := Calculation{
 		"Decimal to Hexadecimal",
 		"/networking/decimal-to-hexadecimal",
-		genInput(api.DecimalToHexadecimalInput{}),
+		genInput(service.DecimalToHexadecimalService{}),
 		genTemplateHTML(math.DecimalToHexadecimal("92")),
-		api.DecimalToHexadecimalInput{},
+		service.DecimalToHexadecimalService{},
 	}
-	HexadecimalToBinaryData := Calculation{
+	hexadecimalToBinaryData := Calculation{
 		"Hexadecimal to Binary",
 		"/networking/hexadecimal-to-binary",
-		genInput(api.HexadecimalToBinaryInput{}),
+		genInput(service.HexadecimalToBinaryService{}),
 		genTemplateHTML(math.HexadecimalToBinary("6BA")),
-		api.HexadecimalToBinaryInput{},
+		service.HexadecimalToBinaryService{},
 	}
-	HexadecimalToDecimalData := Calculation{
+	hexadecimalToDecimalData := Calculation{
 		"Hexadecimal to Decimal",
 		"/networking/hexadecimal-to-decimal",
-		genInput(api.HexadecimalToDecimalInput{}),
+		genInput(service.HexadecimalToDecimalService{}),
 		genTemplateHTML(math.HexadecimalToDecimal("6BA")),
-		api.HexadecimalToDecimalInput{},
+		service.HexadecimalToDecimalService{},
 	}
-	return append(c, BinaryToDecimalData, BinaryToHexadecimalData, DecimalToBinaryData, DecimalToHexadecimalData,
-		HexadecimalToBinaryData, HexadecimalToDecimalData)
+	return append(c, binaryToDecimalData, binaryToHexadecimalData, decimalToBinaryData, decimalToHexadecimalData,
+		hexadecimalToBinaryData, hexadecimalToDecimalData)
 }
 
 func numbersCalculations() (c []Calculation) {
-	IsPrimeData := Calculation{
+	isPrimeData := Calculation{
 		"Find if Number is a Prime Number",
 		"/numbers/is-prime",
-		genInput(api.IsPrimeInput{}),
+		genInput(service.IsPrimeService{}),
 		template.HTML(math.IsPrime(129)),
-		api.IsPrimeInput{},
+		service.IsPrimeService{},
 	}
-	HighestCommonFactorData := Calculation{
+	highestCommonFactorData := Calculation{
 		"Highest Common Factor",
 		"/numbers/highest-common-factor",
-		genInput(api.HighestCommonFactorInput{}),
+		genInput(service.HighestCommonFactorService{}),
 		template.HTML(math.HighestCommonFactor(600, 752)),
-		api.HighestCommonFactorInput{},
+		service.HighestCommonFactorService{},
 	}
-	LowestCommonMultipleData := Calculation{
+	lowestCommonMultipleData := Calculation{
 		"Lowest Common Multiple",
 		"/numbers/lowest-common-multiple",
-		genInput(api.LowestCommonMultipleInput{}),
+		genInput(service.LowestCommonMultipleService{}),
 		template.HTML(math.LowestCommonMultiple(600, 752)),
-		api.LowestCommonMultipleInput{},
+		service.LowestCommonMultipleService{},
 	}
-	return append(c, IsPrimeData, HighestCommonFactorData, LowestCommonMultipleData)
+	return append(c, isPrimeData, highestCommonFactorData, lowestCommonMultipleData)
 }
 
 func percentagesCalculations() (c []Calculation) {
-	ChangeByPercentageData := Calculation{
+	changeByPercentageData := Calculation{
 		"Change Number by Percentage",
 		"/percentages/change-by-percentage",
-		genInput(api.ChangeByPercentageInput{}),
+		genInput(service.ChangeByPercentageService{}),
 		genTemplateHTML(math.ChangeByPercentage(900, 65)),
-		api.ChangeByPercentageInput{},
+		service.ChangeByPercentageService{},
 	}
-	NumberFromPercentageData := Calculation{
+	numberFromPercentageData := Calculation{
 		"Get Number from a Percentage",
 		"/percentages/number-from-percentage",
-		genInput(api.NumberFromPercentageInput{}),
+		genInput(service.NumberFromPercentageService{}),
 		genTemplateHTML(math.NumberFromPercentage(600, 752)),
-		api.NumberFromPercentageInput{},
+		service.NumberFromPercentageService{},
 	}
-	PercentageChangeData := Calculation{
+	percentageChangeData := Calculation{
 		"Find Percentage Difference of Two Numbers",
 		"/percentages/percentage-change",
-		genInput(api.PercentageChangeInput{}),
+		genInput(service.PercentageChangeService{}),
 		genTemplateHTML(math.PercentageChange(400, 540)),
-		api.PercentageChangeInput{},
+		service.PercentageChangeService{},
 	}
-	PercentageFromNumberData := Calculation{
+	percentageFromNumberData := Calculation{
 		"Find Percentage of a Number",
 		"/percentages/percentage-from-number",
-		genInput(api.PercentageFromNumberInput{}),
+		genInput(service.PercentageFromNumberService{}),
 		genTemplateHTML(math.PercentageFromNumber(585, 900)),
-		api.PercentageFromNumberInput{},
+		service.PercentageFromNumberService{},
 	}
 
-	return append(c, ChangeByPercentageData, NumberFromPercentageData, PercentageChangeData, PercentageFromNumberData)
+	return append(c, changeByPercentageData, numberFromPercentageData, percentageChangeData, percentageFromNumberData)
 }
 
 func tsaCalculations() (c []Calculation) {
-	PythagoreanTheoremData := Calculation{
+	pythagoreanTheoremData := Calculation{
 		"Pythagorean Theorem",
 		"/tsa/pythagorean-theorem",
-		genInput(api.TsaPythagoreanTheoremInput{}),
+		genInput(service.TsaPythagoreanTheoremService{}),
 		genTemplateHTML(math.TSAPythagoreanTheorem(25, 17)),
-		api.TsaPythagoreanTheoremInput{},
+		service.TsaPythagoreanTheoremService{},
 	}
-	ConeData := Calculation{
+	coneData := Calculation{
 		"Cone",
 		"/tsa/cone",
-		genInput(api.TsaConeInput{}),
+		genInput(service.TsaConeService{}),
 		genTemplateHTML(math.TsaCone(3, 5)),
-		api.TsaConeInput{},
+		service.TsaConeService{},
 	}
-	CubeData := Calculation{
+	cubeData := Calculation{
 		"Cube",
 		"/tsa/cube",
-		genInput(api.TsaCubeInput{}),
+		genInput(service.TsaCubeService{}),
 		genTemplateHTML(math.TsaCube(3)),
-		api.TsaCubeInput{},
+		service.TsaCubeService{},
 	}
-	CylinderData := Calculation{
+	cylinderData := Calculation{
 		"Cylinder",
 		"/tsa/cylinder",
-		genInput(api.TsaCylinderInput{}),
+		genInput(service.TsaCylinderService{}),
 		genTemplateHTML(math.TsaCylinder(2, 5)),
-		api.TsaCylinderInput{},
+		service.TsaCylinderService{},
 	}
-	RectangularPrismData := Calculation{
+	rectangularPrismData := Calculation{
 		"Rectangular Prism",
 		"/tsa/rectangular-prism",
-		genInput(api.TsaRectangularPrismInput{}),
+		genInput(service.TsaRectangularPrismService{}),
 		genTemplateHTML(math.TsaRectangularPrism(2, 4, 3)),
-		api.TsaRectangularPrismInput{},
+		service.TsaRectangularPrismService{},
 	}
-	SphereData := Calculation{
+	sphereData := Calculation{
 		"Sphere",
 		"/tsa/sphere",
-		genInput(api.TsaSphereInput{}),
+		genInput(service.TsaSphereService{}),
 		genTemplateHTML(math.TsaSphere(1)),
-		api.TsaSphereInput{},
+		service.TsaSphereService{},
 	}
-	SquareBasedTriangleData := Calculation{
+	squareBasedTriangleData := Calculation{
 		"Square Based Triangle",
 		"/tsa/square-based-triangle",
-		genInput(api.TsaSquareBaseTriangleInput{}),
+		genInput(service.TsaSquareBaseTriangleService{}),
 		genTemplateHTML(math.TsaSquareBaseTriangle(4, 6)),
-		api.TsaSquareBaseTriangleInput{},
+		service.TsaSquareBaseTriangleService{},
 	}
-	return append(c, PythagoreanTheoremData, ConeData, CubeData, CylinderData, RectangularPrismData, SphereData,
-		SquareBasedTriangleData)
+	return append(c, pythagoreanTheoremData, coneData, cubeData, cylinderData, rectangularPrismData, sphereData,
+		squareBasedTriangleData)
 }
 
-func genInput(input api.Input) (inputs []inputInfo) {
+func genInput(input service.Service) (inputs []inputInfo) {
 	val := reflect.ValueOf(input)
 
 	for i := 0; i < val.Type().NumField(); i++ {
