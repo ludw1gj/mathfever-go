@@ -41,58 +41,31 @@ type TsaSquareBaseTriangleService struct {
 }
 
 func (i TsaPythagoreanTheoremService) Execute() (s string, err error) {
-	err = validateJsonInput(i)
-	if err != nil {
-		return
-	}
 	return math.TSAPythagoreanTheorem(i.SideA, i.SideB)
 }
 
 func (i TsaConeService) Execute() (s string, err error) {
-	err = validateJsonInput(i)
-	if err != nil {
-		return
-	}
 	return math.TsaCone(i.Radius, i.SlantHeight)
 }
 
 func (i TsaCubeService) Execute() (s string, err error) {
-	err = validateJsonInput(i)
-	if err != nil {
-		return
-	}
 	return math.TsaCube(i.Length)
 }
 
 func (i TsaCylinderService) Execute() (s string, err error) {
-	err = validateJsonInput(i)
-	if err != nil {
-		return
-	}
 	return math.TsaCylinder(i.Radius, i.Height)
 }
 
 func (i TsaRectangularPrismService) Execute() (s string, err error) {
-	err = validateJsonInput(i)
-	if err != nil {
-		return
-	}
 	return math.TsaRectangularPrism(i.Height, i.Length, i.Width)
 }
 
 func (i TsaSphereService) Execute() (s string, err error) {
-	err = validateJsonInput(i)
-	if err != nil {
-		return
-	}
+
 	return math.TsaSphere(i.Radius)
 }
 
 func (i TsaSquareBaseTriangleService) Execute() (s string, err error) {
-	err = validateJsonInput(i)
-	if err != nil {
-		return
-	}
 	return math.TsaSquareBaseTriangle(i.BaseLength, i.Height)
 }
 
@@ -100,53 +73,30 @@ func (i TsaPythagoreanTheoremService) JsonError() error {
 	return genJsonErr(i)
 }
 
-func (i TsaConeService) JsonError() error {
-	return genJsonErr(i)
-}
-
-func (i TsaCubeService) JsonError() error {
-	return genJsonErr(i)
-}
-
-func (i TsaCylinderService) JsonError() error {
-	return genJsonErr(i)
-}
-
-func (i TsaRectangularPrismService) JsonError() error {
-	return genJsonErr(i)
-}
-
-func (i TsaSphereService) JsonError() error {
-	return genJsonErr(i)
-}
-func (i TsaSquareBaseTriangleService) JsonError() error {
-	return genJsonErr(i)
-}
-
 func (i TsaPythagoreanTheoremService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
 
 func (i TsaConeService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
 
 func (i TsaCubeService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
 
 func (i TsaCylinderService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
 
 func (i TsaRectangularPrismService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
 
 func (i TsaSphereService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
 
 func (i TsaSquareBaseTriangleService) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	calculationsAPIHelper(w, r, &i, i.JsonError())
+	calculationsAPIHelper(w, r, &i)
 }
