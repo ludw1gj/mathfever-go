@@ -28,7 +28,6 @@ type templateLoader struct {
 	baseFile string
 }
 
-// ReloadTemplates reloads templates on runtime
 func loadTemplates() {
 	pubTpls := []templateLoader{
 		{

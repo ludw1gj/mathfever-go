@@ -2,37 +2,12 @@ package math
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"log"
 	"math"
 	"strconv"
 )
 
-func validateBinary(binary string) error {
-	if len(binary) == 0 {
-		return errors.New("error: invalid or no input")
-	}
-	_, err := strconv.ParseInt(binary, 2, 0)
-	if err != nil {
-		return fmt.Errorf("incorrect input: is not a binary number - %s", binary)
-	}
-	return nil
-}
-
-func validateHexadecimal(hexadecimal string) error {
-	if len(hexadecimal) == 0 {
-		return errors.New("error: invalid or no input")
-	}
-	_, err := strconv.ParseInt(hexadecimal, 16, 0)
-	if err != nil || len(hexadecimal) == 0 {
-		return fmt.Errorf("incorrect input: is not a hexadecimal number - %s", hexadecimal)
-	}
-	return nil
-}
-
-// BinaryToDecimal converts a binary value to a decimal value, detailing each step of how a person would go about doing
-// the conversion.
 func BinaryToDecimal(binary string) (s string, err error) {
 	err = validateBinary(binary)
 	if err != nil {
@@ -80,8 +55,6 @@ func BinaryToDecimal(binary string) (s string, err error) {
 	return parseTemplate("./template/math/networking/binaryToDecimal.gohtml", data)
 }
 
-// BinaryToHexadecimal converts a binary value to a hexadecimal value, detailing each step of how a person would go
-// about doing the calculation.
 func BinaryToHexadecimal(binary string) (s string, err error) {
 	err = validateBinary(binary)
 	if err != nil {
@@ -138,8 +111,6 @@ func DecimalToHexadecimal(decimal string) (string, error) {
 	return decimalToBinaryHexadecimal(decimal, 16)
 }
 
-// DecimalToBinary converts a decimal value to a binary value, detailing each step of how a person would go about doing
-// the calculation
 func decimalToBinaryHexadecimal(decimal string, base int) (s string, err error) {
 	decimalInt, err := strconv.Atoi(decimal)
 	if err != nil {

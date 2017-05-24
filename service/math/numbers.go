@@ -168,37 +168,3 @@ func LowestCommonMultiple(n1 int, n2 int) string {
 
 	return buf.String()
 }
-
-func findElementFrequency(X []int) map[int]int {
-	m := make(map[int]int)
-	for _, x := range X {
-		m[x] = 0
-	}
-	for _, x := range X {
-		for k := range m {
-			if x == k {
-				m[k]++
-			}
-		}
-	}
-	return m
-}
-
-// compareSlice returns common elements between two slices
-func compareSlice(X, Y []int) (common []int) {
-	for i, x := range X {
-		for _, y := range Y {
-			if x == y {
-				common = append(common, x)
-				X = append(X[:i], 0)
-				break
-			}
-		}
-	}
-	return
-}
-
-// remove removes element and then moves all elements after to the left
-func remove(slice []int, s int) []int {
-	return append(slice[:s], slice[s+1:]...)
-}
