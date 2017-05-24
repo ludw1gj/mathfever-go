@@ -61,16 +61,11 @@ func (i TsaRectangularPrismService) Execute() (s string, err error) {
 }
 
 func (i TsaSphereService) Execute() (s string, err error) {
-
 	return math.TsaSphere(i.Radius)
 }
 
 func (i TsaSquareBaseTriangleService) Execute() (s string, err error) {
 	return math.TsaSquareBaseTriangle(i.BaseLength, i.Height)
-}
-
-func (i TsaPythagoreanTheoremService) JsonError() error {
-	return genJsonError(i)
 }
 
 func (i TsaPythagoreanTheoremService) HandleAPI(w http.ResponseWriter, r *http.Request) {
