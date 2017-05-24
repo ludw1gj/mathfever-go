@@ -21,7 +21,7 @@ func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Service
 	err := decoder.Decode(&input)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(common.ErrorJSON{genJsonErr(input).Error()})
+		json.NewEncoder(w).Encode(common.ErrorJson{genJsonErr(input).Error()})
 		return
 	}
 	defer r.Body.Close()
@@ -30,7 +30,7 @@ func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Service
 	err = validateJsonInput(input)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(common.ErrorJSON{err.Error()})
+		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
 		return
 	}
 
@@ -38,10 +38,10 @@ func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Service
 	s, err := input.Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(common.ErrorJSON{err.Error()})
+		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
 		return
 	}
-	json.NewEncoder(w).Encode(common.ContentJSON{s})
+	json.NewEncoder(w).Encode(common.ContentJson{s})
 }
 
 func validateJsonInput(input Service) error {

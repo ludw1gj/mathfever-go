@@ -30,9 +30,9 @@ func calculationsAPIHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		w.WriteHeader(http.StatusNotFound)
-		json.NewEncoder(w).Encode(common.ErrorJSON{"error 404: api route not found"})
+		json.NewEncoder(w).Encode(common.ErrorJson{"error 404: api route not found"})
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		json.NewEncoder(w).Encode(common.ErrorJSON{"invalid method: method must be POST"})
+		json.NewEncoder(w).Encode(common.ErrorJson{"invalid method: method must be POST"})
 	}
 }

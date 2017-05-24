@@ -1,9 +1,9 @@
 package common
 
-type ErrorJSON struct {
+type ErrorJson struct {
 	Error string `json:"error"`
 }
 
-type ContentJSON struct {
+type ContentJson struct {
 	Content string `json:"content"`
 }
