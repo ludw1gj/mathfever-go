@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	tmplBufpool     *bpool.BufferPool
+	tmplBufPool     *bpool.BufferPool
 	templateDir = filepath.Join("template", "site")
 
 	homeTpml,
@@ -116,8 +116,8 @@ func loadTemplates() {
 }
 
 func renderTemplate(w http.ResponseWriter, r *http.Request, tmpl *template.Template, name string, data interface{}) {
-	buf := tmplBufpool.Get()
-	defer tmplBufpool.Put(buf)
+	buf := tmplBufPool.Get()
+	defer tmplBufPool.Put(buf)
 
 	err := tmpl.ExecuteTemplate(buf, name, data)
 	if err != nil {
