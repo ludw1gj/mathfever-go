@@ -1,5 +1,7 @@
 package math
 
+import "path/filepath"
+
 func ChangeByPercentage(n float64, p float64) (string, error) {
 	/*
 	ChangeByPercentage:
@@ -35,7 +37,8 @@ func ChangeByPercentage(n float64, p float64) (string, error) {
 		noun,
 		round(answer, .5, 2),
 	}
-	return parseTemplate("./template/math/percentages/change_by_percentage.gohtml", data)
+	tmplFile := filepath.Join("template", "math", "percentages", "change_by_percentage.gohtml")
+	return parseTemplate(tmplFile, data)
 }
 
 func NumberFromPercentage(p float64, n float64) (string, error) {
@@ -57,7 +60,8 @@ func NumberFromPercentage(p float64, n float64) (string, error) {
 		round(divided, .5, 2),
 		round(answer, .5, 2),
 	}
-	return parseTemplate("./template/math/percentages/number_from_percentage.gohtml", data)
+	tmplFile := filepath.Join("template", "math", "percentages", "number_from_percentage.gohtml")
+	return parseTemplate(tmplFile, data)
 }
 
 func PercentageChange(n float64, newN float64) (string, error) {
@@ -82,7 +86,8 @@ func PercentageChange(n float64, newN float64) (string, error) {
 		round(decimalisedPercentage, .5, 2),
 		round(answer, .5, 2),
 	}
-	return parseTemplate("./template/math/percentages/percentage_change.gohtml", data)
+	tmplFile := filepath.Join("template", "math", "percentages", "percentage_change.gohtml")
+	return parseTemplate(tmplFile, data)
 }
 
 func PercentageFromNumber(n float64, totalN float64) (string, error) {
@@ -104,5 +109,6 @@ func PercentageFromNumber(n float64, totalN float64) (string, error) {
 		round(decimalisedPercentage, .5, 2),
 		round(answer, .5, 2),
 	}
-	return parseTemplate("./template/math/percentages/percentage_from_number.gohtml", data)
+	tmplFile := filepath.Join("template", "math", "percentages", "percentage_from_number.gohtml")
+	return parseTemplate(tmplFile, data)
 }
