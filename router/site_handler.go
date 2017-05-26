@@ -42,7 +42,7 @@ func categoriesHandler(w http.ResponseWriter, r *http.Request) {
 
 	categories := model.CategoryData
 	for _, categ := range categories {
-		if category == strings.Split(categ.URL, "/")[1] {
+		if strings.Split(categ.URL, "/")[1] == category {
 			renderTemplate(w, r, categoriesTpml, "base.gohtml", categ)
 			return
 		}
@@ -56,9 +56,9 @@ func calculationsHandler(w http.ResponseWriter, r *http.Request) {
 	calculation := vars["calculation"]
 
 	for _, categ := range model.CategoryData {
-		if category == strings.Split(categ.URL, "/")[1] {
+		if strings.Split(categ.URL, "/")[1] == category {
 			for _, calc := range categ.Calculations {
-				if calculation == strings.Split(calc.URL, "/")[2] {
+				if strings.Split(calc.URL, "/")[2] == calculation {
 					data := struct {
 						model.Category
 						model.Calculation
