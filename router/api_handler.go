@@ -22,7 +22,7 @@ func calculationsAPIHandler(w http.ResponseWriter, r *http.Request) {
 			if category == strings.Split(categ.URL, "/")[1] {
 				for _, calc := range categ.Calculations {
 					if calculation == strings.Split(calc.URL, "/")[2] {
-						calc.Service.HandleAPI(w, r)
+						calc.MathAPI.HandleAPI(w, r)
 						return
 					}
 				}

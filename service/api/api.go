@@ -1,4 +1,4 @@
-package service
+package api
 
 import (
 	"bytes"
@@ -7,32 +7,33 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
-	"strconv"
 
 	"github.com/spottywolf/mathfever/common"
 )
 
-func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Service) {
-	// decode
+type MathAPI interface {
+	Execute() (string, error)
+	HandleAPI(http.ResponseWriter, *http.Request)
+}
+
+func apiHandler(w http.ResponseWriter, r *http.Request, apiInput MathAPI) {
 	decoder := json.NewDecoder(r.Body)
-	err := decoder.Decode(&input)
+	err := decoder.Decode(&apiInput)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(common.ErrorJson{genJsonError(input).Error()})
+		json.NewEncoder(w).Encode(common.ErrorJson{genJsonError(apiInput).Error()})
 		return
 	}
 	defer r.Body.Close()
 
-	// validate
-	err = validateJsonInput(input)
+	err = verifyJsonInput(apiInput)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
 		return
 	}
 
-	// execute
-	s, err := input.Execute()
+	s, err := apiInput.Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
@@ -41,8 +42,8 @@ func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Service
 	json.NewEncoder(w).Encode(common.ContentJson{s})
 }
 
-func genJsonError(input Service) error {
-	val := reflect.ValueOf(input)
+func genJsonError(apiInput MathAPI) error {
+	val := reflect.ValueOf(apiInput)
 	v := reflect.Indirect(val)
 
 	var buf bytes.Buffer
@@ -60,48 +61,25 @@ func genJsonError(input Service) error {
 	return errors.New(buf.String())
 }
 
-func validateJsonInput(input Service) error {
-	val := reflect.ValueOf(input)
+func verifyJsonInput(apiInput MathAPI) error {
+	val := reflect.ValueOf(apiInput)
 	v := reflect.Indirect(val)
 
 	for i := 0; i < v.Type().NumField(); i++ {
 		switch v.Field(i).Type().Kind() {
 		case reflect.String:
 			if v.Field(i).String() == "" {
-				return genJsonError(input)
+				return genJsonError(apiInput)
 			}
 		case reflect.Int:
 			if v.Field(i).Int() == 0 {
-				return genJsonError(input)
+				return genJsonError(apiInput)
 			}
 		case reflect.Float64:
 			if v.Field(i).Float() == 0 {
-				return genJsonError(input)
+				return genJsonError(apiInput)
 			}
 		}
-	}
-	return nil
-}
-
-func validateBinary(binary string) error {
-	b, err := strconv.ParseInt(binary, 2, 0)
-	if err != nil || b < 1 {
-		return fmt.Errorf("invalid input: is not a binary number or greater than 1: %s", binary)
-	}
-	return nil
-}
-
-func validatePositiveDecimal(decimal int) error {
-	if decimal < 1 {
-		return fmt.Errorf("invalid input: is not a decimal number or greater than 1: : %d", decimal)
-	}
-	return nil
-}
-
-func validateHexadecimal(hexadecimal string) error {
-	h, err := strconv.ParseInt(hexadecimal, 16, 0)
-	if err != nil || h < 1 {
-		return fmt.Errorf("invalid input: is not a hexadecimal number or greater than 1: %s", hexadecimal)
 	}
 	return nil
 }
