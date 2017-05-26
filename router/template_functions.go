@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-var FuncMap = template.FuncMap{
+var funcMap = template.FuncMap{
 	"genRoute": func(name string) string {
 		url, err := Router.Get(name).URL()
 		if err != nil {
