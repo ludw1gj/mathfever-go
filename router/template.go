@@ -2,110 +2,130 @@ package router
 
 import (
 	"html/template"
+	"log"
+	"net/http"
 	"path/filepath"
+
+	"github.com/oxtoacart/bpool"
 )
 
 var (
+	tmplBufpool     *bpool.BufferPool
 	templateDir = filepath.Join("template", "site")
 
-	homeTpl,
-	aboutTpl,
-	helpTpl,
-	privacyTpl,
-	termsTpl,
-	messageBoardTpl,
-	conversionTableTpl,
-	categoriesTpl,
-	calculationTpl,
-	notFoundTpl,
-	errorTpl *template.Template
+	homeTpml,
+	aboutTpml,
+	helpTpml,
+	privacyTpml,
+	termsTpml,
+	messageBoardTpml,
+	conversionTableTpml,
+	categoriesTpml,
+	calculationTpml,
+	notFoundTpml,
+	errorTpml *template.Template
 )
 
 type templateLoader struct {
-	templ    **template.Template
+	tmpl    **template.Template
 	name     string
 	file     string
 	baseFile string
 }
 
 func loadTemplates() {
-	pubTpls := []templateLoader{
+	pubTmpls := []templateLoader{
 		{
-			&homeTpl,
+			&homeTpml,
 			"home",
 			"home.gohtml",
 			"",
 		},
 		{
-			&aboutTpl,
+			&aboutTpml,
 			"about",
 			"about.gohtml",
 			"",
 		},
 		{
-			&helpTpl,
+			&helpTpml,
 			"help",
 			"help.gohtml",
 			"",
 		},
 		{
-			&privacyTpl,
+			&privacyTpml,
 			"privacy",
 			"privacy.gohtml",
 			"",
 		},
 		{
-			&termsTpl,
+			&termsTpml,
 			"terms",
 			"terms.gohtml",
 			"",
 		},
 		{
-			&messageBoardTpl,
+			&messageBoardTpml,
 			"message_board",
 			"message_board.gohtml",
 			"",
 		},
 		{
-			&conversionTableTpl,
+			&conversionTableTpml,
 			"conversion_table",
 			"conversion_table.gohtml",
 			"",
 		},
 		{
-			&categoriesTpl,
+			&categoriesTpml,
 			"category",
 			"category.gohtml",
 			"",
 		},
 		{
-			&calculationTpl,
+			&calculationTpml,
 			"calculation",
 			"calculation.gohtml",
 			"",
 		},
 		{
-			&notFoundTpl,
+			&notFoundTpml,
 			"not_found",
 			"not_found.gohtml",
 			"",
 		},
 		{
-			&errorTpl,
+			&errorTpml,
 			"error",
 			"server_error.gohtml",
 			"",
 		},
 	}
-	for i := range pubTpls {
-		pubTpls[i].baseFile = filepath.Join(templateDir, "base.gohtml")
+	for i := range pubTmpls {
+		pubTmpls[i].baseFile = filepath.Join(templateDir, "base.gohtml")
 	}
 
-	tpls := make([]templateLoader, 0, len(pubTpls))
-	tpls = append(tpls, pubTpls...)
+	tmpls := make([]templateLoader, 0, len(pubTmpls))
+	tmpls = append(tmpls, pubTmpls...)
 
-	for _, tpl := range tpls {
-		t := template.Must(template.New(tpl.name).Funcs(funcMap).ParseFiles(tpl.baseFile, filepath.Join(templateDir, tpl.file)))
-		*tpl.templ = t
+	for _, tmpl := range tmpls {
+		t := template.Must(template.New(tmpl.name).Funcs(funcMap).ParseFiles(tmpl.baseFile, filepath.Join(templateDir, tmpl.file)))
+		*tmpl.tmpl = t
 	}
+}
+
+func renderTemplate(w http.ResponseWriter, r *http.Request, tmpl *template.Template, name string, data interface{}) {
+	buf := tmplBufpool.Get()
+	defer tmplBufpool.Put(buf)
+
+	err := tmpl.ExecuteTemplate(buf, name, data)
+	if err != nil {
+		log.Println(err)
+		serverErrorHandler(w, r)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	buf.WriteTo(w)
 }
