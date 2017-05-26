@@ -1,6 +1,7 @@
 package model
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"reflect"
@@ -10,17 +11,25 @@ import (
 )
 
 type Calculation struct {
-	Name    string `json:"name"`
-	URL     string `json:"url"`
-	Input   []inputInfo `json:"input"`
-	Example template.HTML `json:"example"`
-	MathAPI api.MathAPI `json:"math_api"`
+	Name            string `json:"name"`
+	URL             string `json:"url"`
+	Input           []inputInfo `json:"input"`
+	Example         template.HTML `json:"example"`
+	MathAPI         api.MathAPI `json:"math_api"`
+	MetaDescription string
 }
 
 type inputInfo struct {
 	Name string `json:"name"`
 	Tag  string `json:"tag"`
 }
+
+var (
+	networkingCalcs = networkingCalculations()
+	numbersCalcs    = numbersCalculations()
+	percentageCalcs = percentagesCalculations()
+	tsaCalcs        = tsaCalculations()
+)
 
 func networkingCalculations() (c []Calculation) {
 	binaryToDecimalData := Calculation{
@@ -29,6 +38,7 @@ func networkingCalculations() (c []Calculation) {
 		genInput(api.BinaryToDecimalAPI{}),
 		genTemplateHTML(math.BinaryToDecimal("10101")),
 		api.BinaryToDecimalAPI{},
+		genMetaDescCalculation("Binary to Decimal"),
 	}
 	binaryToHexadecimalData := Calculation{
 		"Binary to Hexadecimal",
@@ -36,6 +46,7 @@ func networkingCalculations() (c []Calculation) {
 		genInput(api.BinaryToHexadecimalAPI{}),
 		genTemplateHTML(math.BinaryToHexadecimal("10111")),
 		api.BinaryToHexadecimalAPI{},
+		genMetaDescCalculation("Binary to Hexadecimal"),
 	}
 	decimalToBinaryData := Calculation{
 		"Decimal to Binary",
@@ -43,6 +54,7 @@ func networkingCalculations() (c []Calculation) {
 		genInput(api.DecimalToBinaryAPI{}),
 		genTemplateHTML(math.DecimalToBinary(21)),
 		api.DecimalToBinaryAPI{},
+		genMetaDescCalculation("Decimal to Binary"),
 	}
 	decimalToHexadecimalData := Calculation{
 		"Decimal to Hexadecimal",
@@ -50,6 +62,7 @@ func networkingCalculations() (c []Calculation) {
 		genInput(api.DecimalToHexadecimalAPI{}),
 		genTemplateHTML(math.DecimalToHexadecimal(92)),
 		api.DecimalToHexadecimalAPI{},
+		genMetaDescCalculation("Decimal to Hexadecimal"),
 	}
 	hexadecimalToBinaryData := Calculation{
 		"Hexadecimal to Binary",
@@ -57,6 +70,7 @@ func networkingCalculations() (c []Calculation) {
 		genInput(api.HexadecimalToBinaryAPI{}),
 		genTemplateHTML(math.HexadecimalToBinary("6BA")),
 		api.HexadecimalToBinaryAPI{},
+		genMetaDescCalculation("Hexadecimal to Binary"),
 	}
 	hexadecimalToDecimalData := Calculation{
 		"Hexadecimal to Decimal",
@@ -64,6 +78,7 @@ func networkingCalculations() (c []Calculation) {
 		genInput(api.HexadecimalToDecimalAPI{}),
 		genTemplateHTML(math.HexadecimalToDecimal("6BA")),
 		api.HexadecimalToDecimalAPI{},
+		genMetaDescCalculation("Hexadecimal to Decimal"),
 	}
 	return append(c, binaryToDecimalData, binaryToHexadecimalData, decimalToBinaryData, decimalToHexadecimalData,
 		hexadecimalToBinaryData, hexadecimalToDecimalData)
@@ -76,6 +91,7 @@ func numbersCalculations() (c []Calculation) {
 		genInput(api.IsPrimeAPI{}),
 		template.HTML(math.IsPrime(129)),
 		api.IsPrimeAPI{},
+		genMetaDescCalculation("Find if Number is a Prime Number"),
 	}
 	highestCommonFactorData := Calculation{
 		"Highest Common Factor",
@@ -83,6 +99,7 @@ func numbersCalculations() (c []Calculation) {
 		genInput(api.HighestCommonFactorAPI{}),
 		template.HTML(math.HighestCommonFactor(600, 752)),
 		api.HighestCommonFactorAPI{},
+		genMetaDescCalculation("Highest Common Factor"),
 	}
 	lowestCommonMultipleData := Calculation{
 		"Lowest Common Multiple",
@@ -90,6 +107,7 @@ func numbersCalculations() (c []Calculation) {
 		genInput(api.LowestCommonMultipleAPI{}),
 		template.HTML(math.LowestCommonMultiple(600, 752)),
 		api.LowestCommonMultipleAPI{},
+		genMetaDescCalculation("Lowest Common Multiple"),
 	}
 	return append(c, isPrimeData, highestCommonFactorData, lowestCommonMultipleData)
 }
@@ -101,6 +119,7 @@ func percentagesCalculations() (c []Calculation) {
 		genInput(api.ChangeByPercentageAPI{}),
 		genTemplateHTML(math.ChangeByPercentage(900, 65)),
 		api.ChangeByPercentageAPI{},
+		genMetaDescCalculation("Change Number by Percentage"),
 	}
 	numberFromPercentageData := Calculation{
 		"Get Number from a Percentage",
@@ -108,6 +127,7 @@ func percentagesCalculations() (c []Calculation) {
 		genInput(api.NumberFromPercentageAPI{}),
 		genTemplateHTML(math.NumberFromPercentage(600, 752)),
 		api.NumberFromPercentageAPI{},
+		genMetaDescCalculation("Get Number from a Percentage"),
 	}
 	percentageChangeData := Calculation{
 		"Find Percentage Difference of Two Numbers",
@@ -115,6 +135,7 @@ func percentagesCalculations() (c []Calculation) {
 		genInput(api.PercentageChangeAPI{}),
 		genTemplateHTML(math.PercentageChange(400, 540)),
 		api.PercentageChangeAPI{},
+		genMetaDescCalculation("Find Percentage Difference of Two Numbers"),
 	}
 	percentageFromNumberData := Calculation{
 		"Find Percentage of a Number",
@@ -122,6 +143,7 @@ func percentagesCalculations() (c []Calculation) {
 		genInput(api.PercentageFromNumberAPI{}),
 		genTemplateHTML(math.PercentageFromNumber(585, 900)),
 		api.PercentageFromNumberAPI{},
+		genMetaDescCalculation("Find Percentage of a Number"),
 	}
 
 	return append(c, changeByPercentageData, numberFromPercentageData, percentageChangeData, percentageFromNumberData)
@@ -134,6 +156,7 @@ func tsaCalculations() (c []Calculation) {
 		genInput(api.TsaPythagoreanTheoremAPI{}),
 		genTemplateHTML(math.TSAPythagoreanTheorem(25, 17)),
 		api.TsaPythagoreanTheoremAPI{},
+		genMetaDescCalculation("Pythagorean Theorem"),
 	}
 	coneData := Calculation{
 		"Cone",
@@ -141,6 +164,7 @@ func tsaCalculations() (c []Calculation) {
 		genInput(api.TsaConeAPI{}),
 		genTemplateHTML(math.TsaCone(3, 5)),
 		api.TsaConeAPI{},
+		genMetaDescCalculation("Total Surface Area of Cone"),
 	}
 	cubeData := Calculation{
 		"Cube",
@@ -148,6 +172,7 @@ func tsaCalculations() (c []Calculation) {
 		genInput(api.TsaCubeAPI{}),
 		genTemplateHTML(math.TsaCube(3)),
 		api.TsaCubeAPI{},
+		genMetaDescCalculation("Total Surface Area of Cube"),
 	}
 	cylinderData := Calculation{
 		"Cylinder",
@@ -155,6 +180,7 @@ func tsaCalculations() (c []Calculation) {
 		genInput(api.TsaCylinderAPI{}),
 		genTemplateHTML(math.TsaCylinder(2, 5)),
 		api.TsaCylinderAPI{},
+		genMetaDescCalculation("Total Surface Area of Cylinder"),
 	}
 	rectangularPrismData := Calculation{
 		"Rectangular Prism",
@@ -162,6 +188,7 @@ func tsaCalculations() (c []Calculation) {
 		genInput(api.TsaRectangularPrismAPI{}),
 		genTemplateHTML(math.TsaRectangularPrism(2, 4, 3)),
 		api.TsaRectangularPrismAPI{},
+		genMetaDescCalculation("Total Surface Area of Rectangular Prism"),
 	}
 	sphereData := Calculation{
 		"Sphere",
@@ -169,6 +196,7 @@ func tsaCalculations() (c []Calculation) {
 		genInput(api.TsaSphereAPI{}),
 		genTemplateHTML(math.TsaSphere(1)),
 		api.TsaSphereAPI{},
+		genMetaDescCalculation("Total Surface Area of Sphere"),
 	}
 	squareBasedTriangleData := Calculation{
 		"Square Based Triangle",
@@ -176,6 +204,7 @@ func tsaCalculations() (c []Calculation) {
 		genInput(api.TsaSquareBaseTriangleAPI{}),
 		genTemplateHTML(math.TsaSquareBaseTriangle(4, 6)),
 		api.TsaSquareBaseTriangleAPI{},
+		genMetaDescCalculation("Total Surface Area of Square Based Triangle"),
 	}
 	return append(c, pythagoreanTheoremData, coneData, cubeData, cylinderData, rectangularPrismData, sphereData,
 		squareBasedTriangleData)
@@ -186,7 +215,7 @@ func genInput(input api.MathAPI) (inputs []inputInfo) {
 
 	for i := 0; i < val.Type().NumField(); i++ {
 		var data inputInfo
-		if val.Type().Field(i).Tag.Get("name") == "" {
+		if val.Type().Field(i).Tag.Get("name") == genMetaDescCalculation("") {
 			log.Fatalf("Error: %s struct does not have 'name' tag", val.Type().Name())
 		} else {
 			data = inputInfo{
@@ -204,4 +233,8 @@ func genTemplateHTML(s string, err error) template.HTML {
 		log.Fatalln(err)
 	}
 	return template.HTML(s)
+}
+
+func genMetaDescCalculation(solving string) string {
+	return fmt.Sprintf("Solve: %s, showing mathematical proof and answer.", solving)
 }
