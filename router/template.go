@@ -33,6 +33,11 @@ type templateLoader struct {
 	baseFile string
 }
 
+func init() {
+	tmplBufPool = bpool.NewBufferPool(64)
+	loadTemplates()
+}
+
 func loadTemplates() {
 	pubTmpls := []templateLoader{
 		{
