@@ -13,7 +13,7 @@ if (document.getElementById('calculation-form') !== null) {
 
         // validate the data
         for (var key in formData) {
-            // remove all whitespace from the form data
+            // removes all whitespace from the form data
             formData[key] = formData[key].replace(/\s/g, '');
 
             if (formData[key] === '') {
@@ -34,7 +34,7 @@ if (document.getElementById('calculation-form') !== null) {
                     break;
                 } else {
                     // data must be an integer string not a float string
-                    formData[key] = parseInt(formData[key]).toString();
+                    formData[key] = parseInt(formData[key]);
                 }
             } else if (key === 'hexadecimal') {
                 // hexadecimal to uppercase before it reaches the server

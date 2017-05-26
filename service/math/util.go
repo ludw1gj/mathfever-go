@@ -3,10 +3,8 @@ package math
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"log"
 	"math"
-	"strconv"
 	"text/template"
 )
 
@@ -23,28 +21,6 @@ func parseTemplate(filename string, data interface{}) (s string, err error) {
 		return s, errors.New("internal system error: template execute error")
 	}
 	return b.String(), nil
-}
-
-func validateBinary(binary string) error {
-	if len(binary) == 0 {
-		return errors.New("error: invalid or no input")
-	}
-	_, err := strconv.ParseInt(binary, 2, 0)
-	if err != nil {
-		return fmt.Errorf("incorrect input: is not a binary number - %s", binary)
-	}
-	return nil
-}
-
-func validateHexadecimal(hexadecimal string) error {
-	if len(hexadecimal) == 0 {
-		return errors.New("error: invalid or no input")
-	}
-	_, err := strconv.ParseInt(hexadecimal, 16, 0)
-	if err != nil || len(hexadecimal) == 0 {
-		return fmt.Errorf("incorrect input: is not a hexadecimal number - %s", hexadecimal)
-	}
-	return nil
 }
 
 func round(val float64, roundOn float64, places int) (newVal float64) {

@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+	"strconv"
+
 	"github.com/spottywolf/mathfever/common"
 )
 
@@ -37,7 +39,7 @@ func calculationsAPIHelper(w http.ResponseWriter, r *http.Request, input Service
 	// execute
 	s, err := input.Execute()
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
 		return
 	}
@@ -84,4 +86,33 @@ func genJsonError(input Service) error {
 	fmt.Fprint(&buf, "}")
 
 	return errors.New(buf.String())
+}
+
+func validateBinary(binary string) error {
+	if len(binary) == 0 {
+		return errors.New("error: invalid or no input")
+	}
+	b, err := strconv.ParseInt(binary, 2, 0)
+	if err != nil || b < 1 {
+		return fmt.Errorf("invalid input: is not a binary number or greater than 1: %s", binary)
+	}
+	return nil
+}
+
+func validatePositiveDecimal(decimal int) error {
+	if decimal < 1 {
+		return fmt.Errorf("error: no input ir decimal number is less than 1: %d", decimal)
+	}
+	return nil
+}
+
+func validateHexadecimal(hexadecimal string) error {
+	if len(hexadecimal) == 0 {
+		return errors.New("error: invalid or no input")
+	}
+	h, err := strconv.ParseInt(hexadecimal, 16, 0)
+	if err != nil || h < 1 {
+		return fmt.Errorf("invalid input: is not a hexadecimal number or greater than 1: %s", hexadecimal)
+	}
+	return nil
 }

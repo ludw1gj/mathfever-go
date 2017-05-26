@@ -1,29 +1,29 @@
-{{ define "title" }}{{ .Name }} - MathFever{{ end }}
+{{define "title"}}{{.Name}} - MathFever{{end}}
 
-{{ define "content" }}
+{{define "content"}}
 <!-- Main Heading -->
-<h1 id="main-heading">{{ .Name }}</h1>
+<h1 id="main-heading">{{.Name}}</h1>
 <hr class="separator">
 
 <!-- Page Content-->
 <div class="mdl-grid">
     <div class="general-content mdl-color--white content mdl-color-text--grey-800 mdl-cell mdl-cell--9-col mdl-shadow--2dp">
 
-        <h4>{{ .Name }} Calculations:</h4>
+        <h4>{{.Name}} Calculations:</h4>
 
         <ul class="category-calc-ul">
-            {{ range .Calculations }}
-            <li><a class="no-text-decoration" href="{{ .URL }}">{{ .Name }}</a></li>
-            {{ end }}
+            {{range .Calculations}}
+            <li><a class="no-text-decoration" href="{{.URL}}">{{.Name}}</a></li>
+            {{end}}
         </ul>
 
-        {{ range .Calculations }}
+        {{range .Calculations}}
         <hr>
-        <h4>{{ .Name }}</h4>
-        {{ .Example }}
-        {{ end }}
+        <h4>{{.Name}}</h4>
+        {{.Example}}
+        {{end}}
 
     </div>
 </div>
 
-{{ end }}
+{{end}}

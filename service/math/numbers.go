@@ -50,7 +50,7 @@ func IsPrime(n int) string {
 	return buf.String()
 }
 
-func FindPrimeFactors(n int) (primeFactors []int, table bytes.Buffer, proof bytes.Buffer, factorFrequency map[int]int) {
+func findPrimeFactors(n int) (primeFactors []int, table bytes.Buffer, proof bytes.Buffer, factorFrequency map[int]int) {
 	originalN := n
 	fmt.Fprint(&table, `<table class="mdl-data-table mdl-js-data-table"><tbody>`)
 	for i := 2; i*i <= n; {
@@ -75,7 +75,9 @@ func FindPrimeFactors(n int) (primeFactors []int, table bytes.Buffer, proof byte
 	for _, factor := range primeFactors {
 		fmt.Fprintf(&proof, "%d &times ", factor)
 	}
-	proof.Truncate(len(proof.String()) - 7)
+	if len(primeFactors) > 0 {
+		proof.Truncate(len(proof.String()) - 7)
+	}
 	fmt.Fprintf(&proof, "= %d<br>", originalN)
 
 	factorFrequency = findElementFrequency(primeFactors)
@@ -88,8 +90,8 @@ func FindPrimeFactors(n int) (primeFactors []int, table bytes.Buffer, proof byte
 }
 
 func HighestCommonFactor(n1 int, n2 int) string {
-	primeFactors1, table1, proof1, _ := FindPrimeFactors(n1)
-	primeFactors2, table2, proof2, _ := FindPrimeFactors(n2)
+	primeFactors1, table1, proof1, _ := findPrimeFactors(n1)
+	primeFactors2, table2, proof2, _ := findPrimeFactors(n2)
 	commonN := compareSlice(primeFactors1, primeFactors2)
 
 	var buf bytes.Buffer
@@ -126,10 +128,9 @@ func HighestCommonFactor(n1 int, n2 int) string {
 	return buf.String()
 }
 
-// CAUSES bytes.Buffer: truncation out of range, WHEN ONE INPUT VALUE IS 1
 func LowestCommonMultiple(n1 int, n2 int) string {
-	_, table1, proof1, factorFrequency1 := FindPrimeFactors(n1)
-	_, table2, proof2, factorFrequency2 := FindPrimeFactors(n2)
+	_, table1, proof1, factorFrequency1 := findPrimeFactors(n1)
+	_, table2, proof2, factorFrequency2 := findPrimeFactors(n2)
 
 	var buf bytes.Buffer
 	fmt.Fprintf(&buf, "<p>Find the lowest common mulitple of %d and %d.</p>", n1, n2)

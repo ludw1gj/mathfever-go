@@ -1,18 +1,18 @@
-<p>Where the Percentage is {{ .Percentage }}%, and the Number is {{ .Number }}:</p>
+<p>Where the Percentage is {{.Percentage}}%, and the Number is {{.Number}}:</p>
 
 <p>Use the equation below:<br>
-(Percentage &#xf7; 100) &times Number<br>
-({{ .Percentage }} &#xf7; 100) &times {{ .Number }}</p>
+    (Percentage &#xf7; 100) &times Number<br>
+    ({{.Percentage}} &#xf7; 100) &times {{.Number}}</p>
 
 <p>Find the decimalised version of the Percentage:<br>
-Percentage &#xf7; 100<br>
-{{ .Percentage }} &#xf7; 100<br>
-{{ .Divided }}</p>
+    Percentage &#xf7; 100<br>
+    {{.Percentage}} &#xf7; 100<br>
+    {{.Divided}}</p>
 
 <p>Now multiply it with the Number to get the final answer:<br>
-({{ .Divided }}) &times Number<br>
-({{ .Divided }}) &times {{ .Number }}<br>
-{{ .Answer }}</p>
+    ({{.Divided}}) &times Number<br>
+    ({{.Divided}}) &times {{.Number}}<br>
+    {{.Answer}}</p>
 
 <p>Therefore:<br>
-{{ .Percentage }}% of {{ .Number }} is {{ .Answer }}.</p>
+    {{.Percentage}}% of {{.Number}} is {{.Answer}}.</p>

@@ -114,14 +114,14 @@ function binaryValidation(binary) {
 
 /**
  * This function checks if param decimal is a decimal number, int and float are accepted
- * @param {String} decimal
+ * @param {Number} decimal
  * decimal String, must not contain spaces
  * @returns {boolean}
  */
 function decimalValidation(decimal) {
     var isValidDecimal = true;
 
-    if (isNaN(Number(decimal)) || decimal > 999999999999) {
+    if (isNaN(decimal) || decimal > 999999999999) {
         isValidDecimal = false;
     }
     return isValidDecimal;

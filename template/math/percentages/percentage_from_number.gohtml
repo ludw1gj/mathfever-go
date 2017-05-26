@@ -1,16 +1,16 @@
-<p>Where the Number is {{ .Number }}, and the Total Number is {{ .TotalNumber }}:</p>
+<p>Where the Number is {{.Number}}, and the Total Number is {{.TotalNumber}}:</p>
 
 <p>Calculate using the equation shown below:<br>
-(Number &#xf7; Total Number) &times 100</p>
+    (Number &#xf7; Total Number) &times 100</p>
 
 <p>Find the decimalised version of the percentage:<br>
-Number &#xf7; Total Number<br>
-{{ .Number }} &#xf7; {{ .TotalNumber }}<br>
-{{ .DecimalisedPercentage }}</p>
+    Number &#xf7; Total Number<br>
+    {{.Number}} &#xf7; {{.TotalNumber}}<br>
+    {{.DecimalisedPercentage}}</p>
 
 <p>Convert decimalised percentage to percentage to get the answer:<br>
-{{ .DecimalisedPercentage }} &times 100<br>
-{{ .Answer }}</p>
+    {{.DecimalisedPercentage}} &times 100<br>
+    {{.Answer}}</p>
 
 <p>Therefore:<br>
-{{ .Number }} is {{ .Answer }}% of {{ .TotalNumber }}.</p>
+    {{.Number}} is {{.Answer}}% of {{.TotalNumber}}.</p>

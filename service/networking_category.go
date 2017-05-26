@@ -15,11 +15,11 @@ type BinaryToHexadecimalService struct {
 }
 
 type DecimalToBinaryService struct {
-	Decimal string `json:"decimal" name:"Decimal"`
+	Decimal int `json:"decimal" name:"Decimal"`
 }
 
 type DecimalToHexadecimalService struct {
-	Decimal string `json:"decimal" name:"Decimal"`
+	Decimal int `json:"decimal" name:"Decimal"`
 }
 
 type HexadecimalToBinaryService struct {
@@ -31,26 +31,50 @@ type HexadecimalToDecimalService struct {
 }
 
 func (i BinaryToDecimalService) Execute() (s string, err error) {
+	err = validateBinary(i.Binary)
+	if err != nil {
+		return s, err
+	}
 	return math.BinaryToDecimal(i.Binary)
 }
 
 func (i BinaryToHexadecimalService) Execute() (s string, err error) {
+	err = validateBinary(i.Binary)
+	if err != nil {
+		return s, err
+	}
 	return math.BinaryToHexadecimal(i.Binary)
 }
 
 func (i DecimalToBinaryService) Execute() (s string, err error) {
+	err = validatePositiveDecimal(i.Decimal)
+	if err != nil {
+		return s, err
+	}
 	return math.DecimalToBinary(i.Decimal)
 }
 
 func (i DecimalToHexadecimalService) Execute() (s string, err error) {
+	err = validatePositiveDecimal(i.Decimal)
+	if err != nil {
+		return s, err
+	}
 	return math.DecimalToHexadecimal(i.Decimal)
 }
 
 func (i HexadecimalToBinaryService) Execute() (s string, err error) {
+	err = validateHexadecimal(i.Hexadecimal)
+	if err != nil {
+		return s, err
+	}
 	return math.HexadecimalToBinary(i.Hexadecimal)
 }
 
 func (i HexadecimalToDecimalService) Execute() (s string, err error) {
+	err = validateHexadecimal(i.Hexadecimal)
+	if err != nil {
+		return s, err
+	}
 	return math.HexadecimalToDecimal(i.Hexadecimal)
 }
 

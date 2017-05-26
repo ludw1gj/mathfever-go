@@ -40,14 +40,14 @@ func networkingCalculations() (c []Calculation) {
 		"Decimal to Binary",
 		"/networking/decimal-to-binary",
 		genInput(service.DecimalToBinaryService{}),
-		genTemplateHTML(math.DecimalToBinary("21")),
+		genTemplateHTML(math.DecimalToBinary(21)),
 		service.DecimalToBinaryService{},
 	}
 	decimalToHexadecimalData := Calculation{
 		"Decimal to Hexadecimal",
 		"/networking/decimal-to-hexadecimal",
 		genInput(service.DecimalToHexadecimalService{}),
-		genTemplateHTML(math.DecimalToHexadecimal("92")),
+		genTemplateHTML(math.DecimalToHexadecimal(92)),
 		service.DecimalToHexadecimalService{},
 	}
 	hexadecimalToBinaryData := Calculation{

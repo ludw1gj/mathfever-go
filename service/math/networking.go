@@ -9,11 +9,6 @@ import (
 )
 
 func BinaryToDecimal(binary string) (s string, err error) {
-	err = validateBinary(binary)
-	if err != nil {
-		return s, err
-	}
-
 	lenBinary := len(binary)
 	n := lenBinary - 1
 	const base = 2
@@ -56,11 +51,6 @@ func BinaryToDecimal(binary string) (s string, err error) {
 }
 
 func BinaryToHexadecimal(binary string) (s string, err error) {
-	err = validateBinary(binary)
-	if err != nil {
-		return s, err
-	}
-
 	zeroedBinary := binary
 	nLength := len(zeroedBinary)
 	// if input doesn't divide into groups of length of 4, add 0"s to the beginning of the string
@@ -103,19 +93,16 @@ func BinaryToHexadecimal(binary string) (s string, err error) {
 	return parseTemplate("./template/math/networking/binary_to_hexadecimal.gohtml", data)
 }
 
-func DecimalToBinary(decimal string) (string, error) {
+func DecimalToBinary(decimal int) (string, error) {
 	return decimalToBinaryHexadecimal(decimal, 2)
 }
 
-func DecimalToHexadecimal(decimal string) (string, error) {
+func DecimalToHexadecimal(decimal int) (string, error) {
 	return decimalToBinaryHexadecimal(decimal, 16)
 }
 
-func decimalToBinaryHexadecimal(decimal string, base int) (s string, err error) {
-	decimalInt, err := strconv.Atoi(decimal)
-	if err != nil {
-		return s, fmt.Errorf("incorrect input: is not a decimal number - %s", decimal)
-	}
+func decimalToBinaryHexadecimal(decimal int, base int) (s string, err error) {
+	decimalInt := decimal
 
 	var remainders []int
 	var remaindersHex []string
@@ -146,7 +133,7 @@ func decimalToBinaryHexadecimal(decimal string, base int) (s string, err error) 
 		}
 	}
 	data := struct {
-		Decimal       string
+		Decimal       int
 		Base          int
 		Proof         string
 		Remainders    []int
@@ -164,11 +151,6 @@ func decimalToBinaryHexadecimal(decimal string, base int) (s string, err error) 
 }
 
 func HexadecimalToBinary(hexadecimal string) (s string, err error) {
-	err = validateHexadecimal(hexadecimal)
-	if err != nil {
-		return s, err
-	}
-
 	var binaries bytes.Buffer
 	var proof bytes.Buffer
 	var answer string
@@ -211,11 +193,6 @@ func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 }
 
 func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
-	err = validateHexadecimal(hexadecimal)
-	if err != nil {
-		return s, err
-	}
-
 	hexLength := len(hexadecimal) - 1
 	var decimals []int64
 	var proof1 bytes.Buffer
