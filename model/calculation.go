@@ -9,11 +9,11 @@ import (
 )
 
 type Calculation struct {
-	Name    string        `json:"name"`
-	URL     string        `json:"url"`
-	Input   []inputInfo       `json:"input"`
+	Name    string `json:"name"`
+	URL     string `json:"url"`
+	Input   []inputInfo `json:"input"`
 	Example template.HTML `json:"example"`
-	Service service.Service     `json:"service"`
+	Service service.Service `json:"service"`
 }
 
 type inputInfo struct {
