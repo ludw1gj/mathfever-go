@@ -9,8 +9,6 @@ if (document.getElementById('calculation-form') !== null) {
         var formData = serializeFormObj(calculationForm);
         var isValidInput = true;
 
-        console.log(formData);
-
         // validate the data
         for (var key in formData) {
             // removes all whitespace from the form data
@@ -44,7 +42,7 @@ if (document.getElementById('calculation-form') !== null) {
                     displayCalculationCard('<p>Please enter a valid hexadecimal number, and is not over 64 characters in length.</p>');
                     break;
                 }
-            } else if (key !== 'csrfmiddlewaretoken' && !decimalValidation(formData[key])) {
+            } else if (!decimalValidation(formData[key])) {
                 isValidInput = false;
                 displayCalculationCard('<p>Please enter a valid input, and is not over 999,999,999,999.</p>');
                 break;

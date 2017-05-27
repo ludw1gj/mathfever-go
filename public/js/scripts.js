@@ -35,7 +35,6 @@ function submitAjax(data) {
         displayCalculationCard('<p>There was a connection issue. Check your internet connection or the sever might be down.</p>')
     };
 
-    request.setRequestHeader("X-CSRFToken", data.csrfmiddlewaretoken);
     request.setRequestHeader('Content-Type', 'application/json');
     console.log(JSON.stringify(data), url);
     request.send(JSON.stringify(data));
