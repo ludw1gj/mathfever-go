@@ -51,6 +51,10 @@ func (i PercentageChangeAPI) Execute() (s string, err error) {
 }
 
 func (i PercentageFromNumberAPI) Execute() (s string, err error) {
+	err = validateFloat(false, i.Number, i.TotalNumber)
+	if err != nil {
+		return s, err
+	}
 	return math.PercentageFromNumber(i.Number, i.TotalNumber)
 }
 
