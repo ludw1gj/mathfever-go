@@ -41,30 +41,58 @@ type TsaSquareBaseTriangleAPI struct {
 }
 
 func (i TsaPythagoreanTheoremAPI) Execute() (s string, err error) {
+	err = validateFloat(true, i.SideA, i.SideB)
+	if err != nil {
+		return s, err
+	}
 	return math.TSAPythagoreanTheorem(i.SideA, i.SideB)
 }
 
 func (i TsaConeAPI) Execute() (s string, err error) {
+	err = validateFloat(true, i.Radius, i.SlantHeight)
+	if err != nil {
+		return s, err
+	}
 	return math.TsaCone(i.Radius, i.SlantHeight)
 }
 
 func (i TsaCubeAPI) Execute() (s string, err error) {
+	err = validateFloat(true, i.Length)
+	if err != nil {
+		return s, err
+	}
 	return math.TsaCube(i.Length)
 }
 
 func (i TsaCylinderAPI) Execute() (s string, err error) {
+	err = validateFloat(true, i.Radius, i.Height)
+	if err != nil {
+		return s, err
+	}
 	return math.TsaCylinder(i.Radius, i.Height)
 }
 
 func (i TsaRectangularPrismAPI) Execute() (s string, err error) {
+	err = validateFloat(true, i.Height, i.Length, i.Width)
+	if err != nil {
+		return s, err
+	}
 	return math.TsaRectangularPrism(i.Height, i.Length, i.Width)
 }
 
 func (i TsaSphereAPI) Execute() (s string, err error) {
+	err = validateFloat(true, i.Radius)
+	if err != nil {
+		return s, err
+	}
 	return math.TsaSphere(i.Radius)
 }
 
 func (i TsaSquareBaseTriangleAPI) Execute() (s string, err error) {
+	err = validateFloat(true, i.BaseLength, i.Height)
+	if err != nil {
+		return s, err
+	}
 	return math.TsaSquareBaseTriangle(i.BaseLength, i.Height)
 }
 

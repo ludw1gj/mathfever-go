@@ -21,14 +21,26 @@ type LowestCommonMultipleAPI struct {
 }
 
 func (i IsPrimeAPI) Execute() (s string, err error) {
+	err = validatePositiveInt(i.Number)
+	if err != nil {
+		return s, err
+	}
 	return math.IsPrime(i.Number), nil
 }
 
 func (i HighestCommonFactorAPI) Execute() (s string, err error) {
+	err = validatePositiveInt(i.Num1, i.Num2)
+	if err != nil {
+		return s, err
+	}
 	return math.HighestCommonFactor(i.Num1, i.Num2), nil
 }
 
 func (i LowestCommonMultipleAPI) Execute() (s string, err error) {
+	err = validatePositiveInt(i.Num1, i.Num2)
+	if err != nil {
+		return s, err
+	}
 	return math.LowestCommonMultiple(i.Num1, i.Num2), nil
 }
 

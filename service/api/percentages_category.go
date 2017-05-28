@@ -26,19 +26,31 @@ type PercentageFromNumberAPI struct {
 	TotalNumber float64 `json:"total_number" name:"Total Number"`
 }
 
-func (i ChangeByPercentageAPI) Execute() (string, error) {
+func (i ChangeByPercentageAPI) Execute() (s string, err error) {
+	err = validateFloat(false, i.Number, i.Percentage)
+	if err != nil {
+		return s, err
+	}
 	return math.ChangeByPercentage(i.Number, i.Percentage)
 }
 
-func (i NumberFromPercentageAPI) Execute() (string, error) {
+func (i NumberFromPercentageAPI) Execute() (s string, err error) {
+	err = validateFloat(false, i.Percentage, i.Number)
+	if err != nil {
+		return s, err
+	}
 	return math.NumberFromPercentage(i.Percentage, i.Number)
 }
 
-func (i PercentageChangeAPI) Execute() (string, error) {
+func (i PercentageChangeAPI) Execute() (s string, err error) {
+	err = validateFloat(false, i.Number, i.NewNumber)
+	if err != nil {
+		return s, err
+	}
 	return math.PercentageChange(i.Number, i.NewNumber)
 }
 
-func (i PercentageFromNumberAPI) Execute() (string, error) {
+func (i PercentageFromNumberAPI) Execute() (s string, err error) {
 	return math.PercentageFromNumber(i.Number, i.TotalNumber)
 }
 

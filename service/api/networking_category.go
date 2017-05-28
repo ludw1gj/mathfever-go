@@ -47,7 +47,7 @@ func (i BinaryToHexadecimalAPI) Execute() (s string, err error) {
 }
 
 func (i DecimalToBinaryAPI) Execute() (s string, err error) {
-	err = validatePositiveDecimal(i.Decimal)
+	err = validatePositiveInt(i.Decimal)
 	if err != nil {
 		return s, err
 	}
@@ -55,7 +55,7 @@ func (i DecimalToBinaryAPI) Execute() (s string, err error) {
 }
 
 func (i DecimalToHexadecimalAPI) Execute() (s string, err error) {
-	err = validatePositiveDecimal(i.Decimal)
+	err = validatePositiveInt(i.Decimal)
 	if err != nil {
 		return s, err
 	}
