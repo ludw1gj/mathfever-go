@@ -20,29 +20,29 @@ var (
 		"Networking",
 		"/networking",
 		"/public/img/category/networking.jpg",
-		networkingCalcs,
-		genMetaDescCategory("Networking", networkingCalcs),
+		networkingCalculations,
+		genMetaDescCategory("Networking", networkingCalculations),
 	}
 	numbersCategory = Category{
 		"Primes and Factors",
 		"/numbers",
 		"/public/img/category/addition.jpg",
-		numbersCalcs,
-		genMetaDescCategory("Primes and Factors", numbersCalcs),
+		numbersCalculations,
+		genMetaDescCategory("Primes and Factors", numbersCalculations),
 	}
 	percentagesCategory = Category{
 		"Percentages",
 		"/percentages",
 		"/public/img/category/algebra.jpg",
-		percentageCalcs,
-		genMetaDescCategory("Percentages", percentageCalcs),
+		percentageCalculations,
+		genMetaDescCategory("Percentages", percentageCalculations),
 	}
 	tsaCategory = Category{
 		"Total Surface Area",
 		"/tsa",
 		"/public/img/category/geometry-1044090.jpg",
-		tsaCalcs,
-		genMetaDescCategory("Total Surface Area", tsaCalcs),
+		tsaCalculations,
+		genMetaDescCategory("Total Surface Area", tsaCalculations),
 	}
 )
 
