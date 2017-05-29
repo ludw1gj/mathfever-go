@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="eng">
-
 <!-- Head -->
 <head>
     <!-- Title -->
@@ -9,17 +8,16 @@
     <!-- Meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content='{{block "meta" .}}MathFever - A website where users can find mathematical proof and answers to
-    common math problems, with values of their choosing.{{end}}'/>
-
+    <meta name="description" content='{{block "meta" .}}MathFever - A website where users can find mathematical proof
+    and answers to common math problems, with values of their choosing.{{end}}'/>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/public/img/favicon/favicon.ico">
+    <link rel="shortcut icon" href="/public/resource/img/favicon/favicon.ico">
 
     <!-- CSS -->
+    <link rel="stylesheet" href="/public/vendor/css/material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/resource/css/style.css">
 
     <script>
         (function (i, s, o, g, r, a, m) {
@@ -36,7 +34,6 @@
 
         ga('create', 'UA-99327257-1', 'auto');
         ga('send', 'pageview');
-
     </script>
 </head>
 
@@ -48,9 +45,8 @@
         <div class="mdl-layout__header-row">
             <!-- Title -->
             <span id="top-bar-title" class="mdl-layout-title">MathFever</span>
-            <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
+            <!-- Navigation -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href='{{genRoute "home"}}'>Home</a>
                 <a class="mdl-navigation__link" href='{{genRoute "message-board"}}'>Message Board</a>
@@ -73,14 +69,10 @@
 
     <!-- Main -->
     <main class="mdl-layout__content">
-        <!-- Whole Content Excl Header/Drawer-->
+        <!-- Content -->
         <div id="page-content">
-
-            <!-- CONTENT GOES HERE -->
             {{block "content" .}}{{end}}
-
         </div>
-
         <!-- Footer -->
         <footer class="mdl-mini-footer">
             <div class="mdl-mini-footer__left-section">
@@ -93,14 +85,12 @@
             </div>
         </footer>
     </main>
-
 </div>
 
 <!-- JS -->
-<script src="/public/js/form.js"></script>
-<script src="/public/js/scripts.js"></script>
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="/public/resource/js/form.js"></script>
+<script src="/public/resource/js/scripts.js"></script>
+<script defer src="/public/vendor/js/material.min.js"></script>
 
 </body>
-
 </html>

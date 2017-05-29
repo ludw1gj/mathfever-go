@@ -14,41 +14,37 @@ type Category struct {
 }
 
 var (
-	CategoryData []Category
-
-	networkingCategory = Category{
-		"Networking",
-		"/networking",
-		"/public/img/category/networking.jpg",
-		networkingCalculations,
-		genMetaDescCategory("Networking", networkingCalculations),
-	}
-	numbersCategory = Category{
-		"Primes and Factors",
-		"/numbers",
-		"/public/img/category/addition.jpg",
-		numbersCalculations,
-		genMetaDescCategory("Primes and Factors", numbersCalculations),
-	}
-	percentagesCategory = Category{
-		"Percentages",
-		"/percentages",
-		"/public/img/category/algebra.jpg",
-		percentageCalculations,
-		genMetaDescCategory("Percentages", percentageCalculations),
-	}
-	tsaCategory = Category{
-		"Total Surface Area",
-		"/tsa",
-		"/public/img/category/geometry-1044090.jpg",
-		tsaCalculations,
-		genMetaDescCategory("Total Surface Area", tsaCalculations),
+	CategoryData = []Category{
+		{
+			"Networking",
+			"/networking",
+			"/public/resource/img/category/networking.jpg",
+			networkingCalculations,
+			genMetaDescCategory("Networking", networkingCalculations),
+		},
+		{
+			"Primes and Factors",
+			"/numbers",
+			"/public/resource/img/category/addition.jpg",
+			numbersCalculations,
+			genMetaDescCategory("Primes and Factors", numbersCalculations),
+		},
+		{
+			"Percentages",
+			"/percentages",
+			"/public/resource/img/category/algebra.jpg",
+			percentageCalculations,
+			genMetaDescCategory("Percentages", percentageCalculations),
+		},
+		{
+			"Total Surface Area",
+			"/tsa",
+			"/public/resource/img/category/geometry-1044090.jpg",
+			tsaCalculations,
+			genMetaDescCategory("Total Surface Area", tsaCalculations),
+		},
 	}
 )
-
-func init() {
-	CategoryData = append(CategoryData, networkingCategory, numbersCategory, percentagesCategory, tsaCategory)
-}
 
 func genMetaDescCategory(category string, calcs []Calculation) string {
 	var buf bytes.Buffer
