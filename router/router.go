@@ -1,7 +1,9 @@
 package router
 
 import (
+	"flag"
 	"net/http"
+
 	"github.com/gorilla/mux"
 )
 
@@ -9,9 +11,6 @@ var Router *mux.Router
 
 func init() {
 	Router = mux.NewRouter()
-
-	// Static Files Handler
-	Router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public"))))
 
 	// Site Handler
 	Router.HandleFunc("/", homeHandler).Name("home")
@@ -29,4 +28,11 @@ func init() {
 
 	// Not Found Handler
 	Router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
+
+	// Static Files Handler in Dev mode
+	boolPtr := flag.Bool("dev", false, "Use in development")
+	flag.Parse()
+	if *boolPtr {
+		Router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public"))))
+	}
 }
