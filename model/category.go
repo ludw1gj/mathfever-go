@@ -10,38 +10,38 @@ type Category struct {
 	URL          string        `json:"url"`
 	ImageURL     string        `json:"image"`
 	Description  string        `json:"description"`
-	Calculations []Calculation `json:"calculation"`
+	Calculations *[]Calculation `json:"calculation"`
 }
 
 var (
-	categories = []Category{
+	Categories = []Category{
 		{
 			"Networking",
 			"/networking",
 			"/static/resource/img/category/networking.jpg",
 			genDescCategory("Networking", networkingCalculations),
-			networkingCalculations,
+			&networkingCalculations,
 		},
 		{
 			"Primes and Factors",
 			"/numbers",
 			"/static/resource/img/category/addition.jpg",
 			genDescCategory("Primes and Factors", numbersCalculations),
-			numbersCalculations,
+			&numbersCalculations,
 		},
 		{
 			"Percentages",
 			"/percentages",
 			"/static/resource/img/category/algebra.jpg",
 			genDescCategory("Percentages", percentageCalculations),
-			percentageCalculations,
+			&percentageCalculations,
 		},
 		{
 			"Total Surface Area",
 			"/tsa",
 			"/static/resource/img/category/geometry.jpg",
 			genDescCategory("Total Surface Area", tsaCalculations),
-			tsaCalculations,
+			&tsaCalculations,
 		},
 	}
 )
@@ -56,8 +56,4 @@ func genDescCategory(category string, calcs []Calculation) string {
 	fmt.Fprintf(&buf, "and %s.", calcs[len(calcs)-1].Name)
 
 	return buf.String()
-}
-
-func GetAllCategories() (c []Category) {
-	return categories
 }

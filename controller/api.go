@@ -22,9 +22,9 @@ func (ac ApiController) DoCalculation(w http.ResponseWriter, r *http.Request) {
 	category := vars["category"]
 	calculation := vars["calculation"]
 
-	for _, categ := range model.GetAllCategories() {
+	for _, categ := range model.Categories {
 		if strings.Split(categ.URL, "/")[1] == category {
-			for _, calc := range categ.Calculations {
+			for _, calc := range *categ.Calculations {
 				if strings.Split(calc.URL, "/")[2] == calculation {
 					calc.Math.HandleAPI(w, r)
 					return

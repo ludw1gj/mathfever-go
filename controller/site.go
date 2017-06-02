@@ -17,7 +17,7 @@ func NewSiteController() *SiteController {
 }
 
 func (SiteController) HomeHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, homeTpml, "base.gohtml", model.GetAllCategories())
+	renderTemplate(w, r, homeTpml, "base.gohtml", model.Categories)
 }
 
 func (SiteController) AboutHandler(w http.ResponseWriter, r *http.Request) {
@@ -48,8 +48,7 @@ func (sc SiteController) CategoryHandler(w http.ResponseWriter, r *http.Request)
 	vars := mux.Vars(r)
 	category := vars["category"]
 
-	categories := model.GetAllCategories()
-	for _, categ := range categories {
+	for _, categ := range model.Categories {
 		if strings.Split(categ.URL, "/")[1] == category {
 			renderTemplate(w, r, categoriesTpml, "base.gohtml", categ)
 			return
@@ -63,9 +62,9 @@ func (sc SiteController) CalculationHandler(w http.ResponseWriter, r *http.Reque
 	category := vars["category"]
 	calculation := vars["calculation"]
 
-	for _, categ := range model.GetAllCategories() {
+	for _, categ := range model.Categories {
 		if strings.Split(categ.URL, "/")[1] == category {
-			for _, calc := range categ.Calculations {
+			for _, calc := range *categ.Calculations {
 				if strings.Split(calc.URL, "/")[2] == calculation {
 					data := struct {
 						model.Category
