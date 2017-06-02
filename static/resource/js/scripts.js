@@ -31,7 +31,6 @@ function submitAjax(data) {
     };
 
     request.onerror = function () {
-        console.log(request.error);
         displayCalculationCard('<p>There was a connection issue. Check your internet connection or the sever might be down.</p>')
     };
 

@@ -1,4 +1,4 @@
-package api
+package service
 
 import (
 	"bytes"
@@ -7,21 +7,22 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
-
-	"github.com/spottywolf/mathfever/common"
 )
 
-type MathAPI interface {
-	Execute() (string, error)
-	HandleAPI(http.ResponseWriter, *http.Request)
+type ErrorJson struct {
+	Error string `json:"error"`
 }
 
-func apiHandler(w http.ResponseWriter, r *http.Request, apiInput MathAPI) {
+type ContentJson struct {
+	Content string `json:"content"`
+}
+
+func apiHandler(w http.ResponseWriter, r *http.Request, apiInput MathApi) {
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&apiInput)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(common.ErrorJson{genJsonError(apiInput).Error()})
+		json.NewEncoder(w).Encode(ErrorJson{genJsonError(apiInput).Error()})
 		return
 	}
 	defer r.Body.Close()
@@ -29,20 +30,20 @@ func apiHandler(w http.ResponseWriter, r *http.Request, apiInput MathAPI) {
 	err = verifyJsonInput(apiInput)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
+		json.NewEncoder(w).Encode(ErrorJson{err.Error()})
 		return
 	}
 
 	s, err := apiInput.Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
+		json.NewEncoder(w).Encode(ErrorJson{err.Error()})
 		return
 	}
-	json.NewEncoder(w).Encode(common.ContentJson{s})
+	json.NewEncoder(w).Encode(ContentJson{s})
 }
 
-func genJsonError(apiInput MathAPI) error {
+func genJsonError(apiInput MathApi) error {
 	val := reflect.ValueOf(apiInput)
 	v := reflect.Indirect(val)
 
@@ -61,7 +62,7 @@ func genJsonError(apiInput MathAPI) error {
 	return errors.New(buf.String())
 }
 
-func verifyJsonInput(apiInput MathAPI) error {
+func verifyJsonInput(apiInput MathApi) error {
 	val := reflect.ValueOf(apiInput)
 	v := reflect.Indirect(val)
 
