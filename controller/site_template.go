@@ -1,16 +1,14 @@
-package router
+package controller
 
 import (
 	"html/template"
-	"log"
-	"net/http"
 	"path/filepath"
 
 	"github.com/oxtoacart/bpool"
 )
 
 var (
-	tmplBufPool     *bpool.BufferPool
+	tmplBufPool *bpool.BufferPool
 	templateDir = filepath.Join("template", "site")
 
 	homeTpml,
@@ -27,7 +25,7 @@ var (
 )
 
 type templateLoader struct {
-	tmpl    **template.Template
+	tmpl     **template.Template
 	name     string
 	file     string
 	baseFile string
@@ -115,22 +113,7 @@ func loadTemplates() {
 	tmpls = append(tmpls, pubTmpls...)
 
 	for _, tmpl := range tmpls {
-		t := template.Must(template.New(tmpl.name).Funcs(funcMap).ParseFiles(tmpl.baseFile, filepath.Join(templateDir, tmpl.file)))
+		t := template.Must(template.New(tmpl.name).ParseFiles(tmpl.baseFile, filepath.Join(templateDir, tmpl.file)))
 		*tmpl.tmpl = t
 	}
-}
-
-func renderTemplate(w http.ResponseWriter, r *http.Request, tmpl *template.Template, name string, data interface{}) {
-	buf := tmplBufPool.Get()
-	defer tmplBufPool.Put(buf)
-
-	err := tmpl.ExecuteTemplate(buf, name, data)
-	if err != nil {
-		log.Println(err)
-		serverErrorHandler(w, r)
-		return
-	}
-
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	buf.WriteTo(w)
 }

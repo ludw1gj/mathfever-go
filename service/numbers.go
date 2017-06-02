@@ -1,9 +1,9 @@
-package api
+package service
 
 import (
 	"net/http"
 
-	"github.com/spottywolf/mathfever/service/math"
+	"github.com/spottywolf/mathfever-go/service/math"
 )
 
 type IsPrimeAPI struct {

@@ -6,17 +6,17 @@ import (
 	"log"
 	"reflect"
 
-	"github.com/spottywolf/mathfever/service/api"
-	"github.com/spottywolf/mathfever/service/math"
+	"github.com/spottywolf/mathfever-go/service"
+	"github.com/spottywolf/mathfever-go/service/math"
 )
 
 type Calculation struct {
-	Name            string `json:"name"`
-	URL             string `json:"url"`
-	Input           []inputInfo `json:"input"`
-	Example         template.HTML `json:"example"`
-	MathAPI         api.MathAPI `json:"math_api"`
-	MetaDescription string
+	Name        string `json:"name"`
+	URL         string `json:"url"`
+	InputInfo   []inputInfo `json:"input_info"`
+	Description string `json:"description"`
+	Example     template.HTML `json:"example"`
+	Math        service.MathApi
 }
 
 type inputInfo struct {
@@ -29,181 +29,178 @@ var (
 		{
 			"Binary to Decimal",
 			"/networking/binary-to-decimal",
-			genInput(api.BinaryToDecimalAPI{}),
-			genTemplateHTML(math.BinaryToDecimal("10101")),
-			api.BinaryToDecimalAPI{},
-			genMetaDescCalculation("Binary to Decimal"),
+			genInput(service.BinaryToDecimalAPI{}),
+			genDescCalculation("Binary to Decimal"),
+			genExample(service.BinaryToDecimalAPI{"10101"}.Execute()),
+			&service.BinaryToDecimalAPI{},
 		},
 		{
 			"Binary to Hexadecimal",
 			"/networking/binary-to-hexadecimal",
-			genInput(api.BinaryToHexadecimalAPI{}),
-			genTemplateHTML(math.BinaryToHexadecimal("10111")),
-			api.BinaryToHexadecimalAPI{},
-			genMetaDescCalculation("Binary to Hexadecimal"),
+			genInput(service.BinaryToHexadecimalAPI{}),
+			genDescCalculation("Binary to Hexadecimal"),
+			genExample(math.BinaryToHexadecimal("10111")),
+			&service.BinaryToHexadecimalAPI{},
 		},
 		{
 			"Decimal to Binary",
 			"/networking/decimal-to-binary",
-			genInput(api.DecimalToBinaryAPI{}),
-			genTemplateHTML(math.DecimalToBinary(21)),
-			api.DecimalToBinaryAPI{},
-			genMetaDescCalculation("Decimal to Binary"),
+			genInput(service.DecimalToBinaryAPI{}),
+			genDescCalculation("Decimal to Binary"),
+			genExample(math.DecimalToBinary(21)),
+			&service.DecimalToBinaryAPI{},
 		},
 		{
 			"Decimal to Hexadecimal",
 			"/networking/decimal-to-hexadecimal",
-			genInput(api.DecimalToHexadecimalAPI{}),
-			genTemplateHTML(math.DecimalToHexadecimal(92)),
-			api.DecimalToHexadecimalAPI{},
-			genMetaDescCalculation("Decimal to Hexadecimal"),
+			genInput(service.DecimalToHexadecimalAPI{}),
+			genDescCalculation("Decimal to Hexadecimal"),
+			genExample(math.DecimalToHexadecimal(92)),
+			&service.DecimalToHexadecimalAPI{},
 		},
 		{
 			"Hexadecimal to Binary",
 			"/networking/hexadecimal-to-binary",
-			genInput(api.HexadecimalToBinaryAPI{}),
-			genTemplateHTML(math.HexadecimalToBinary("6BA")),
-			api.HexadecimalToBinaryAPI{},
-			genMetaDescCalculation("Hexadecimal to Binary"),
+			genInput(service.HexadecimalToBinaryAPI{}),
+			genDescCalculation("Hexadecimal to Binary"),
+			genExample(math.HexadecimalToBinary("6BA")),
+			&service.HexadecimalToBinaryAPI{},
 		},
 		{
 			"Hexadecimal to Decimal",
 			"/networking/hexadecimal-to-decimal",
-			genInput(api.HexadecimalToDecimalAPI{}),
-			genTemplateHTML(math.HexadecimalToDecimal("6BA")),
-			api.HexadecimalToDecimalAPI{},
-			genMetaDescCalculation("Hexadecimal to Decimal"),
+			genInput(service.HexadecimalToDecimalAPI{}),
+			genDescCalculation("Hexadecimal to Decimal"),
+			genExample(math.HexadecimalToDecimal("6BA")),
+			&service.HexadecimalToDecimalAPI{},
 		},
 	}
-
 	numbersCalculations = []Calculation{
 		{
 			"Find if Number is a Prime Number",
 			"/numbers/is-prime",
-			genInput(api.IsPrimeAPI{}),
+			genInput(service.IsPrimeAPI{}),
+			genDescCalculation("Find if Number is a Prime Number"),
 			template.HTML(math.IsPrime(129)),
-			api.IsPrimeAPI{},
-			genMetaDescCalculation("Find if Number is a Prime Number"),
+			&service.IsPrimeAPI{},
 		},
 		{
 			"Highest Common Factor",
 			"/numbers/highest-common-factor",
-			genInput(api.HighestCommonFactorAPI{}),
+			genInput(service.HighestCommonFactorAPI{}),
+			genDescCalculation("Highest Common Factor"),
 			template.HTML(math.HighestCommonFactor(600, 752)),
-			api.HighestCommonFactorAPI{},
-			genMetaDescCalculation("Highest Common Factor"),
+			&service.HighestCommonFactorAPI{},
 		},
 		{
 			"Lowest Common Multiple",
 			"/numbers/lowest-common-multiple",
-			genInput(api.LowestCommonMultipleAPI{}),
+			genInput(service.LowestCommonMultipleAPI{}),
+			genDescCalculation("Lowest Common Multiple"),
 			template.HTML(math.LowestCommonMultiple(600, 752)),
-			api.LowestCommonMultipleAPI{},
-			genMetaDescCalculation("Lowest Common Multiple"),
+			&service.LowestCommonMultipleAPI{},
 		},
 	}
-
 	percentageCalculations = []Calculation{
 		{
 			"Change Number by Percentage",
 			"/percentages/change-by-percentage",
-			genInput(api.ChangeByPercentageAPI{}),
-			genTemplateHTML(math.ChangeByPercentage(900, 65)),
-			api.ChangeByPercentageAPI{},
-			genMetaDescCalculation("Change Number by Percentage"),
+			genInput(service.ChangeByPercentageAPI{}),
+			genDescCalculation("Change Number by Percentage"),
+			genExample(math.ChangeByPercentage(900, 65)),
+			&service.ChangeByPercentageAPI{},
 		},
 		{
 			"Get Number from a Percentage",
 			"/percentages/number-from-percentage",
-			genInput(api.NumberFromPercentageAPI{}),
-			genTemplateHTML(math.NumberFromPercentage(600, 752)),
-			api.NumberFromPercentageAPI{},
-			genMetaDescCalculation("Get Number from a Percentage"),
+			genInput(service.NumberFromPercentageAPI{}),
+			genDescCalculation("Get Number from a Percentage"),
+			genExample(math.NumberFromPercentage(600, 752)),
+			&service.NumberFromPercentageAPI{},
 		},
 		{
 			"Find Percentage Difference of Two Numbers",
 			"/percentages/percentage-change",
-			genInput(api.PercentageChangeAPI{}),
-			genTemplateHTML(math.PercentageChange(400, 540)),
-			api.PercentageChangeAPI{},
-			genMetaDescCalculation("Find Percentage Difference of Two Numbers"),
+			genInput(service.PercentageChangeAPI{}),
+			genDescCalculation("Find Percentage Difference of Two Numbers"),
+			genExample(math.PercentageChange(400, 540)),
+			&service.PercentageChangeAPI{},
 		},
 		{
 			"Find Percentage of a Number",
 			"/percentages/percentage-from-number",
-			genInput(api.PercentageFromNumberAPI{}),
-			genTemplateHTML(math.PercentageFromNumber(585, 900)),
-			api.PercentageFromNumberAPI{},
-			genMetaDescCalculation("Find Percentage of a Number"),
+			genInput(service.PercentageFromNumberAPI{}),
+			genDescCalculation("Find Percentage of a Number"),
+			genExample(math.PercentageFromNumber(585, 900)),
+			&service.PercentageFromNumberAPI{},
 		},
 	}
-
 	tsaCalculations = []Calculation{
 		{
 			"Pythagorean Theorem",
 			"/tsa/pythagorean-theorem",
-			genInput(api.TsaPythagoreanTheoremAPI{}),
-			genTemplateHTML(math.TSAPythagoreanTheorem(25, 17)),
-			api.TsaPythagoreanTheoremAPI{},
-			genMetaDescCalculation("Pythagorean Theorem"),
+			genInput(service.TsaPythagoreanTheoremAPI{}),
+			genDescCalculation("Pythagorean Theorem"),
+			genExample(math.TSAPythagoreanTheorem(25, 17)),
+			&service.TsaPythagoreanTheoremAPI{},
 		},
 		{
 			"Cone",
 			"/tsa/cone",
-			genInput(api.TsaConeAPI{}),
-			genTemplateHTML(math.TsaCone(3, 5)),
-			api.TsaConeAPI{},
-			genMetaDescCalculation("Total Surface Area of Cone"),
+			genInput(service.TsaConeAPI{}),
+			genDescCalculation("Total Surface Area of Cone"),
+			genExample(math.TsaCone(3, 5)),
+			&service.TsaConeAPI{},
 		},
 		{
 			"Cube",
 			"/tsa/cube",
-			genInput(api.TsaCubeAPI{}),
-			genTemplateHTML(math.TsaCube(3)),
-			api.TsaCubeAPI{},
-			genMetaDescCalculation("Total Surface Area of Cube"),
+			genInput(service.TsaCubeAPI{}),
+			genDescCalculation("Total Surface Area of Cube"),
+			genExample(math.TsaCube(3)),
+			&service.TsaCubeAPI{},
 		},
 		{
 			"Cylinder",
 			"/tsa/cylinder",
-			genInput(api.TsaCylinderAPI{}),
-			genTemplateHTML(math.TsaCylinder(2, 5)),
-			api.TsaCylinderAPI{},
-			genMetaDescCalculation("Total Surface Area of Cylinder"),
+			genInput(service.TsaCylinderAPI{}),
+			genDescCalculation("Total Surface Area of Cylinder"),
+			genExample(math.TsaCylinder(2, 5)),
+			&service.TsaCylinderAPI{},
 		},
 		{
 			"Rectangular Prism",
 			"/tsa/rectangular-prism",
-			genInput(api.TsaRectangularPrismAPI{}),
-			genTemplateHTML(math.TsaRectangularPrism(2, 4, 3)),
-			api.TsaRectangularPrismAPI{},
-			genMetaDescCalculation("Total Surface Area of Rectangular Prism"),
+			genInput(service.TsaRectangularPrismAPI{}),
+			genDescCalculation("Total Surface Area of Rectangular Prism"),
+			genExample(math.TsaRectangularPrism(2, 4, 3)),
+			&service.TsaRectangularPrismAPI{},
 		},
 		{
 			"Sphere",
 			"/tsa/sphere",
-			genInput(api.TsaSphereAPI{}),
-			genTemplateHTML(math.TsaSphere(1)),
-			api.TsaSphereAPI{},
-			genMetaDescCalculation("Total Surface Area of Sphere"),
+			genInput(service.TsaSphereAPI{}),
+			genDescCalculation("Total Surface Area of Sphere"),
+			genExample(math.TsaSphere(1)),
+			&service.TsaSphereAPI{},
 		},
 		{
 			"Square Based Triangle",
 			"/tsa/square-based-triangle",
-			genInput(api.TsaSquareBaseTriangleAPI{}),
-			genTemplateHTML(math.TsaSquareBaseTriangle(4, 6)),
-			api.TsaSquareBaseTriangleAPI{},
-			genMetaDescCalculation("Total Surface Area of Square Based Triangle"),
+			genInput(service.TsaSquareBaseTriangleAPI{}),
+			genDescCalculation("Total Surface Area of Square Based Triangle"),
+			genExample(math.TsaSquareBaseTriangle(4, 6)),
+			&service.TsaSquareBaseTriangleAPI{},
 		},
 	}
 )
 
-func genInput(input api.MathAPI) (inputs []inputInfo) {
+func genInput(input service.MathApi) (inputs []inputInfo) {
 	val := reflect.ValueOf(input)
 
 	for i := 0; i < val.Type().NumField(); i++ {
 		var data inputInfo
-		if val.Type().Field(i).Tag.Get("name") == genMetaDescCalculation("") {
+		if val.Type().Field(i).Tag.Get("name") == genDescCalculation("") {
 			log.Fatalf("Error: %s struct does not have 'name' tag", val.Type().Name())
 		} else {
 			data = inputInfo{
@@ -216,13 +213,13 @@ func genInput(input api.MathAPI) (inputs []inputInfo) {
 	return inputs
 }
 
-func genTemplateHTML(s string, err error) template.HTML {
+func genExample(s string, err error) template.HTML {
 	if err != nil {
 		log.Fatalln(err)
 	}
 	return template.HTML(s)
 }
 
-func genMetaDescCalculation(solving string) string {
+func genDescCalculation(solving string) string {
 	return fmt.Sprintf("Solve: %s, showing mathematical proof and answer.", solving)
 }

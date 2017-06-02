@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/spottywolf/mathfever-go/controller"
 )
 
 var Router *mux.Router
@@ -13,26 +14,30 @@ func init() {
 	Router = mux.NewRouter()
 
 	// Site Handler
-	Router.HandleFunc("/", homeHandler).Name("home")
-	Router.HandleFunc("/about", aboutHandler).Name("about")
-	Router.HandleFunc("/help", helpHandler).Name("help")
-	Router.HandleFunc("/privacy", privacyHandler).Name("privacy")
-	Router.HandleFunc("/terms", termsHandler).Name("terms")
-	Router.HandleFunc("/message-board", messageBoardHandler).Name("message-board")
-	Router.HandleFunc("/networking/conversion-table", conversionTableHandler)
-	Router.HandleFunc("/{category}", categoriesHandler)
-	Router.HandleFunc("/{category}/{calculation}", calculationsHandler)
+	sc := controller.NewSiteController()
+	Router.HandleFunc("/home", sc.HomeHandler).Methods("GET")
+	Router.HandleFunc("/about", sc.AboutHandler).Methods("GET")
+	Router.HandleFunc("/help", sc.HelpHandler).Methods("GET")
+	Router.HandleFunc("/privacy", sc.PrivacyHandler).Methods("GET")
+	Router.HandleFunc("/terms", sc.TermsHandler).Methods("GET")
+	Router.HandleFunc("/message-board", sc.MessageBoardHandler).Methods("GET")
+	Router.HandleFunc("/networking/conversion-table", sc.ConversionTableHandler).Methods("GET")
+	Router.HandleFunc("/{category}", sc.CategoryHandler).Methods("GET")
+	Router.HandleFunc("/{category}/{calculation}", sc.CalculationHandler).Methods("GET")
+
+	Router.NotFoundHandler = http.HandlerFunc(sc.NotFoundHandler)
 
 	// API Handler
-	Router.HandleFunc("/api/{category}/{calculation}", calculationsAPIHandler)
+	ac := controller.NewApiController()
+	apiRoute := Router.PathPrefix("/api").Subrouter()
+	apiRoute.HandleFunc("/{category}/{calculation}", ac.DoCalculation).Methods("POST")
 
-	// Not Found Handler
-	Router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
+	apiRoute.NotFoundHandler = http.HandlerFunc(ac.NotFoundHandler)
 
 	// Static Files Handler in Dev mode
 	boolPtr := flag.Bool("dev", false, "Use in development")
 	flag.Parse()
 	if *boolPtr {
-		Router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public"))))
+		Router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	}
 }
