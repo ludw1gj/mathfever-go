@@ -15,7 +15,7 @@ func init() {
 
 	// Site Handler
 	sc := controller.NewSiteController()
-	Router.HandleFunc("/home", sc.HomeHandler).Methods("GET")
+	Router.HandleFunc("/", sc.HomeHandler).Methods("GET")
 	Router.HandleFunc("/about", sc.AboutHandler).Methods("GET")
 	Router.HandleFunc("/help", sc.HelpHandler).Methods("GET")
 	Router.HandleFunc("/privacy", sc.PrivacyHandler).Methods("GET")
