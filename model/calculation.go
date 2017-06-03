@@ -31,7 +31,7 @@ var (
 			"/networking/binary-to-decimal",
 			genInputInfo(service.BinaryToDecimalAPI{}),
 			genDescCalculation("Binary to Decimal"),
-			genExample(service.BinaryToDecimalAPI{"10101"}.Execute()),
+			genExample(math.BinaryToDecimal("10101")),
 			&service.BinaryToDecimalAPI{},
 		},
 		{
