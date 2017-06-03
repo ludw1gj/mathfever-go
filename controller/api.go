@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/FriedPigeon/mathfever-go/model"
 	"github.com/gorilla/mux"
-	"github.com/spottywolf/mathfever-go/model"
 )
 
 type ApiController struct{}

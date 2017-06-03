@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/FriedPigeon/mathfever-go/model"
 	"github.com/gorilla/mux"
 	"github.com/oxtoacart/bpool"
-	"github.com/spottywolf/mathfever-go/model"
 )
 
 var tmplBufPool *bpool.BufferPool

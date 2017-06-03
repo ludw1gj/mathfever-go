@@ -4,8 +4,8 @@ import (
 	"flag"
 	"net/http"
 
+	"github.com/FriedPigeon/mathfever-go/controller"
 	"github.com/gorilla/mux"
-	"github.com/spottywolf/mathfever-go/controller"
 )
 
 var Router *mux.Router

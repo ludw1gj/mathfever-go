@@ -8,11 +8,11 @@ Golang >=1.8
 
 ## Setup Notes:
 * Get the code:
-`go get github.com/spottywolf/go-mathfever`
+`go get github.com/FriedPigeon/go-mathfever`
 * To run in development:
 `go run main.go -dev=true`
 * Access via http://localhost:8080
 * To build: `go build` `./go-mathfever`
 
 ## Authors
-* **spottywolf**
+* **FriedPigeon**

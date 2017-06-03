@@ -6,8 +6,8 @@ import (
 	"log"
 	"reflect"
 
-	"github.com/spottywolf/mathfever-go/service"
-	"github.com/spottywolf/mathfever-go/service/math"
+	"github.com/FriedPigeon/mathfever-go/service"
+	"github.com/FriedPigeon/mathfever-go/service/math"
 )
 
 type Calculation struct {

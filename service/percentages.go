@@ -3,7 +3,7 @@ package service
 import (
 	"net/http"
 
-	"github.com/spottywolf/mathfever-go/service/math"
+	"github.com/FriedPigeon/mathfever-go/service/math"
 )
 
 type ChangeByPercentageAPI struct {
