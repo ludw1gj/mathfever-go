@@ -29,7 +29,7 @@ var (
 		{
 			"Binary to Decimal",
 			"/networking/binary-to-decimal",
-			genInput(service.BinaryToDecimalAPI{}),
+			genInputInfo(service.BinaryToDecimalAPI{}),
 			genDescCalculation("Binary to Decimal"),
 			genExample(service.BinaryToDecimalAPI{"10101"}.Execute()),
 			&service.BinaryToDecimalAPI{},
@@ -37,7 +37,7 @@ var (
 		{
 			"Binary to Hexadecimal",
 			"/networking/binary-to-hexadecimal",
-			genInput(service.BinaryToHexadecimalAPI{}),
+			genInputInfo(service.BinaryToHexadecimalAPI{}),
 			genDescCalculation("Binary to Hexadecimal"),
 			genExample(math.BinaryToHexadecimal("10111")),
 			&service.BinaryToHexadecimalAPI{},
@@ -45,7 +45,7 @@ var (
 		{
 			"Decimal to Binary",
 			"/networking/decimal-to-binary",
-			genInput(service.DecimalToBinaryAPI{}),
+			genInputInfo(service.DecimalToBinaryAPI{}),
 			genDescCalculation("Decimal to Binary"),
 			genExample(math.DecimalToBinary(21)),
 			&service.DecimalToBinaryAPI{},
@@ -53,7 +53,7 @@ var (
 		{
 			"Decimal to Hexadecimal",
 			"/networking/decimal-to-hexadecimal",
-			genInput(service.DecimalToHexadecimalAPI{}),
+			genInputInfo(service.DecimalToHexadecimalAPI{}),
 			genDescCalculation("Decimal to Hexadecimal"),
 			genExample(math.DecimalToHexadecimal(92)),
 			&service.DecimalToHexadecimalAPI{},
@@ -61,7 +61,7 @@ var (
 		{
 			"Hexadecimal to Binary",
 			"/networking/hexadecimal-to-binary",
-			genInput(service.HexadecimalToBinaryAPI{}),
+			genInputInfo(service.HexadecimalToBinaryAPI{}),
 			genDescCalculation("Hexadecimal to Binary"),
 			genExample(math.HexadecimalToBinary("6BA")),
 			&service.HexadecimalToBinaryAPI{},
@@ -69,7 +69,7 @@ var (
 		{
 			"Hexadecimal to Decimal",
 			"/networking/hexadecimal-to-decimal",
-			genInput(service.HexadecimalToDecimalAPI{}),
+			genInputInfo(service.HexadecimalToDecimalAPI{}),
 			genDescCalculation("Hexadecimal to Decimal"),
 			genExample(math.HexadecimalToDecimal("6BA")),
 			&service.HexadecimalToDecimalAPI{},
@@ -79,7 +79,7 @@ var (
 		{
 			"Find if Number is a Prime Number",
 			"/numbers/is-prime",
-			genInput(service.IsPrimeAPI{}),
+			genInputInfo(service.IsPrimeAPI{}),
 			genDescCalculation("Find if Number is a Prime Number"),
 			template.HTML(math.IsPrime(129)),
 			&service.IsPrimeAPI{},
@@ -87,7 +87,7 @@ var (
 		{
 			"Highest Common Factor",
 			"/numbers/highest-common-factor",
-			genInput(service.HighestCommonFactorAPI{}),
+			genInputInfo(service.HighestCommonFactorAPI{}),
 			genDescCalculation("Highest Common Factor"),
 			template.HTML(math.HighestCommonFactor(600, 752)),
 			&service.HighestCommonFactorAPI{},
@@ -95,7 +95,7 @@ var (
 		{
 			"Lowest Common Multiple",
 			"/numbers/lowest-common-multiple",
-			genInput(service.LowestCommonMultipleAPI{}),
+			genInputInfo(service.LowestCommonMultipleAPI{}),
 			genDescCalculation("Lowest Common Multiple"),
 			template.HTML(math.LowestCommonMultiple(600, 752)),
 			&service.LowestCommonMultipleAPI{},
@@ -105,7 +105,7 @@ var (
 		{
 			"Change Number by Percentage",
 			"/percentages/change-by-percentage",
-			genInput(service.ChangeByPercentageAPI{}),
+			genInputInfo(service.ChangeByPercentageAPI{}),
 			genDescCalculation("Change Number by Percentage"),
 			genExample(math.ChangeByPercentage(900, 65)),
 			&service.ChangeByPercentageAPI{},
@@ -113,7 +113,7 @@ var (
 		{
 			"Get Number from a Percentage",
 			"/percentages/number-from-percentage",
-			genInput(service.NumberFromPercentageAPI{}),
+			genInputInfo(service.NumberFromPercentageAPI{}),
 			genDescCalculation("Get Number from a Percentage"),
 			genExample(math.NumberFromPercentage(600, 752)),
 			&service.NumberFromPercentageAPI{},
@@ -121,7 +121,7 @@ var (
 		{
 			"Find Percentage Difference of Two Numbers",
 			"/percentages/percentage-change",
-			genInput(service.PercentageChangeAPI{}),
+			genInputInfo(service.PercentageChangeAPI{}),
 			genDescCalculation("Find Percentage Difference of Two Numbers"),
 			genExample(math.PercentageChange(400, 540)),
 			&service.PercentageChangeAPI{},
@@ -129,7 +129,7 @@ var (
 		{
 			"Find Percentage of a Number",
 			"/percentages/percentage-from-number",
-			genInput(service.PercentageFromNumberAPI{}),
+			genInputInfo(service.PercentageFromNumberAPI{}),
 			genDescCalculation("Find Percentage of a Number"),
 			genExample(math.PercentageFromNumber(585, 900)),
 			&service.PercentageFromNumberAPI{},
@@ -139,7 +139,7 @@ var (
 		{
 			"Pythagorean Theorem",
 			"/tsa/pythagorean-theorem",
-			genInput(service.TsaPythagoreanTheoremAPI{}),
+			genInputInfo(service.TsaPythagoreanTheoremAPI{}),
 			genDescCalculation("Pythagorean Theorem"),
 			genExample(math.TSAPythagoreanTheorem(25, 17)),
 			&service.TsaPythagoreanTheoremAPI{},
@@ -147,7 +147,7 @@ var (
 		{
 			"Cone",
 			"/tsa/cone",
-			genInput(service.TsaConeAPI{}),
+			genInputInfo(service.TsaConeAPI{}),
 			genDescCalculation("Total Surface Area of Cone"),
 			genExample(math.TsaCone(3, 5)),
 			&service.TsaConeAPI{},
@@ -155,7 +155,7 @@ var (
 		{
 			"Cube",
 			"/tsa/cube",
-			genInput(service.TsaCubeAPI{}),
+			genInputInfo(service.TsaCubeAPI{}),
 			genDescCalculation("Total Surface Area of Cube"),
 			genExample(math.TsaCube(3)),
 			&service.TsaCubeAPI{},
@@ -163,7 +163,7 @@ var (
 		{
 			"Cylinder",
 			"/tsa/cylinder",
-			genInput(service.TsaCylinderAPI{}),
+			genInputInfo(service.TsaCylinderAPI{}),
 			genDescCalculation("Total Surface Area of Cylinder"),
 			genExample(math.TsaCylinder(2, 5)),
 			&service.TsaCylinderAPI{},
@@ -171,7 +171,7 @@ var (
 		{
 			"Rectangular Prism",
 			"/tsa/rectangular-prism",
-			genInput(service.TsaRectangularPrismAPI{}),
+			genInputInfo(service.TsaRectangularPrismAPI{}),
 			genDescCalculation("Total Surface Area of Rectangular Prism"),
 			genExample(math.TsaRectangularPrism(2, 4, 3)),
 			&service.TsaRectangularPrismAPI{},
@@ -179,7 +179,7 @@ var (
 		{
 			"Sphere",
 			"/tsa/sphere",
-			genInput(service.TsaSphereAPI{}),
+			genInputInfo(service.TsaSphereAPI{}),
 			genDescCalculation("Total Surface Area of Sphere"),
 			genExample(math.TsaSphere(1)),
 			&service.TsaSphereAPI{},
@@ -187,7 +187,7 @@ var (
 		{
 			"Square Based Triangle",
 			"/tsa/square-based-triangle",
-			genInput(service.TsaSquareBaseTriangleAPI{}),
+			genInputInfo(service.TsaSquareBaseTriangleAPI{}),
 			genDescCalculation("Total Surface Area of Square Based Triangle"),
 			genExample(math.TsaSquareBaseTriangle(4, 6)),
 			&service.TsaSquareBaseTriangleAPI{},
@@ -195,7 +195,7 @@ var (
 	}
 )
 
-func genInput(input service.MathApi) (inputs []inputInfo) {
+func genInputInfo(input service.MathApi) (inputs []inputInfo) {
 	val := reflect.ValueOf(input)
 
 	for i := 0; i < val.Type().NumField(); i++ {
