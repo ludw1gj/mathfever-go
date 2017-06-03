@@ -11,12 +11,12 @@ import (
 )
 
 type Calculation struct {
-	Name        string `json:"name"`
-	URL         string `json:"url"`
-	InputInfo   []inputInfo `json:"input_info"`
-	Description string `json:"description"`
-	Example     template.HTML `json:"example"`
-	Math        service.MathApi
+	Name        string          `json:"name"`
+	URL         string          `json:"url"`
+	InputInfo   []inputInfo     `json:"input_info"`
+	Description string          `json:"description"`
+	Example     template.HTML   `json:"example"`
+	Math        service.MathApi `json:"math"`
 }
 
 type inputInfo struct {

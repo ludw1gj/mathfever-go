@@ -6,10 +6,10 @@ import (
 )
 
 type Category struct {
-	Name         string        `json:"name"`
-	URL          string        `json:"url"`
-	ImageURL     string        `json:"image"`
-	Description  string        `json:"description"`
+	Name         string         `json:"name"`
+	URL          string         `json:"url"`
+	ImageURL     string         `json:"image"`
+	Description  string         `json:"description"`
 	Calculations *[]Calculation `json:"calculation"`
 }
 

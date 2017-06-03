@@ -7,18 +7,18 @@ import (
 
 func TSAPythagoreanTheorem(a float64, b float64) (string, error) {
 	/*
-	Use the Pythagorean Theorem to find side lengths (a or b), or the hypotenuse (c) of a right-angle triangle.
+		Use the Pythagorean Theorem to find side lengths (a or b), or the hypotenuse (c) of a right-angle triangle.
 
-	Pythagorean Theorem: right-angle triangle with side lengths (a, b) and hypotenuse (c).
-	a^2 + b^2 = c^2
+		Pythagorean Theorem: right-angle triangle with side lengths (a, b) and hypotenuse (c).
+		a^2 + b^2 = c^2
 
-	Example:
-	When a = 25 and b = 17, find c.
-	c^2 	= 25^2 + 17^2
-		= 625 + 289
-		= 914
-	c	= √914
-		≈ 30.2
+		Example:
+		When a = 25 and b = 17, find c.
+		c^2 	= 25^2 + 17^2
+			= 625 + 289
+			= 914
+		c	= √914
+			≈ 30.2
 	*/
 	aSqr := math.Pow(a, 2)
 	bSqr := math.Pow(b, 2)
@@ -46,11 +46,11 @@ func TSAPythagoreanTheorem(a float64, b float64) (string, error) {
 
 func TsaCone(radius float64, slantHeight float64) (string, error) {
 	/*
-	Find the Total Surface Area of a sphere, with the equation:
-	Where S is Slant Height, r is radius
-	TSA     = tsa of base (circle) + tsa of curved surface
-		= πr^2 + πrS
-		= πr(r + S)
+		Find the Total Surface Area of a sphere, with the equation:
+		Where S is Slant Height, r is radius
+		TSA     = tsa of base (circle) + tsa of curved surface
+			= πr^2 + πrS
+			= πr(r + S)
 	*/
 	baseArea := math.Pi * math.Pow(radius, 2)
 	curvedSurfaceArea := math.Pi * radius * slantHeight
@@ -75,8 +75,8 @@ func TsaCone(radius float64, slantHeight float64) (string, error) {
 
 func TsaCube(length float64) (string, error) {
 	/*
-	Find the Total Surface Area of a cube, with the equation:
-	TSA = 6L^2
+		Find the Total Surface Area of a cube, with the equation:
+		TSA = 6L^2
 	*/
 	lengthSqr := math.Pow(length, 2)
 	tsa := 6 * lengthSqr
@@ -96,10 +96,10 @@ func TsaCube(length float64) (string, error) {
 
 func TsaCylinder(radius float64, height float64) (string, error) {
 	/*
-	Find the Total Surface Area of a cylinder, with the equation:
-	TSA = tsa of 2 circles + curved surface
-	    = 2πr^2 + 2πrh
-	    = 2πr(r + h)
+		Find the Total Surface Area of a cylinder, with the equation:
+		TSA = tsa of 2 circles + curved surface
+		    = 2πr^2 + 2πrh
+		    = 2πr(r + h)
 	*/
 	radiusSqr := math.Pow(radius, 2)
 	circlesArea := 2 * math.Pi * radiusSqr
@@ -130,8 +130,8 @@ func TsaCylinder(radius float64, height float64) (string, error) {
 
 func TsaRectangularPrism(height float64, length float64, width float64) (string, error) {
 	/*
-	Find the Total Surface Area of a rectangular prism, with the equation:
-	TSA = 2(wh + lw + lh)
+		Find the Total Surface Area of a rectangular prism, with the equation:
+		TSA = 2(wh + lw + lh)
 	*/
 	add := (width * height) + (length * width) + (length * height)
 	tsa := 2 * add
@@ -155,8 +155,8 @@ func TsaRectangularPrism(height float64, length float64, width float64) (string,
 
 func TsaSphere(radius float64) (string, error) {
 	/*
-	Find the Total Surface Area of a sphere, with the equation:
-	TSA = 4πr^2
+		Find the Total Surface Area of a sphere, with the equation:
+		TSA = 4πr^2
 	*/
 	tsa := 4 * math.Pi * math.Pow(radius, 2)
 
@@ -173,10 +173,10 @@ func TsaSphere(radius float64) (string, error) {
 
 func TsaSquareBaseTriangle(baseLength float64, height float64) (string, error) {
 	/*
-	Find the Total Surface Area of a square based triangle, with the equation:
-	TSA = tsa of square + tsa of 4 triangles
-	    = b^2 + 4 * (1/2bh)
-	    = b^2 + 2bh
+		Find the Total Surface Area of a square based triangle, with the equation:
+		TSA = tsa of square + tsa of 4 triangles
+		    = b^2 + 4 * (1/2bh)
+		    = b^2 + 2bh
 	*/
 	squareArea := math.Pow(baseLength, 2)
 	fourTrianglesArea := 2 * (baseLength * height)

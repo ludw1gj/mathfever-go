@@ -4,12 +4,12 @@ import "path/filepath"
 
 func ChangeByPercentage(n float64, p float64) (string, error) {
 	/*
-	ChangeByPercentage:
-	Increase/Decrease a number by a percentage.
-	(n / 100) * p + n
+		ChangeByPercentage:
+		Increase/Decrease a number by a percentage.
+		(n / 100) * p + n
 
-	First work out 1% of 250, 250 ÷ 100 = 2.5 then multiply the answer by 23, because there was a 23% increase in
-	rainfall. 2.5 × 23 = 57.5.
+		First work out 1% of 250, 250 ÷ 100 = 2.5 then multiply the answer by 23, because there was a 23% increase in
+		rainfall. 2.5 × 23 = 57.5.
 	*/
 	onePercent := n / 100
 	addValue := onePercent * p
@@ -43,8 +43,8 @@ func ChangeByPercentage(n float64, p float64) (string, error) {
 
 func NumberFromPercentage(p float64, n float64) (string, error) {
 	/*
-	Find the value of a percentage of a number.
-	(p / 100) * n
+		Find the value of a percentage of a number.
+		(p / 100) * n
 	*/
 	divided := p / 100
 	answer := divided * n
@@ -66,8 +66,8 @@ func NumberFromPercentage(p float64, n float64) (string, error) {
 
 func PercentageChange(n float64, newN float64) (string, error) {
 	/*
-	 Find the percentage change from one number to another.
-	 (new_n - original_n) / original_n * 100
+		Find the percentage change from one number to another.
+		(new_n - original_n) / original_n * 100
 	*/
 	change := newN - n
 	decimalisedPercentage := change / n
@@ -92,8 +92,8 @@ func PercentageChange(n float64, newN float64) (string, error) {
 
 func PercentageFromNumber(n float64, totalN float64) (string, error) {
 	/*
-	Find the percentage of a number of a total number.
-	(n / total_n) * 100
+		Find the percentage of a number of a total number.
+		(n / total_n) * 100
 	*/
 	decimalisedPercentage := n / totalN
 	answer := decimalisedPercentage * 100
