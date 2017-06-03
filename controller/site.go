@@ -95,6 +95,7 @@ func serverError(w http.ResponseWriter, r *http.Request) {
 	var buf bytes.Buffer
 	err := errorTpml.ExecuteTemplate(&buf, "base.gohtml", nil)
 	if err != nil {
+		w.Write([]byte("500: Server error"))
 		log.Printf("StatusInternalServerError template failed to execute: %s", err.Error())
 		return
 	}
