@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"bytes"
 	"html/template"
 	"log"
 	"net/http"
@@ -88,14 +89,25 @@ func (SiteController) NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, r, notFoundTpml, "base.gohtml", nil)
 }
 
+func serverError(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusInternalServerError)
+
+	var buf bytes.Buffer
+	err := errorTpml.ExecuteTemplate(&buf, "base.gohtml", nil)
+	if err != nil {
+		log.Printf("StatusInternalServerError template failed to execute: %s", err.Error())
+		return
+	}
+	w.Write(buf.Bytes())
+}
+
 func renderTemplate(w http.ResponseWriter, r *http.Request, tmpl *template.Template, name string, data interface{}) {
 	buf := tmplBufPool.Get()
 	defer tmplBufPool.Put(buf)
 
 	err := tmpl.ExecuteTemplate(buf, name, data)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		renderTemplate(w, r, errorTpml, "base.gohtml", nil)
+		serverError(w, r)
 		log.Println(err)
 		return
 	}
