@@ -8,9 +8,9 @@ import (
 type Category struct {
 	Name         string         `json:"name"`
 	URL          string         `json:"url"`
-	ImageURL     string         `json:"image"`
+	ImageURL     string         `json:"image_url"`
 	Description  string         `json:"description"`
-	Calculations *[]Calculation `json:"calculation"`
+	Calculations *[]Calculation `json:"calculations"`
 }
 
 var (
