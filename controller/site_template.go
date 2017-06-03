@@ -8,7 +8,6 @@ import (
 )
 
 var (
-	tmplBufPool *bpool.BufferPool
 	templateDir = filepath.Join("template", "site")
 
 	homeTpml,
@@ -22,6 +21,8 @@ var (
 	calculationTpml,
 	notFoundTpml,
 	errorTpml *template.Template
+
+	tmplBufPool *bpool.BufferPool
 )
 
 type templateLoader struct {
