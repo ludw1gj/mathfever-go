@@ -8,8 +8,15 @@ import (
 	"strings"
 
 	"github.com/gorilla/mux"
+	"github.com/oxtoacart/bpool"
 	"github.com/spottywolf/mathfever-go/model"
 )
+
+var tmplBufPool *bpool.BufferPool
+
+func init() {
+	tmplBufPool = bpool.NewBufferPool(64)
+}
 
 type SiteController struct{}
 
@@ -109,7 +116,7 @@ func renderTemplate(w http.ResponseWriter, r *http.Request, tmpl *template.Templ
 	err := tmpl.ExecuteTemplate(buf, name, data)
 	if err != nil {
 		serverError(w, r)
-		log.Println(err)
+		log.Println(err.Error())
 		return
 	}
 

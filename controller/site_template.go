@@ -3,13 +3,9 @@ package controller
 import (
 	"html/template"
 	"path/filepath"
-
-	"github.com/oxtoacart/bpool"
 )
 
 var (
-	templateDir = filepath.Join("template", "site")
-
 	homeTpml,
 	aboutTpml,
 	helpTpml,
@@ -21,9 +17,11 @@ var (
 	calculationTpml,
 	notFoundTpml,
 	errorTpml *template.Template
-
-	tmplBufPool *bpool.BufferPool
 )
+
+func init() {
+	loadTemplates()
+}
 
 type templateLoader struct {
 	tmpl     **template.Template
@@ -32,12 +30,9 @@ type templateLoader struct {
 	baseFile string
 }
 
-func init() {
-	tmplBufPool = bpool.NewBufferPool(64)
-	loadTemplates()
-}
-
 func loadTemplates() {
+	templateDir := filepath.Join("template", "site")
+
 	pubTmpls := []templateLoader{
 		{
 			&homeTpml,
