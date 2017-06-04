@@ -25,7 +25,6 @@ func apiHandler(w http.ResponseWriter, r *http.Request, apiInput MathApi) {
 		json.NewEncoder(w).Encode(ErrorJson{genJsonError(apiInput).Error()})
 		return
 	}
-	defer r.Body.Close()
 
 	err = verifyJsonInput(apiInput)
 	if err != nil {

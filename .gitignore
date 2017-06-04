@@ -2,7 +2,6 @@
 .idea
 
 # Other
-/mathfever
-/static/srv/sitemap.xml
-.DS_Store
 /mathfever-go
+/assets/srv/sitemap.xml
+.DS_Store
