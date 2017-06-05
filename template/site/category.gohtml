@@ -1,7 +1,7 @@
 {{define "title"}}{{.Name}} - MathFever{{end}}
 {{define "meta"}}{{.Description}}{{end}}
 
-{{define "content"}}
+{{define "content" -}}
 <!-- Main Heading -->
 <h1 id="main-heading">{{.Name}}</h1>
 <hr class="separator">
@@ -13,17 +13,17 @@
 
         <!-- Links -->
         <ul class="category-calc-ul">
-            {{range .Calculations}}
+            {{range .Calculations -}}
             <li><a class="no-text-decoration" href="{{.URL}}">{{.Name}}</a></li>
-            {{end}}
+            {{- end}}
         </ul>
 
         <!-- Calculation Output Example -->
-        {{range .Calculations}}
+        {{range .Calculations -}}
         <hr>
         <h4>{{.Name}}</h4>
         {{.Example}}
-        {{end}}
+        {{- end}}
     </div>
 </div>
-{{end}}
+{{- end}}
