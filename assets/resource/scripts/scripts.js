@@ -35,7 +35,6 @@ function submitAjax(data) {
     };
 
     request.setRequestHeader('Content-Type', 'application/json');
-    console.log(JSON.stringify(data), url);
     request.send(JSON.stringify(data));
 }
 
