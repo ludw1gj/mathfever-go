@@ -102,7 +102,6 @@ function displayCalcCard(content) {
     calculationCard.classList.add('fade-in');
 }
 
-// * VALIDATION *
 /**
  * This function checks if param binary is a binary number
  * @param {String} binary
@@ -155,7 +154,6 @@ function hexadecimalValidation(hexadecimal) {
     return isValidHexadecimal;
 }
 
-// * AJAX *
 /**
  * This function submits an ajax request of content-type json to the 'api' route
  * @param {Object} data
