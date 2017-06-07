@@ -1,6 +1,9 @@
 {{define "title"}}{{.Calculation.Name}} | {{.Category.Name}} - MathFever{{end}}
 {{define "meta"}}{{.Calculation.Description}}{{end}}
 
+{{define "calcScript"}}
+<script defer src="/assets/resources/scripts/script.js"></script>{{end}}
+
 {{define "content" -}}
 <div class="calculation-page-heading">
     <!-- Main Heading -->
@@ -29,8 +32,4 @@
     <div id="calculation-card" class="general-content mdl-color--white content mdl-color-text--grey-800 mdl-cell
     mdl-cell--10-col mdl-shadow--2dp"></div>
 </div>
-{{- end}}
-
-{{define "calcScript" -}}
-<script async src="/assets/resources/scripts/script.js"></script>
 {{- end}}
