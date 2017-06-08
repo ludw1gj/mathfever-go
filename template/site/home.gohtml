@@ -10,9 +10,9 @@
     <div class="home-card demo-card-wide mdl-card mdl-cell mdl-cell--top mdl-cell--4 mdl-cell--4-col-phone mdl-shadow--2dp">
         <!-- Index Card Picture/Title -->
         <div class="home-card--title mdl-card__title"
-             style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{.ImageURL}}) center/cover">
+             style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{.Category.ImageURL}}) center/cover">
             <h6 class="mdl-card__title-text">
-                <a href="{{.URL}}">{{.Name}}</a>
+                <a href="{{.Category.URL}}">{{.Category.Name}}</a>
             </h6>
         </div>
 

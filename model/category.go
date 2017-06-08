@@ -1,59 +1,54 @@
 package model
 
-import (
-	"bytes"
-	"fmt"
-)
-
 type Category struct {
-	Name         string         `json:"name"`
-	URL          string         `json:"url"`
-	ImageURL     string         `json:"image_url"`
-	Description  string         `json:"description"`
-	Calculations *[]Calculation `json:"calculations"`
+	Name        string `json:"name"`
+	Slug        string `json:"slug"`
+	URL         string `json:"url"`
+	ImageURL    string `json:"image_url"`
+	Description string `json:"description"`
 }
 
 var (
-	Categories = []Category{
-		{
-			"Networking",
-			"/networking",
-			"/assets/resources/images/category/networking.jpg",
-			genDescCategory("Networking", networkingCalculations),
-			&networkingCalculations,
-		},
-		{
-			"Primes and Factors",
-			"/numbers",
-			"/assets/resources/images/category/addition.jpg",
-			genDescCategory("Primes and Factors", numbersCalculations),
-			&numbersCalculations,
-		},
-		{
-			"Percentages",
-			"/percentages",
-			"/assets/resources/images/category/algebra.jpg",
-			genDescCategory("Percentages", percentageCalculations),
-			&percentageCalculations,
-		},
-		{
-			"Total Surface Area",
-			"/tsa",
-			"/assets/resources/images/category/geometry.jpg",
-			genDescCategory("Total Surface Area", tsaCalculations),
-			&tsaCalculations,
-		},
+	networking = Category{
+		"Networking",
+		"networking",
+		"/networking",
+		"/assets/resources/images/category/networking.jpg",
+		"Calculations that you might use for Networking/Computer Science: Binary to Decimal, Binary " +
+			"to Hexadecimal, Decimal to Binary, Decimal to Hexadecimal, Hexadecimal to Binary, and " +
+			"Hexadecimal to Decimal.",
+	}
+	numbers = Category{
+		"Primes and Factors",
+		"numbers",
+		"/numbers",
+		"/assets/resources/images/category/addition.jpg",
+		"Calculations about numbers! Find Highest Common Factor, find Lowest Common Multiple, and " +
+			"figuring out Prime Numbers.",
+	}
+	percentages = Category{
+		"Percentages",
+		"percentages",
+		"/percentages",
+		"/assets/resources/images/category/algebra.jpg",
+		"Calculations for percentages! Find the value from a percentage, find a percentage from a " +
+			"value, or find the percentage change between two values.",
+	}
+	tsa = Category{
+		"Total Surface Area",
+		"tsa",
+		"/tsa",
+		"/assets/resources/images/category/geometry.jpg",
+		"Calculations that you might use for Total Surface Area: Pythagorean Theorem (also known as " +
+			"Pythagoras's Theorem), Total Surface Area of Cone, Total Surface Area of Cube, Total Surface " +
+			"Area of Cylinder, Total Surface Area of Rectangular Prism, Total Surface Area of Sphere, and " +
+			"Total Surface Area of Square Based Triangle.",
+	}
+
+	CategoryData = []Category{
+		networking,
+		numbers,
+		percentages,
+		tsa,
 	}
 )
-
-func genDescCategory(category string, calcs []Calculation) string {
-	var buf bytes.Buffer
-
-	fmt.Fprintf(&buf, "Calculations that you might use for %s: ", category)
-	for i := 0; i < len(calcs)-1; i++ {
-		fmt.Fprintf(&buf, "%s, ", calcs[i].Name)
-	}
-	fmt.Fprintf(&buf, "and %s.", calcs[len(calcs)-1].Name)
-
-	return buf.String()
-}

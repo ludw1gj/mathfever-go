@@ -13,26 +13,30 @@ var Router *mux.Router
 func init() {
 	Router = mux.NewRouter()
 
-	// Site Handler
-	sc := controller.NewSiteController()
-	Router.HandleFunc("/", sc.HomeHandler).Methods("GET")
-	Router.HandleFunc("/about", sc.AboutHandler).Methods("GET")
-	Router.HandleFunc("/help", sc.HelpHandler).Methods("GET")
-	Router.HandleFunc("/privacy", sc.PrivacyHandler).Methods("GET")
-	Router.HandleFunc("/terms", sc.TermsHandler).Methods("GET")
-	Router.HandleFunc("/message-board", sc.MessageBoardHandler).Methods("GET")
-	Router.HandleFunc("/networking/conversion-table", sc.ConversionTableHandler).Methods("GET")
-	Router.HandleFunc("/{category}", sc.CategoryHandler).Methods("GET")
-	Router.HandleFunc("/{category}/{calculation}", sc.CalculationHandler).Methods("GET")
+	// Site Router
+	siteCtrl := controller.NewSiteController()
+	Router.HandleFunc("/", siteCtrl.HomeHandler).Methods("GET")
+	Router.HandleFunc("/about", siteCtrl.AboutHandler).Methods("GET")
+	Router.HandleFunc("/help", siteCtrl.HelpHandler).Methods("GET")
+	Router.HandleFunc("/privacy", siteCtrl.PrivacyHandler).Methods("GET")
+	Router.HandleFunc("/terms", siteCtrl.TermsHandler).Methods("GET")
+	Router.HandleFunc("/message-board", siteCtrl.MessageBoardHandler).Methods("GET")
+	Router.HandleFunc("/networking/conversion-table", siteCtrl.ConversionTableHandler).Methods("GET")
+	Router.HandleFunc("/{category}", siteCtrl.CategoryHandler).Methods("GET")
+	Router.HandleFunc("/{category}/{calculation}", siteCtrl.CalculationHandler).Methods("GET")
 
-	Router.NotFoundHandler = http.HandlerFunc(sc.NotFoundHandler)
+	Router.NotFoundHandler = http.HandlerFunc(siteCtrl.NotFoundHandler)
 
-	// API Handler
-	ac := controller.NewApiController()
-	apiRoute := Router.PathPrefix("/api").Subrouter()
-	apiRoute.HandleFunc("/{category}/{calculation}", ac.DoCalculation).Methods("POST")
+	// API Router
+	apiRouter := Router.PathPrefix("/api").Subrouter()
 
-	apiRoute.NotFoundHandler = http.HandlerFunc(ac.NotFoundHandler)
+	categCtrl := controller.NewCategoryController()
+	apiRouter.HandleFunc("/{category}", categCtrl.CategoryHandler).Methods("POST")
+
+	calcCtrl := controller.NewCalculationController()
+	apiRouter.HandleFunc("/{category}/{calculation}", calcCtrl.CalculationHandler).Methods("POST")
+
+	apiRouter.NotFoundHandler = http.HandlerFunc(siteCtrl.NotFoundAPIHandler)
 
 	// Static Files Handler in Dev mode
 	boolPtr := flag.Bool("dev", false, "Use in development")

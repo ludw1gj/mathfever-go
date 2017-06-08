@@ -1,15 +1,15 @@
-{{define "title"}}{{.Name}} - MathFever{{end}}
-{{define "meta"}}{{.Description}}{{end}}
+{{define "title"}}{{.Category.Name}} - MathFever{{end}}
+{{define "meta"}}{{.Category.Description}}{{end}}
 
 {{define "content" -}}
 <!-- Main Heading -->
-<h1 id="main-heading">{{.Name}}</h1>
+<h1 id="main-heading">{{.Category.Name}}</h1>
 <hr class="separator">
 
 <!-- Page Content-->
 <div class="mdl-grid">
     <div class="general-content mdl-color--white content mdl-color-text--grey-800 mdl-cell mdl-cell--9-col mdl-shadow--2dp">
-        <h4>{{.Name}} Calculations:</h4>
+        <h4>{{.Category.Name}} Calculations:</h4>
 
         <!-- Links -->
         <ul class="category-calc-ul">

@@ -7,39 +7,33 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+
+	"github.com/FriedPigeon/mathfever-go/common"
 )
-
-type ErrorJson struct {
-	Error string `json:"error"`
-}
-
-type ContentJson struct {
-	Content string `json:"content"`
-}
 
 func apiHandler(w http.ResponseWriter, r *http.Request, apiInput MathApi) {
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&apiInput)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(ErrorJson{genJsonError(apiInput).Error()})
+		json.NewEncoder(w).Encode(common.ErrorJson{genJsonError(apiInput).Error()})
 		return
 	}
 
 	err = verifyJsonInput(apiInput)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(ErrorJson{err.Error()})
+		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
 		return
 	}
 
 	s, err := apiInput.Execute()
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(ErrorJson{err.Error()})
+		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
 		return
 	}
-	json.NewEncoder(w).Encode(ContentJson{s})
+	json.NewEncoder(w).Encode(common.ContentJson{s})
 }
 
 func genJsonError(apiInput MathApi) error {
