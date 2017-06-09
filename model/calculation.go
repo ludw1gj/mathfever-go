@@ -1,6 +1,7 @@
 package model
 
 import (
+	"errors"
 	"fmt"
 	"html/template"
 	"log"
@@ -16,7 +17,7 @@ type Calculation struct {
 	InputInfo   []inputInfo     `json:"input_info"`
 	Description string          `json:"description"`
 	Example     template.HTML   `json:"example"`
-	Math        service.MathApi `json:"math"`
+	Math        service.MathApi `json:"-"`
 	Category    *Category       `json:"category"`
 }
 
@@ -261,4 +262,22 @@ func genExample(s string, err error) template.HTML {
 		log.Fatalln(err)
 	}
 	return template.HTML(s)
+}
+
+func GetCalculationBySlug(slug string) (c Calculation, err error) {
+	for _, calculation := range CalculationData {
+		if calculation.Slug == slug {
+			return calculation, nil
+		}
+	}
+	return c, errors.New("Calculation does not exist.")
+}
+
+func GetCalculationsByCategorySlug(slug string) (c []Calculation) {
+	for _, calculation := range CalculationData {
+		if calculation.Category.Slug == slug {
+			c = append(c, calculation)
+		}
+	}
+	return c
 }

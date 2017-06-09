@@ -11,6 +11,10 @@ import (
 	"github.com/FriedPigeon/mathfever-go/common"
 )
 
+type contentJson struct {
+	Content string `json:"content"`
+}
+
 func apiHandler(w http.ResponseWriter, r *http.Request, apiInput MathApi) {
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&apiInput)
@@ -33,7 +37,7 @@ func apiHandler(w http.ResponseWriter, r *http.Request, apiInput MathApi) {
 		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
 		return
 	}
-	json.NewEncoder(w).Encode(common.ContentJson{s})
+	json.NewEncoder(w).Encode(contentJson{s})
 }
 
 func genJsonError(apiInput MathApi) error {

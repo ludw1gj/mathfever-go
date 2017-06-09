@@ -1,11 +1,20 @@
 package model
 
+import (
+	"errors"
+)
+
 type Category struct {
 	Name        string `json:"name"`
 	Slug        string `json:"slug"`
 	URL         string `json:"url"`
 	ImageURL    string `json:"image_url"`
 	Description string `json:"description"`
+}
+
+type categoryWithCalculations struct {
+	Category     Category      `json:"category"`
+	Calculations []Calculation `json:"calculations"`
 }
 
 var (
@@ -50,4 +59,37 @@ var (
 		percentages,
 		tsa,
 	}
+	categoriesData []categoryWithCalculations
 )
+
+func init() {
+	// populate categories data
+	for _, categ := range CategoryData {
+		categoriesData = append(categoriesData, categoryWithCalculations{
+			categ,
+			GetCalculationsByCategorySlug(categ.Slug),
+		})
+	}
+}
+
+func GetCategoryBySlug(slug string) (c Category, err error) {
+	for _, category := range CategoryData {
+		if category.Slug == slug {
+			return category, nil
+		}
+	}
+	return c, errors.New("Category does not exist.")
+}
+
+func GetCategoryWithCalculationsBySlug(slug string) (c categoryWithCalculations, err error) {
+	category, err := GetCategoryBySlug(slug)
+	if err != nil {
+		return c, errors.New("Category does not exist.")
+	}
+	calculations := GetCalculationsByCategorySlug(slug)
+	return categoryWithCalculations{category, calculations}, nil
+}
+
+func GetAllCategoriesWithCalculations() []categoryWithCalculations {
+	return categoriesData
+}
