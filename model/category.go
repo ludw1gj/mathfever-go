@@ -44,7 +44,6 @@ var (
 			"Area of Cylinder, Total Surface Area of Rectangular Prism, Total Surface Area of Sphere, and " +
 			"Total Surface Area of Square Based Triangle.",
 	}
-
 	CategoryData = []Category{
 		networking,
 		numbers,

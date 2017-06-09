@@ -27,7 +27,7 @@ type inputInfo struct {
 
 var (
 	CalculationData = []Calculation{
-		// NETWORKING
+		// Networking
 		{
 			"Binary to Decimal",
 			"binary-to-decimal",
@@ -88,7 +88,7 @@ var (
 			&service.HexadecimalToDecimalAPI{},
 			&networking,
 		},
-		// NUMBERS
+		// Numbers
 		{
 			"Find if Number is a Prime Number",
 			"is-prime",
@@ -119,7 +119,7 @@ var (
 			&service.LowestCommonMultipleAPI{},
 			&numbers,
 		},
-		// PERCENTAGES
+		// Percentages
 		{
 			"Change Number by Percentage",
 			"change-by-percentage",
@@ -160,7 +160,7 @@ var (
 			&service.PercentageFromNumberAPI{},
 			&percentages,
 		},
-		// TOTAL SURFACE AREA
+		// Total Surface Area
 		{
 			"Pythagorean Theorem",
 			"pythagorean-theorem",
@@ -252,13 +252,13 @@ func genInputInfo(input service.MathApi) (inputs []inputInfo) {
 	return inputs
 }
 
+func genDescCalculation(solving string) string {
+	return fmt.Sprintf("Solve: %s, showing mathematical proof and answer.", solving)
+}
+
 func genExample(s string, err error) template.HTML {
 	if err != nil {
 		log.Fatalln(err)
 	}
 	return template.HTML(s)
-}
-
-func genDescCalculation(solving string) string {
-	return fmt.Sprintf("Solve: %s, showing mathematical proof and answer.", solving)
 }
