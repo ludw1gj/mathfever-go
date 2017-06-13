@@ -1,9 +1,7 @@
 package services
 
 import (
-	"net/http"
-
-	"github.com/FriedPigeon/mathfever-go/services/maths"
+	"github.com/FriedPigeon/mathfever-go/maths"
 )
 
 type BinaryToDecimalAPI struct {
@@ -30,7 +28,7 @@ type HexadecimalToDecimalAPI struct {
 	Hexadecimal string `json:"hexadecimal" name:"Hexadecimal"`
 }
 
-func (i BinaryToDecimalAPI) Execute() (s string, err error) {
+func (i BinaryToDecimalAPI) ExecuteMath() (s string, err error) {
 	err = validateBinary(i.Binary)
 	if err != nil {
 		return s, err
@@ -38,7 +36,7 @@ func (i BinaryToDecimalAPI) Execute() (s string, err error) {
 	return maths.BinaryToDecimal(i.Binary)
 }
 
-func (i BinaryToHexadecimalAPI) Execute() (s string, err error) {
+func (i BinaryToHexadecimalAPI) ExecuteMath() (s string, err error) {
 	err = validateBinary(i.Binary)
 	if err != nil {
 		return s, err
@@ -46,7 +44,7 @@ func (i BinaryToHexadecimalAPI) Execute() (s string, err error) {
 	return maths.BinaryToHexadecimal(i.Binary)
 }
 
-func (i DecimalToBinaryAPI) Execute() (s string, err error) {
+func (i DecimalToBinaryAPI) ExecuteMath() (s string, err error) {
 	err = validatePositiveInt(i.Decimal)
 	if err != nil {
 		return s, err
@@ -54,7 +52,7 @@ func (i DecimalToBinaryAPI) Execute() (s string, err error) {
 	return maths.DecimalToBinary(i.Decimal)
 }
 
-func (i DecimalToHexadecimalAPI) Execute() (s string, err error) {
+func (i DecimalToHexadecimalAPI) ExecuteMath() (s string, err error) {
 	err = validatePositiveInt(i.Decimal)
 	if err != nil {
 		return s, err
@@ -62,7 +60,7 @@ func (i DecimalToHexadecimalAPI) Execute() (s string, err error) {
 	return maths.DecimalToHexadecimal(i.Decimal)
 }
 
-func (i HexadecimalToBinaryAPI) Execute() (s string, err error) {
+func (i HexadecimalToBinaryAPI) ExecuteMath() (s string, err error) {
 	err = validateHexadecimal(i.Hexadecimal)
 	if err != nil {
 		return s, err
@@ -70,34 +68,10 @@ func (i HexadecimalToBinaryAPI) Execute() (s string, err error) {
 	return maths.HexadecimalToBinary(i.Hexadecimal)
 }
 
-func (i HexadecimalToDecimalAPI) Execute() (s string, err error) {
+func (i HexadecimalToDecimalAPI) ExecuteMath() (s string, err error) {
 	err = validateHexadecimal(i.Hexadecimal)
 	if err != nil {
 		return s, err
 	}
 	return maths.HexadecimalToDecimal(i.Hexadecimal)
-}
-
-func (i BinaryToDecimalAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	apiHandler(w, r, &i)
-}
-
-func (i BinaryToHexadecimalAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	apiHandler(w, r, &i)
-}
-
-func (i DecimalToBinaryAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	apiHandler(w, r, &i)
-}
-
-func (i DecimalToHexadecimalAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	apiHandler(w, r, &i)
-}
-
-func (i HexadecimalToBinaryAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	apiHandler(w, r, &i)
-}
-
-func (i HexadecimalToDecimalAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	apiHandler(w, r, &i)
 }

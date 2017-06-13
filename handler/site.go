@@ -1,11 +1,11 @@
-package handlers
+package handler
 
 import (
 	"net/http"
 
 	"github.com/FriedPigeon/mathfever-go/models"
-	"github.com/gorilla/mux"
 	"github.com/FriedPigeon/mathfever-go/templates"
+	"github.com/gorilla/mux"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
@@ -36,7 +36,7 @@ func ConversionTable(w http.ResponseWriter, r *http.Request) {
 	templates.RenderTpl(w, r, templates.ConversionTableTpl, "base.gohtml", nil)
 }
 
-func Category(w http.ResponseWriter, r *http.Request) {
+func CategoryPage(w http.ResponseWriter, r *http.Request) {
 	categorySlug := mux.Vars(r)["category"]
 	data, err := models.GetCategoryWithCalculationsBySlug(categorySlug)
 	if err != nil {
@@ -46,14 +46,22 @@ func Category(w http.ResponseWriter, r *http.Request) {
 	templates.RenderTpl(w, r, templates.CategoryTpl, "base.gohtml", data)
 }
 
-func Calculation(w http.ResponseWriter, r *http.Request) {
+func CalculationPage(w http.ResponseWriter, r *http.Request) {
 	calculationSlug := mux.Vars(r)["calculation"]
 	calculation, err := models.GetCalculationBySlug(calculationSlug)
 	if err != nil {
 		NotFound(w, r)
 		return
 	}
-	templates.RenderTpl(w, r, templates.CalculationTpl, "base.gohtml", calculation)
+	category, _ := models.GetCategoryBySlug(calculation.Category)
+
+	templates.RenderTpl(w, r, templates.CalculationTpl, "base.gohtml", struct {
+		Calculation models.Calculation
+		Category    models.Category
+	}{
+		calculation,
+		category,
+	})
 }
 
 func NotFound(w http.ResponseWriter, r *http.Request) {

@@ -1,5 +1,5 @@
-{{define "title"}}{{.Name}} | {{.Category.Name}} - MathFever{{end}}
-{{define "meta"}}{{.Description}}{{end}}
+{{define "title"}}{{.Calculation.Name}} | {{.Category.Name}} - MathFever{{end}}
+{{define "meta"}}{{.Calculation.Description}}{{end}}
 
 {{define "calcScript"}}
 <script defer src="/assets/resources/scripts/script.js"></script>{{end}}
@@ -8,13 +8,13 @@
 <div class="calculation-page-heading">
     <!-- Main Heading -->
     <h3><a href="{{.Category.URL}}">{{.Category.Name}}:</a></h3>
-    <h2 id="main-heading">{{.Name}}</h2>
+    <h2 id="main-heading">{{.Calculation.Name}}</h2>
 </div>
 
 <!-- User Input Form -->
 <form id="calculation-form">
     <!-- User Input Field -->
-    {{range .InputInfo -}}
+    {{range .Calculation.InputInfo -}}
     <div class="user-input-field mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" name="{{.Tag}}" type="text" id="{{.Tag}}" autocomplete="off">
         <label class="mdl-textfield__label" for="{{.Tag}}" id="{{.Tag}}Label">{{.Name}}</label>

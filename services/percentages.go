@@ -1,9 +1,7 @@
 package services
 
 import (
-	"net/http"
-
-	"github.com/FriedPigeon/mathfever-go/services/maths"
+	"github.com/FriedPigeon/mathfever-go/maths"
 )
 
 type ChangeByPercentageAPI struct {
@@ -26,7 +24,7 @@ type PercentageFromNumberAPI struct {
 	TotalNumber float64 `json:"total_number" name:"Total Number"`
 }
 
-func (i ChangeByPercentageAPI) Execute() (s string, err error) {
+func (i ChangeByPercentageAPI) ExecuteMath() (s string, err error) {
 	err = validateFloat(false, i.Number, i.Percentage)
 	if err != nil {
 		return s, err
@@ -34,7 +32,7 @@ func (i ChangeByPercentageAPI) Execute() (s string, err error) {
 	return maths.ChangeByPercentage(i.Number, i.Percentage)
 }
 
-func (i NumberFromPercentageAPI) Execute() (s string, err error) {
+func (i NumberFromPercentageAPI) ExecuteMath() (s string, err error) {
 	err = validateFloat(false, i.Percentage, i.Number)
 	if err != nil {
 		return s, err
@@ -42,7 +40,7 @@ func (i NumberFromPercentageAPI) Execute() (s string, err error) {
 	return maths.NumberFromPercentage(i.Percentage, i.Number)
 }
 
-func (i PercentageChangeAPI) Execute() (s string, err error) {
+func (i PercentageChangeAPI) ExecuteMath() (s string, err error) {
 	err = validateFloat(false, i.Number, i.NewNumber)
 	if err != nil {
 		return s, err
@@ -50,26 +48,10 @@ func (i PercentageChangeAPI) Execute() (s string, err error) {
 	return maths.PercentageChange(i.Number, i.NewNumber)
 }
 
-func (i PercentageFromNumberAPI) Execute() (s string, err error) {
+func (i PercentageFromNumberAPI) ExecuteMath() (s string, err error) {
 	err = validateFloat(false, i.Number, i.TotalNumber)
 	if err != nil {
 		return s, err
 	}
 	return maths.PercentageFromNumber(i.Number, i.TotalNumber)
-}
-
-func (i ChangeByPercentageAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	apiHandler(w, r, &i)
-}
-
-func (i NumberFromPercentageAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	apiHandler(w, r, &i)
-}
-
-func (i PercentageChangeAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	apiHandler(w, r, &i)
-}
-
-func (i PercentageFromNumberAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
-	apiHandler(w, r, &i)
 }

@@ -11,14 +11,14 @@ import (
 )
 
 type Calculation struct {
-	Name        string          `json:"name"`
-	Slug        string          `json:"slug"`
-	URL         string          `json:"url"`
-	InputInfo   []inputInfo     `json:"input_info"`
-	Description string          `json:"description"`
-	Example     template.HTML   `json:"example"`
-	Math        services.MathApi `json:"-"`
-	Category    *Category       `json:"category"`
+	Name        string           `json:"name"`
+	Slug        string           `json:"slug"`
+	URL         string           `json:"url"`
+	InputInfo   []inputInfo      `json:"input_info"`
+	Description string           `json:"description"`
+	Example     template.HTML    `json:"example"`
+	Math        services.MathAPI `json:"-"`
+	Category    string           `json:"category"`
 }
 
 type inputInfo struct {
@@ -35,9 +35,9 @@ var (
 			"/networking/binary-to-decimal",
 			genInputInfo(services.BinaryToDecimalAPI{}),
 			genDescCalculation("Binary to Decimal"),
-			genExample(services.BinaryToDecimalAPI{"10101"}.Execute()),
+			genExample(services.BinaryToDecimalAPI{"10101"}.ExecuteMath()),
 			&services.BinaryToDecimalAPI{},
-			&networking,
+			"networking",
 		},
 		{
 			"Binary to Hexadecimal",
@@ -45,9 +45,9 @@ var (
 			"/networking/binary-to-hexadecimal",
 			genInputInfo(services.BinaryToHexadecimalAPI{}),
 			genDescCalculation("Binary to Hexadecimal"),
-			genExample(services.BinaryToHexadecimalAPI{"10111"}.Execute()),
+			genExample(services.BinaryToHexadecimalAPI{"10111"}.ExecuteMath()),
 			&services.BinaryToHexadecimalAPI{},
-			&networking,
+			"networking",
 		},
 		{
 			"Decimal to Binary",
@@ -55,9 +55,9 @@ var (
 			"/networking/decimal-to-binary",
 			genInputInfo(services.DecimalToBinaryAPI{}),
 			genDescCalculation("Decimal to Binary"),
-			genExample(services.DecimalToBinaryAPI{21}.Execute()),
+			genExample(services.DecimalToBinaryAPI{21}.ExecuteMath()),
 			&services.DecimalToBinaryAPI{},
-			&networking,
+			"networking",
 		},
 		{
 			"Decimal to Hexadecimal",
@@ -65,9 +65,9 @@ var (
 			"/networking/decimal-to-hexadecimal",
 			genInputInfo(services.DecimalToHexadecimalAPI{}),
 			genDescCalculation("Decimal to Hexadecimal"),
-			genExample(services.DecimalToHexadecimalAPI{92}.Execute()),
+			genExample(services.DecimalToHexadecimalAPI{92}.ExecuteMath()),
 			&services.DecimalToHexadecimalAPI{},
-			&networking,
+			"networking",
 		},
 		{
 			"Hexadecimal to Binary",
@@ -75,9 +75,9 @@ var (
 			"/networking/hexadecimal-to-binary",
 			genInputInfo(services.HexadecimalToBinaryAPI{}),
 			genDescCalculation("Hexadecimal to Binary"),
-			genExample(services.HexadecimalToBinaryAPI{"6BA"}.Execute()),
+			genExample(services.HexadecimalToBinaryAPI{"6BA"}.ExecuteMath()),
 			&services.HexadecimalToBinaryAPI{},
-			&networking,
+			"networking",
 		},
 		{
 			"Hexadecimal to Decimal",
@@ -85,9 +85,9 @@ var (
 			"/networking/hexadecimal-to-decimal",
 			genInputInfo(services.HexadecimalToDecimalAPI{}),
 			genDescCalculation("Hexadecimal to Decimal"),
-			genExample(services.HexadecimalToDecimalAPI{"6BA"}.Execute()),
+			genExample(services.HexadecimalToDecimalAPI{"6BA"}.ExecuteMath()),
 			&services.HexadecimalToDecimalAPI{},
-			&networking,
+			"networking",
 		},
 		// Numbers
 		{
@@ -96,9 +96,9 @@ var (
 			"/numbers/is-prime",
 			genInputInfo(services.IsPrimeAPI{}),
 			genDescCalculation("Find if Number is a Prime Number"),
-			genExample(services.IsPrimeAPI{129}.Execute()),
+			genExample(services.IsPrimeAPI{129}.ExecuteMath()),
 			&services.IsPrimeAPI{},
-			&numbers,
+			"numbers",
 		},
 		{
 			"Highest Common Factor",
@@ -106,9 +106,9 @@ var (
 			"/numbers/highest-common-factor",
 			genInputInfo(services.HighestCommonFactorAPI{}),
 			genDescCalculation("Highest Common Factor"),
-			genExample(services.HighestCommonFactorAPI{600, 752}.Execute()),
+			genExample(services.HighestCommonFactorAPI{600, 752}.ExecuteMath()),
 			&services.HighestCommonFactorAPI{},
-			&numbers,
+			"numbers",
 		},
 		{
 			"Lowest Common Multiple",
@@ -116,9 +116,9 @@ var (
 			"/numbers/lowest-common-multiple",
 			genInputInfo(services.LowestCommonMultipleAPI{}),
 			genDescCalculation("Lowest Common Multiple"),
-			genExample(services.LowestCommonMultipleAPI{600, 752}.Execute()),
+			genExample(services.LowestCommonMultipleAPI{600, 752}.ExecuteMath()),
 			&services.LowestCommonMultipleAPI{},
-			&numbers,
+			"numbers",
 		},
 		// Percentages
 		{
@@ -127,9 +127,9 @@ var (
 			"/percentages/change-by-percentage",
 			genInputInfo(services.ChangeByPercentageAPI{}),
 			genDescCalculation("Change Number by Percentage"),
-			genExample(services.ChangeByPercentageAPI{900, 65}.Execute()),
+			genExample(services.ChangeByPercentageAPI{900, 65}.ExecuteMath()),
 			&services.ChangeByPercentageAPI{},
-			&percentages,
+			"percentages",
 		},
 		{
 			"Get Number from a Percentage",
@@ -137,9 +137,9 @@ var (
 			"/percentages/number-from-percentage",
 			genInputInfo(services.NumberFromPercentageAPI{}),
 			genDescCalculation("Get Number from a Percentage"),
-			genExample(services.NumberFromPercentageAPI{600, 752}.Execute()),
+			genExample(services.NumberFromPercentageAPI{600, 752}.ExecuteMath()),
 			&services.NumberFromPercentageAPI{},
-			&percentages,
+			"percentages",
 		},
 		{
 			"Find Percentage Difference of Two Numbers",
@@ -147,9 +147,9 @@ var (
 			"/percentages/percentage-change",
 			genInputInfo(services.PercentageChangeAPI{}),
 			genDescCalculation("Find Percentage Difference of Two Numbers"),
-			genExample(services.PercentageChangeAPI{400, 540}.Execute()),
+			genExample(services.PercentageChangeAPI{400, 540}.ExecuteMath()),
 			&services.PercentageChangeAPI{},
-			&percentages,
+			"percentages",
 		},
 		{
 			"Find Percentage of a Number",
@@ -157,9 +157,9 @@ var (
 			"/percentages/percentage-from-number",
 			genInputInfo(services.PercentageFromNumberAPI{}),
 			genDescCalculation("Find Percentage of a Number"),
-			genExample(services.PercentageFromNumberAPI{585, 900}.Execute()),
+			genExample(services.PercentageFromNumberAPI{585, 900}.ExecuteMath()),
 			&services.PercentageFromNumberAPI{},
-			&percentages,
+			"percentages",
 		},
 		// Total Surface Area
 		{
@@ -168,9 +168,9 @@ var (
 			"/tsa/pythagorean-theorem",
 			genInputInfo(services.TsaPythagoreanTheoremAPI{}),
 			genDescCalculation("Pythagorean Theorem"),
-			genExample(services.TsaPythagoreanTheoremAPI{25, 17}.Execute()),
+			genExample(services.TsaPythagoreanTheoremAPI{25, 17}.ExecuteMath()),
 			&services.TsaPythagoreanTheoremAPI{},
-			&tsa,
+			"tsa",
 		},
 		{
 			"Cone",
@@ -178,9 +178,9 @@ var (
 			"/tsa/cone",
 			genInputInfo(services.TsaConeAPI{}),
 			genDescCalculation("Total Surface Area of Cone"),
-			genExample(services.TsaConeAPI{3, 5}.Execute()),
+			genExample(services.TsaConeAPI{3, 5}.ExecuteMath()),
 			&services.TsaConeAPI{},
-			&tsa,
+			"tsa",
 		},
 		{
 			"Cube",
@@ -188,9 +188,9 @@ var (
 			"/tsa/cube",
 			genInputInfo(services.TsaCubeAPI{}),
 			genDescCalculation("Total Surface Area of Cube"),
-			genExample(services.TsaCubeAPI{3}.Execute()),
+			genExample(services.TsaCubeAPI{3}.ExecuteMath()),
 			&services.TsaCubeAPI{},
-			&tsa,
+			"tsa",
 		},
 		{
 			"Cylinder",
@@ -198,9 +198,9 @@ var (
 			"/tsa/cylinder",
 			genInputInfo(services.TsaCylinderAPI{}),
 			genDescCalculation("Total Surface Area of Cylinder"),
-			genExample(services.TsaCylinderAPI{2, 5}.Execute()),
+			genExample(services.TsaCylinderAPI{2, 5}.ExecuteMath()),
 			&services.TsaCylinderAPI{},
-			&tsa,
+			"tsa",
 		},
 		{
 			"Rectangular Prism",
@@ -208,9 +208,9 @@ var (
 			"/tsa/rectangular-prism",
 			genInputInfo(services.TsaRectangularPrismAPI{}),
 			genDescCalculation("Total Surface Area of Rectangular Prism"),
-			genExample(services.TsaRectangularPrismAPI{2, 4, 3}.Execute()),
+			genExample(services.TsaRectangularPrismAPI{2, 4, 3}.ExecuteMath()),
 			&services.TsaRectangularPrismAPI{},
-			&tsa,
+			"tsa",
 		},
 		{
 			"Sphere",
@@ -218,9 +218,9 @@ var (
 			"/tsa/sphere",
 			genInputInfo(services.TsaSphereAPI{}),
 			genDescCalculation("Total Surface Area of Sphere"),
-			genExample(services.TsaSphereAPI{1}.Execute()),
+			genExample(services.TsaSphereAPI{1}.ExecuteMath()),
 			&services.TsaSphereAPI{},
-			&tsa,
+			"tsa",
 		},
 		{
 			"Square Based Triangle",
@@ -228,14 +228,14 @@ var (
 			"/tsa/square-based-triangle",
 			genInputInfo(services.TsaSquareBaseTriangleAPI{}),
 			genDescCalculation("Total Surface Area of Square Based Triangle"),
-			genExample(services.TsaSquareBaseTriangleAPI{4, 6}.Execute()),
+			genExample(services.TsaSquareBaseTriangleAPI{4, 6}.ExecuteMath()),
 			&services.TsaSquareBaseTriangleAPI{},
-			&tsa,
+			"tsa",
 		},
 	}
 )
 
-func genInputInfo(input services.MathApi) (inputs []inputInfo) {
+func genInputInfo(input services.MathAPI) (inputs []inputInfo) {
 	val := reflect.ValueOf(input)
 
 	for i := 0; i < val.Type().NumField(); i++ {
@@ -275,7 +275,7 @@ func GetCalculationBySlug(slug string) (c Calculation, err error) {
 
 func GetCalculationsByCategorySlug(categorySlug string) (c []Calculation, err error) {
 	for _, calculation := range CalculationData {
-		if calculation.Category.Slug == categorySlug {
+		if calculation.Category == categorySlug {
 			c = append(c, calculation)
 		}
 	}
