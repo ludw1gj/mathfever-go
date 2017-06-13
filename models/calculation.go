@@ -11,8 +11,8 @@ import (
 )
 
 type Calculation struct {
-	Name        string           `json:"name"`
 	Slug        string           `json:"slug"`
+	Name        string           `json:"name"`
 	URL         string           `json:"url"`
 	InputInfo   []inputInfo      `json:"input_info"`
 	Description string           `json:"description"`
@@ -30,8 +30,8 @@ var (
 	CalculationData = []Calculation{
 		// Networking
 		{
-			"Binary to Decimal",
 			"binary-to-decimal",
+			"Binary to Decimal",
 			"/networking/binary-to-decimal",
 			genInputInfo(services.BinaryToDecimalAPI{}),
 			genDescCalculation("Binary to Decimal"),
@@ -40,8 +40,8 @@ var (
 			"networking",
 		},
 		{
-			"Binary to Hexadecimal",
 			"binary-to-hexadecimal",
+			"Binary to Hexadecimal",
 			"/networking/binary-to-hexadecimal",
 			genInputInfo(services.BinaryToHexadecimalAPI{}),
 			genDescCalculation("Binary to Hexadecimal"),
@@ -50,8 +50,8 @@ var (
 			"networking",
 		},
 		{
-			"Decimal to Binary",
 			"decimal-to-binary",
+			"Decimal to Binary",
 			"/networking/decimal-to-binary",
 			genInputInfo(services.DecimalToBinaryAPI{}),
 			genDescCalculation("Decimal to Binary"),
@@ -60,8 +60,8 @@ var (
 			"networking",
 		},
 		{
-			"Decimal to Hexadecimal",
 			"decimal-to-hexadecimal",
+			"Decimal to Hexadecimal",
 			"/networking/decimal-to-hexadecimal",
 			genInputInfo(services.DecimalToHexadecimalAPI{}),
 			genDescCalculation("Decimal to Hexadecimal"),
@@ -70,8 +70,8 @@ var (
 			"networking",
 		},
 		{
-			"Hexadecimal to Binary",
 			"hexadecimal-to-binary",
+			"Hexadecimal to Binary",
 			"/networking/hexadecimal-to-binary",
 			genInputInfo(services.HexadecimalToBinaryAPI{}),
 			genDescCalculation("Hexadecimal to Binary"),
@@ -80,8 +80,8 @@ var (
 			"networking",
 		},
 		{
-			"Hexadecimal to Decimal",
 			"hexadecimal-to-decimal",
+			"Hexadecimal to Decimal",
 			"/networking/hexadecimal-to-decimal",
 			genInputInfo(services.HexadecimalToDecimalAPI{}),
 			genDescCalculation("Hexadecimal to Decimal"),
@@ -91,8 +91,8 @@ var (
 		},
 		// Numbers
 		{
-			"Find if Number is a Prime Number",
 			"is-prime",
+			"Find if Number is a Prime Number",
 			"/numbers/is-prime",
 			genInputInfo(services.IsPrimeAPI{}),
 			genDescCalculation("Find if Number is a Prime Number"),
@@ -101,8 +101,8 @@ var (
 			"numbers",
 		},
 		{
-			"Highest Common Factor",
 			"highest-common-factor",
+			"Highest Common Factor",
 			"/numbers/highest-common-factor",
 			genInputInfo(services.HighestCommonFactorAPI{}),
 			genDescCalculation("Highest Common Factor"),
@@ -111,8 +111,8 @@ var (
 			"numbers",
 		},
 		{
-			"Lowest Common Multiple",
 			"lowest-common-multiple",
+			"Lowest Common Multiple",
 			"/numbers/lowest-common-multiple",
 			genInputInfo(services.LowestCommonMultipleAPI{}),
 			genDescCalculation("Lowest Common Multiple"),
@@ -122,8 +122,8 @@ var (
 		},
 		// Percentages
 		{
-			"Change Number by Percentage",
 			"change-by-percentage",
+			"Change Number by Percentage",
 			"/percentages/change-by-percentage",
 			genInputInfo(services.ChangeByPercentageAPI{}),
 			genDescCalculation("Change Number by Percentage"),
@@ -132,8 +132,8 @@ var (
 			"percentages",
 		},
 		{
-			"Get Number from a Percentage",
 			"number-from-percentage",
+			"Get Number from a Percentage",
 			"/percentages/number-from-percentage",
 			genInputInfo(services.NumberFromPercentageAPI{}),
 			genDescCalculation("Get Number from a Percentage"),
@@ -142,8 +142,8 @@ var (
 			"percentages",
 		},
 		{
-			"Find Percentage Difference of Two Numbers",
 			"percentage-change",
+			"Find Percentage Difference of Two Numbers",
 			"/percentages/percentage-change",
 			genInputInfo(services.PercentageChangeAPI{}),
 			genDescCalculation("Find Percentage Difference of Two Numbers"),
@@ -152,8 +152,8 @@ var (
 			"percentages",
 		},
 		{
-			"Find Percentage of a Number",
 			"percentage-from-number",
+			"Find Percentage of a Number",
 			"/percentages/percentage-from-number",
 			genInputInfo(services.PercentageFromNumberAPI{}),
 			genDescCalculation("Find Percentage of a Number"),
@@ -163,8 +163,8 @@ var (
 		},
 		// Total Surface Area
 		{
-			"Pythagorean Theorem",
 			"pythagorean-theorem",
+			"Pythagorean Theorem",
 			"/tsa/pythagorean-theorem",
 			genInputInfo(services.TsaPythagoreanTheoremAPI{}),
 			genDescCalculation("Pythagorean Theorem"),
@@ -173,8 +173,8 @@ var (
 			"tsa",
 		},
 		{
-			"Cone",
 			"cone",
+			"Cone",
 			"/tsa/cone",
 			genInputInfo(services.TsaConeAPI{}),
 			genDescCalculation("Total Surface Area of Cone"),
@@ -183,8 +183,8 @@ var (
 			"tsa",
 		},
 		{
-			"Cube",
 			"cube",
+			"Cube",
 			"/tsa/cube",
 			genInputInfo(services.TsaCubeAPI{}),
 			genDescCalculation("Total Surface Area of Cube"),
@@ -193,8 +193,8 @@ var (
 			"tsa",
 		},
 		{
-			"Cylinder",
 			"cylinder",
+			"Cylinder",
 			"/tsa/cylinder",
 			genInputInfo(services.TsaCylinderAPI{}),
 			genDescCalculation("Total Surface Area of Cylinder"),
@@ -203,8 +203,8 @@ var (
 			"tsa",
 		},
 		{
-			"Rectangular Prism",
 			"rectangular-prism",
+			"Rectangular Prism",
 			"/tsa/rectangular-prism",
 			genInputInfo(services.TsaRectangularPrismAPI{}),
 			genDescCalculation("Total Surface Area of Rectangular Prism"),
@@ -213,8 +213,8 @@ var (
 			"tsa",
 		},
 		{
-			"Sphere",
 			"sphere",
+			"Sphere",
 			"/tsa/sphere",
 			genInputInfo(services.TsaSphereAPI{}),
 			genDescCalculation("Total Surface Area of Sphere"),
@@ -223,8 +223,8 @@ var (
 			"tsa",
 		},
 		{
-			"Square Based Triangle",
 			"square-based-triangle",
+			"Square Based Triangle",
 			"/tsa/square-based-triangle",
 			genInputInfo(services.TsaSquareBaseTriangleAPI{}),
 			genDescCalculation("Total Surface Area of Square Based Triangle"),
