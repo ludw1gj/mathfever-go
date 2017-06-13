@@ -65,9 +65,11 @@ var (
 func init() {
 	// populate categories data
 	for _, categ := range CategoryData {
+		calculations, _ := GetCalculationsByCategorySlug(categ.Slug)
+
 		categoriesData = append(categoriesData, categoryWithCalculations{
 			categ,
-			GetCalculationsByCategorySlug(categ.Slug),
+			calculations,
 		})
 	}
 }
@@ -86,7 +88,7 @@ func GetCategoryWithCalculationsBySlug(slug string) (c categoryWithCalculations,
 	if err != nil {
 		return c, errors.New("Category does not exist.")
 	}
-	calculations := GetCalculationsByCategorySlug(slug)
+	calculations, _ := GetCalculationsByCategorySlug(slug)
 	return categoryWithCalculations{category, calculations}, nil
 }
 

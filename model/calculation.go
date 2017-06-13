@@ -273,11 +273,14 @@ func GetCalculationBySlug(slug string) (c Calculation, err error) {
 	return c, errors.New("Calculation does not exist.")
 }
 
-func GetCalculationsByCategorySlug(slug string) (c []Calculation) {
+func GetCalculationsByCategorySlug(slug string) (c []Calculation, err error) {
 	for _, calculation := range CalculationData {
 		if calculation.Category.Slug == slug {
 			c = append(c, calculation)
 		}
 	}
-	return c
+	if len(c) == 0 {
+		return c, errors.New("No calculations returned, category slug must be incorrect.")
+	}
+	return c, err
 }
