@@ -1,9 +1,9 @@
-package service
+package services
 
 import (
 	"net/http"
 
-	"github.com/FriedPigeon/mathfever-go/service/math"
+	"github.com/FriedPigeon/mathfever-go/services/maths"
 )
 
 type ChangeByPercentageAPI struct {
@@ -31,7 +31,7 @@ func (i ChangeByPercentageAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.ChangeByPercentage(i.Number, i.Percentage)
+	return maths.ChangeByPercentage(i.Number, i.Percentage)
 }
 
 func (i NumberFromPercentageAPI) Execute() (s string, err error) {
@@ -39,7 +39,7 @@ func (i NumberFromPercentageAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.NumberFromPercentage(i.Percentage, i.Number)
+	return maths.NumberFromPercentage(i.Percentage, i.Number)
 }
 
 func (i PercentageChangeAPI) Execute() (s string, err error) {
@@ -47,7 +47,7 @@ func (i PercentageChangeAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.PercentageChange(i.Number, i.NewNumber)
+	return maths.PercentageChange(i.Number, i.NewNumber)
 }
 
 func (i PercentageFromNumberAPI) Execute() (s string, err error) {
@@ -55,7 +55,7 @@ func (i PercentageFromNumberAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.PercentageFromNumber(i.Number, i.TotalNumber)
+	return maths.PercentageFromNumber(i.Number, i.TotalNumber)
 }
 
 func (i ChangeByPercentageAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {

@@ -4,7 +4,7 @@ import (
 	"flag"
 	"net/http"
 
-	"github.com/FriedPigeon/mathfever-go/controller"
+	"github.com/FriedPigeon/mathfever-go/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -16,27 +16,25 @@ func init() {
 	// API Router
 	apiRouter := Router.PathPrefix("/api").Subrouter()
 
-	apiCtrl := controller.NewApiController()
-	apiRouter.HandleFunc("/", apiCtrl.GetCategories).Methods("GET")
-	apiRouter.HandleFunc("/{category}", apiCtrl.GetCategory).Methods("GET")
-	apiRouter.HandleFunc("/{category}/{calculation}", apiCtrl.GetCalculation).Methods("GET")
-	apiRouter.HandleFunc("/{category}/{calculation}", apiCtrl.DoCalculation).Methods("POST")
+	apiRouter.HandleFunc("/", handlers.GetCategories).Methods("GET")
+	apiRouter.HandleFunc("/{category}", handlers.GetCategory).Methods("GET")
+	apiRouter.HandleFunc("/{category}/{calculation}", handlers.GetCalculation).Methods("GET")
+	apiRouter.HandleFunc("/{category}/{calculation}", handlers.DoCalculation).Methods("POST")
 
-	apiRouter.NotFoundHandler = http.HandlerFunc(apiCtrl.NotFoundAPI)
+	apiRouter.NotFoundHandler = http.HandlerFunc(handlers.NotFoundAPI)
 
 	// Site Router
-	siteCtrl := controller.NewSiteController()
-	Router.HandleFunc("/", siteCtrl.Home).Methods("GET")
-	Router.HandleFunc("/about", siteCtrl.About).Methods("GET")
-	Router.HandleFunc("/help", siteCtrl.Help).Methods("GET")
-	Router.HandleFunc("/privacy", siteCtrl.Privacy).Methods("GET")
-	Router.HandleFunc("/terms", siteCtrl.Terms).Methods("GET")
-	Router.HandleFunc("/message-board", siteCtrl.MessageBoard).Methods("GET")
-	Router.HandleFunc("/networking/conversion-table", siteCtrl.ConversionTable).Methods("GET")
-	Router.HandleFunc("/{category}", siteCtrl.Category).Methods("GET")
-	Router.HandleFunc("/{category}/{calculation}", siteCtrl.Calculation).Methods("GET")
+	Router.HandleFunc("/", handlers.Home).Methods("GET")
+	Router.HandleFunc("/about", handlers.About).Methods("GET")
+	Router.HandleFunc("/help", handlers.Help).Methods("GET")
+	Router.HandleFunc("/privacy", handlers.Privacy).Methods("GET")
+	Router.HandleFunc("/terms", handlers.Terms).Methods("GET")
+	Router.HandleFunc("/message-board", handlers.MessageBoard).Methods("GET")
+	Router.HandleFunc("/networking/conversion-table", handlers.ConversionTable).Methods("GET")
+	Router.HandleFunc("/{category}", handlers.Category).Methods("GET")
+	Router.HandleFunc("/{category}/{calculation}", handlers.Calculation).Methods("GET")
 
-	Router.NotFoundHandler = http.HandlerFunc(siteCtrl.NotFound)
+	Router.NotFoundHandler = http.HandlerFunc(handlers.NotFound)
 
 	// Static Files Handler in Dev mode
 	boolPtr := flag.Bool("dev", false, "Use in development")

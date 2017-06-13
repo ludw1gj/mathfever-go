@@ -1,4 +1,4 @@
-package math
+package maths
 
 import (
 	"bytes"
@@ -12,13 +12,13 @@ func parseTemplate(filename string, data interface{}) (s string, err error) {
 	tpl, err := template.ParseFiles(filename)
 	if err != nil {
 		log.Println(err)
-		return s, errors.New("internal system error: parse template error")
+		return s, errors.New("internal system error: parse templates error")
 	}
 	var b bytes.Buffer
 	err = tpl.Execute(&b, data)
 	if err != nil {
 		log.Println(err)
-		return s, errors.New("internal system error: template execute error")
+		return s, errors.New("internal system error: templates execute error")
 	}
 	return b.String(), nil
 }

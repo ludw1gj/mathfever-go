@@ -1,4 +1,4 @@
-package controller
+package handlers
 
 import (
 	"encoding/json"
@@ -6,29 +6,23 @@ import (
 	"net/http"
 
 	"github.com/FriedPigeon/mathfever-go/common"
-	"github.com/FriedPigeon/mathfever-go/model"
+	"github.com/FriedPigeon/mathfever-go/models"
 	"github.com/gorilla/mux"
 )
 
-type apiController struct{}
-
-func NewApiController() *apiController {
-	return &apiController{}
-}
-
-func (apiController) GetCategories(w http.ResponseWriter, r *http.Request) {
+func GetCategories(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	data := model.GetAllCategoriesWithCalculations()
+	data := models.GetAllCategoriesWithCalculations()
 	json.NewEncoder(w).Encode(data)
 }
 
-func (apiController) GetCategory(w http.ResponseWriter, r *http.Request) {
+func GetCategory(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	categorySlug := mux.Vars(r)["category"]
 	fmt.Println(categorySlug)
-	data, err := model.GetCategoryWithCalculationsBySlug(categorySlug)
+	data, err := models.GetCategoryWithCalculationsBySlug(categorySlug)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
@@ -37,11 +31,11 @@ func (apiController) GetCategory(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(data)
 }
 
-func (apiController) GetCalculation(w http.ResponseWriter, r *http.Request) {
+func GetCalculation(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	calculationSlug := mux.Vars(r)["calculation"]
-	calculation, err := model.GetCalculationBySlug(calculationSlug)
+	calculation, err := models.GetCalculationBySlug(calculationSlug)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
 		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
@@ -50,11 +44,11 @@ func (apiController) GetCalculation(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(calculation)
 }
 
-func (apiController) DoCalculation(w http.ResponseWriter, r *http.Request) {
+func DoCalculation(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	calculationSlug := mux.Vars(r)["calculation"]
-	calculation, err := model.GetCalculationBySlug(calculationSlug)
+	calculation, err := models.GetCalculationBySlug(calculationSlug)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(common.ErrorJson{err.Error()})
@@ -63,7 +57,7 @@ func (apiController) DoCalculation(w http.ResponseWriter, r *http.Request) {
 	calculation.Math.HandleAPI(w, r)
 }
 
-func (apiController) NotFoundAPI(w http.ResponseWriter, r *http.Request) {
+func NotFoundAPI(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNotFound)
 

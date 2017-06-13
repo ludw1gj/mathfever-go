@@ -1,9 +1,9 @@
-package service
+package services
 
 import (
 	"net/http"
 
-	"github.com/FriedPigeon/mathfever-go/service/math"
+	"github.com/FriedPigeon/mathfever-go/services/maths"
 )
 
 type IsPrimeAPI struct {
@@ -25,7 +25,7 @@ func (i IsPrimeAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.IsPrime(i.Number), nil
+	return maths.IsPrime(i.Number), nil
 }
 
 func (i HighestCommonFactorAPI) Execute() (s string, err error) {
@@ -33,7 +33,7 @@ func (i HighestCommonFactorAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.HighestCommonFactor(i.Num1, i.Num2), nil
+	return maths.HighestCommonFactor(i.Num1, i.Num2), nil
 }
 
 func (i LowestCommonMultipleAPI) Execute() (s string, err error) {
@@ -41,7 +41,7 @@ func (i LowestCommonMultipleAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.LowestCommonMultiple(i.Num1, i.Num2), nil
+	return maths.LowestCommonMultiple(i.Num1, i.Num2), nil
 }
 
 func (i IsPrimeAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {

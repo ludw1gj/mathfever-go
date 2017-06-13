@@ -1,4 +1,4 @@
-package controller
+package templates
 
 import (
 	"html/template"
@@ -6,22 +6,24 @@ import (
 	"net/http"
 	"path/filepath"
 
+	"bytes"
+
 	"github.com/oxtoacart/bpool"
 )
 
 var (
 	tmplBufPool *bpool.BufferPool
 
-	homeTpl,
-	aboutTpl,
-	helpTpl,
-	privacyTpl,
-	termsTpl,
-	messageBoardTpl,
-	conversionTableTpl,
-	categoryTpl,
-	calculationTpl,
-	notFoundTpl,
+	HomeTpl,
+	AboutTpl,
+	HelpTpl,
+	PrivacyTpl,
+	TermsTpl,
+	MessageBoardTpl,
+	ConversionTableTpl,
+	CategoryTpl,
+	CalculationTpl,
+	NotFoundTpl,
 	serverErrorTpl *template.Template
 )
 
@@ -38,65 +40,65 @@ type templateLoader struct {
 }
 
 func loadTemplates() {
-	templateDir := filepath.Join("template", "site")
+	templateDir := filepath.Join("templates", "site")
 
 	siteTpls := []templateLoader{
 		{
-			&homeTpl,
+			&HomeTpl,
 			"home",
 			"home.gohtml",
 			"",
 		},
 		{
-			&aboutTpl,
+			&AboutTpl,
 			"about",
 			"about.gohtml",
 			"",
 		},
 		{
-			&helpTpl,
+			&HelpTpl,
 			"help",
 			"help.gohtml",
 			"",
 		},
 		{
-			&privacyTpl,
+			&PrivacyTpl,
 			"privacy",
 			"privacy.gohtml",
 			"",
 		},
 		{
-			&termsTpl,
+			&TermsTpl,
 			"terms",
 			"terms.gohtml",
 			"",
 		},
 		{
-			&messageBoardTpl,
+			&MessageBoardTpl,
 			"message_board",
 			"message_board.gohtml",
 			"",
 		},
 		{
-			&conversionTableTpl,
+			&ConversionTableTpl,
 			"conversion_table",
 			"conversion_table.gohtml",
 			"",
 		},
 		{
-			&categoryTpl,
+			&CategoryTpl,
 			"category",
 			"category.gohtml",
 			"",
 		},
 		{
-			&calculationTpl,
+			&CalculationTpl,
 			"calculation",
 			"calculation.gohtml",
 			"",
 		},
 		{
-			&notFoundTpl,
+			&NotFoundTpl,
 			"not_found",
 			"not_found.gohtml",
 			"",
@@ -121,7 +123,7 @@ func loadTemplates() {
 	}
 }
 
-func renderTpl(w http.ResponseWriter, r *http.Request, tmpl *template.Template, name string, data interface{}) {
+func RenderTpl(w http.ResponseWriter, r *http.Request, tmpl *template.Template, name string, data interface{}) {
 	buf := tmplBufPool.Get()
 	defer tmplBufPool.Put(buf)
 
@@ -134,4 +136,17 @@ func renderTpl(w http.ResponseWriter, r *http.Request, tmpl *template.Template, 
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	buf.WriteTo(w)
+}
+
+func serverError(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusInternalServerError)
+
+	var buf bytes.Buffer
+	err := serverErrorTpl.ExecuteTemplate(&buf, "base.gohtml", nil)
+	if err != nil {
+		w.Write([]byte("500: Server error"))
+		log.Printf("StatusInternalServerError templates failed to execute: %s", err.Error())
+		return
+	}
+	w.Write(buf.Bytes())
 }

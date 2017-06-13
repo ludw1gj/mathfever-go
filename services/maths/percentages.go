@@ -1,4 +1,4 @@
-package math
+package maths
 
 import "path/filepath"
 
@@ -37,7 +37,7 @@ func ChangeByPercentage(n float64, p float64) (string, error) {
 		noun,
 		round(answer, .5, 2),
 	}
-	tmplFile := filepath.Join("template", "math", "percentages", "change_by_percentage.gohtml")
+	tmplFile := filepath.Join("templates", "maths", "percentages", "change_by_percentage.gohtml")
 	return parseTemplate(tmplFile, data)
 }
 
@@ -60,7 +60,7 @@ func NumberFromPercentage(p float64, n float64) (string, error) {
 		round(divided, .5, 2),
 		round(answer, .5, 2),
 	}
-	tmplFile := filepath.Join("template", "math", "percentages", "number_from_percentage.gohtml")
+	tmplFile := filepath.Join("templates", "maths", "percentages", "number_from_percentage.gohtml")
 	return parseTemplate(tmplFile, data)
 }
 
@@ -86,7 +86,7 @@ func PercentageChange(n float64, newN float64) (string, error) {
 		round(decimalisedPercentage, .5, 2),
 		round(answer, .5, 2),
 	}
-	tmplFile := filepath.Join("template", "math", "percentages", "percentage_change.gohtml")
+	tmplFile := filepath.Join("templates", "maths", "percentages", "percentage_change.gohtml")
 	return parseTemplate(tmplFile, data)
 }
 
@@ -109,6 +109,6 @@ func PercentageFromNumber(n float64, totalN float64) (string, error) {
 		round(decimalisedPercentage, .5, 2),
 		round(answer, .5, 2),
 	}
-	tmplFile := filepath.Join("template", "math", "percentages", "percentage_from_number.gohtml")
+	tmplFile := filepath.Join("templates", "maths", "percentages", "percentage_from_number.gohtml")
 	return parseTemplate(tmplFile, data)
 }

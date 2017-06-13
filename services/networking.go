@@ -1,9 +1,9 @@
-package service
+package services
 
 import (
 	"net/http"
 
-	"github.com/FriedPigeon/mathfever-go/service/math"
+	"github.com/FriedPigeon/mathfever-go/services/maths"
 )
 
 type BinaryToDecimalAPI struct {
@@ -35,7 +35,7 @@ func (i BinaryToDecimalAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.BinaryToDecimal(i.Binary)
+	return maths.BinaryToDecimal(i.Binary)
 }
 
 func (i BinaryToHexadecimalAPI) Execute() (s string, err error) {
@@ -43,7 +43,7 @@ func (i BinaryToHexadecimalAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.BinaryToHexadecimal(i.Binary)
+	return maths.BinaryToHexadecimal(i.Binary)
 }
 
 func (i DecimalToBinaryAPI) Execute() (s string, err error) {
@@ -51,7 +51,7 @@ func (i DecimalToBinaryAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.DecimalToBinary(i.Decimal)
+	return maths.DecimalToBinary(i.Decimal)
 }
 
 func (i DecimalToHexadecimalAPI) Execute() (s string, err error) {
@@ -59,7 +59,7 @@ func (i DecimalToHexadecimalAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.DecimalToHexadecimal(i.Decimal)
+	return maths.DecimalToHexadecimal(i.Decimal)
 }
 
 func (i HexadecimalToBinaryAPI) Execute() (s string, err error) {
@@ -67,7 +67,7 @@ func (i HexadecimalToBinaryAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.HexadecimalToBinary(i.Hexadecimal)
+	return maths.HexadecimalToBinary(i.Hexadecimal)
 }
 
 func (i HexadecimalToDecimalAPI) Execute() (s string, err error) {
@@ -75,7 +75,7 @@ func (i HexadecimalToDecimalAPI) Execute() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.HexadecimalToDecimal(i.Hexadecimal)
+	return maths.HexadecimalToDecimal(i.Hexadecimal)
 }
 
 func (i BinaryToDecimalAPI) HandleAPI(w http.ResponseWriter, r *http.Request) {
