@@ -280,7 +280,7 @@ func GetCalculationsByCategorySlug(slug string) (c []Calculation, err error) {
 		}
 	}
 	if len(c) == 0 {
-		return c, errors.New("No calculations returned, category slug must be incorrect.")
+		return c, errors.New("No calculations found, category slug may be incorrect.")
 	}
 	return c, err
 }
