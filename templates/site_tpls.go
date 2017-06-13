@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	tmplBufPool *bpool.BufferPool
+	tplBufPool *bpool.BufferPool
 
 	HomeTpl,
 	AboutTpl,
@@ -28,7 +28,7 @@ var (
 )
 
 func init() {
-	tmplBufPool = bpool.NewBufferPool(32)
+	tplBufPool = bpool.NewBufferPool(32)
 	loadTemplates()
 }
 
@@ -123,11 +123,11 @@ func loadTemplates() {
 	}
 }
 
-func RenderTpl(w http.ResponseWriter, r *http.Request, tmpl *template.Template, name string, data interface{}) {
-	buf := tmplBufPool.Get()
-	defer tmplBufPool.Put(buf)
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tpl *template.Template, name string, data interface{}) {
+	buf := tplBufPool.Get()
+	defer tplBufPool.Put(buf)
 
-	err := tmpl.ExecuteTemplate(buf, name, data)
+	err := tpl.ExecuteTemplate(buf, name, data)
 	if err != nil {
 		serverError(w, r)
 		log.Println(err.Error())

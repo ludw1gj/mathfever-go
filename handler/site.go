@@ -9,31 +9,31 @@ import (
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	templates.RenderTpl(w, r, templates.HomeTpl, "base.gohtml", models.GetAllCategoriesWithCalculations())
+	templates.RenderTemplate(w, r, templates.HomeTpl, "base.gohtml", models.GetAllCategoriesWithCalculations())
 }
 
 func About(w http.ResponseWriter, r *http.Request) {
-	templates.RenderTpl(w, r, templates.AboutTpl, "base.gohtml", nil)
+	templates.RenderTemplate(w, r, templates.AboutTpl, "base.gohtml", nil)
 }
 
 func Help(w http.ResponseWriter, r *http.Request) {
-	templates.RenderTpl(w, r, templates.HelpTpl, "base.gohtml", nil)
+	templates.RenderTemplate(w, r, templates.HelpTpl, "base.gohtml", nil)
 }
 
 func Privacy(w http.ResponseWriter, r *http.Request) {
-	templates.RenderTpl(w, r, templates.PrivacyTpl, "base.gohtml", nil)
+	templates.RenderTemplate(w, r, templates.PrivacyTpl, "base.gohtml", nil)
 }
 
 func Terms(w http.ResponseWriter, r *http.Request) {
-	templates.RenderTpl(w, r, templates.TermsTpl, "base.gohtml", nil)
+	templates.RenderTemplate(w, r, templates.TermsTpl, "base.gohtml", nil)
 }
 
 func MessageBoard(w http.ResponseWriter, r *http.Request) {
-	templates.RenderTpl(w, r, templates.MessageBoardTpl, "base.gohtml", nil)
+	templates.RenderTemplate(w, r, templates.MessageBoardTpl, "base.gohtml", nil)
 }
 
 func ConversionTable(w http.ResponseWriter, r *http.Request) {
-	templates.RenderTpl(w, r, templates.ConversionTableTpl, "base.gohtml", nil)
+	templates.RenderTemplate(w, r, templates.ConversionTableTpl, "base.gohtml", nil)
 }
 
 func CategoryPage(w http.ResponseWriter, r *http.Request) {
@@ -43,7 +43,7 @@ func CategoryPage(w http.ResponseWriter, r *http.Request) {
 		NotFound(w, r)
 		return
 	}
-	templates.RenderTpl(w, r, templates.CategoryTpl, "base.gohtml", data)
+	templates.RenderTemplate(w, r, templates.CategoryTpl, "base.gohtml", data)
 }
 
 func CalculationPage(w http.ResponseWriter, r *http.Request) {
@@ -55,7 +55,7 @@ func CalculationPage(w http.ResponseWriter, r *http.Request) {
 	}
 	category, _ := models.GetCategoryBySlug(calculation.Category)
 
-	templates.RenderTpl(w, r, templates.CalculationTpl, "base.gohtml", struct {
+	templates.RenderTemplate(w, r, templates.CalculationTpl, "base.gohtml", struct {
 		Calculation models.Calculation
 		Category    models.Category
 	}{
@@ -66,5 +66,5 @@ func CalculationPage(w http.ResponseWriter, r *http.Request) {
 
 func NotFound(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
-	templates.RenderTpl(w, r, templates.NotFoundTpl, "base.gohtml", nil)
+	templates.RenderTemplate(w, r, templates.NotFoundTpl, "base.gohtml", nil)
 }
