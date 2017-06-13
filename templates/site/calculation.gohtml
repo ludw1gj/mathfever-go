@@ -7,7 +7,7 @@
 {{define "content" -}}
 <div class="calculation-page-heading">
     <!-- Main Heading -->
-    <h3><a href="{{.Category.URL}}">{{.Category.Name}}:</a></h3>
+    <h3><a href="{{genURL .Category.Name}}">{{.Category.Name}}:</a></h3>
     <h2 id="main-heading">{{.Calculation.Name}}</h2>
 </div>
 

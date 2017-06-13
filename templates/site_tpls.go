@@ -118,7 +118,7 @@ func loadTemplates() {
 	tpls = append(tpls, siteTpls...)
 
 	for _, tpl := range tpls {
-		t := template.Must(template.New(tpl.name).ParseFiles(tpl.baseFile, filepath.Join(templateDir, tpl.file)))
+		t := template.Must(template.New(tpl.name).Funcs(funcMap).ParseFiles(tpl.baseFile, filepath.Join(templateDir, tpl.file)))
 		*tpl.tpl = t
 	}
 }

@@ -2,12 +2,12 @@ package models
 
 import (
 	"errors"
+
+	"github.com/FriedPigeon/mathfever-go/common"
 )
 
 type Category struct {
-	Slug        string `json:"slug"`
 	Name        string `json:"name"`
-	URL         string `json:"url"`
 	ImageURL    string `json:"image_url"`
 	Description string `json:"description"`
 }
@@ -19,41 +19,33 @@ type categoryWithCalculations struct {
 
 var (
 	networking = Category{
-		"networking",
 		"Networking",
-		"/networking",
 		"/assets/resources/images/category/networking.jpg",
 		"Calculations that you might use for Networking/Computer Science: Binary to Decimal, Binary " +
 			"to Hexadecimal, Decimal to Binary, Decimal to Hexadecimal, Hexadecimal to Binary, and " +
 			"Hexadecimal to Decimal.",
 	}
 	numbers = Category{
-		"numbers",
 		"Primes and Factors",
-		"/numbers",
 		"/assets/resources/images/category/addition.jpg",
 		"Calculations about numbers! Find Highest Common Factor, find Lowest Common Multiple, and " +
 			"figuring out Prime Numbers.",
 	}
 	percentages = Category{
-		"percentages",
 		"Percentages",
-		"/percentages",
 		"/assets/resources/images/category/algebra.jpg",
 		"Calculations for percentages! Find the value from a percentage, find a percentage from a " +
 			"value, or find the percentage change between two values.",
 	}
 	tsa = Category{
-		"tsa",
 		"Total Surface Area",
-		"/tsa",
 		"/assets/resources/images/category/geometry.jpg",
 		"Calculations that you might use for Total Surface Area: Pythagorean Theorem (also known as " +
 			"Pythagoras's Theorem), Total Surface Area of Cone, Total Surface Area of Cube, Total Surface " +
 			"Area of Cylinder, Total Surface Area of Rectangular Prism, Total Surface Area of Sphere, and " +
 			"Total Surface Area of Square Based Triangle.",
 	}
-	CategoryData = []Category{
+	categoryData = []Category{
 		networking,
 		numbers,
 		percentages,
@@ -64,23 +56,22 @@ var (
 
 func init() {
 	// populate categories data
-	for _, categ := range CategoryData {
-		calculations, _ := GetCalculationsByCategorySlug(categ.Slug)
+	for _, category := range GetAllCategories() {
+		calculations, _ := GetCalculationsByCategoryName(category.Name)
 
 		categoriesData = append(categoriesData, categoryWithCalculations{
-			categ,
+			category,
 			calculations,
 		})
 	}
 }
 
-func GetCategoryBySlug(slug string) (c Category, err error) {
-	for _, category := range CategoryData {
-		if category.Slug == slug {
-			return category, nil
-		}
-	}
-	return c, errors.New("Category does not exist.")
+func GetAllCategories() []Category {
+	return categoryData
+}
+
+func GetAllCategoriesWithCalculations() []categoryWithCalculations {
+	return categoriesData
 }
 
 func GetCategoryWithCalculationsBySlug(slug string) (c categoryWithCalculations, err error) {
@@ -92,6 +83,11 @@ func GetCategoryWithCalculationsBySlug(slug string) (c categoryWithCalculations,
 	return categoryWithCalculations{category, calculations}, nil
 }
 
-func GetAllCategoriesWithCalculations() []categoryWithCalculations {
-	return categoriesData
+func GetCategoryBySlug(slug string) (c Category, err error) {
+	for _, category := range GetAllCategories() {
+		if common.GenSlug(category.Name) == slug {
+			return category, nil
+		}
+	}
+	return c, errors.New("Category does not exist.")
 }

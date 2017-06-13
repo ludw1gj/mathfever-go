@@ -12,7 +12,7 @@
         <div class="home-card--title mdl-card__title"
              style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{.Category.ImageURL}}) center/cover">
             <h6 class="mdl-card__title-text">
-                <a href="{{.Category.URL}}">{{.Category.Name}}</a>
+                <a href="{{genURL .Category.Name}}">{{.Category.Name}}</a>
             </h6>
         </div>
 
@@ -21,7 +21,7 @@
             <ul>
                 {{range .Calculations -}}
                 <li>
-                    <a href="{{.URL}}">{{.Name}}</a>
+                    <a href="{{genURL .Category.Name .Name}}">{{.Name}}</a>
                 </li>
                 {{- end}}
             </ul>

@@ -14,7 +14,7 @@
         <!-- Links -->
         <ul class="category-calc-ul">
             {{range .Calculations -}}
-            <li><a class="no-text-decoration" href="{{.URL}}">{{.Name}}</a></li>
+            <li><a class="no-text-decoration" href="{{genURL .Category.Name .Name}}">{{.Name}}</a></li>
             {{- end}}
         </ul>
 

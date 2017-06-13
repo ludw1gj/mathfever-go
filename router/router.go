@@ -15,7 +15,6 @@ func init() {
 
 	// API Router
 	apiRouter := Router.PathPrefix("/api").Subrouter()
-
 	apiRouter.HandleFunc("/", handler.GetCategories).Methods("GET")
 	apiRouter.HandleFunc("/{category}", handler.GetCategory).Methods("GET")
 	apiRouter.HandleFunc("/{category}/{calculation}", handler.GetCalculation).Methods("GET")
