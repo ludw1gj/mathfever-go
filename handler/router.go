@@ -36,6 +36,7 @@ func init() {
 	boolPtr := flag.Bool("dev", false, "Use in development")
 	flag.Parse()
 	if *boolPtr {
-		Router.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets"))))
+		fs := http.FileServer(http.Dir("./assets"))
+		Router.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", fs))
 	}
 }
