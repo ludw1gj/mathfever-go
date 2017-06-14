@@ -49,7 +49,7 @@ func calculationPage(w http.ResponseWriter, r *http.Request) {
 	calculationSlug := mux.Vars(r)["calculation"]
 	calculation, err := models.GetCalculationBySlug(calculationSlug)
 	if err != nil {
-		notFound(w, r)
+		notFound(w, nil)
 		return
 	}
 	renderTemplate(w, calculationTpl, "base", calculation)
