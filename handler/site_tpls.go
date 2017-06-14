@@ -123,13 +123,13 @@ func loadTemplates() {
 	}
 }
 
-func renderTemplate(w http.ResponseWriter, r *http.Request, tpl *template.Template, name string, data interface{}) {
+func renderTemplate(w http.ResponseWriter, tpl *template.Template, name string, data interface{}) {
 	buf := tplBufPool.Get()
 	defer tplBufPool.Put(buf)
 
-	err := tpl.ExecuteTemplate(buf, name, data)
+	err := tpl.ExecuteTemplate(buf, name+".gohtml", data)
 	if err != nil {
-		serverError(w, r)
+		serverError(w)
 		log.Println(err.Error())
 		return
 	}
@@ -138,7 +138,7 @@ func renderTemplate(w http.ResponseWriter, r *http.Request, tpl *template.Templa
 	buf.WriteTo(w)
 }
 
-func serverError(w http.ResponseWriter, r *http.Request) {
+func serverError(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusInternalServerError)
 
 	var buf bytes.Buffer

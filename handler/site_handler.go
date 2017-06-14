@@ -7,32 +7,32 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, homeTpl, "base.gohtml", models.GetAllCategoriesWithCalculations())
+func home(w http.ResponseWriter, _ *http.Request) {
+	renderTemplate(w, homeTpl, "base", models.GetAllCategoriesWithCalculations())
 }
 
-func about(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, aboutTpl, "base.gohtml", nil)
+func about(w http.ResponseWriter, _ *http.Request) {
+	renderTemplate(w, aboutTpl, "base", nil)
 }
 
-func help(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, helpTpl, "base.gohtml", nil)
+func help(w http.ResponseWriter, _ *http.Request) {
+	renderTemplate(w, helpTpl, "base", nil)
 }
 
-func privacy(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, privacyTpl, "base.gohtml", nil)
+func privacy(w http.ResponseWriter, _ *http.Request) {
+	renderTemplate(w, privacyTpl, "base", nil)
 }
 
-func terms(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, termsTpl, "base.gohtml", nil)
+func terms(w http.ResponseWriter, _ *http.Request) {
+	renderTemplate(w, termsTpl, "base", nil)
 }
 
-func messageBoard(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, messageBoardTpl, "base.gohtml", nil)
+func messageBoard(w http.ResponseWriter, _ *http.Request) {
+	renderTemplate(w, messageBoardTpl, "base", nil)
 }
 
-func conversionTable(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, r, conversionTableTpl, "base.gohtml", nil)
+func conversionTable(w http.ResponseWriter, _ *http.Request) {
+	renderTemplate(w, conversionTableTpl, "base", nil)
 }
 
 func categoryPage(w http.ResponseWriter, r *http.Request) {
@@ -42,7 +42,7 @@ func categoryPage(w http.ResponseWriter, r *http.Request) {
 		notFound(w, r)
 		return
 	}
-	renderTemplate(w, r, categoryTpl, "base.gohtml", data)
+	renderTemplate(w, categoryTpl, "base", data)
 }
 
 func calculationPage(w http.ResponseWriter, r *http.Request) {
@@ -52,10 +52,10 @@ func calculationPage(w http.ResponseWriter, r *http.Request) {
 		notFound(w, r)
 		return
 	}
-	renderTemplate(w, r, calculationTpl, "base.gohtml", calculation)
+	renderTemplate(w, calculationTpl, "base", calculation)
 }
 
-func notFound(w http.ResponseWriter, r *http.Request) {
+func notFound(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
-	renderTemplate(w, r, notFoundTpl, "base.gohtml", nil)
+	renderTemplate(w, notFoundTpl, "base", nil)
 }
