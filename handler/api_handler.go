@@ -19,7 +19,7 @@ type errorJson struct {
 	Error string `json:"error"`
 }
 
-func getCategories(w http.ResponseWriter, r *http.Request) {
+func getCategories(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	data := models.GetAllCategoriesWithCalculations()
@@ -93,7 +93,7 @@ func doCalculation(w http.ResponseWriter, r *http.Request) {
 	}{s})
 }
 
-func notFoundAPI(w http.ResponseWriter, r *http.Request) {
+func notFoundAPI(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNotFound)
 
