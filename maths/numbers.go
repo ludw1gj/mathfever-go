@@ -32,7 +32,8 @@ func IsPrime(n int) string {
 		fmt.Fprintf(&buf, "<p>%d is a prime number, because its only whole-number factors are 1 and itself</p>", n)
 	}
 
-	fmt.Fprint(&buf, `<h6>Helpful Tips:</h6>
+	fmt.Fprint(&buf, `
+	<h6>Helpful Tips:</h6>
 	<p>Prime numbers are numbers whose only whole-number factors are 1 and itself.</p>
 	<p>To determine if a number (n) is a prime number, here are some rules:</p>
 	<ul>
@@ -52,13 +53,19 @@ func IsPrime(n int) string {
 
 func findPrimeFactors(n int) (primeFactors []int, table bytes.Buffer, proof bytes.Buffer, factorFrequency map[int]int) {
 	originalN := n
-	fmt.Fprint(&table, `<table class="mdl-data-table mdl-js-data-table"><tbody>`)
+	fmt.Fprint(&table, `
+	<table class="mdl-data-table mdl-js-data-table">
+	<tbody>`)
 	for i := 2; i*i <= n; {
 		if n%i == 0 {
 			primeFactors = append(primeFactors, i)
-			fmt.Fprintf(&table, `<tr><td>%d | %d</td>
-						    <td class="column-wrap mdl-data-table__cell--non-numeric">%d is a factor of %d</td>
-						    <td class="column-wrap mdl-data-table__cell--non-numeric">%d divided by %d is %d</td></tr>`, n, i, i, n, n, i, n/i)
+			fmt.Fprintf(&table, `
+			<tr>
+				<td>%d | %d</td>
+				<td class="column-wrap mdl-data-table__cell--non-numeric">%d is a factor of %d</td>
+				<td class="column-wrap mdl-data-table__cell--non-numeric">%d divided by %d is %d</td>
+			</tr>`, n, i, i, n, n, i, n/i)
+
 			n /= i
 		} else {
 			i++
@@ -66,11 +73,20 @@ func findPrimeFactors(n int) (primeFactors []int, table bytes.Buffer, proof byte
 	}
 	if n > 1 {
 		primeFactors = append(primeFactors, n)
-		fmt.Fprintf(&table, `<tr><td>%d | %d</td>
-					    <td class="column-wrap mdl-data-table__cell--non-numeric">%d is a factor of %d</td>
-					    <td class="column-wrap mdl-data-table__cell--non-numeric">%d divided by %d is %d</td></tr>`, n, n, n, n, n, n, 1)
+		fmt.Fprintf(&table, `
+		<tr>
+		<td>%d | %d</td>
+		<td class="column-wrap mdl-data-table__cell--non-numeric">%d is a factor of %d</td>
+		<td class="column-wrap mdl-data-table__cell--non-numeric">%d divided by %d is %d</td>
+		</tr>`, n, n, n, n, n, n, 1)
 	}
-	fmt.Fprint(&table, `<tr><td>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td><td></td></tr> </tbody></table>`)
+	fmt.Fprint(&table, `
+	<tr>
+	<td>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	<td></td>
+	<td></td>
+	</tr>
+	</tbody></table>`)
 
 	for _, factor := range primeFactors {
 		fmt.Fprintf(&proof, "%d &times ", factor)
@@ -124,7 +140,6 @@ func HighestCommonFactor(n1 int, n2 int) string {
 	}
 
 	fmt.Fprintf(&buf, "<p>Therefore the highest common factor of %d and %d is:<br>%d</p>", n1, n2, answer)
-
 	return buf.String()
 }
 
@@ -166,6 +181,5 @@ func LowestCommonMultiple(n1 int, n2 int) string {
 	fmt.Fprintf(&buf, "= %d</p>", answer)
 
 	fmt.Fprintf(&buf, "<p>Therefore the lowest common multiple of %d and %d is:<br>%d</p>", n1, n2, answer)
-
 	return buf.String()
 }
