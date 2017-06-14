@@ -5,8 +5,11 @@ import (
 	"errors"
 	"log"
 	"math"
+	"path/filepath"
 	"text/template"
 )
+
+var tplDir = filepath.Join("templates", "maths")
 
 func parseTemplate(filename string, data interface{}) (s string, err error) {
 	tpl, err := template.ParseFiles(filename)

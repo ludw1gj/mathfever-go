@@ -5,6 +5,8 @@ import (
 	"path/filepath"
 )
 
+var tsaTplDir = filepath.Join(tplDir, "tsa")
+
 func TSAPythagoreanTheorem(a float64, b float64) (string, error) {
 	/*
 		Use the Pythagorean Theorem to find side lengths (a or b), or the hypotenuse (c) of a right-angle triangle.
@@ -40,7 +42,7 @@ func TSAPythagoreanTheorem(a float64, b float64) (string, error) {
 		round(ab, .5, 2),
 		round(answer, .5, 2),
 	}
-	tplFile := filepath.Join("templates", "maths", "tsa", "pythagorean_theorem.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "pythagorean_theorem.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -69,7 +71,7 @@ func TsaCone(radius float64, slantHeight float64) (string, error) {
 		round(curvedSurfaceArea, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join("templates", "maths", "tsa", "tsa_cone.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "tsa_cone.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -90,7 +92,7 @@ func TsaCube(length float64) (string, error) {
 		round(lengthSqr, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join("templates", "maths", "tsa", "tsa_cube.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "tsa_cube.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -124,7 +126,7 @@ func TsaCylinder(radius float64, height float64) (string, error) {
 		round(curvedSurfaceArea, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join("templates", "maths", "tsa", "tsa_cylinder.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "tsa_cylinder.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -149,7 +151,7 @@ func TsaRectangularPrism(height float64, length float64, width float64) (string,
 		round(add, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join("templates", "maths", "tsa", "tsa_rectangular_prism.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "tsa_rectangular_prism.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -167,7 +169,7 @@ func TsaSphere(radius float64) (string, error) {
 		round(radius, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join("templates", "maths", "tsa", "tsa_sphere.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "tsa_sphere.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -195,6 +197,6 @@ func TsaSquareBaseTriangle(baseLength float64, height float64) (string, error) {
 		round(fourTrianglesArea, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join("templates", "maths", "tsa", "tsa_square_base_triangle.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "tsa_square_base_triangle.gohtml")
 	return parseTemplate(tplFile, data)
 }

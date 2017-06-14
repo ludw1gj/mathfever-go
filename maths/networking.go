@@ -9,6 +9,8 @@ import (
 	"strconv"
 )
 
+var networkingTplDir = filepath.Join(tplDir, "networking")
+
 func BinaryToDecimal(binary string) (s string, err error) {
 	lenBinary := len(binary)
 	n := lenBinary - 1
@@ -48,7 +50,7 @@ func BinaryToDecimal(binary string) (s string, err error) {
 		proofSteps,
 		answer,
 	}
-	tplFile := filepath.Join("templates", "maths", "networking", "binary_to_decimal.gohtml")
+	tplFile := filepath.Join(networkingTplDir, "binary_to_decimal.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -92,7 +94,7 @@ func BinaryToHexadecimal(binary string) (s string, err error) {
 		proof.String(),
 		answer.String(),
 	}
-	tplFile := filepath.Join("templates", "maths", "networking", "binary_to_hexadecimal.gohtml")
+	tplFile := filepath.Join(networkingTplDir, "binary_to_hexadecimal.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -150,7 +152,7 @@ func decimalToBinaryHexadecimal(decimal int, base int) (s string, err error) {
 		remaindersHex,
 		answer.String(),
 	}
-	tplFile := filepath.Join("templates", "maths", "networking", "decimal_to_binary_hexadecimal.gohtml")
+	tplFile := filepath.Join(networkingTplDir, "decimal_to_binary_hexadecimal.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -193,7 +195,7 @@ func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 		binaries.String(),
 		answer,
 	}
-	tplFile := filepath.Join("templates", "maths", "networking", "hexadecimal_to_binary.gohtml")
+	tplFile := filepath.Join(networkingTplDir, "hexadecimal_to_binary.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -240,6 +242,6 @@ func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
 		proof2,
 		result,
 	}
-	tplFile := filepath.Join("templates", "maths", "networking", "hexadecimal_to_decimal.gohtml")
+	tplFile := filepath.Join(networkingTplDir, "hexadecimal_to_decimal.gohtml")
 	return parseTemplate(tplFile, data)
 }
