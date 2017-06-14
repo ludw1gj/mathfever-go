@@ -39,7 +39,7 @@ func categoryPage(w http.ResponseWriter, r *http.Request) {
 	categorySlug := mux.Vars(r)["category"]
 	data, err := models.GetCategoryWithCalculationsBySlug(categorySlug)
 	if err != nil {
-		notFound(w, r)
+		notFound(w, nil)
 		return
 	}
 	renderTemplate(w, categoryTpl, "base", data)
