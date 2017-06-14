@@ -12,13 +12,13 @@ import (
 	"github.com/FriedPigeon/mathfever-go/services"
 )
 
-type Calculation struct {
+type calculation struct {
 	Name        string           `json:"name"`
 	Description string           `json:"description"`
 	InputInfo   []inputInfo      `json:"input_info"`
 	Example     template.HTML    `json:"example"`
 	Math        services.MathAPI `json:"-"`
-	Category    *Category        `json:"-"`
+	Category    *category        `json:"-"`
 }
 
 type inputInfo struct {
@@ -27,7 +27,7 @@ type inputInfo struct {
 }
 
 var (
-	calculationData = []Calculation{
+	calculationData = []calculation{
 		// Networking
 		{
 			"Binary to Decimal",
@@ -224,23 +224,23 @@ func genExample(s string, err error) template.HTML {
 	return template.HTML(s)
 }
 
-func GetAllCalculations() []Calculation {
+func GetAllCalculations() []calculation {
 	return calculationData
 }
 
-func GetCalculationBySlug(slug string) (c Calculation, err error) {
-	for _, calculation := range GetAllCalculations() {
-		if common.GenSlug(calculation.Name) == slug {
-			return calculation, nil
+func GetCalculationBySlug(slug string) (c calculation, err error) {
+	for _, calc := range GetAllCalculations() {
+		if common.GenSlug(calc.Name) == slug {
+			return calc, nil
 		}
 	}
 	return c, errors.New("Calculation does not exist.")
 }
 
-func GetCalculationsByCategoryName(categoryName string) (c []Calculation, err error) {
-	for _, calculation := range GetAllCalculations() {
-		if calculation.Category.Name == categoryName {
-			c = append(c, calculation)
+func GetCalculationsByCategoryName(categoryName string) (c []calculation, err error) {
+	for _, calc := range GetAllCalculations() {
+		if calc.Category.Name == categoryName {
+			c = append(c, calc)
 		}
 	}
 	if len(c) == 0 {
@@ -249,10 +249,10 @@ func GetCalculationsByCategoryName(categoryName string) (c []Calculation, err er
 	return c, err
 }
 
-func GetCalculationsByCategorySlug(categorySlug string) (c []Calculation, err error) {
-	for _, calculation := range GetAllCalculations() {
-		if common.GenSlug(calculation.Category.Name) == categorySlug {
-			c = append(c, calculation)
+func GetCalculationsByCategorySlug(categorySlug string) (c []calculation, err error) {
+	for _, calc := range GetAllCalculations() {
+		if common.GenSlug(calc.Category.Name) == categorySlug {
+			c = append(c, calc)
 		}
 	}
 	if len(c) == 0 {

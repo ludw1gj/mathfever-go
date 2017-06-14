@@ -46,25 +46,13 @@ func categoryPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func calculationPage(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	calculationSlug := vars["calculation"]
-	categorySlug := vars["category"]
-
+	calculationSlug := mux.Vars(r)["calculation"]
 	calculation, err := models.GetCalculationBySlug(calculationSlug)
 	if err != nil {
 		notFound(w, r)
 		return
 	}
-	category, _ := models.GetCategoryBySlug(categorySlug)
-
-	renderTemplate(w, r, calculationTpl, "base.gohtml",
-		struct {
-			Calculation models.Calculation
-			Category    models.Category
-		}{
-			calculation,
-			category,
-		})
+	renderTemplate(w, r, calculationTpl, "base.gohtml", calculation)
 }
 
 func notFound(w http.ResponseWriter, r *http.Request) {
