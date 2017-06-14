@@ -19,14 +19,14 @@ type errorJson struct {
 	Error string `json:"error"`
 }
 
-func GetCategories(w http.ResponseWriter, r *http.Request) {
+func getCategories(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	data := models.GetAllCategoriesWithCalculations()
 	json.NewEncoder(w).Encode(data)
 }
 
-func GetCategory(w http.ResponseWriter, r *http.Request) {
+func getCategory(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	categorySlug := mux.Vars(r)["category"]
@@ -40,7 +40,7 @@ func GetCategory(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(data)
 }
 
-func GetCalculation(w http.ResponseWriter, r *http.Request) {
+func getCalculation(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	calculationSlug := mux.Vars(r)["calculation"]
@@ -53,7 +53,7 @@ func GetCalculation(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(calculation)
 }
 
-func DoCalculation(w http.ResponseWriter, r *http.Request) {
+func doCalculation(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	calculationSlug := mux.Vars(r)["calculation"]
@@ -93,7 +93,7 @@ func DoCalculation(w http.ResponseWriter, r *http.Request) {
 	}{s})
 }
 
-func NotFoundAPI(w http.ResponseWriter, r *http.Request) {
+func notFoundAPI(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNotFound)
 

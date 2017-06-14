@@ -1,4 +1,4 @@
-package templates
+package handler
 
 import (
 	"html/template"
@@ -14,16 +14,16 @@ import (
 var (
 	tplBufPool *bpool.BufferPool
 
-	HomeTpl,
-	AboutTpl,
-	HelpTpl,
-	PrivacyTpl,
-	TermsTpl,
-	MessageBoardTpl,
-	ConversionTableTpl,
-	CategoryTpl,
-	CalculationTpl,
-	NotFoundTpl,
+	homeTpl,
+	aboutTpl,
+	helpTpl,
+	privacyTpl,
+	termsTpl,
+	messageBoardTpl,
+	conversionTableTpl,
+	categoryTpl,
+	calculationTpl,
+	notFoundTpl,
 	serverErrorTpl *template.Template
 )
 
@@ -44,61 +44,61 @@ func loadTemplates() {
 
 	siteTpls := []templateLoader{
 		{
-			&HomeTpl,
+			&homeTpl,
 			"home",
 			"home.gohtml",
 			"",
 		},
 		{
-			&AboutTpl,
+			&aboutTpl,
 			"about",
 			"about.gohtml",
 			"",
 		},
 		{
-			&HelpTpl,
+			&helpTpl,
 			"help",
 			"help.gohtml",
 			"",
 		},
 		{
-			&PrivacyTpl,
+			&privacyTpl,
 			"privacy",
 			"privacy.gohtml",
 			"",
 		},
 		{
-			&TermsTpl,
+			&termsTpl,
 			"terms",
 			"terms.gohtml",
 			"",
 		},
 		{
-			&MessageBoardTpl,
+			&messageBoardTpl,
 			"message_board",
 			"message_board.gohtml",
 			"",
 		},
 		{
-			&ConversionTableTpl,
+			&conversionTableTpl,
 			"conversion_table",
 			"conversion_table.gohtml",
 			"",
 		},
 		{
-			&CategoryTpl,
+			&categoryTpl,
 			"category",
 			"category.gohtml",
 			"",
 		},
 		{
-			&CalculationTpl,
+			&calculationTpl,
 			"calculation",
 			"calculation.gohtml",
 			"",
 		},
 		{
-			&NotFoundTpl,
+			&notFoundTpl,
 			"not_found",
 			"not_found.gohtml",
 			"",
@@ -123,7 +123,7 @@ func loadTemplates() {
 	}
 }
 
-func RenderTemplate(w http.ResponseWriter, r *http.Request, tpl *template.Template, name string, data interface{}) {
+func renderTemplate(w http.ResponseWriter, r *http.Request, tpl *template.Template, name string, data interface{}) {
 	buf := tplBufPool.Get()
 	defer tplBufPool.Put(buf)
 
