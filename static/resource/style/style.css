@@ -1,6 +1,4 @@
-/*****************/
-/* BASE TEMPLATE */
-/*****************/
+/*Base Template*/
 #main-heading {
     margin-left: 5%;
     font-family: 'Roboto Thin', sans-serif;
@@ -11,16 +9,11 @@
     min-height: 90vh;
 }
 
-/**********/
-/* FOOTER */
-/**********/
 .mdl-mini-footer {
     margin-top: 50px;
 }
 
-/*****************/
-/* HOME TEMPLATE */
-/*****************/
+/*Home Template*/
 .home-card {
     border: solid 1px #e4e4e4;
 }
@@ -39,16 +32,34 @@
     text-decoration: underline;
 }
 
-/*********************/
-/* CATEGORY TEMPLATE */
-/*********************/
+/*Message Board Template*/
+#disqus_thread {
+    margin: 30px auto;
+}
+
+.round-img {
+    max-width: 100%;
+    border-radius: 15px;
+}
+
+/*Category Template*/
 .category-calc-ul a:hover {
     text-decoration: underline;
 }
 
-/************************/
-/* CALCULATION TEMPLATE */
-/************************/
+/*Calculation Template*/
+.calculation-page-heading a {
+    margin-left: 5%;
+    font-family: 'Roboto Thin', sans-serif;
+    font-weight: 200;
+    text-decoration: none;
+    color: inherit;
+}
+
+.calculation-page-heading a:hover {
+    color: orange;
+}
+
 .user-input-field {
     margin-left: 5%;
 }
@@ -67,16 +78,8 @@
     word-break: break-all;
 }
 
-.calculation-page-heading a {
-    margin-left: 5%;
-    font-family: 'Roboto Thin', sans-serif;
-    font-weight: 200;
-    text-decoration: none;
-    color: inherit;
-}
-
-.calculation-page-heading a:hover {
-    color: orange;
+.column-wrap {
+    white-space: normal;
 }
 
 .fade-in {
@@ -120,21 +123,13 @@
     }
 }
 
-/*******************/
-/* ERROR TEMPLATES */
-/*******************/
+/*Error Templates*/
 .error-img {
     width: 100%;
     border-radius: 15px;
 }
 
-/********/
-/* MISC */
-/********/
-.column-wrap {
-    white-space: normal;
-}
-
+/*Misc*/
 .small-caps {
     font-variant: small-caps;
 }
@@ -154,13 +149,4 @@
 
 .no-text-decoration {
     text-decoration: none;
-}
-
-#disqus_thread {
-    margin: 30px auto;
-}
-
-.round-img {
-    max-width: 100%;
-    border-radius: 15px;
 }
