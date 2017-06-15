@@ -69,6 +69,12 @@
     margin-top: 1%;
 }
 
+#loading-spinner-container {
+    margin: auto;
+    text-align: center;
+    opacity: 0;
+}
+
 #calculation-card {
     opacity: 0;
     padding-top: 35px;

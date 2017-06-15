@@ -3,6 +3,7 @@
 // Validate the data in form
 if (document.getElementById('calculation-form')) {
     var calculationForm = document.getElementById('calculation-form');
+
     calculationForm.addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -88,6 +89,7 @@ function validateForm(formData) {
     }
     // if the data is valid, send the Ajax request
     if (isValidInput) {
+        document.getElementById("loading-spinner-container").style.opacity = 100;
         submitAjax(formData);
     }
 }
@@ -165,6 +167,8 @@ function submitAjax(data) {
     request.open('POST', url, true);
 
     request.onload = function () {
+        document.getElementById("loading-spinner-container").style.opacity = 0;
+
         if (this.status >= 200 && this.status <= 404) {
             var resp = JSON.parse(this.response);
 
