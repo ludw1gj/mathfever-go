@@ -40,7 +40,7 @@ type templateLoader struct {
 }
 
 func loadTemplates() {
-	templateDir := filepath.Join("handler", "site", "template")
+	templateDir := filepath.Join("template", "site")
 
 	siteTpls := []templateLoader{
 		{
@@ -145,7 +145,7 @@ func serverError(w http.ResponseWriter) {
 	err := serverErrorTpl.ExecuteTemplate(&buf, "base.gohtml", nil)
 	if err != nil {
 		w.Write([]byte("500: Server error"))
-		log.Printf("StatusInternalServerError template failed to execute: %s", err.Error())
+		log.Printf("StatusInternalServerError site failed to execute: %s", err.Error())
 		return
 	}
 	w.Write(buf.Bytes())

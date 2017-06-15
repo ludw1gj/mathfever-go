@@ -9,19 +9,19 @@ import (
 	"text/template"
 )
 
-var tplDir = filepath.Join("service", "math", "template")
+var tplDir = filepath.Join("template", "math")
 
 func parseTemplate(filename string, data interface{}) (s string, err error) {
 	tpl, err := template.ParseFiles(filename)
 	if err != nil {
 		log.Println(err)
-		return s, errors.New("internal system error: parse template error")
+		return s, errors.New("internal system error: parse site error")
 	}
 	var b bytes.Buffer
 	err = tpl.Execute(&b, data)
 	if err != nil {
 		log.Println(err)
-		return s, errors.New("internal system error: template execute error")
+		return s, errors.New("internal system error: site execute error")
 	}
 	return b.String(), nil
 }
