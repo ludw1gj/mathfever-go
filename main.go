@@ -4,9 +4,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/FriedPigeon/mathfever-go/handler"
+	"github.com/FriedPigeon/mathfever-go/router"
 )
 
 func main() {
-	log.Fatal(http.ListenAndServe(":8080", handler.Router))
+	log.Fatal(http.ListenAndServe(":8080", router.Router))
 }

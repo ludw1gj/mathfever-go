@@ -3,5 +3,5 @@
 
 # Other
 /mathfever-go
-/assets/srv/sitemap.xml
+/static/resource/srv/sitemap.xml
 .DS_Store

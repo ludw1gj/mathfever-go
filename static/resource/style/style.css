@@ -1,0 +1,203 @@
+/*********/
+/* FONTS */
+/*********/
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url(/static/resource/font/MaterialIcons-Regular.woff2) format('woff2');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+/*****************/
+/* BASE TEMPLATE */
+/*****************/
+#main-heading {
+    margin-left: 5%;
+    font-family: 'Roboto Thin', sans-serif;
+    font-weight: 200;
+}
+
+#page-content {
+    min-height: 90vh;
+}
+
+/**********/
+/* FOOTER */
+/**********/
+.mdl-mini-footer {
+    margin-top: 50px;
+}
+
+/*****************/
+/* HOME TEMPLATE */
+/*****************/
+.home-card {
+    border: solid 1px #e4e4e4;
+}
+
+.home-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.home-card--title {
+    color: #fff;
+    height: 176px;
+}
+
+.home-card--title a:hover, .home-card--text a:hover {
+    text-decoration: underline;
+}
+
+/*********************/
+/* CATEGORY TEMPLATE */
+/*********************/
+.category-calc-ul a:hover {
+    text-decoration: underline;
+}
+
+/************************/
+/* CALCULATION TEMPLATE */
+/************************/
+.user-input-field {
+    margin-left: 5%;
+}
+
+.calculation-button {
+    margin-left: 5%;
+    margin-top: 1%;
+}
+
+#calculation-card {
+    opacity: 0;
+    padding-top: 35px;
+}
+
+.word-break {
+    word-break: break-all;
+}
+
+.calculation-page-heading a {
+    margin-left: 5%;
+    font-family: 'Roboto Thin', sans-serif;
+    font-weight: 200;
+    text-decoration: none;
+    color: inherit;
+}
+
+.calculation-page-heading a:hover {
+    color: orange;
+}
+
+.fade-in {
+    -webkit-animation: fadeIn ease-in 1;
+    -moz-animation: fadeIn ease-in 1;
+    animation: fadeIn ease-in 1;
+
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+    -webkit-animation-duration: 0.2s;
+    -moz-animation-duration: 0.2s;
+    animation-duration: 0.2s;
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/*******************/
+/* ERROR TEMPLATES */
+/*******************/
+.error-img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+/********/
+/* MISC */
+/********/
+.column-wrap {
+    white-space: normal;
+}
+
+.small-caps {
+    font-variant: small-caps;
+}
+
+.separator {
+    margin-left: 1%;
+    margin-right: 1%;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.general-content {
+    margin: auto;
+    padding: 20px 5%;
+    overflow: auto;
+}
+
+.no-text-decoration {
+    text-decoration: none;
+}
+
+#disqus_thread {
+    margin: 30px auto;
+}
+
+.round-img {
+    max-width: 100%;
+    border-radius: 15px;
+}

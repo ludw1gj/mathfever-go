@@ -1,0 +1,18 @@
+<p>Here we will convert the decimal number {{.Decimal}} to
+    {{if eq .Base 2}}binary{{end}}{{if eq .Base 16}}hexadecimal{{end}}.</p>
+
+<p>Divide the decimal number by {{.Base}} and record the remainder:<br>
+    {{.Proof}}</p>
+
+<p>Join the remainders from last to first:<br>
+    <span class="word-break">{{.Answer}}</span></p>
+{{if .RemaindersHex -}}
+<p>Convert remainders to their hexadecimal equivalents:<br>
+    Refer to the Conversion Table <a href="/category/networking/conversion-table" rel="noopener noreferrer"
+                                     target="_blank">here</a>.<br>
+    {{range $i, $r := .Remainders -}}
+    ({{$r}})<sub>10</sub> = ({{index $.RemaindersHex $i}})<sub>16</sub><br>
+    {{- end}}</p>
+{{- end}}
+<p class="word-break">Therefore:<br>
+    ({{.Decimal}})<sub>10</sub> = (<span class="word-break">{{.Answer}}</span>)<sub>{{.Base}}</sub></p>

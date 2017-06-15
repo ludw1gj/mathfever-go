@@ -1,0 +1,30 @@
+{{define "content" -}}
+<!-- Main Heading -->
+<h1 id="main-heading">Home</h1>
+<hr class="separator">
+
+<!-- Index of Categories -->
+<div class="mdl-grid">
+    {{range . -}}
+    <!-- Index Card -->
+    <div class="home-card demo-card-wide mdl-card mdl-cell mdl-cell--top mdl-cell--4 mdl-cell--4-col-phone mdl-shadow--2dp">
+        <!-- Index Card Picture/Title -->
+        <div class="home-card--title mdl-card__title"
+             style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{.Category.ImageURL}}) center/cover">
+            <h6 class="mdl-card__title-text">
+                <a href="{{genURL "category" .Category.Name}}">{{.Category.Name}}</a>
+            </h6>
+        </div>
+
+        <!-- Index Card Text-->
+        <div class="home-card--text mdl-card__supporting-text">
+            <ul>
+                {{range .Calculations -}}
+                <li><a href="{{genURL "category" .Category.Name .Name}}">{{.Name}}</a></li>
+                {{- end}}
+            </ul>
+        </div>
+    </div>
+    {{- end}}
+</div>
+{{- end}}
