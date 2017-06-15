@@ -15,7 +15,7 @@ var Router *mux.Router
 func init() {
 	Router = mux.NewRouter().StrictSlash(true)
 
-	// Site Router
+	// Site Routes
 	Router.HandleFunc("/", site.Home).Methods("GET")
 	Router.HandleFunc("/about", site.About).Methods("GET")
 	Router.HandleFunc("/help", site.Help).Methods("GET")
@@ -35,11 +35,8 @@ func init() {
 		Router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 	}
 
-	// API Router
+	// API Routes
 	apiRouter := Router.PathPrefix("/api").Subrouter()
-	apiRouter.HandleFunc("/category/", api.GetCategories).Methods("GET")
-	apiRouter.HandleFunc("/category/{category}", api.GetCategory).Methods("GET")
-	apiRouter.HandleFunc("/category/{category}/{calculation}", api.GetCalculation).Methods("GET")
 	apiRouter.HandleFunc("/category/{category}/{calculation}", api.DoCalculation).Methods("POST")
 	apiRouter.NotFoundHandler = http.HandlerFunc(api.NotFoundAPI)
 }

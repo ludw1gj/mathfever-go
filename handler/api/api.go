@@ -1,13 +1,11 @@
 package api
 
 import (
-	"encoding/json"
-	"net/http"
-
-	"fmt"
-
 	"bytes"
+	"encoding/json"
 	"errors"
+	"fmt"
+	"net/http"
 	"reflect"
 
 	"github.com/FriedPigeon/mathfever-go/database"
@@ -15,17 +13,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func GetCalculation(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
-	calculationSlug := mux.Vars(r)["calculation"]
-	calculation, err := database.GetCalculationBySlug(calculationSlug)
-	if err != nil {
-		w.WriteHeader(http.StatusNotFound)
-		json.NewEncoder(w).Encode(errorJson{err.Error()})
-		return
-	}
-	json.NewEncoder(w).Encode(calculation)
+type errorJson struct {
+	Error string `json:"error"`
 }
 
 func DoCalculation(w http.ResponseWriter, r *http.Request) {
@@ -108,4 +97,11 @@ func verifyJsonInput(apiInput service.MathAPI) error {
 		}
 	}
 	return nil
+}
+
+func NotFoundAPI(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNotFound)
+
+	json.NewEncoder(w).Encode(errorJson{"api route not found"})
 }
