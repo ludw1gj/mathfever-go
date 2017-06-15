@@ -15,13 +15,13 @@ func parseTemplate(filename string, data interface{}) (s string, err error) {
 	tpl, err := template.ParseFiles(filename)
 	if err != nil {
 		log.Println(err)
-		return s, errors.New("internal system error: parse site error")
+		return s, errors.New("internal system error: parse template error")
 	}
 	var b bytes.Buffer
 	err = tpl.Execute(&b, data)
 	if err != nil {
 		log.Println(err)
-		return s, errors.New("internal system error: site execute error")
+		return s, errors.New("internal system error: template execute error")
 	}
 	return b.String(), nil
 }
