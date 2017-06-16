@@ -11,27 +11,27 @@ var numbersTplDir = filepath.Join(tplDir, "numbers")
 
 // IsPrime checks if n is a prime number and returns if is/not a prime and why.
 func IsPrime(n int) (string, error) {
-	var answer bytes.Buffer
+	var answer string
 	if n <= 0 {
-		fmt.Fprintf(&answer, "%d is not a prime number, because prime numbers are defined for integers greater than 1.", n)
+		answer = fmt.Sprintf("%d is not a prime number, because prime numbers are defined for integers greater than 1.", n)
 	} else if n == 1 {
-		fmt.Fprint(&answer, "1 is not considered to be a prime number.")
+		answer = fmt.Sprint("1 is not considered to be a prime number.")
 	} else if n == 2 {
-		fmt.Fprint(&answer, "2 is a prime number, because its only whole-number factors are 1 and itself.</p>")
+		answer = fmt.Sprint("2 is a prime number, because its only whole-number factors are 1 and itself.")
 	} else if n%2 == 0 {
-		fmt.Fprintf(&answer, "%d is not a prime number, because it is divisible by 2.", n)
+		answer = fmt.Sprintf("%d is not a prime number, because it is divisible by 2.", n)
 	} else {
 		sqr := int(math.Sqrt(float64(n))) + 1
 		for i := 3; i < sqr; {
 			if n%i == 0 {
-				fmt.Fprintf(&answer, "%d is not a prime number, because it is divisible by %d.", n, i)
+				answer = fmt.Sprintf("%d is not a prime number, because it is divisible by %d.", n, i)
 				break
 			}
 			i += 2
 		}
 	}
-	if len(answer.String()) == 0 {
-		fmt.Fprintf(&answer, "%d is a prime number, because its only whole-number factors are 1 and itself.", n)
+	if len(answer) == 0 {
+		answer = fmt.Sprintf("%d is a prime number, because its only whole-number factors are 1 and itself.", n)
 	}
 
 	data := struct {
@@ -39,7 +39,7 @@ func IsPrime(n int) (string, error) {
 		Answer string
 	}{
 		n,
-		answer.String(),
+		answer,
 	}
 	tpl := filepath.Join(numbersTplDir, "is_prime.gohtml")
 	return parseTemplate(tpl, data)
