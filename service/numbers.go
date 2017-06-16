@@ -31,7 +31,7 @@ func (i HighestCommonFactorAPI) ExecuteMath() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.HighestCommonFactor(i.Num1, i.Num2), nil
+	return math.HighestCommonFactor(i.Num1, i.Num2)
 }
 
 func (i LowestCommonMultipleAPI) ExecuteMath() (s string, err error) {
@@ -39,5 +39,5 @@ func (i LowestCommonMultipleAPI) ExecuteMath() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.LowestCommonMultiple(i.Num1, i.Num2), nil
+	return math.LowestCommonMultiple(i.Num1, i.Num2)
 }

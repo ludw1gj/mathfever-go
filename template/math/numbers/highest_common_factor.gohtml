@@ -1,0 +1,33 @@
+<h6>Question:</h6>
+
+<p>Find the highest common factor of {{.FirstNumber}} and {{.SecondNumber}}.</p>
+
+<h6>Answer:</h6>
+
+<p>The highest common factor of {{.FirstNumber}} and {{.SecondNumber}} is {{.Answer}}.</p>
+
+<h6>Here's the working out:</h6>
+
+<p>Finding all prime factors of {{.FirstNumber}}:</p>
+{{.Table1}}
+
+<p>Finding all prime factors of {{.SecondNumber}}:</p>
+{{.Table2}}
+
+<p>Prime factors for the first number are:<br>
+    {{.Proof1}}</p>
+
+<p>Prime factors for the second number are:<br>
+    {{.Proof2}}</p>
+
+<p>Find the primes that are shared between the two numbers:<br>
+    {{.SharedPrimes}}</p>
+
+{{if .SharedPrimesProof}}
+<p>Take the shared primes and multiply them together:<br>
+    {{.SharedPrimesProof}}</p>
+{{end}}
+
+<h6>Therefore:</h6>
+
+<p>The highest common factor of {{.FirstNumber}} and {{.SecondNumber}} is {{.Answer}}.</p>

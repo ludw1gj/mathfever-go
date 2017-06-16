@@ -45,8 +45,11 @@ func IsPrime(n int) (string, error) {
 	return parseTemplate(tpl, data)
 }
 
-func findPrimeFactors(n int) (primeFactors []int, table bytes.Buffer, proof bytes.Buffer, factorFrequency map[int]int) {
+func findPrimeFactors(n int) ([]int, string, string, map[int]int) {
 	originalN := n
+
+	var primeFactors []int
+	var table bytes.Buffer
 	fmt.Fprint(&table, `
 	<table class="mdl-data-table mdl-js-data-table">
 	<tbody>`)
@@ -82,6 +85,7 @@ func findPrimeFactors(n int) (primeFactors []int, table bytes.Buffer, proof byte
 	</tr>
 	</tbody></table>`)
 
+	var proof bytes.Buffer
 	for _, factor := range primeFactors {
 		fmt.Fprintf(&proof, "%d &times ", factor)
 	}
@@ -90,65 +94,71 @@ func findPrimeFactors(n int) (primeFactors []int, table bytes.Buffer, proof byte
 	}
 	fmt.Fprintf(&proof, "= %d<br>", originalN)
 
-	factorFrequency = findElementFrequency(primeFactors)
+	factorFrequency := findElementFrequency(primeFactors)
 	for factor := range factorFrequency {
 		fmt.Fprintf(&proof, "%d<sup>%d</sup> &times ", factor, factorFrequency[factor])
 	}
 	proof.Truncate(len(proof.String()) - 7)
 	fmt.Fprintf(&proof, "= %d<br>", originalN)
-	return primeFactors, table, proof, factorFrequency
+	return primeFactors, table.String(), proof.String(), factorFrequency
 }
 
-func HighestCommonFactor(n1 int, n2 int) string {
+func HighestCommonFactor(n1 int, n2 int) (string, error) {
 	primeFactors1, table1, proof1, _ := findPrimeFactors(n1)
 	primeFactors2, table2, proof2, _ := findPrimeFactors(n2)
 	commonN := compareSlice(primeFactors1, primeFactors2)
 
-	var buf bytes.Buffer
-	fmt.Fprintf(&buf, "<p>Find the highest common factor of %d and %d.</p>", n1, n2)
-	fmt.Fprintf(&buf, "<p>Finding all prime factors of %d:</p>%s", n1, table1.String())
-	fmt.Fprintf(&buf, "<p>Finding all prime factors of %d:</p>%s", n2, table2.String())
-
-	fmt.Fprintf(&buf, "<p>Prime factors for the first number are:<br>%s</p>", proof1.String())
-	fmt.Fprintf(&buf, "<p>Prime factors for the second number are:<br>%s</p>", proof2.String())
-
-	fmt.Fprint(&buf, "<p>Find the primes that are shared between the two numbers:<br>")
-
+	var sharedPrimes bytes.Buffer
+	var sharedPrimesProof bytes.Buffer
 	answer := 1
 	if len(commonN) != 0 {
+		// shared primes
 		for _, n := range commonN {
-			fmt.Fprintf(&buf, "%d, ", n)
+			fmt.Fprintf(&sharedPrimes, "%d, ", n)
 		}
-		buf.Truncate(len(buf.String()) - 2)
-		fmt.Fprint(&buf, "</p>")
+		sharedPrimes.Truncate(len(sharedPrimes.String()) - 2)
 
-		fmt.Fprint(&buf, "<p>Take the shared primes and multiply them together:<br>")
+		// shared primes proof
 		for _, n := range commonN {
-			fmt.Fprintf(&buf, "%d &times ", n)
+			fmt.Fprintf(&sharedPrimesProof, "%d &times ", n)
 			answer *= n
 		}
-		buf.Truncate(len(buf.String()) - 7)
-		fmt.Fprintf(&buf, " = %d</p>", answer)
+		sharedPrimesProof.Truncate(len(sharedPrimesProof.String()) - 7)
+		fmt.Fprintf(&sharedPrimesProof, " = %d", answer)
 	} else {
-		fmt.Fprint(&buf, "There are no shared factors.</p>")
+		fmt.Fprint(&sharedPrimes, "There are no shared factors.")
 	}
 
-	fmt.Fprintf(&buf, "<p>Therefore the highest common factor of %d and %d is:<br>%d</p>", n1, n2, answer)
-	return buf.String()
+	data := struct {
+		FirstNumber       int
+		SecondNumber      int
+		Table1            string
+		Table2            string
+		Proof1            string
+		Proof2            string
+		SharedPrimes      string
+		SharedPrimesProof string
+		Answer            int
+	}{
+		n1,
+		n2,
+		table1,
+		table2,
+		proof1,
+		proof2,
+		sharedPrimes.String(),
+		sharedPrimesProof.String(),
+		answer,
+	}
+	tpl := filepath.Join(numbersTplDir, "highest_common_factor.gohtml")
+	return parseTemplate(tpl, data)
 }
 
-func LowestCommonMultiple(n1 int, n2 int) string {
+func LowestCommonMultiple(n1 int, n2 int) (string, error) {
 	_, table1, proof1, factorFrequency1 := findPrimeFactors(n1)
 	_, table2, proof2, factorFrequency2 := findPrimeFactors(n2)
 
-	var buf bytes.Buffer
-	fmt.Fprintf(&buf, "<p>Find the lowest common mulitple of %d and %d.</p>", n1, n2)
-	fmt.Fprintf(&buf, "<p>Finding all prime factors of %d:</p>%s", n1, table1.String())
-	fmt.Fprintf(&buf, "<p>Finding all prime factors of %d:</p>%s", n2, table2.String())
-
-	fmt.Fprintf(&buf, "<p>Prime factors for the first number are:<br>%s</p>", proof1.String())
-	fmt.Fprintf(&buf, "<p>Prime factors for the second number are:<br>%s</p>", proof2.String())
-
+	// find sets with the highest exponent
 	m := make(map[int]int)
 	for i := range factorFrequency1 {
 		if factorFrequency1[i] > factorFrequency2[i] {
@@ -165,15 +175,34 @@ func LowestCommonMultiple(n1 int, n2 int) string {
 		}
 	}
 
-	fmt.Fprint(&buf, "<p>Compare the primes of the first and second numbers and use the sets with the highest exponent:<br>")
+	var compareProof bytes.Buffer
 	answer := 1
 	for factor := range m {
-		fmt.Fprintf(&buf, "%d<sup>%d</sup> &times ", factor, m[factor])
+		fmt.Fprintf(&compareProof, "%d<sup>%d</sup> &times ", factor, m[factor])
 		answer *= int(math.Pow(float64(factor), float64(m[factor])))
 	}
-	buf.Truncate(len(buf.String()) - 7)
-	fmt.Fprintf(&buf, "= %d</p>", answer)
+	compareProof.Truncate(len(compareProof.String()) - 7)
+	fmt.Fprintf(&compareProof, "= %d", answer)
 
-	fmt.Fprintf(&buf, "<p>Therefore the lowest common multiple of %d and %d is:<br>%d</p>", n1, n2, answer)
-	return buf.String()
+	data := struct {
+		FirstNumber  int
+		SecondNumber int
+		Table1       string
+		Table2       string
+		Proof1       string
+		Proof2       string
+		CompareProof string
+		Answer       int
+	}{
+		n1,
+		n2,
+		table1,
+		table2,
+		proof1,
+		proof2,
+		compareProof.String(),
+		answer,
+	}
+	tpl := filepath.Join(numbersTplDir, "lowest_common_multiple.gohtml")
+	return parseTemplate(tpl, data)
 }
