@@ -23,7 +23,7 @@ func (i IsPrimeAPI) ExecuteMath() (s string, err error) {
 	if err != nil {
 		return s, err
 	}
-	return math.IsPrime(i.Number), nil
+	return math.IsPrime(i.Number)
 }
 
 func (i HighestCommonFactorAPI) ExecuteMath() (s string, err error) {

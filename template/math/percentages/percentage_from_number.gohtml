@@ -1,4 +1,13 @@
-<p>Where the Number is {{.Number}}, and the Total Number is {{.TotalNumber}}:</p>
+<h6>Question:</h6>
+
+<p>Where the number is {{.Number}} and the total number is {{.TotalNumber}}, find how much percentage {{.Number}} is of
+    {{.TotalNumber}}.</p>
+
+<h6>Answer:</h6>
+
+<p>{{.Number}} is {{.Answer}}% of {{.TotalNumber}}.</p>
+
+<h6>Here's how to calculate it:</h6>
 
 <p>Calculate using the equation shown below:<br>
     (Number &#xf7; Total Number) &times 100</p>
@@ -12,5 +21,6 @@
     {{.DecimalisedPercentage}} &times 100<br>
     {{.Answer}}</p>
 
-<p>Therefore:<br>
-    {{.Number}} is {{.Answer}}% of {{.TotalNumber}}.</p>
+<h6>Therefore:</h6>
+
+<p>{{.Number}} is {{.Answer}}% of {{.TotalNumber}}.</p>

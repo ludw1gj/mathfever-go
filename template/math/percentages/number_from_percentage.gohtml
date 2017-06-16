@@ -1,4 +1,13 @@
-<p>Where the Percentage is {{.Percentage}}%, and the Number is {{.Number}}:</p>
+<h6>Question:</h6>
+
+<p>Where the percentage is {{.Percentage}}% and the number is {{.Number}}, find the resulting number of the
+    percentage.</p>
+
+<h6>Answer:</h6>
+
+<p>{{.Percentage}}% of {{.Number}} is {{.Answer}}.</p>
+
+<h6>Here's how to calculate it:</h6>
 
 <p>Use the equation below:<br>
     (Percentage &#xf7; 100) &times Number<br>
@@ -14,5 +23,6 @@
     ({{.Divided}}) &times {{.Number}}<br>
     {{.Answer}}</p>
 
-<p>Therefore:<br>
-    {{.Percentage}}% of {{.Number}} is {{.Answer}}.</p>
+<h6>Therefore:</h6>
+
+<p>{{.Percentage}}% of {{.Number}} is {{.Answer}}.</p>

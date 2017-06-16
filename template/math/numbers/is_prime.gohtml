@@ -1,0 +1,28 @@
+<h6>Question:</h6>
+
+<p>Is {{.Number}} a prime number?</p>
+
+<h6>Answer:</h6>
+
+<p>{{.Answer}}</p>
+
+<h6>Helpful Tips:</h6>
+
+<p>Prime numbers are numbers whose only whole-number factors are 1 and itself.</p>
+
+<p>To determine if a number (n) is a prime number, here are some rules:</p>
+
+<ul>
+    <li>Prime numbers are defined for whole-numbers greater than 1.</li>
+    <li>1 is not considered a prime number.</li>
+    <li>2 is considered a prime number because its only whole-number factors are 1 and itself.</li>
+    <li>Any number that is divisible by 2 is not a prime number.</li>
+    <li>After the steps above, start by dividing the number by 3, then 5, then 7, and so on, checking if the number
+        can be divided by those divisors. As we have determined it cannot be divided by 2, there is no need to divide by
+        4, 6, 8, and so on.
+    </li>
+    <li>The maximum divisor to look for is the square root of your number, because: n=a&timesb and if both values
+        were greater than the square root of n, a&timesb would be larger than n. Therefore at least one of those
+        factors must be less than or equal to the square root of n.
+    </li>
+</ul>

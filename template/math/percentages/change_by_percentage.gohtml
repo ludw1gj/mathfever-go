@@ -1,4 +1,12 @@
-<p>Where the {{.Noun}} in Percentage is {{.Percentage}}%, and the Number is {{.Number}}:</p>
+<h6>Question:</h6>
+
+<p>Where the {{.Noun}} in percentage is {{.Percentage}}% and the number is {{.Number}}, find the resulting number.</p>
+
+<h6>Answer:</h6>
+
+<p>The number {{.Number}} {{.Noun}}d by {{.Percentage}}% is {{.Answer}}.</p>
+
+<h6>Here's how to calculate it:</h6>
 
 <p>Calculate using the equation shown below:<br>
     (Number &#xf7; 100) &times Percentage + Number<br>
@@ -19,5 +27,6 @@
     {{.AddValue}} + {{.Number}}<br>
     {{.Answer}}</p>
 
-<p>Therefore:<br>
-    {{.Number}} {{.Noun}}d by {{.Percentage}}% is {{.Answer}}.</p>
+<h6>Therefore:</h6>
+
+<p>{{.Number}} {{.Noun}}d by {{.Percentage}}% is {{.Answer}}.</p>

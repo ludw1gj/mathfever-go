@@ -4,51 +4,45 @@ import (
 	"bytes"
 	"fmt"
 	"math"
+	"path/filepath"
 )
 
+var numbersTplDir = filepath.Join(tplDir, "numbers")
+
 // IsPrime checks if n is a prime number and returns if is/not a prime and why.
-func IsPrime(n int) string {
-	var buf bytes.Buffer
+func IsPrime(n int) (string, error) {
+	var answer bytes.Buffer
 	if n <= 0 {
-		fmt.Fprintf(&buf, "<p>%d is not a prime number, because prime numbers are defined for"+
-			" integers greater than 1.</p>", n)
+		fmt.Fprintf(&answer, "%d is not a prime number, because prime numbers are defined for integers greater than 1.", n)
 	} else if n == 1 {
-		fmt.Fprint(&buf, "<p>1 is not considered to be a prime number.</p>")
+		fmt.Fprint(&answer, "1 is not considered to be a prime number.")
 	} else if n == 2 {
-		fmt.Fprint(&buf, "<p>2 is a prime number, because its only whole-number factors are 1 and itself.</p>")
+		fmt.Fprint(&answer, "2 is a prime number, because its only whole-number factors are 1 and itself.</p>")
 	} else if n%2 == 0 {
-		fmt.Fprintf(&buf, "<p>%d is not a prime number, because it is divisible by 2.</p>", n)
+		fmt.Fprintf(&answer, "%d is not a prime number, because it is divisible by 2.", n)
 	} else {
 		sqr := int(math.Sqrt(float64(n))) + 1
 		for i := 3; i < sqr; {
 			if n%i == 0 {
-				fmt.Fprintf(&buf, "<p>%d is not a prime number, because it is divisible by %d.", n, i)
+				fmt.Fprintf(&answer, "%d is not a prime number, because it is divisible by %d.", n, i)
 				break
 			}
 			i += 2
 		}
 	}
-	if len(buf.String()) == 0 {
-		fmt.Fprintf(&buf, "<p>%d is a prime number, because its only whole-number factors are 1 and itself</p>", n)
+	if len(answer.String()) == 0 {
+		fmt.Fprintf(&answer, "%d is a prime number, because its only whole-number factors are 1 and itself.", n)
 	}
 
-	fmt.Fprint(&buf, `
-	<h6>Helpful Tips:</h6>
-	<p>Prime numbers are numbers whose only whole-number factors are 1 and itself.</p>
-	<p>To determine if a number (n) is a prime number, here are some rules:</p>
-	<ul>
-		<li>Prime numbers are defined for whole-numbers greater than 1.</li>
-		<li>1 is not considered a prime number.</li>
-		<li>2 is considered a prime number because its only whole-number factors are 1 and itself.</li>
-		<li>Any number that is divisible by 2 is not a prime number.</li>
-		<li>After the steps above, start by dividing the number by 3, then 5, then 7, and so on, checking if the number
-		can be divided by those divisors. As we have determined it cannot be divided by 2, there is no need to divide by
-		4, 6, 8, and so on.</li>
-		<li>The maximum divisor to look for is the square root of your number, because: n=a&timesb and if both values
-		were greater than the square root of n, a&timesb would be larger than n. Therefore at least one of those
-		factors must be less than or equal to the square root of n.</li>
-	</ul>`)
-	return buf.String()
+	data := struct {
+		Number int
+		Answer string
+	}{
+		n,
+		answer.String(),
+	}
+	tpl := filepath.Join(numbersTplDir, "is_prime.gohtml")
+	return parseTemplate(tpl, data)
 }
 
 func findPrimeFactors(n int) (primeFactors []int, table bytes.Buffer, proof bytes.Buffer, factorFrequency map[int]int) {

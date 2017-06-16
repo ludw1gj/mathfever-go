@@ -203,7 +203,7 @@ func genDescCalculation(solving string) string {
 
 func genExample(s string, err error) template.HTML {
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalln("Error when generating an example for calculation:", err)
 	}
 	return template.HTML(s)
 }
