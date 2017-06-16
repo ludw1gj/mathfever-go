@@ -15,9 +15,9 @@ func IsPrime(n int) (string, error) {
 	if n <= 0 {
 		answer = fmt.Sprintf("%d is not a prime number, because prime numbers are defined for integers greater than 1.", n)
 	} else if n == 1 {
-		answer = fmt.Sprint("1 is not considered to be a prime number.")
+		answer = "1 is not considered to be a prime number."
 	} else if n == 2 {
-		answer = fmt.Sprint("2 is a prime number, because its only whole-number factors are 1 and itself.")
+		answer = "2 is a prime number, because its only whole-number factors are 1 and itself."
 	} else if n%2 == 0 {
 		answer = fmt.Sprintf("%d is not a prime number, because it is divisible by 2.", n)
 	} else {
