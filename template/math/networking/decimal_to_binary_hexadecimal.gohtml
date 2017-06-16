@@ -1,5 +1,9 @@
-<p>Here we will convert the decimal number {{.Decimal}} to
-    {{if eq .Base 2}}binary{{end}}{{if eq .Base 16}}hexadecimal{{end}}.</p>
+<h6>Answer:</h6>
+
+<p>The decimal number <b>{{.Decimal}}</b> in {{if eq .Base 2}}binary{{else}}hexadecimal{{end}} is <b>{{.Answer}}</b>.
+</p>
+
+<h6>Here's how to convert it:</h6>
 
 <p>Divide the decimal number by {{.Base}} and record the remainder:<br>
     {{.Proof}}</p>
@@ -14,5 +18,8 @@
     ({{$r}})<sub>10</sub> = ({{index $.RemaindersHex $i}})<sub>16</sub><br>
     {{- end}}</p>
 {{- end}}
-<p class="word-break">Therefore:<br>
-    ({{.Decimal}})<sub>10</sub> = (<span class="word-break">{{.Answer}}</span>)<sub>{{.Base}}</sub></p>
+
+<h6>Therefore:</h6>
+
+<p class="word-break">({{.Decimal}})<sub>10</sub> = (<span class="word-break">{{.Answer}}</span>)<sub>{{.Base}}</sub>
+</p>

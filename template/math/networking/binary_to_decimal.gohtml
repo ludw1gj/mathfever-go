@@ -1,16 +1,20 @@
-<p>Here we will convert the binary number {{.Binary}} to decimal.</p>
+<h6>Answer:</h6>
+
+<p>The binary number <b>{{.Binary}}</b> in decimal is <b>{{.Answer}}</b>.</p>
+
+<h6>Here's how to convert it:</h6>
 
 <p>Using the following continuing equation the accurate answer can be found: (b x 2<sup>n</sup>)…<br>
     Where <strong>b</strong> is the binary number at the n<sup>th</sup> position and <strong>n</strong> is the
-    n<sup>th</sup> position.</p>
-
-<p>There are {{.LenBinary}} numbers in this binary number, the n<sup>th</sup> position starts from 0, and therefore
+    n<sup>th</sup> position.<br>
+    There are {{.LenBinary}} numbers in this binary number, the n<sup>th</sup> position starts from 0, and therefore
     the n<sup>th</sup> position goes up to {{.MaxPosition}} ({{.LenBinary}} - 1). Count down from {{.MaxPosition}}
     and insert the binary number at that position.</p>
 
-<p>The binary number <span class="word-break">{{.Binary}}</span> would be:<br>
+<p>Using the equation for the binary number <span class="word-break">{{.Binary}}</span>, it would go like this:<br>
     {{range .Proof}}{{.}}<br>{{end}}
     <span class="word-break">{{.Binary}}</span> = <span class="word-break">{{.Answer}}</span></p>
 
-<p class="word-break">Therefore:<br>
-    ({{.Binary}})<sub>2</sub> = ({{.Answer}})<sub>10</sub></p>
+<h6>Therefore:</h6>
+
+<p class="word-break">({{.Binary}})<sub>2</sub> = ({{.Answer}})<sub>10</sub></p>

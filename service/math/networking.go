@@ -159,7 +159,7 @@ func decimalToBinaryHexadecimal(decimal int, base int) (s string, err error) {
 func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 	var binaries bytes.Buffer
 	var proof bytes.Buffer
-	var answer string
+
 	var buf bytes.Buffer
 	for _, char := range hexadecimal {
 		decimalChar, err := strconv.ParseInt(string(char), 16, 0)
@@ -182,7 +182,6 @@ func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 		fmt.Fprintf(&proof, "(%s)<sub>16</sub> = (%s)<sub>2</sub><br>", string(char), binary)
 	}
 	binaries.Truncate(len(binaries.String()) - 1)
-	answer = fmt.Sprintf("(%s)<sub></sub> = (%s)<sub></sub>", hexadecimal, binaries.String())
 
 	data := struct {
 		Hexadecimal string
@@ -193,7 +192,7 @@ func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 		hexadecimal,
 		proof.String(),
 		binaries.String(),
-		answer,
+		binaries.String(),
 	}
 	tplFile := filepath.Join(networkingTplDir, "hexadecimal_to_binary.gohtml")
 	return parseTemplate(tplFile, data)
@@ -205,7 +204,7 @@ func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
 	var proof1 bytes.Buffer
 	var proof2 [4]string
 	var proof2Buf [4]bytes.Buffer
-	var result int64
+	var answer int64
 	for _, char := range hexadecimal {
 		decimal, err := strconv.ParseInt(string(char), 16, 0)
 		if err != nil {
@@ -215,7 +214,7 @@ func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
 		decimals = append(decimals, decimal)
 		power := int64(math.Pow(16, float64(hexLength)))
 		multiplied := decimal * power
-		result += multiplied
+		answer += multiplied
 
 		fmt.Fprintf(&proof1, "(%s)<sub>16</sub> = (%d)<sub>10</sub><br>", string(char), decimal)
 
@@ -224,7 +223,7 @@ func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
 		fmt.Fprintf(&proof2Buf[2], "%d + ", decimal*power)
 		hexLength--
 	}
-	fmt.Fprintf(&proof2Buf[3], "%d + ", result)
+	fmt.Fprintf(&proof2Buf[3], "%d + ", answer)
 
 	for i, line := range proof2Buf {
 		proof2Buf[i].Truncate(len(line.String()) - 3)
@@ -235,12 +234,12 @@ func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
 		Hexadecimal string
 		Proof1      string
 		Proof2      [4]string
-		Result      int64
+		Answer      int64
 	}{
 		hexadecimal,
 		proof1.String(),
 		proof2,
-		result,
+		answer,
 	}
 	tplFile := filepath.Join(networkingTplDir, "hexadecimal_to_decimal.gohtml")
 	return parseTemplate(tplFile, data)

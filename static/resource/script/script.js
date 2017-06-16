@@ -185,6 +185,7 @@ function submitAjax(data) {
         }
     };
     request.onerror = function () {
+        document.getElementById("loading-spinner-container").style.opacity = 0;
         displayCalcCard('There was a connection issue. Check your internet connection or the sever might be down.')
     };
     request.setRequestHeader('Content-Type', 'application/json');
