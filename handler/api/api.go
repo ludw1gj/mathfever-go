@@ -1,3 +1,4 @@
+// Package api contains handlers for api routes.
 package api
 
 import (
@@ -18,8 +19,8 @@ type errorJson struct {
 }
 
 // DoCalculation handles the api calculation route. It decodes the client's json input into a type MathAPI struct,
-// verifies it has the correct fields and value types, and executes the associated calculation's math function
-// returning a json response of the output.
+// verifies that it has the correct fields and value types, and executes the associated calculation's math function
+// returning the result as a json response.
 func DoCalculation(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 

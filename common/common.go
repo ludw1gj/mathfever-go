@@ -1,3 +1,4 @@
+// Package common contains utility functions used by other packages.
 package common
 
 import "strings"

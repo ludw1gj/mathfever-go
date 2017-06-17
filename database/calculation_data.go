@@ -61,6 +61,7 @@ var (
 			&service.HexadecimalToDecimalAPI{},
 			&networking,
 		},
+
 		// Numbers
 		{
 			"Find if Number is a Prime Number",
@@ -86,6 +87,7 @@ var (
 			&service.LowestCommonMultipleAPI{},
 			&numbers,
 		},
+
 		// Percentages
 		{
 			"Change Number by Percentage",
@@ -119,6 +121,7 @@ var (
 			&service.PercentageFromNumberAPI{},
 			&percentages,
 		},
+
 		// Total Surface Area
 		{
 			"Pythagorean Theorem",
@@ -184,8 +187,8 @@ func genInputInfo(input service.MathAPI) (inputs []model.CalculationInput) {
 
 	for i := 0; i < val.Type().NumField(); i++ {
 		var data model.CalculationInput
-		if val.Type().Field(i).Tag.Get("name") == genDescCalculation("") {
-			log.Fatalf("Error: %s struct does not have 'name' tag", val.Type().Name())
+		if val.Type().Field(i).Tag.Get("name") == "" {
+			log.Fatalf("Error: %s struct must have 'name' tag", val.Type().Name())
 		} else {
 			data = model.CalculationInput{
 				Name: val.Type().Field(i).Tag.Get("name"),

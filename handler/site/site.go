@@ -1,3 +1,4 @@
+// Package site contains handlers for site routes.
 package site
 
 import (
