@@ -1,10 +1,4 @@
 /*Base Template*/
-#main-heading {
-    margin-left: 5%;
-    font-family: 'Roboto Thin', sans-serif;
-    font-weight: 200;
-}
-
 #page-content {
     min-height: 90vh;
 }
@@ -50,6 +44,7 @@
 /*Calculation Template*/
 .calculation-page-heading a {
     margin-left: 5%;
+    margin-right: 5%;
     font-family: 'Roboto Thin', sans-serif;
     font-weight: 200;
     text-decoration: none;
@@ -135,6 +130,13 @@
 }
 
 /*Misc*/
+.main-heading {
+    margin-left: 5%;
+    margin-right: 5%;
+    font-family: 'Roboto Thin', sans-serif;
+    font-weight: 200;
+}
+
 .small-caps {
     font-variant: small-caps;
 }

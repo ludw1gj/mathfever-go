@@ -9,7 +9,7 @@ Golang >=1.8
 `go get github.com/FriedPigeon/go-mathfever`
 * To run in development:
 `go run main.go -dev=true`
-* Access via http://localhost:8080
+* Access via http://localhost:8000
 * To build: `go build` `./go-mathfever`
 
 ## Authors
