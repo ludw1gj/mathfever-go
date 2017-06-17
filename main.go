@@ -8,5 +8,6 @@ import (
 )
 
 func main() {
-	log.Fatal(http.ListenAndServe(":8080", router.Router))
+	log.Println("mathfever.xyz listening on port 8000...")
+	log.Fatal(http.ListenAndServe(":8000", router.Router))
 }

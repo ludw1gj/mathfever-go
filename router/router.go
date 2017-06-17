@@ -1,3 +1,5 @@
+// Package router initialises a mux.Router instance and registers Site/API routes including
+// a file server for development use.
 package router
 
 import (
@@ -10,6 +12,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Router to be used by http.ListenAndServe on which Site/API routes are registered to.
 var Router *mux.Router
 
 func init() {

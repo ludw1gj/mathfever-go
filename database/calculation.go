@@ -6,10 +6,12 @@ import (
 	"github.com/FriedPigeon/mathfever-go/model"
 )
 
+// GetAllCalculations returns all of type Calculation that is stored.
 func GetAllCalculations() []model.Calculation {
 	return calculationData
 }
 
+// GetCalculationBySlug returns a single Calculation matching the slug of Calculation.Name.
 func GetCalculationBySlug(slug string) (c model.Calculation, err error) {
 	for _, calc := range GetAllCalculations() {
 		if genSlug(calc.Name) == slug {
@@ -19,6 +21,7 @@ func GetCalculationBySlug(slug string) (c model.Calculation, err error) {
 	return c, errors.New("Calculation does not exist.")
 }
 
+// GetCalculationsByCategoryName returns an array of Calculation that match Category.Name.
 func GetCalculationsByCategoryName(categoryName string) (c []model.Calculation, err error) {
 	for _, calc := range GetAllCalculations() {
 		if calc.Category.Name == categoryName {
@@ -31,6 +34,7 @@ func GetCalculationsByCategoryName(categoryName string) (c []model.Calculation, 
 	return c, err
 }
 
+// GetCalculationsByCategorySlug returns an array of Calculation that match the slug of Category.Name.
 func GetCalculationsByCategorySlug(categorySlug string) (c []model.Calculation, err error) {
 	for _, calc := range GetAllCalculations() {
 		if genSlug(calc.Category.Name) == categorySlug {
