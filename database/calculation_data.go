@@ -179,15 +179,15 @@ var (
 	}
 )
 
-func genInputInfo(input service.MathAPI) (inputs []model.CalculationInputInfo) {
+func genInputInfo(input service.MathAPI) (inputs []model.CalculationInput) {
 	val := reflect.ValueOf(input)
 
 	for i := 0; i < val.Type().NumField(); i++ {
-		var data model.CalculationInputInfo
+		var data model.CalculationInput
 		if val.Type().Field(i).Tag.Get("name") == genDescCalculation("") {
 			log.Fatalf("Error: %s struct does not have 'name' tag", val.Type().Name())
 		} else {
-			data = model.CalculationInputInfo{
+			data = model.CalculationInput{
 				Name: val.Type().Field(i).Tag.Get("name"),
 				Tag:  val.Type().Field(i).Tag.Get("json"),
 			}
