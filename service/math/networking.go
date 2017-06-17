@@ -11,6 +11,7 @@ import (
 
 var networkingTplDir = filepath.Join(tplDir, "networking")
 
+// BinaryToDecimal outputs the proof and answer of a binary to decimal conversion.
 func BinaryToDecimal(binary string) (s string, err error) {
 	lenBinary := len(binary)
 	n := lenBinary - 1
@@ -54,6 +55,7 @@ func BinaryToDecimal(binary string) (s string, err error) {
 	return parseTemplate(tplFile, data)
 }
 
+// BinaryToHexadecimal outputs the proof and answer of a binary to hexadecimal conversion.
 func BinaryToHexadecimal(binary string) (s string, err error) {
 	zeroedBinary := binary
 	nLength := len(zeroedBinary)
@@ -98,10 +100,12 @@ func BinaryToHexadecimal(binary string) (s string, err error) {
 	return parseTemplate(tplFile, data)
 }
 
+// DecimalToBinary outputs the proof and answer of a decimal to binary conversion.
 func DecimalToBinary(decimal int) (string, error) {
 	return decimalToBinaryHexadecimal(decimal, 2)
 }
 
+// DecimalToHexadecimal outputs the proof and answer of a decimal to hexadecimal conversion.
 func DecimalToHexadecimal(decimal int) (string, error) {
 	return decimalToBinaryHexadecimal(decimal, 16)
 }
@@ -156,6 +160,7 @@ func decimalToBinaryHexadecimal(decimal int, base int) (s string, err error) {
 	return parseTemplate(tplFile, data)
 }
 
+// HexadecimalToBinary outputs the proof and answer of a hexadecimal to binary conversion.
 func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 	var binaries bytes.Buffer
 	var proof bytes.Buffer
@@ -198,6 +203,7 @@ func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 	return parseTemplate(tplFile, data)
 }
 
+// HexadecimalToBinary outputs the proof and answer of a hexadecimal to decimal conversion.
 func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
 	hexLength := len(hexadecimal) - 1
 	var decimals []int64

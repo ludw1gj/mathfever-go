@@ -103,6 +103,7 @@ func findPrimeFactors(n int) ([]int, string, string, map[int]int) {
 	return primeFactors, table.String(), proof.String(), factorFrequency
 }
 
+// HighestCommonFactor outputs the proof and answer of calculating the highest common factor of two numbers.
 func HighestCommonFactor(n1 int, n2 int) (string, error) {
 	primeFactors1, table1, proof1, _ := findPrimeFactors(n1)
 	primeFactors2, table2, proof2, _ := findPrimeFactors(n2)
@@ -154,6 +155,7 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 	return parseTemplate(tpl, data)
 }
 
+// LowestCommonMultiple outputs the proof and answer of calculating the lowest common multiple of two numbers.
 func LowestCommonMultiple(n1 int, n2 int) (string, error) {
 	_, table1, proof1, factorFrequency1 := findPrimeFactors(n1)
 	_, table2, proof2, factorFrequency2 := findPrimeFactors(n2)

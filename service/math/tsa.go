@@ -7,6 +7,7 @@ import (
 
 var tsaTplDir = filepath.Join(tplDir, "tsa")
 
+// PercentageFromNumber outputs the proof and answer of finding the hypotenuse using the pythagorean theorem.
 func TSAPythagoreanTheorem(a float64, b float64) (string, error) {
 	/*
 		Use the Pythagorean Theorem to find side lengths (a or b), or the hypotenuse (c) of a right-angle triangle.
@@ -46,6 +47,7 @@ func TSAPythagoreanTheorem(a float64, b float64) (string, error) {
 	return parseTemplate(tplFile, data)
 }
 
+// TsaCone outputs the proof and answer of finding the total surface area of a cone.
 func TsaCone(radius float64, slantHeight float64) (string, error) {
 	/*
 		Find the Total Surface Area of a sphere, with the equation:
@@ -75,6 +77,7 @@ func TsaCone(radius float64, slantHeight float64) (string, error) {
 	return parseTemplate(tplFile, data)
 }
 
+// TsaCube outputs the proof and answer of finding the total surface area of a cube.
 func TsaCube(length float64) (string, error) {
 	/*
 		Find the Total Surface Area of a cube, with the equation:
@@ -96,6 +99,7 @@ func TsaCube(length float64) (string, error) {
 	return parseTemplate(tplFile, data)
 }
 
+// TsaCylinder outputs the proof and answer of finding the total surface area of a cylinder.
 func TsaCylinder(radius float64, height float64) (string, error) {
 	/*
 		Find the Total Surface Area of a cylinder, with the equation:
@@ -130,6 +134,7 @@ func TsaCylinder(radius float64, height float64) (string, error) {
 	return parseTemplate(tplFile, data)
 }
 
+// TsaRectangularPrism outputs the proof and answer of finding the total surface area of a rectangular prism.
 func TsaRectangularPrism(height float64, length float64, width float64) (string, error) {
 	/*
 		Find the Total Surface Area of a rectangular prism, with the equation:
@@ -155,6 +160,7 @@ func TsaRectangularPrism(height float64, length float64, width float64) (string,
 	return parseTemplate(tplFile, data)
 }
 
+// TsaSphere outputs the proof and answer of finding the total surface area of a sphere.
 func TsaSphere(radius float64) (string, error) {
 	/*
 		Find the Total Surface Area of a sphere, with the equation:
@@ -173,6 +179,7 @@ func TsaSphere(radius float64) (string, error) {
 	return parseTemplate(tplFile, data)
 }
 
+// TsaSquareBaseTriangle outputs the proof and answer of finding the total surface area of a square base triangle.
 func TsaSquareBaseTriangle(baseLength float64, height float64) (string, error) {
 	/*
 		Find the Total Surface Area of a square based triangle, with the equation:

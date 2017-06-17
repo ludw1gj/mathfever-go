@@ -19,6 +19,6 @@ type Calculation struct {
 
 // CalculationInput describes an input name and input json field of a calculation.
 type CalculationInput struct {
-	Name string `json:"name"` // name of input. eg. Side A
-	Tag  string `json:"tag"`  // json field of Name. eg. side_a
+	Name string `json:"name"` // name of input eg. Side A
+	Tag  string `json:"tag"`  // json field of Name eg. side_a
 }
