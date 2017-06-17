@@ -1,4 +1,4 @@
-// Package router initialises a mux.Router instance and registers Site/API routes including
+// Package router initialises a mux.Router instance and registers site/api routes including
 // a file server for development use.
 package router
 
@@ -12,13 +12,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// Router to be used by http.ListenAndServe on which Site/API routes are registered to.
+// Router to be used by http.ListenAndServe on which site/api routes are registered to.
 var Router *mux.Router
 
 func init() {
 	Router = mux.NewRouter().StrictSlash(true)
 
-	// Site Routes
+	// site routes
 	Router.HandleFunc("/", site.Home).Methods("GET")
 	Router.HandleFunc("/about", site.About).Methods("GET")
 	Router.HandleFunc("/help", site.Help).Methods("GET")
@@ -30,7 +30,7 @@ func init() {
 	Router.HandleFunc("/category/{category}/{calculation}", site.CalculationPage).Methods("GET")
 	Router.NotFoundHandler = http.HandlerFunc(site.NotFound)
 
-	// Static Files Handler in Dev mode
+	// static files handler in dev mode
 	boolPtr := flag.Bool("dev", false, "Use in development")
 	flag.Parse()
 	if *boolPtr {
@@ -38,7 +38,7 @@ func init() {
 		Router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 	}
 
-	// API Routes
+	// api routes
 	apiRouter := Router.PathPrefix("/api").Subrouter()
 	apiRouter.HandleFunc("/category/{category}/{calculation}", api.DoCalculation).Methods("POST")
 	apiRouter.NotFoundHandler = http.HandlerFunc(api.NotFoundAPI)

@@ -9,7 +9,7 @@ import (
 // Calculation holds information about a calculation and links to a service.MathAPI to
 // execute calculation math function.
 type Calculation struct {
-	Name        string                 `json:"name"`        // the name of the calculation
+	Name        string                 `json:"name"`        // name of the calculation
 	Description string                 `json:"description"` // describes the calculation
 	InputInfo   []CalculationInputInfo `json:"input_info"`  // contains the names of the inputs and their json tags
 	Example     template.HTML          `json:"example"`     // example of output of calculation math function
@@ -17,6 +17,7 @@ type Calculation struct {
 	Category    *Category              `json:"-"`           // a Calculation should 'belong' a Category
 }
 
+// CalculationInputInfo describes an input name and input json field of a calculation.
 type CalculationInputInfo struct {
 	Name string `json:"name"` // name of the required input. eg. Side A
 	Tag  string `json:"tag"`  // json field name of Name. eg. side_a

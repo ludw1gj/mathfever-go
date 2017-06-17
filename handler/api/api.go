@@ -17,6 +17,9 @@ type errorJson struct {
 	Error string `json:"error"`
 }
 
+// DoCalculation handles the api calculation route. It decodes the client's json input into a type MathAPI struct,
+// verifies it has the correct fields and value types, and executes the associated calculation's math function
+// returning a json response of the output.
 func DoCalculation(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -99,6 +102,7 @@ func verifyJsonInput(apiInput service.MathAPI) error {
 	return nil
 }
 
+// NotFoundAPI returns a 404 error to the client and send an a json response that the api route was not found.
 func NotFoundAPI(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNotFound)

@@ -3,10 +3,11 @@ package database
 import (
 	"errors"
 
+	"github.com/FriedPigeon/mathfever-go/common"
 	"github.com/FriedPigeon/mathfever-go/model"
 )
 
-// GetAllCalculations returns all of type Calculation that is stored.
+// GetAllCalculations returns all calculations.
 func GetAllCalculations() []model.Calculation {
 	return calculationData
 }
@@ -14,7 +15,7 @@ func GetAllCalculations() []model.Calculation {
 // GetCalculationBySlug returns a single Calculation matching the slug of Calculation.Name.
 func GetCalculationBySlug(slug string) (c model.Calculation, err error) {
 	for _, calc := range GetAllCalculations() {
-		if genSlug(calc.Name) == slug {
+		if common.GenSlug(calc.Name) == slug {
 			return calc, nil
 		}
 	}
@@ -37,7 +38,7 @@ func GetCalculationsByCategoryName(categoryName string) (c []model.Calculation, 
 // GetCalculationsByCategorySlug returns an array of Calculation that match the slug of Category.Name.
 func GetCalculationsByCategorySlug(categorySlug string) (c []model.Calculation, err error) {
 	for _, calc := range GetAllCalculations() {
-		if genSlug(calc.Category.Name) == categorySlug {
+		if common.GenSlug(calc.Category.Name) == categorySlug {
 			c = append(c, calc)
 		}
 	}
