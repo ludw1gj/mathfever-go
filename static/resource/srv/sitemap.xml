@@ -6,157 +6,157 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
     <url>
-        <loc>https://mathfever.xyz/</loc>
+        <loc>https://www.mathfever.xyz/</loc>
         <changefreq>monthly</changefreq>
         <priority>1.00</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/message-board</loc>
+        <loc>https://www.mathfever.xyz/message-board</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/about</loc>
+        <loc>https://www.mathfever.xyz/about</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/help</loc>
+        <loc>https://www.mathfever.xyz/help</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/networking</loc>
+        <loc>https://www.mathfever.xyz/category/networking</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/networking/binary-to-decimal</loc>
+        <loc>https://www.mathfever.xyz/category/networking/binary-to-decimal</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/networking/binary-to-hexadecimal</loc>
+        <loc>https://www.mathfever.xyz/category/networking/binary-to-hexadecimal</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/networking/decimal-to-binary</loc>
+        <loc>https://www.mathfever.xyz/category/networking/decimal-to-binary</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/networking/decimal-to-hexadecimal</loc>
+        <loc>https://www.mathfever.xyz/category/networking/decimal-to-hexadecimal</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/networking/hexadecimal-to-binary</loc>
+        <loc>https://www.mathfever.xyz/category/networking/hexadecimal-to-binary</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/networking/hexadecimal-to-decimal</loc>
+        <loc>https://www.mathfever.xyz/category/networking/hexadecimal-to-decimal</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/primes-and-factors</loc>
+        <loc>https://www.mathfever.xyz/category/primes-and-factors</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/primes-and-factors/find-if-number-is-a-prime-number</loc>
+        <loc>https://www.mathfever.xyz/category/primes-and-factors/find-if-number-is-a-prime-number</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/primes-and-factors/highest-common-factor</loc>
+        <loc>https://www.mathfever.xyz/category/primes-and-factors/highest-common-factor</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/primes-and-factors/lowest-common-multiple</loc>
+        <loc>https://www.mathfever.xyz/category/primes-and-factors/lowest-common-multiple</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/percentages</loc>
+        <loc>https://www.mathfever.xyz/category/percentages</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/percentages/change-number-by-percentage</loc>
+        <loc>https://www.mathfever.xyz/category/percentages/change-number-by-percentage</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/percentages/get-number-from-a-percentage</loc>
+        <loc>https://www.mathfever.xyz/category/percentages/get-number-from-a-percentage</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/percentages/find-percentage-difference-of-two-numbers</loc>
+        <loc>https://www.mathfever.xyz/category/percentages/find-percentage-difference-of-two-numbers</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/percentages/find-percentage-of-a-number</loc>
+        <loc>https://www.mathfever.xyz/category/percentages/find-percentage-of-a-number</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/total-surface-area</loc>
+        <loc>https://www.mathfever.xyz/category/total-surface-area</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/total-surface-area/pythagorean-theorem</loc>
+        <loc>https://www.mathfever.xyz/category/total-surface-area/pythagorean-theorem</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/total-surface-area/cone</loc>
+        <loc>https://www.mathfever.xyz/category/total-surface-area/cone</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/total-surface-area/cube</loc>
+        <loc>https://www.mathfever.xyz/category/total-surface-area/cube</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/total-surface-area/cylinder</loc>
+        <loc>https://www.mathfever.xyz/category/total-surface-area/cylinder</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/total-surface-area/rectangular-prism</loc>
+        <loc>https://www.mathfever.xyz/category/total-surface-area/rectangular-prism</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/total-surface-area/sphere</loc>
+        <loc>https://www.mathfever.xyz/category/total-surface-area/sphere</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/total-surface-area/square-based-triangle</loc>
+        <loc>https://www.mathfever.xyz/category/total-surface-area/square-based-triangle</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/terms</loc>
+        <loc>https://www.mathfever.xyz/terms</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/privacy</loc>
+        <loc>https://www.mathfever.xyz/privacy</loc>
         <changefreq>monthly</changefreq>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://mathfever.xyz/category/networking/conversion-table</loc>
+        <loc>https://www.mathfever.xyz/category/networking/conversion-table</loc>
         <changefreq>monthly</changefreq>
         <priority>0.64</priority>
     </url>
