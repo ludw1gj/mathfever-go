@@ -7,7 +7,7 @@ import (
 
 var tsaTplDir = filepath.Join(tplDir, "tsa")
 
-// PercentageFromNumber outputs the proof and answer of finding the hypotenuse using the pythagorean theorem.
+// TSAPythagoreanTheorem outputs the proof and answer of finding the hypotenuse using the pythagorean theorem.
 func TSAPythagoreanTheorem(a float64, b float64) (string, error) {
 	/*
 		Use the Pythagorean Theorem to find side lengths (a or b), or the hypotenuse (c) of a right-angle triangle.
