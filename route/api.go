@@ -1,5 +1,4 @@
-// Package api contains handlers for api routes.
-package api
+package route
 
 import (
 	"bytes"
@@ -9,26 +8,26 @@ import (
 	"net/http"
 	"reflect"
 
+	"github.com/FriedPigeon/mathfever-go/api"
 	"github.com/FriedPigeon/mathfever-go/database"
-	"github.com/FriedPigeon/mathfever-go/service"
 	"github.com/gorilla/mux"
 )
 
-type errorJson struct {
+type errorJSON struct {
 	Error string `json:"error"`
 }
 
-// DoCalculation handles the api calculation route. It decodes the client's json input into a type MathAPI struct,
+// doCalculation handles the api calculation route. It decodes the client's json input into a type MathAPI struct,
 // verifies that it has the correct fields and value types, and executes the associated calculation's math function
 // returning the result as a json response.
-func DoCalculation(w http.ResponseWriter, r *http.Request) {
+func doCalculation(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	calculationSlug := mux.Vars(r)["calculation"]
 	calculation, err := database.GetCalculationBySlug(calculationSlug)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(errorJson{err.Error()})
+		json.NewEncoder(w).Encode(errorJSON{err.Error()})
 		return
 	}
 
@@ -37,15 +36,15 @@ func DoCalculation(w http.ResponseWriter, r *http.Request) {
 	err = decoder.Decode(&calculation.Math)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(errorJson{genJsonError(calculation.Math).Error()})
+		json.NewEncoder(w).Encode(errorJSON{genJSONError(calculation.Math).Error()})
 		return
 	}
 
 	// verify input
-	err = verifyJsonInput(calculation.Math)
+	err = verifyJSONInput(calculation.Math)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(errorJson{err.Error()})
+		json.NewEncoder(w).Encode(errorJSON{err.Error()})
 		return
 	}
 
@@ -53,7 +52,7 @@ func DoCalculation(w http.ResponseWriter, r *http.Request) {
 	s, err := calculation.Math.ExecuteMath()
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(errorJson{err.Error()})
+		json.NewEncoder(w).Encode(errorJSON{err.Error()})
 		return
 	}
 	json.NewEncoder(w).Encode(struct {
@@ -61,7 +60,15 @@ func DoCalculation(w http.ResponseWriter, r *http.Request) {
 	}{s})
 }
 
-func genJsonError(apiInput service.MathAPI) error {
+// notFoundAPI returns a 404 error to the client and send an a json response that the api route was not found.
+func notFoundAPI(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNotFound)
+
+	json.NewEncoder(w).Encode(errorJSON{"api route not found"})
+}
+
+func genJSONError(apiInput api.MathAPI) error {
 	val := reflect.ValueOf(apiInput)
 	v := reflect.Indirect(val)
 
@@ -80,7 +87,7 @@ func genJsonError(apiInput service.MathAPI) error {
 	return errors.New(buf.String())
 }
 
-func verifyJsonInput(apiInput service.MathAPI) error {
+func verifyJSONInput(apiInput api.MathAPI) error {
 	val := reflect.ValueOf(apiInput)
 	v := reflect.Indirect(val)
 
@@ -88,25 +95,17 @@ func verifyJsonInput(apiInput service.MathAPI) error {
 		switch v.Field(i).Type().Kind() {
 		case reflect.String:
 			if v.Field(i).String() == "" {
-				return genJsonError(apiInput)
+				return genJSONError(apiInput)
 			}
 		case reflect.Int:
 			if v.Field(i).Int() == 0 {
-				return genJsonError(apiInput)
+				return genJSONError(apiInput)
 			}
 		case reflect.Float64:
 			if v.Field(i).Float() == 0 {
-				return genJsonError(apiInput)
+				return genJSONError(apiInput)
 			}
 		}
 	}
 	return nil
-}
-
-// NotFoundAPI returns a 404 error to the client and send an a json response that the api route was not found.
-func NotFoundAPI(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusNotFound)
-
-	json.NewEncoder(w).Encode(errorJson{"api route not found"})
 }

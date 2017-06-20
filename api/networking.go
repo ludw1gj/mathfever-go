@@ -3,7 +3,7 @@
 // executed in the ExecuteMath method. The struct values have field of json and a field of name.
 // These are used to populate the model.CalculationInput model, used in model.Calculation.CalculationInput.
 
-package service
+package api
 
 import (
 	"github.com/FriedPigeon/mathfever-go/math"

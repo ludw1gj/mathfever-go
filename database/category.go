@@ -2,37 +2,47 @@ package database
 
 import (
 	"errors"
-
-	"github.com/FriedPigeon/mathfever-go/common"
-	"github.com/FriedPigeon/mathfever-go/model"
 )
 
+// calculation holds information about a category of calculations.
+type category struct {
+	Name        string `json:"name"`        // name of category
+	ImageURL    string `json:"image_url"`   // url of image for category
+	Description string `json:"description"` // describes the category
+}
+
+// categoryWithCalculations hold a category and it's calculations.
+type categoryWithCalculations struct {
+	Category     category      `json:"category"`     // the category
+	Calculations []calculation `json:"calculations"` // the calculations belonging to the category
+}
+
 // GetAllCategories returns all categories.
-func GetAllCategories() []model.Category {
+func GetAllCategories() []category {
 	return categoryData
 }
 
-// GetCategoryBySlug returns a single Category matching the slug of Category.Name.
-func GetCategoryBySlug(slug string) (c model.Category, err error) {
+// GetCategoryBySlug returns a single category matching the slug of category.Name.
+func GetCategoryBySlug(slug string) (c category, err error) {
 	for _, categ := range GetAllCategories() {
-		if common.GenSlug(categ.Name) == slug {
+		if genSlug(categ.Name) == slug {
 			return categ, nil
 		}
 	}
-	return c, errors.New("Category does not exist.")
+	return c, errors.New("category does not exist.")
 }
 
 // GetAllCategoriesWithCalculations returns all categories with all their calculations.
-func GetAllCategoriesWithCalculations() []model.CategoryWithCalculations {
+func GetAllCategoriesWithCalculations() []categoryWithCalculations {
 	return categoriesData
 }
 
-// GetCategoryWithCalculationsBySlug returns a category with its calculations, matching the slug of Category.Name.
-func GetCategoryWithCalculationsBySlug(slug string) (c model.CategoryWithCalculations, err error) {
+// GetCategoryWithCalculationsBySlug returns a category with its calculations, matching the slug of category.Name.
+func GetCategoryWithCalculationsBySlug(slug string) (c categoryWithCalculations, err error) {
 	categ, err := GetCategoryBySlug(slug)
 	if err != nil {
-		return c, errors.New("Category does not exist.")
+		return c, errors.New("category does not exist.")
 	}
 	calcs, _ := GetCalculationsByCategorySlug(slug)
-	return model.CategoryWithCalculations{Category: categ, Calculations: calcs}, nil
+	return categoryWithCalculations{Category: categ, Calculations: calcs}, nil
 }
