@@ -40,7 +40,7 @@ type loader struct {
 }
 
 func load() {
-	tplDir := filepath.Join("template", "site")
+	tplDir := filepath.Join("templates", "site")
 
 	siteTpls := []loader{
 		{
