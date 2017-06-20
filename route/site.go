@@ -9,37 +9,37 @@ import (
 )
 
 // getHome handles the index page.
-func getHome(w http.ResponseWriter, _ *http.Request) {
+func getHomePage(w http.ResponseWriter, _ *http.Request) {
 	template.Render(w, "home", database.GetAllCategoriesWithCalculations())
 }
 
-// getAbout handles the about page.
-func getAbout(w http.ResponseWriter, _ *http.Request) {
+// getAboutPage handles the about page.
+func getAboutPage(w http.ResponseWriter, _ *http.Request) {
 	template.Render(w, "about", nil)
 }
 
-// getHelp handles the help page.
-func getHelp(w http.ResponseWriter, _ *http.Request) {
+// getHelpPage handles the help page.
+func getHelpPage(w http.ResponseWriter, _ *http.Request) {
 	template.Render(w, "help", nil)
 }
 
-// getPrivacy handles the privacy page.
-func getPrivacy(w http.ResponseWriter, _ *http.Request) {
+// getPrivacyPage handles the privacy page.
+func getPrivacyPage(w http.ResponseWriter, _ *http.Request) {
 	template.Render(w, "privacy", nil)
 }
 
-// getTerms handles the terms page.
-func getTerms(w http.ResponseWriter, _ *http.Request) {
+// getTermsPage handles the terms page.
+func getTermsPage(w http.ResponseWriter, _ *http.Request) {
 	template.Render(w, "terms", nil)
 }
 
-// getMessageBoard handles the message board page.
-func getMessageBoard(w http.ResponseWriter, _ *http.Request) {
+// getMessageBoardPage handles the message board page.
+func getMessageBoardPage(w http.ResponseWriter, _ *http.Request) {
 	template.Render(w, "messageBoard", nil)
 }
 
-// getConversionTable handles the conversion table page.
-func getConversionTable(w http.ResponseWriter, _ *http.Request) {
+// getConversionTablePage handles the conversion table page.
+func getConversionTablePage(w http.ResponseWriter, _ *http.Request) {
 	template.Render(w, "conversionTable", nil)
 }
 
@@ -49,7 +49,7 @@ func getCategoryPage(w http.ResponseWriter, r *http.Request) {
 	categorySlug := mux.Vars(r)["category"]
 	data, err := database.GetCategoryWithCalculationsBySlug(categorySlug)
 	if err != nil {
-		notFound(w, nil)
+		notFoundPage(w, nil)
 		return
 	}
 	template.Render(w, "category", data)
@@ -61,14 +61,14 @@ func getCalculationPage(w http.ResponseWriter, r *http.Request) {
 	calculationSlug := mux.Vars(r)["calculation"]
 	calculation, err := database.GetCalculationBySlug(calculationSlug)
 	if err != nil {
-		notFound(w, nil)
+		notFoundPage(w, nil)
 		return
 	}
 	template.Render(w, "calculation", calculation)
 }
 
-// notFound returns a 404 error to the client and renders the not found page.
-func notFound(w http.ResponseWriter, _ *http.Request) {
+// notFoundPage returns a 404 error to the client and renders the not found page.
+func notFoundPage(w http.ResponseWriter, _ *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
-	template.Render(w, "notFound", nil)
+	template.Render(w, "notFoundPage", nil)
 }

@@ -16,16 +16,16 @@ func Load() *mux.Router {
 	r := mux.NewRouter().StrictSlash(true)
 
 	// site routes
-	r.HandleFunc("/", getHome).Methods("GET")
-	r.HandleFunc("/about", getAbout).Methods("GET")
-	r.HandleFunc("/help", getHelp).Methods("GET")
-	r.HandleFunc("/privacy", getPrivacy).Methods("GET")
-	r.HandleFunc("/terms", getTerms).Methods("GET")
-	r.HandleFunc("/message-board", getMessageBoard).Methods("GET")
-	r.HandleFunc("/category/networking/conversion-table", getConversionTable).Methods("GET")
+	r.HandleFunc("/", getHomePage).Methods("GET")
+	r.HandleFunc("/about", getAboutPage).Methods("GET")
+	r.HandleFunc("/help", getHelpPage).Methods("GET")
+	r.HandleFunc("/privacy", getPrivacyPage).Methods("GET")
+	r.HandleFunc("/terms", getTermsPage).Methods("GET")
+	r.HandleFunc("/message-board", getMessageBoardPage).Methods("GET")
+	r.HandleFunc("/category/networking/conversion-table", getConversionTablePage).Methods("GET")
 	r.HandleFunc("/category/{category}", getCategoryPage).Methods("GET")
 	r.HandleFunc("/category/{category}/{calculation}", getCalculationPage).Methods("GET")
-	r.NotFoundHandler = http.HandlerFunc(notFound)
+	r.NotFoundHandler = http.HandlerFunc(notFoundPage)
 
 	// static files handler in dev mode
 	boolPtr := flag.Bool("dev", false, "Use in development")
