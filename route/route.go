@@ -28,9 +28,9 @@ func Load() *mux.Router {
 	r.NotFoundHandler = http.HandlerFunc(notFoundPage)
 
 	// static files handler in dev mode
-	boolPtr := flag.Bool("dev", false, "Use in development")
+	dev := flag.Bool("dev", false, "Use in development")
 	flag.Parse()
-	if *boolPtr {
+	if *dev {
 		fs := http.FileServer(http.Dir("./static"))
 		r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 	}
