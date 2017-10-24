@@ -9,7 +9,7 @@ import (
 	"reflect"
 
 	"github.com/FriedPigeon/mathfever-go/api"
-	"github.com/FriedPigeon/mathfever-go/database"
+	"github.com/FriedPigeon/mathfever-go/data"
 	"github.com/gorilla/mux"
 )
 
@@ -24,7 +24,7 @@ func doCalculation(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	calculationSlug := mux.Vars(r)["calculation"]
-	calculation, err := database.GetCalculationBySlug(calculationSlug)
+	calculation, err := data.GetCalculationBySlug(calculationSlug)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(errorJSON{err.Error()})

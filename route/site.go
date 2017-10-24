@@ -3,14 +3,14 @@ package route
 import (
 	"net/http"
 
-	"github.com/FriedPigeon/mathfever-go/database"
+	"github.com/FriedPigeon/mathfever-go/data"
 	"github.com/FriedPigeon/mathfever-go/template"
 	"github.com/gorilla/mux"
 )
 
 // getHome handles the index page.
 func getHomePage(w http.ResponseWriter, _ *http.Request) {
-	template.Render(w, "home", database.GetAllCategoriesWithCalculations())
+	template.Render(w, "home", data.GetAllCategoriesWithCalculations())
 }
 
 // getAboutPage handles the about page.
@@ -47,7 +47,7 @@ func getConversionTablePage(w http.ResponseWriter, _ *http.Request) {
 // by the client as a response.
 func getCategoryPage(w http.ResponseWriter, r *http.Request) {
 	categorySlug := mux.Vars(r)["category"]
-	data, err := database.GetCategoryWithCalculationsBySlug(categorySlug)
+	data, err := data.GetCategoryWithCalculationsBySlug(categorySlug)
 	if err != nil {
 		notFoundPage(w, nil)
 		return
@@ -59,7 +59,7 @@ func getCategoryPage(w http.ResponseWriter, r *http.Request) {
 // by the client as a response.
 func getCalculationPage(w http.ResponseWriter, r *http.Request) {
 	calculationSlug := mux.Vars(r)["calculation"]
-	calculation, err := database.GetCalculationBySlug(calculationSlug)
+	calculation, err := data.GetCalculationBySlug(calculationSlug)
 	if err != nil {
 		notFoundPage(w, nil)
 		return

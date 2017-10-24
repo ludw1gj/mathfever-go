@@ -50,7 +50,7 @@ func TSAPythagoreanTheorem(a float64, b float64) (string, error) {
 // TsaCone outputs the proof and answer of finding the total surface area of a cone.
 func TsaCone(radius float64, slantHeight float64) (string, error) {
 	/*
-		Find the Total Surface Area of a sphere, with the equation:
+		Find the Total Surface Area of a cone, with the equation:
 		Where S is Slant Height, r is radius
 		TSA     = tsa of base (circle) + tsa of curved surface
 			= πr^2 + πrS

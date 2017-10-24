@@ -1,5 +1,5 @@
-// Package database contains models, model data, and functions to retrieve data.
-package database
+// Package data contains models, model data, and functions to retrieve data.
+package data
 
 import "strings"
 

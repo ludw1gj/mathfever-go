@@ -14,7 +14,7 @@ func ChangeByPercentage(n float64, p float64) (string, error) {
 		(n / 100) * p + n
 
 		First work out 1% of 250, 250 ÷ 100 = 2.5 then multiply the answer by 23, because there
-		was a 23% increase in rainfall. 2.5 × 23 = 57.5.
+		was a 23% increase. 2.5 × 23 = 57.5.
 	*/
 	onePercent := n / 100
 	addValue := onePercent * p
