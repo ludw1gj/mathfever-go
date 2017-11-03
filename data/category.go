@@ -4,45 +4,45 @@ import (
 	"errors"
 )
 
-// calculation holds information about a category of calculations.
-type category struct {
+// Category holds information about a category of calculations.
+type Category struct {
 	Name        string `json:"name"`        // name of category
 	ImageURL    string `json:"image_url"`   // url of image for category
 	Description string `json:"description"` // describes the category
 }
 
-// categoryWithCalculations hold a category and it's calculations.
-type categoryWithCalculations struct {
-	Category     category      `json:"category"`     // the category
-	Calculations []calculation `json:"calculations"` // the calculations belonging to the category
+// CategoryWithCalculations hold a category and it's calculations.
+type CategoryWithCalculations struct {
+	Category     Category      `json:"category"`     // the category
+	Calculations []Calculation `json:"calculations"` // the calculations belonging to the category
 }
 
 // GetAllCategories returns all categories.
-func GetAllCategories() []category {
+func GetAllCategories() []Category {
 	return categoryData
 }
 
 // GetCategoryBySlug returns a single category matching the slug of category.Name.
-func GetCategoryBySlug(slug string) (c category, err error) {
-	for _, categ := range GetAllCategories() {
-		if genSlug(categ.Name) == slug {
-			return categ, nil
+func GetCategoryBySlug(slug string) (category Category, err error) {
+	for _, categories := range GetAllCategories() {
+		if genSlug(categories.Name) == slug {
+			return categories, nil
 		}
 	}
-	return c, errors.New("category does not exist.")
+	return category, errors.New("category does not exist")
 }
 
 // GetAllCategoriesWithCalculations returns all categories with all their calculations.
-func GetAllCategoriesWithCalculations() []categoryWithCalculations {
+func GetAllCategoriesWithCalculations() []CategoryWithCalculations {
 	return categoriesData
 }
 
 // GetCategoryWithCalculationsBySlug returns a category with its calculations, matching the slug of category.Name.
-func GetCategoryWithCalculationsBySlug(slug string) (c categoryWithCalculations, err error) {
-	categ, err := GetCategoryBySlug(slug)
+func GetCategoryWithCalculationsBySlug(slug string) (CategoryWithCalculations, error) {
+	category, err := GetCategoryBySlug(slug)
 	if err != nil {
-		return c, errors.New("category does not exist.")
+		return CategoryWithCalculations{}, errors.New("category does not exist")
 	}
-	calcs, _ := GetCalculationsByCategorySlug(slug)
-	return categoryWithCalculations{Category: categ, Calculations: calcs}, nil
+	calculations, _ := GetCalculationsByCategorySlug(slug)
+	return CategoryWithCalculations{Category: category, Calculations: calculations}, nil
 }

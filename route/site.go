@@ -47,12 +47,12 @@ func getConversionTablePage(w http.ResponseWriter, _ *http.Request) {
 // by the client as a response.
 func getCategoryPage(w http.ResponseWriter, r *http.Request) {
 	categorySlug := mux.Vars(r)["category"]
-	data, err := data.GetCategoryWithCalculationsBySlug(categorySlug)
+	categoryWithCalculations, err := data.GetCategoryWithCalculationsBySlug(categorySlug)
 	if err != nil {
 		notFoundPage(w, nil)
 		return
 	}
-	template.Render(w, "category", data)
+	template.Render(w, "category", categoryWithCalculations)
 }
 
 // getCalculationPage handles the calculation page, if the calculation exists, returns the calculation requested

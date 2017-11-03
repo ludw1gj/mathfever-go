@@ -203,7 +203,7 @@ func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 	return parseTemplate(tplFile, data)
 }
 
-// HexadecimalToBinary outputs the proof and answer of a hexadecimal to decimal conversion.
+// HexadecimalToDecimal outputs the proof and answer of a hexadecimal to decimal conversion.
 func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
 	hexLength := len(hexadecimal) - 1
 	var decimals []int64

@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	calculationData = []calculation{
+	calculationData = []Calculation{
 		// Networking
 		{
 			"Binary to Decimal",
@@ -205,7 +205,7 @@ func genDescCalculation(solving string) string {
 
 func genExample(s string, err error) template.HTML {
 	if err != nil {
-		log.Fatalln("Error when generating an example for calculation:", err)
+		log.Fatalln("error when generating an example for calculation:", err)
 	}
 	return template.HTML(s)
 }

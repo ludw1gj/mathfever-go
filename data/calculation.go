@@ -8,15 +8,15 @@ import (
 	"github.com/FriedPigeon/mathfever-go/api"
 )
 
-// calculation holds information about a calculation and links to a api.MathAPI to
+// Calculation holds information about a calculation and links to a api.MathAPI to
 // execute calculation math function.
-type calculation struct {
+type Calculation struct {
 	Name        string             `json:"name"`        // name of the calculation
 	Description string             `json:"description"` // describes the calculation
 	InputInfo   []CalculationInput `json:"input_info"`  // contains the names of the inputs and their json tags
 	Example     template.HTML      `json:"example"`     // example of output of calculation math function
 	Math        api.MathAPI        `json:"-"`           // accepts types such as BinaryToDecimalAPI
-	Category    *category          `json:"-"`           // a calculation should 'belong' to a Category
+	Category    *Category          `json:"-"`           // a calculation should 'belong' to a Category
 }
 
 // CalculationInput describes an input name and input json field of a calculation.
@@ -26,42 +26,42 @@ type CalculationInput struct {
 }
 
 // GetAllCalculations returns all calculations.
-func GetAllCalculations() []calculation {
+func GetAllCalculations() []Calculation {
 	return calculationData
 }
 
 // GetCalculationBySlug returns a single calculation matching the slug of calculation.Name.
-func GetCalculationBySlug(slug string) (c calculation, err error) {
-	for _, calc := range GetAllCalculations() {
-		if genSlug(calc.Name) == slug {
-			return calc, nil
+func GetCalculationBySlug(slug string) (Calculation, error) {
+	for _, calculation := range GetAllCalculations() {
+		if genSlug(calculation.Name) == slug {
+			return calculation, nil
 		}
 	}
-	return c, errors.New("calculation does not exist.")
+	return Calculation{}, errors.New("calculation does not exist")
 }
 
 // GetCalculationsByCategoryName returns an array of calculation that match Category.Name.
-func GetCalculationsByCategoryName(categoryName string) (c []calculation, err error) {
-	for _, calc := range GetAllCalculations() {
-		if calc.Category.Name == categoryName {
-			c = append(c, calc)
+func GetCalculationsByCategoryName(categoryName string) (calculations []Calculation, err error) {
+	for _, calculation := range GetAllCalculations() {
+		if calculation.Category.Name == categoryName {
+			calculations = append(calculations, calculation)
 		}
 	}
-	if len(c) == 0 {
-		return c, errors.New("No calculations found, category slug may be incorrect.")
+	if len(calculations) == 0 {
+		return calculations, errors.New("no calculations found, category slug may be incorrect")
 	}
-	return c, err
+	return calculations, nil
 }
 
 // GetCalculationsByCategorySlug returns an array of calculation that match the slug of Category.Name.
-func GetCalculationsByCategorySlug(categorySlug string) (c []calculation, err error) {
-	for _, calc := range GetAllCalculations() {
-		if genSlug(calc.Category.Name) == categorySlug {
-			c = append(c, calc)
+func GetCalculationsByCategorySlug(categorySlug string) (calculations []Calculation, err error) {
+	for _, calculation := range GetAllCalculations() {
+		if genSlug(calculation.Category.Name) == categorySlug {
+			calculations = append(calculations, calculation)
 		}
 	}
-	if len(c) == 0 {
-		return c, errors.New("No calculations found, category slug may be incorrect.")
+	if len(calculations) == 0 {
+		return calculations, errors.New("no calculations found, category slug may be incorrect")
 	}
-	return c, err
+	return calculations, nil
 }
