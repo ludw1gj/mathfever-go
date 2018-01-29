@@ -5,8 +5,6 @@ package route
 import (
 	"net/http"
 
-	"flag"
-
 	"github.com/gorilla/mux"
 )
 
@@ -27,13 +25,8 @@ func Load() *mux.Router {
 	r.HandleFunc("/category/{category}/{calculation}", getCalculationPage).Methods("GET")
 	r.NotFoundHandler = http.HandlerFunc(notFoundPage)
 
-	// static files handler in dev mode
-	dev := flag.Bool("dev", false, "Use in development")
-	flag.Parse()
-	if *dev {
-		fs := http.FileServer(http.Dir("./static"))
-		r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
-	}
+	fs := http.FileServer(http.Dir("./static"))
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 
 	// api routes
 	apiRouter := r.PathPrefix("/api").Subrouter()

@@ -6,7 +6,7 @@
 package api
 
 import (
-	"github.com/FriedPigeon/mathfever-go/math"
+	"github.com/robertjeffs/mathfever-go/math"
 )
 
 type IsPrimeAPI struct {

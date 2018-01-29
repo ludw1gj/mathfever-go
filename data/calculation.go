@@ -5,7 +5,7 @@ import (
 
 	"html/template"
 
-	"github.com/FriedPigeon/mathfever-go/api"
+	"github.com/robertjeffs/mathfever-go/api"
 )
 
 // Calculation holds information about a calculation and links to a api.MathAPI to

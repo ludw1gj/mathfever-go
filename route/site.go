@@ -3,9 +3,9 @@ package route
 import (
 	"net/http"
 
-	"github.com/FriedPigeon/mathfever-go/data"
-	"github.com/FriedPigeon/mathfever-go/template"
 	"github.com/gorilla/mux"
+	"github.com/robertjeffs/mathfever-go/data"
+	"github.com/robertjeffs/mathfever-go/template"
 )
 
 // getHome handles the index page.

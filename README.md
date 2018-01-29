@@ -11,12 +11,10 @@ oxtoacart/bpool
 ```
 go get github.com/gorilla/mux
 go get github.com/oxtoacart/bpool
-go get github.com/FriedPigeon/mathfever-go
+go get github.com/robertjeffs/mathfever-go
 ```
 
-* To run in development: `go run main.go -dev=true`
+* To run without building: `go run main.go`
 * Access via `http://localhost:8000`
-* To build: `go build` and to run: `./go-mathfever`
-
-## Authors
-* **FriedPigeon**
+* To build: `go build`
+* To run: `./go-mathfever`
