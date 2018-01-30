@@ -4,10 +4,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/robertjeffs/mathfever-go/route"
+	"github.com/robertjeffs/mathfever-go/controller/router"
 )
 
 func main() {
 	log.Println("mathfever.xyz listening on port 8000...")
-	log.Fatal(http.ListenAndServe(":8000", route.Load()))
+	log.Fatal(http.ListenAndServe(":8000", router.Load()))
 }
