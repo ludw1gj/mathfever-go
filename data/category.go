@@ -19,13 +19,13 @@ type CategoryWithCalculations struct {
 
 // GetAllCategories returns all categories.
 func GetAllCategories() []Category {
-	return categoryData
+	return categories
 }
 
 // GetCategoryBySlug returns a single category matching the slug of category.Name.
 func GetCategoryBySlug(slug string) (category Category, err error) {
 	for _, categories := range GetAllCategories() {
-		if genSlug(categories.Name) == slug {
+		if generateSlug(categories.Name) == slug {
 			return categories, nil
 		}
 	}
@@ -34,7 +34,7 @@ func GetCategoryBySlug(slug string) (category Category, err error) {
 
 // GetAllCategoriesWithCalculations returns all categories with all their calculations.
 func GetAllCategoriesWithCalculations() []CategoryWithCalculations {
-	return categoriesData
+	return categoriesWithCalculations
 }
 
 // GetCategoryWithCalculationsBySlug returns a category with its calculations, matching the slug of category.Name.

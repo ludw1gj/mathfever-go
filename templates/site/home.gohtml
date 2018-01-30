@@ -20,7 +20,7 @@
         <div class="home-card--text mdl-card__supporting-text">
             <ul>
                 {{range .Calculations -}}
-                <li><a href="{{genURL "category" .Category.Name .Name}}">{{.Name}}</a></li>
+                    <li><a href="{{genURL "category" .Category .Name}}">{{.Name}}</a></li>
                 {{- end}}
             </ul>
         </div>

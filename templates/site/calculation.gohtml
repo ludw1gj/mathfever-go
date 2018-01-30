@@ -1,10 +1,10 @@
-{{define "title"}}{{.Name}} | {{.Category.Name}} - MathFever{{end}}
+{{define "title"}}{{.Name}} | {{.Category}} - MathFever{{end}}
 {{define "meta"}}{{.Description}}{{end}}
 
 {{define "content" -}}
 <div class="calculation-page-heading">
     <!-- Main Heading -->
-    <h3><a href="{{genURL "category" .Category.Name}}">{{.Category.Name}}:</a></h3>
+    <h3><a href="{{genURL "category" .Category}}">{{.Category}}:</a></h3>
     <h2 class="main-heading">{{.Name}}</h2>
 </div>
 

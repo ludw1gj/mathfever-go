@@ -16,7 +16,7 @@ type Calculation struct {
 	InputInfo   []CalculationInput `json:"input_info"`  // contains the names of the inputs and their json tags
 	Example     template.HTML      `json:"example"`     // example of output of calculation math function
 	Math        api.MathAPI        `json:"-"`           // accepts types such as BinaryToDecimalAPI
-	Category    *Category          `json:"-"`           // a calculation should 'belong' to a Category
+	Category    string             `json:"-"`           // a calculation should 'belong' to a Category
 }
 
 // CalculationInput describes an input name and input json field of a calculation.
@@ -27,13 +27,13 @@ type CalculationInput struct {
 
 // GetAllCalculations returns all calculations.
 func GetAllCalculations() []Calculation {
-	return calculationData
+	return calculations
 }
 
 // GetCalculationBySlug returns a single calculation matching the slug of calculation.Name.
 func GetCalculationBySlug(slug string) (Calculation, error) {
 	for _, calculation := range GetAllCalculations() {
-		if genSlug(calculation.Name) == slug {
+		if generateSlug(calculation.Name) == slug {
 			return calculation, nil
 		}
 	}
@@ -43,7 +43,7 @@ func GetCalculationBySlug(slug string) (Calculation, error) {
 // GetCalculationsByCategoryName returns an array of calculation that match Category.Name.
 func GetCalculationsByCategoryName(categoryName string) (calculations []Calculation, err error) {
 	for _, calculation := range GetAllCalculations() {
-		if calculation.Category.Name == categoryName {
+		if calculation.Category == categoryName {
 			calculations = append(calculations, calculation)
 		}
 	}
@@ -56,7 +56,7 @@ func GetCalculationsByCategoryName(categoryName string) (calculations []Calculat
 // GetCalculationsByCategorySlug returns an array of calculation that match the slug of Category.Name.
 func GetCalculationsByCategorySlug(categorySlug string) (calculations []Calculation, err error) {
 	for _, calculation := range GetAllCalculations() {
-		if genSlug(calculation.Category.Name) == categorySlug {
+		if generateSlug(calculation.Category) == categorySlug {
 			calculations = append(calculations, calculation)
 		}
 	}

@@ -10,178 +10,178 @@ import (
 )
 
 var (
-	calculationData = []Calculation{
+	calculations = []Calculation{
 		// Networking
 		{
 			"Binary to Decimal",
-			genDescCalculation("Binary to Decimal"),
-			genInputInfo(api.BinaryToDecimalAPI{}),
-			genExample(api.BinaryToDecimalAPI{"10101"}.ExecuteMath()),
+			generateDescCalculation("Binary to Decimal"),
+			generateInputInfo(api.BinaryToDecimalAPI{}),
+			generateExample(api.BinaryToDecimalAPI{"10101"}.ExecuteMath()),
 			&api.BinaryToDecimalAPI{},
-			&networking,
+			"Networking",
 		},
 		{
 			"Binary to Hexadecimal",
-			genDescCalculation("Binary to Hexadecimal"),
-			genInputInfo(api.BinaryToHexadecimalAPI{}),
-			genExample(api.BinaryToHexadecimalAPI{"10111"}.ExecuteMath()),
+			generateDescCalculation("Binary to Hexadecimal"),
+			generateInputInfo(api.BinaryToHexadecimalAPI{}),
+			generateExample(api.BinaryToHexadecimalAPI{"10111"}.ExecuteMath()),
 			&api.BinaryToHexadecimalAPI{},
-			&networking,
+			"Networking",
 		},
 		{
 			"Decimal to Binary",
-			genDescCalculation("Decimal to Binary"),
-			genInputInfo(api.DecimalToBinaryAPI{}),
-			genExample(api.DecimalToBinaryAPI{21}.ExecuteMath()),
+			generateDescCalculation("Decimal to Binary"),
+			generateInputInfo(api.DecimalToBinaryAPI{}),
+			generateExample(api.DecimalToBinaryAPI{21}.ExecuteMath()),
 			&api.DecimalToBinaryAPI{},
-			&networking,
+			"Networking",
 		},
 		{
 			"Decimal to Hexadecimal",
-			genDescCalculation("Decimal to Hexadecimal"),
-			genInputInfo(api.DecimalToHexadecimalAPI{}),
-			genExample(api.DecimalToHexadecimalAPI{92}.ExecuteMath()),
+			generateDescCalculation("Decimal to Hexadecimal"),
+			generateInputInfo(api.DecimalToHexadecimalAPI{}),
+			generateExample(api.DecimalToHexadecimalAPI{92}.ExecuteMath()),
 			&api.DecimalToHexadecimalAPI{},
-			&networking,
+			"Networking",
 		},
 		{
 			"Hexadecimal to Binary",
-			genDescCalculation("Hexadecimal to Binary"),
-			genInputInfo(api.HexadecimalToBinaryAPI{}),
-			genExample(api.HexadecimalToBinaryAPI{"6BA"}.ExecuteMath()),
+			generateDescCalculation("Hexadecimal to Binary"),
+			generateInputInfo(api.HexadecimalToBinaryAPI{}),
+			generateExample(api.HexadecimalToBinaryAPI{"6BA"}.ExecuteMath()),
 			&api.HexadecimalToBinaryAPI{},
-			&networking,
+			"Networking",
 		},
 		{
 			"Hexadecimal to Decimal",
-			genDescCalculation("Hexadecimal to Decimal"),
-			genInputInfo(api.HexadecimalToDecimalAPI{}),
-			genExample(api.HexadecimalToDecimalAPI{"6BA"}.ExecuteMath()),
+			generateDescCalculation("Hexadecimal to Decimal"),
+			generateInputInfo(api.HexadecimalToDecimalAPI{}),
+			generateExample(api.HexadecimalToDecimalAPI{"6BA"}.ExecuteMath()),
 			&api.HexadecimalToDecimalAPI{},
-			&networking,
+			"Networking",
 		},
 
 		// Numbers
 		{
 			"Find if Number is a Prime Number",
-			genDescCalculation("Find if Number is a Prime Number"),
-			genInputInfo(api.IsPrimeAPI{}),
-			genExample(api.IsPrimeAPI{129}.ExecuteMath()),
+			generateDescCalculation("Find if Number is a Prime Number"),
+			generateInputInfo(api.IsPrimeAPI{}),
+			generateExample(api.IsPrimeAPI{129}.ExecuteMath()),
 			&api.IsPrimeAPI{},
-			&numbers,
+			"Primes and Factors",
 		},
 		{
 			"Highest Common Factor",
-			genDescCalculation("Highest Common Factor"),
-			genInputInfo(api.HighestCommonFactorAPI{}),
-			genExample(api.HighestCommonFactorAPI{600, 752}.ExecuteMath()),
+			generateDescCalculation("Highest Common Factor"),
+			generateInputInfo(api.HighestCommonFactorAPI{}),
+			generateExample(api.HighestCommonFactorAPI{600, 752}.ExecuteMath()),
 			&api.HighestCommonFactorAPI{},
-			&numbers,
+			"Primes and Factors",
 		},
 		{
 			"Lowest Common Multiple",
-			genDescCalculation("Lowest Common Multiple"),
-			genInputInfo(api.LowestCommonMultipleAPI{}),
-			genExample(api.LowestCommonMultipleAPI{600, 752}.ExecuteMath()),
+			generateDescCalculation("Lowest Common Multiple"),
+			generateInputInfo(api.LowestCommonMultipleAPI{}),
+			generateExample(api.LowestCommonMultipleAPI{600, 752}.ExecuteMath()),
 			&api.LowestCommonMultipleAPI{},
-			&numbers,
+			"Primes and Factors",
 		},
 
 		// Percentages
 		{
 			"Change Number by Percentage",
-			genDescCalculation("Change Number by Percentage"),
-			genInputInfo(api.ChangeByPercentageAPI{}),
-			genExample(api.ChangeByPercentageAPI{900, 65}.ExecuteMath()),
+			generateDescCalculation("Change Number by Percentage"),
+			generateInputInfo(api.ChangeByPercentageAPI{}),
+			generateExample(api.ChangeByPercentageAPI{900, 65}.ExecuteMath()),
 			&api.ChangeByPercentageAPI{},
-			&percentages,
+			"Percentages",
 		},
 		{
 			"Get Number from a Percentage",
-			genDescCalculation("Get Number from a Percentage"),
-			genInputInfo(api.NumberFromPercentageAPI{}),
-			genExample(api.NumberFromPercentageAPI{600, 752}.ExecuteMath()),
+			generateDescCalculation("Get Number from a Percentage"),
+			generateInputInfo(api.NumberFromPercentageAPI{}),
+			generateExample(api.NumberFromPercentageAPI{600, 752}.ExecuteMath()),
 			&api.NumberFromPercentageAPI{},
-			&percentages,
+			"Percentages",
 		},
 		{
 			"Find Percentage Difference of Two Numbers",
-			genDescCalculation("Find Percentage Difference of Two Numbers"),
-			genInputInfo(api.PercentageChangeAPI{}),
-			genExample(api.PercentageChangeAPI{400, 540}.ExecuteMath()),
+			generateDescCalculation("Find Percentage Difference of Two Numbers"),
+			generateInputInfo(api.PercentageChangeAPI{}),
+			generateExample(api.PercentageChangeAPI{400, 540}.ExecuteMath()),
 			&api.PercentageChangeAPI{},
-			&percentages,
+			"Percentages",
 		},
 		{
 			"Find Percentage of a Number",
-			genDescCalculation("Find Percentage of a Number"),
-			genInputInfo(api.PercentageFromNumberAPI{}),
-			genExample(api.PercentageFromNumberAPI{585, 900}.ExecuteMath()),
+			generateDescCalculation("Find Percentage of a Number"),
+			generateInputInfo(api.PercentageFromNumberAPI{}),
+			generateExample(api.PercentageFromNumberAPI{585, 900}.ExecuteMath()),
 			&api.PercentageFromNumberAPI{},
-			&percentages,
+			"Percentages",
 		},
 
 		// Total Surface Area
 		{
 			"Pythagorean Theorem",
-			genDescCalculation("Pythagorean Theorem"),
-			genInputInfo(api.TsaPythagoreanTheoremAPI{}),
-			genExample(api.TsaPythagoreanTheoremAPI{25, 17}.ExecuteMath()),
+			generateDescCalculation("Pythagorean Theorem"),
+			generateInputInfo(api.TsaPythagoreanTheoremAPI{}),
+			generateExample(api.TsaPythagoreanTheoremAPI{25, 17}.ExecuteMath()),
 			&api.TsaPythagoreanTheoremAPI{},
-			&tsa,
+			"Total Surface Area",
 		},
 		{
 			"Cone",
-			genDescCalculation("Total Surface Area of Cone"),
-			genInputInfo(api.TsaConeAPI{}),
-			genExample(api.TsaConeAPI{3, 5}.ExecuteMath()),
+			generateDescCalculation("Total Surface Area of Cone"),
+			generateInputInfo(api.TsaConeAPI{}),
+			generateExample(api.TsaConeAPI{3, 5}.ExecuteMath()),
 			&api.TsaConeAPI{},
-			&tsa,
+			"Total Surface Area",
 		},
 		{
 			"Cube",
-			genDescCalculation("Total Surface Area of Cube"),
-			genInputInfo(api.TsaCubeAPI{}),
-			genExample(api.TsaCubeAPI{3}.ExecuteMath()),
+			generateDescCalculation("Total Surface Area of Cube"),
+			generateInputInfo(api.TsaCubeAPI{}),
+			generateExample(api.TsaCubeAPI{3}.ExecuteMath()),
 			&api.TsaCubeAPI{},
-			&tsa,
+			"Total Surface Area",
 		},
 		{
 			"Cylinder",
-			genDescCalculation("Total Surface Area of Cylinder"),
-			genInputInfo(api.TsaCylinderAPI{}),
-			genExample(api.TsaCylinderAPI{2, 5}.ExecuteMath()),
+			generateDescCalculation("Total Surface Area of Cylinder"),
+			generateInputInfo(api.TsaCylinderAPI{}),
+			generateExample(api.TsaCylinderAPI{2, 5}.ExecuteMath()),
 			&api.TsaCylinderAPI{},
-			&tsa,
+			"Total Surface Area",
 		},
 		{
 			"Rectangular Prism",
-			genDescCalculation("Total Surface Area of Rectangular Prism"),
-			genInputInfo(api.TsaRectangularPrismAPI{}),
-			genExample(api.TsaRectangularPrismAPI{2, 4, 3}.ExecuteMath()),
+			generateDescCalculation("Total Surface Area of Rectangular Prism"),
+			generateInputInfo(api.TsaRectangularPrismAPI{}),
+			generateExample(api.TsaRectangularPrismAPI{2, 4, 3}.ExecuteMath()),
 			&api.TsaRectangularPrismAPI{},
-			&tsa,
+			"Total Surface Area",
 		},
 		{
 			"Sphere",
-			genDescCalculation("Total Surface Area of Sphere"),
-			genInputInfo(api.TsaSphereAPI{}),
-			genExample(api.TsaSphereAPI{1}.ExecuteMath()),
+			generateDescCalculation("Total Surface Area of Sphere"),
+			generateInputInfo(api.TsaSphereAPI{}),
+			generateExample(api.TsaSphereAPI{1}.ExecuteMath()),
 			&api.TsaSphereAPI{},
-			&tsa,
+			"Total Surface Area",
 		},
 		{
 			"Square Based Triangle",
-			genDescCalculation("Total Surface Area of Square Based Triangle"),
-			genInputInfo(api.TsaSquareBaseTriangleAPI{}),
-			genExample(api.TsaSquareBaseTriangleAPI{4, 6}.ExecuteMath()),
+			generateDescCalculation("Total Surface Area of Square Based Triangle"),
+			generateInputInfo(api.TsaSquareBaseTriangleAPI{}),
+			generateExample(api.TsaSquareBaseTriangleAPI{4, 6}.ExecuteMath()),
 			&api.TsaSquareBaseTriangleAPI{},
-			&tsa,
+			"Total Surface Area",
 		},
 	}
 )
 
-func genInputInfo(input api.MathAPI) (inputs []CalculationInput) {
+func generateInputInfo(input api.MathAPI) (inputs []CalculationInput) {
 	val := reflect.ValueOf(input)
 
 	for i := 0; i < val.Type().NumField(); i++ {
@@ -199,11 +199,11 @@ func genInputInfo(input api.MathAPI) (inputs []CalculationInput) {
 	return inputs
 }
 
-func genDescCalculation(solving string) string {
+func generateDescCalculation(solving string) string {
 	return fmt.Sprintf("Solve: %s, showing mathematical proof and answer.", solving)
 }
 
-func genExample(s string, err error) template.HTML {
+func generateExample(s string, err error) template.HTML {
 	if err != nil {
 		log.Fatalln("error when generating an example for calculation:", err)
 	}

@@ -3,7 +3,7 @@ package data
 
 import "strings"
 
-// genSlug generates a slug of a string.
-func genSlug(s string) string {
+// generateSlug generates a slug of a string.
+func generateSlug(s string) string {
 	return strings.Replace(strings.ToLower(s), " ", "-", -1)
 }
