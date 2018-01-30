@@ -1,5 +1,5 @@
-// Package template initialises templates and provides the Render function.
-package template
+// Package templates initialises templates and provides the Render function.
+package templates
 
 import (
 	"bytes"
