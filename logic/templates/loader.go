@@ -40,7 +40,7 @@ type loader struct {
 }
 
 func load() {
-	templateDirectory := filepath.Join("view", "site")
+	templateDirectory := filepath.Join("views", "site")
 	baseTemplate := filepath.Join(templateDirectory, "base.gohtml")
 
 	siteTemplates := []loader{

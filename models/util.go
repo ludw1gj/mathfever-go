@@ -1,5 +1,4 @@
-// Package model contains models, model data, and functions to retrieve the model data.
-package model
+package models
 
 import "strings"
 

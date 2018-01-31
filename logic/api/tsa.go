@@ -1,8 +1,8 @@
 // This file contains the calculation api types for the Total Surface Area category. The types
 // implement the MathAPI interface, and contain the required input/s needed for the calculation
 // function executed in the ExecuteMath method. The struct values have field of json and a field
-// of name. These are used to populate the model.CalculationInput model, used in
-// model.Calculation.CalculationInput.
+// of name. These are used to populate the models.CalculationInput models, used in
+// models.Calculation.CalculationInput.
 
 package api
 

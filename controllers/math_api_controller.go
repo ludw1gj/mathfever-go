@@ -1,4 +1,4 @@
-package router
+package controllers
 
 import (
 	"bytes"
@@ -10,21 +10,27 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/robertjeffs/mathfever-go/logic/api"
-	"github.com/robertjeffs/mathfever-go/model"
+	"github.com/robertjeffs/mathfever-go/models"
 )
+
+type MathAPIController struct{}
+
+func NewMathAPIController() *MathAPIController {
+	return &MathAPIController{}
+}
 
 type errorJson struct {
 	Error string `json:"error"`
 }
 
-// processCalculation handles the api calculation router. It decodes the client's json input into a type MathAPI struct,
+// ProcessCalculation handles the api calculation router. It decodes the client's json input into a type MathAPI struct,
 // verifies that it has the correct fields and value types, and executes the associated calculation's math function
 // returning the result as a json response.
-func processCalculation(w http.ResponseWriter, r *http.Request) {
+func (mc MathAPIController) ProcessCalculation(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	calculationSlug := mux.Vars(r)["calculation"]
-	calculation, err := model.GetCalculationBySlug(calculationSlug)
+	calculation, err := models.GetCalculationBySlug(calculationSlug)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(errorJson{err.Error()})
@@ -36,12 +42,12 @@ func processCalculation(w http.ResponseWriter, r *http.Request) {
 	err = decoder.Decode(&calculation.Math)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(errorJson{generateJsonError(calculation.Math).Error()})
+		json.NewEncoder(w).Encode(errorJson{mc.generateJsonError(calculation.Math).Error()})
 		return
 	}
 
 	// verify input
-	err = verifyJsonInput(calculation.Math)
+	err = mc.verifyJsonInput(calculation.Math)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(errorJson{err.Error()})
@@ -60,15 +66,15 @@ func processCalculation(w http.ResponseWriter, r *http.Request) {
 	}{s})
 }
 
-// apiNotFound returns a 404 error to the client and send an a json response that the api router was not found.
-func apiNotFound(w http.ResponseWriter, _ *http.Request) {
+// APINotFound returns a 404 error to the client and send an a json response that the api router was not found.
+func (MathAPIController) APINotFound(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNotFound)
 
 	json.NewEncoder(w).Encode(errorJson{"api router not found"})
 }
 
-func generateJsonError(apiInput api.MathAPI) error {
+func (MathAPIController) generateJsonError(apiInput api.MathAPI) error {
 	val := reflect.ValueOf(apiInput)
 	v := reflect.Indirect(val)
 
@@ -87,7 +93,7 @@ func generateJsonError(apiInput api.MathAPI) error {
 	return errors.New(buf.String())
 }
 
-func verifyJsonInput(apiInput api.MathAPI) error {
+func (mc MathAPIController) verifyJsonInput(apiInput api.MathAPI) error {
 	val := reflect.ValueOf(apiInput)
 	v := reflect.Indirect(val)
 
@@ -95,15 +101,15 @@ func verifyJsonInput(apiInput api.MathAPI) error {
 		switch v.Field(i).Type().Kind() {
 		case reflect.String:
 			if v.Field(i).String() == "" {
-				return generateJsonError(apiInput)
+				return mc.generateJsonError(apiInput)
 			}
 		case reflect.Int:
 			if v.Field(i).Int() == 0 {
-				return generateJsonError(apiInput)
+				return mc.generateJsonError(apiInput)
 			}
 		case reflect.Float64:
 			if v.Field(i).Float() == 0 {
-				return generateJsonError(apiInput)
+				return mc.generateJsonError(apiInput)
 			}
 		}
 	}
