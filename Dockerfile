@@ -1,10 +1,14 @@
 FROM golang:1.9.3-alpine3.7
 
-RUN apk --no-cache --update add git
+# Get git
+RUN apk add --no-cache --virtual .build-deps git
 
 # Get dependencies
 RUN go get github.com/gorilla/mux
 RUN go get github.com/oxtoacart/bpool
+
+# Delete git
+RUN apk del .build-deps
 
 # Copy files and install
 COPY . /go/src/github.com/robertjeffs/mathfever-go
