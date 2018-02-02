@@ -43,6 +43,7 @@ func Render(w http.ResponseWriter, name string, data interface{}) {
 	tpl, ok := templates[name]
 	if !ok {
 		renderError(w)
+		return
 	}
 
 	// Create a buffer to temporarily write to and check if any errors were encountered.
@@ -52,6 +53,7 @@ func Render(w http.ResponseWriter, name string, data interface{}) {
 	err := tpl.ExecuteTemplate(buffer, "base.gohtml", data)
 	if err != nil {
 		renderError(w)
+		return
 	}
 
 	// Set the header and write the buffer to the http.ResponseWriter
