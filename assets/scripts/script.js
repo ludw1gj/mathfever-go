@@ -1,6 +1,6 @@
 'use strict';
 
-// Validate the models in form
+// Validate the data in form
 if (document.getElementById('calculation-form')) {
     var calculationForm = document.getElementById('calculation-form');
 
@@ -49,7 +49,7 @@ function serializeFormObj(form) {
 function validateForm(formData) {
     var isValidInput = true;
     for (var key in formData) {
-        // removes all whitespace from the form models
+        // removes all whitespace from the form data
         formData[key] = formData[key].replace(/\s/g, '');
 
         if (formData[key] === '') {
@@ -68,7 +68,7 @@ function validateForm(formData) {
                 displayCalcCard('Please enter a valid decimal number, and is not over 999,999,999,999.');
                 break;
             } else {
-                // models must be an integer string not a float string
+                // data must be an integer string not a float string
                 formData[key] = parseInt(formData[key]);
             }
         } else if (key === 'hexadecimal') {
@@ -87,7 +87,7 @@ function validateForm(formData) {
             formData[key] = parseInt(formData[key]);
         }
     }
-    // if the models is valid, send the Ajax request
+    // if the data is valid, send the Ajax request
     if (isValidInput) {
         document.getElementById("loading-spinner-container").style.opacity = 100;
         submitAjax(formData);

@@ -51,7 +51,7 @@ func findPrimeFactors(n int) ([]int, string, string, map[int]int) {
 	var primeFactors []int
 	var table bytes.Buffer
 	fmt.Fprint(&table, `
-	<table class="mdl-model-table mdl-js-model-table">
+	<table class="mdl-data-table mdl-js-data-table">
 	<tbody>`)
 	for i := 2; i*i <= n; {
 		if n%i == 0 {
@@ -59,8 +59,8 @@ func findPrimeFactors(n int) ([]int, string, string, map[int]int) {
 			fmt.Fprintf(&table, `
 			<tr>
 				<td>%d | %d</td>
-				<td class="column-wrap mdl-model-table__cell--non-numeric">%d is a factor of %d</td>
-				<td class="column-wrap mdl-model-table__cell--non-numeric">%d divided by %d is %d</td>
+				<td class="column-wrap mdl-data-table__cell--non-numeric">%d is a factor of %d</td>
+				<td class="column-wrap mdl-data-table__cell--non-numeric">%d divided by %d is %d</td>
 			</tr>`, n, i, i, n, n, i, n/i)
 
 			n /= i
@@ -73,8 +73,8 @@ func findPrimeFactors(n int) ([]int, string, string, map[int]int) {
 		fmt.Fprintf(&table, `
 		<tr>
 		<td>%d | %d</td>
-		<td class="column-wrap mdl-model-table__cell--non-numeric">%d is a factor of %d</td>
-		<td class="column-wrap mdl-model-table__cell--non-numeric">%d divided by %d is %d</td>
+		<td class="column-wrap mdl-data-table__cell--non-numeric">%d is a factor of %d</td>
+		<td class="column-wrap mdl-data-table__cell--non-numeric">%d divided by %d is %d</td>
 		</tr>`, n, n, n, n, n, n, 1)
 	}
 	fmt.Fprint(&table, `
