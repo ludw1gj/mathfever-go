@@ -20,7 +20,12 @@
     <link rel="stylesheet" href="/assets/styles/style.css">
 
     <!-- JS -->
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+    <script src="/assets/scripts/build/build.js"></script>
+    <script defer>
+        requirejs(["HandlerController"]);
+    </script>
 </head>
 
 <!-- Body -->
@@ -72,8 +77,6 @@
         </footer>
     </main>
 </div>
-
-<script src="/assets/scripts/script.js"></script>
 
 </body>
 </html>
