@@ -1,27 +1,21 @@
-class SerializeHandler {
+export function serializeForm(form: HTMLFormElement) {
+    const elements = form.elements;
+    const obj: { [k: string]: any } = {};
 
-    public static serializeForm(form: HTMLFormElement) {
-        const elements = form.elements;
-        let obj: {[k: string]: any} = {};
+    for (let i = 0; i < elements.length; i += 1) {
+        const element = elements[i] as HTMLInputElement;
+        const type = element.type;
+        const name = element.name;
+        const value = element.value;
 
-        for (let i = 0; i < elements.length; i += 1) {
-            const element = elements[i] as HTMLInputElement;
-            const type = element.type;
-            const name = element.name;
-            const value = element.value;
-
-            switch (type) {
-                case "hidden":
-                case "text":
-                    obj[name] = value;
-                    break;
-                default:
-                    break;
-            }
+        switch (type) {
+            case "hidden":
+            case "text":
+                obj[name] = value;
+                break;
+            default:
+                break;
         }
-        return obj;
     }
-
+    return obj;
 }
-
-export {SerializeHandler}
