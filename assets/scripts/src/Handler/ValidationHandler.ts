@@ -36,13 +36,19 @@ export function validateForm(form: Object): void {
                 if (!isValidDecimal(form[key])) {
                     displayCalculationCard("Please enter a valid input, and is not over 999,999,999,999.");
                     return;
+                }
+                // percentages and total-surface-area category require a float input
+                const currentPageURL = window.location.pathname;
+                if (currentPageURL.indexOf("percentages") !== -1 || currentPageURL.indexOf("total-surface-area") !== -1) {
+                    form[key] = parseFloat(form[key]);
                 } else {
-                    form[key] = parseInt(form[key]); // no numbers should be a float, thus using parseInt rather than parseFloat
+                    form[key] = parseInt(form[key]); // input is for a int route such as numbers category
+
                 }
         }
     }
 
-    // the function has not returned yet. Therefore data is valid, send the Ajax request
+    // the function has not returned, therefore data is valid. Send the Ajax request
     const spinner = document.getElementById("loading-spinner-container") as HTMLElement;
     spinner.style.opacity = "100";
 
