@@ -73,7 +73,7 @@ func TsaCone(radius float64, slantHeight float64) (string, error) {
 		round(curvedSurfaceArea, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join(tsaTplDir, "tsa_cone.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "cone.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -95,7 +95,7 @@ func TsaCube(length float64) (string, error) {
 		round(lengthSqr, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join(tsaTplDir, "tsa_cube.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "cube.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -130,7 +130,7 @@ func TsaCylinder(radius float64, height float64) (string, error) {
 		round(curvedSurfaceArea, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join(tsaTplDir, "tsa_cylinder.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "cylinder.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -156,7 +156,7 @@ func TsaRectangularPrism(height float64, length float64, width float64) (string,
 		round(add, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join(tsaTplDir, "tsa_rectangular_prism.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "rectangular_prism.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -175,7 +175,7 @@ func TsaSphere(radius float64) (string, error) {
 		round(radius, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join(tsaTplDir, "tsa_sphere.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "sphere.gohtml")
 	return parseTemplate(tplFile, data)
 }
 
@@ -204,6 +204,6 @@ func TsaSquareBaseTriangle(baseLength float64, height float64) (string, error) {
 		round(fourTrianglesArea, .5, 2),
 		round(tsa, .5, 2),
 	}
-	tplFile := filepath.Join(tsaTplDir, "tsa_square_base_triangle.gohtml")
+	tplFile := filepath.Join(tsaTplDir, "square_base_triangle.gohtml")
 	return parseTemplate(tplFile, data)
 }
