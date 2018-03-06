@@ -9,7 +9,9 @@ import (
 	"text/template"
 )
 
-var tplDir = filepath.Join("views", "math")
+func getTplDir() string {
+	return filepath.Join("views", "math")
+}
 
 func parseTemplate(filename string, data interface{}) (s string, err error) {
 	tpl, err := template.ParseFiles(filename)

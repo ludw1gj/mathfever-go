@@ -7,7 +7,9 @@ import (
 	"path/filepath"
 )
 
-var numbersTplDir = filepath.Join(tplDir, "numbers")
+func getNumbersTplDir() string {
+	return filepath.Join(getTplDir(), "numbers")
+}
 
 // IsPrime checks if n is a prime number and returns if is/not a prime and why.
 func IsPrime(n int) (string, error) {
@@ -41,7 +43,7 @@ func IsPrime(n int) (string, error) {
 		n,
 		answer,
 	}
-	tpl := filepath.Join(numbersTplDir, "is_prime.gohtml")
+	tpl := filepath.Join(getNumbersTplDir(), "is_prime.gohtml")
 	return parseTemplate(tpl, data)
 }
 
@@ -151,7 +153,7 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 		sharedPrimesProof.String(),
 		answer,
 	}
-	tpl := filepath.Join(numbersTplDir, "highest_common_factor.gohtml")
+	tpl := filepath.Join(getNumbersTplDir(), "highest_common_factor.gohtml")
 	return parseTemplate(tpl, data)
 }
 
@@ -205,6 +207,6 @@ func LowestCommonMultiple(n1 int, n2 int) (string, error) {
 		compareProof.String(),
 		answer,
 	}
-	tpl := filepath.Join(numbersTplDir, "lowest_common_multiple.gohtml")
+	tpl := filepath.Join(getNumbersTplDir(), "lowest_common_multiple.gohtml")
 	return parseTemplate(tpl, data)
 }
