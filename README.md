@@ -6,7 +6,7 @@ Golang >=1.8
 gorilla/mux  
 oxtoacart/bpool
 
-## Setup Notes:
+## Setup Notes
 
 ``` bash
 # Get the code and dependencies
