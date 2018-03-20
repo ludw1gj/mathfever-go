@@ -21,8 +21,8 @@ func init() {
 	bufferPool = bpool.NewBufferPool(32)
 }
 
-// Render writes into a bytes.Buffer before writing to the http.ResponseWriter to catch
-// any errors resulting from populating the template.
+// Render writes into a bytes.Buffer before writing to the http.ResponseWriter to catch any errors resulting from
+// populating the template.
 func Render(w http.ResponseWriter, name string, serverStatus int, data interface{}) {
 	// Ensure the template exists in the map.
 	tpl, ok := templates[name]
