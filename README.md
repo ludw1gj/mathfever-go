@@ -1,5 +1,5 @@
 # MathFever
-A website built with Go, where users can find mathematical proof and answers to common math problems.
+A website built with Go, where users can find mathematical proof and answers to common calculation problems.
 
 ## Project Dependencies 
 Golang >=1.8  

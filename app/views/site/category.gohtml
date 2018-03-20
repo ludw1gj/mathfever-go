@@ -1,0 +1,28 @@
+{{define "title"}}{{.Name}} - MathFever{{end}}
+{{define "meta"}}{{.Description}}{{end}}
+
+{{define "content" -}}
+<!-- Main Heading -->
+<h1 class="main-heading">{{.Name}}</h1>
+<hr class="separator">
+
+<!-- Page Content-->
+<div class="mdl-grid">
+    <div class="general-content mdl-color--white content mdl-color-text--grey-800 mdl-cell mdl-cell--9-col shadow">
+        <h4>{{.Name}} Calculations:</h4>
+        <ul class="category-calc-ul">
+            {{range .Calculations -}}
+                <li><a class="no-text-decoration" href="{{.URL}}">{{.Name}}</a></li>
+            {{- end}}
+        </ul>
+
+        <!-- Calculation Output Examples -->
+        {{range .Calculations -}}
+        <hr>
+        <h4>{{.Name}}</h4>
+        {{.Example}}
+        {{- end}}
+
+    </div>
+</div>
+{{- end}}
