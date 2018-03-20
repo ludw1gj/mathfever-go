@@ -1,7 +1,6 @@
 define("Handler/SerializeHandler", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
-
     function serializeForm(form) {
         var elements = form.elements;
         var obj = {};
@@ -21,25 +20,21 @@ define("Handler/SerializeHandler", ["require", "exports"], function (require, ex
         }
         return obj;
     }
-
     exports.serializeForm = serializeForm;
 });
 define("Handler/CalculationCardHandler", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
-
     function displayCalculationCard(content) {
         var calculationCard = document.getElementById("calculation-card");
         calculationCard.innerHTML = "<p>" + content + "</p>";
         calculationCard.classList.add("fade-in");
     }
-
     exports.displayCalculationCard = displayCalculationCard;
 });
 define("Handler/AjaxHandler", ["require", "exports", "Handler/CalculationCardHandler"], function (require, exports, CalculationCardHandler_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
-
     function submitAjax(data) {
         var spinner = document.getElementById("loading-spinner-container");
         var url = "/api" + window.location.pathname;
@@ -70,13 +65,11 @@ define("Handler/AjaxHandler", ["require", "exports", "Handler/CalculationCardHan
         request.setRequestHeader("Content-Type", "application/json");
         request.send(JSON.stringify(data));
     }
-
     exports.submitAjax = submitAjax;
 });
 define("Handler/ValidationHandler", ["require", "exports", "Handler/CalculationCardHandler", "Handler/AjaxHandler"], function (require, exports, CalculationCardHandler_2, AjaxHandler_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
-
     function validateForm(form) {
         for (var key in form) {
             form[key] = form[key].replace(/\s/g, "");
@@ -125,9 +118,7 @@ define("Handler/ValidationHandler", ["require", "exports", "Handler/CalculationC
         spinner.style.opacity = "100";
         AjaxHandler_1.submitAjax(form);
     }
-
     exports.validateForm = validateForm;
-
     function isValidBinary(binary) {
         if (binary.length > 64) {
             return false;
@@ -139,11 +130,9 @@ define("Handler/ValidationHandler", ["require", "exports", "Handler/CalculationC
         }
         return true;
     }
-
     function isValidDecimal(decimal) {
         return !isNaN(decimal) && decimal < 999999999999;
     }
-
     function isValidHexadecimal(hexadecimal) {
         return /^[A-F0-9]+$/.test(hexadecimal) && hexadecimal.length < 64;
     }
@@ -151,7 +140,6 @@ define("Handler/ValidationHandler", ["require", "exports", "Handler/CalculationC
 define("HandlerController", ["require", "exports", "Handler/SerializeHandler", "Handler/ValidationHandler"], function (require, exports, SerializeHandler_1, ValidationHandler_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
-
     function run() {
         if (!document.getElementById("calculation-form")) {
             return;
@@ -163,6 +151,5 @@ define("HandlerController", ["require", "exports", "Handler/SerializeHandler", "
             ValidationHandler_1.validateForm(form);
         });
     }
-
     run();
 });
