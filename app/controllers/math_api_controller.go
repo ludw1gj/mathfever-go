@@ -8,10 +8,13 @@ import (
 	"net/http"
 	"reflect"
 
-	"github.com/gorilla/mux"
 	"github.com/robertjeffs/mathfever-go/app/api/mathematics"
 	"github.com/robertjeffs/mathfever-go/app/models"
 )
+
+type errorJson struct {
+	Error string `json:"error"`
+}
 
 type MathAPIController struct{}
 
@@ -19,17 +22,21 @@ func NewMathAPIController() *MathAPIController {
 	return &MathAPIController{}
 }
 
-type errorJson struct {
-	Error string `json:"error"`
+// APINotFoundHandler writes a JSON error with a 404 status to the ResponseWriter.
+func (MathAPIController) NotFoundHandler(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNotFound)
+
+	json.NewEncoder(w).Encode(errorJson{"api route not found"})
 }
 
-// ProcessCalculation handles the api calculation router. It decodes the client's json input into a type MathAPI struct,
-// verifies that it has the correct fields and value types, and executes the associated calculation's calculation function
-// returning the result as a json response.
-func (mc MathAPIController) ProcessCalculation(w http.ResponseWriter, r *http.Request) {
+// ProcessCalculationHandler decodes the Request's JSON values into a type Mathematics struct, verifies that it has the
+// correct fields and value types, and executes the associated calculation's math function writing the result as a
+// JSON response to the ResponseWriter.
+func (mc MathAPIController) ProcessCalculationHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	calculationSlug := mux.Vars(r)["calculation"]
+	calculationSlug := r.URL.Query().Get("calculation")
 	calculation, err := models.GetCalculationBySlug(calculationSlug)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -54,7 +61,7 @@ func (mc MathAPIController) ProcessCalculation(w http.ResponseWriter, r *http.Re
 		return
 	}
 
-	// execute and return calculation
+	// execute and return math
 	s, err := calculation.Math.ExecuteMath()
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -64,14 +71,6 @@ func (mc MathAPIController) ProcessCalculation(w http.ResponseWriter, r *http.Re
 	json.NewEncoder(w).Encode(struct {
 		Content string `json:"content"`
 	}{s})
-}
-
-// APINotFound returns a 404 error to the client and send an a json response that the api router was not found.
-func (MathAPIController) APINotFound(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusNotFound)
-
-	json.NewEncoder(w).Encode(errorJson{"api router not found"})
 }
 
 func (MathAPIController) generateJsonError(apiInput mathematics.Mathematics) error {

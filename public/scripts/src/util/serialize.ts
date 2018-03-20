@@ -1,4 +1,4 @@
-export function serializeForm(form: HTMLFormElement) {
+export const serializeForm = (form: HTMLFormElement) => {
     const elements = form.elements;
     const obj: { [k: string]: any } = {};
 
@@ -18,4 +18,4 @@ export function serializeForm(form: HTMLFormElement) {
         }
     }
     return obj;
-}
+};

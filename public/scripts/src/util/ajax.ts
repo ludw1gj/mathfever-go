@@ -1,11 +1,14 @@
-import {displayCalculationCard} from "./CalculationCardHandler";
+import {displayCalculationCard} from "./display";
 
-export function submitAjax(data: Object) {
+export const submitAjax = (data: Object) => {
     const spinner = document.getElementById("loading-spinner-container") as HTMLElement;
 
-    const url = "/api" + window.location.pathname;
+    const currentURL = window.location.pathname;
+    const index = currentURL.lastIndexOf('/');
+    const calculationSlug = currentURL.substring(index + 1);
+
     const request = new XMLHttpRequest();
-    request.open("POST", url, true);
+    request.open("POST", `/api/calculation?calculation=${calculationSlug}`, true);
 
     request.onload = function () {
         spinner.style.opacity = "0";
@@ -31,4 +34,4 @@ export function submitAjax(data: Object) {
     };
     request.setRequestHeader("Content-Type", "application/json");
     request.send(JSON.stringify(data));
-}
+};

@@ -9,34 +9,33 @@ import (
 	"github.com/robertjeffs/mathfever-go/app/controllers"
 )
 
-// Load returns a router instance with site/api routes initialised and a public file handler if dev flag
-// is used.
+// Load returns a router instance with routes and a file server.
 func Load() *mux.Router {
 	r := mux.NewRouter().StrictSlash(true)
+
+	fs := http.FileServer(http.Dir("./public"))
+	r.PathPrefix("/public/").Handler(http.StripPrefix("/public/", fs))
 
 	// controllers
 	sc := controllers.NewSiteController()
 	mc := controllers.NewMathAPIController()
 
-	fs := http.FileServer(http.Dir("./public"))
-	r.PathPrefix("/public/").Handler(http.StripPrefix("/public/", fs))
-
 	// site routes
-	r.HandleFunc("/", sc.GetHomePage).Methods("GET")
-	r.HandleFunc("/about", sc.GetAboutPage).Methods("GET")
-	r.HandleFunc("/help", sc.GetHelpPage).Methods("GET")
-	r.HandleFunc("/privacy", sc.GetPrivacyPage).Methods("GET")
-	r.HandleFunc("/terms", sc.GetTermsPage).Methods("GET")
-	r.HandleFunc("/message-board", sc.GetMessageBoardPage).Methods("GET")
-	r.HandleFunc("/category/networking/conversion-table", sc.GetConversionTablePage).Methods("GET")
-	r.HandleFunc("/category/{category}", sc.GetCategoryPage).Methods("GET")
-	r.HandleFunc("/category/{category}/{calculation}", sc.GetCalculationPage).Methods("GET")
-	r.NotFoundHandler = http.HandlerFunc(sc.NotFoundPage)
+	r.HandleFunc("/", sc.HomePageHandler).Methods("GET")
+	r.HandleFunc("/about", sc.AboutPageHandler).Methods("GET")
+	r.HandleFunc("/help", sc.HelpPageHandler).Methods("GET")
+	r.HandleFunc("/privacy", sc.PrivacyPageHandler).Methods("GET")
+	r.HandleFunc("/terms", sc.TermsPageHandler).Methods("GET")
+	r.HandleFunc("/message-board", sc.MessageBoardPageHandler).Methods("GET")
+	r.HandleFunc("/category/networking/conversion-table", sc.ConversionTablePageHandler).Methods("GET")
+	r.HandleFunc("/category/{category}", sc.CategoryPageHandler).Methods("GET")
+	r.HandleFunc("/category/{category}/{calculation}", sc.CalculationPageHandler).Methods("GET")
+	r.NotFoundHandler = http.HandlerFunc(sc.NotFoundPageHandler)
 
 	// api routes
 	apiRouter := r.PathPrefix("/api").Subrouter()
-	apiRouter.HandleFunc("/category/{category}/{calculation}", mc.ProcessCalculation).Methods("POST")
-	apiRouter.NotFoundHandler = http.HandlerFunc(mc.APINotFound)
+	apiRouter.HandleFunc("/calculation", mc.ProcessCalculationHandler).Methods("POST")
+	apiRouter.NotFoundHandler = http.HandlerFunc(mc.NotFoundHandler)
 
 	return r
 }
