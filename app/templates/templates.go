@@ -11,34 +11,30 @@ import (
 	"github.com/oxtoacart/bpool"
 )
 
-var (
+// SiteTemplates contains templates and a buffer bool, and has a render method to render the containing templates.
+type SiteTemplates struct {
 	templates  map[string]*template.Template
 	bufferPool *bpool.BufferPool
-)
-
-func init() {
-	templates = loadTemplates()
-	bufferPool = bpool.NewBufferPool(32)
 }
 
 // Render writes into a bytes.Buffer before writing to the http.ResponseWriter to catch any errors resulting from
 // populating the template.
-func Render(w http.ResponseWriter, name string, serverStatus int, data interface{}) {
+func (st SiteTemplates) Render(w http.ResponseWriter, name string, serverStatus int, data interface{}) {
 	// Ensure the template exists in the map.
-	tpl, ok := templates[name]
+	tpl, ok := st.templates[name]
 	if !ok {
-		renderError(w)
+		st.renderError(w)
 		return
 	}
 
 	// Create a buffer to temporarily write to and check if any errors were encountered.
-	buffer := bufferPool.Get()
-	defer bufferPool.Put(buffer)
+	buffer := st.bufferPool.Get()
+	defer st.bufferPool.Put(buffer)
 
 	err := tpl.ExecuteTemplate(buffer, "base.gohtml", data)
 	if err != nil {
 		log.Println("template render errror: ", err.Error())
-		renderError(w)
+		st.renderError(w)
 		return
 	}
 
@@ -48,10 +44,10 @@ func Render(w http.ResponseWriter, name string, serverStatus int, data interface
 	buffer.WriteTo(w)
 }
 
-func renderError(w http.ResponseWriter) {
+func (st SiteTemplates) renderError(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusInternalServerError)
 
-	serverErrorTemplate, ok := templates["serverError"]
+	serverErrorTemplate, ok := st.templates["serverError"]
 	if !ok {
 		w.Write([]byte("500: Server error"))
 		log.Println("StatusInternalServerError serverErrorTemplate failed to execute")

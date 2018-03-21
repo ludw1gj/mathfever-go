@@ -7,6 +7,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/robertjeffs/mathfever-go/app/controllers"
+	"github.com/robertjeffs/mathfever-go/app/templates"
 )
 
 // Load returns a router instance with routes and a file server.
@@ -17,7 +18,7 @@ func Load() *mux.Router {
 	r.PathPrefix("/public/").Handler(http.StripPrefix("/public/", fs))
 
 	// controllers
-	sc := controllers.NewSiteController()
+	sc := controllers.NewSiteController(templates.NewSiteTemplates())
 	mc := controllers.NewMathAPIController()
 
 	// site routes

@@ -1,11 +1,13 @@
 package templates
 
 import (
+	"github.com/oxtoacart/bpool"
 	"html/template"
 	"path/filepath"
 )
 
-func loadTemplates() map[string]*template.Template {
+// NewSiteTemplates returns a type SiteTemplates.
+func NewSiteTemplates() SiteTemplates {
 	type templateSetting struct {
 		template **template.Template
 		file     string
@@ -94,17 +96,20 @@ func loadTemplates() map[string]*template.Template {
 		*tpl.template = t
 	}
 
-	return map[string]*template.Template{
-		"home":            homeTemplate,
-		"about":           aboutTemplate,
-		"help":            helpTemplate,
-		"privacy":         privacyTemplate,
-		"terms":           termsTemplate,
-		"messageBoard":    messageBoardTemplate,
-		"conversionTable": conversionTableTemplate,
-		"category":        categoryTemplate,
-		"calculation":     calculationTemplate,
-		"notFound":        notFoundTemplate,
-		"serverError":     serverErrorTemplate,
+	return SiteTemplates{
+		map[string]*template.Template{
+			"home":            homeTemplate,
+			"about":           aboutTemplate,
+			"help":            helpTemplate,
+			"privacy":         privacyTemplate,
+			"terms":           termsTemplate,
+			"messageBoard":    messageBoardTemplate,
+			"conversionTable": conversionTableTemplate,
+			"category":        categoryTemplate,
+			"calculation":     calculationTemplate,
+			"notFound":        notFoundTemplate,
+			"serverError":     serverErrorTemplate,
+		},
+		bpool.NewBufferPool(32),
 	}
 }
