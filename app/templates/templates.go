@@ -9,12 +9,108 @@ import (
 	"log"
 
 	"github.com/oxtoacart/bpool"
+	"path/filepath"
 )
 
 // SiteTemplates contains templates and a buffer bool, and has a render method to render the containing templates.
 type SiteTemplates struct {
 	templates  map[string]*template.Template
 	bufferPool *bpool.BufferPool
+}
+
+// NewSiteTemplates returns a type SiteTemplates.
+func NewSiteTemplates() SiteTemplates {
+	type templateSetting struct {
+		template **template.Template
+		file     string
+	}
+
+	var (
+		homeTemplate,
+		aboutTemplate,
+		helpTemplate,
+		privacyTemplate,
+		termsTemplate,
+		messageBoardTemplate,
+		conversionTableTemplate,
+		categoryTemplate,
+		calculationTemplate,
+		notFoundTemplate,
+		serverErrorTemplate *template.Template
+	)
+
+	templateDirectory := filepath.Join("app", "views", "site")
+	baseTemplate := filepath.Join(templateDirectory, "base.gohtml")
+
+	siteTemplates := []templateSetting{
+		{
+			&homeTemplate,
+			"home.gohtml",
+		},
+		{
+			&aboutTemplate,
+			"about.gohtml",
+		},
+		{
+			&helpTemplate,
+			"help.gohtml",
+		},
+		{
+			&privacyTemplate,
+			"privacy.gohtml",
+		},
+		{
+			&termsTemplate,
+			"terms.gohtml",
+		},
+		{
+			&messageBoardTemplate,
+			"message_board.gohtml",
+		},
+		{
+			&conversionTableTemplate,
+			"conversion_table.gohtml",
+		},
+		{
+			&categoryTemplate,
+			"category.gohtml",
+		},
+		{
+			&calculationTemplate,
+			"calculation.gohtml",
+		},
+		{
+			&notFoundTemplate,
+			"not_found.gohtml",
+		},
+		{
+			&serverErrorTemplate,
+			"server_error.gohtml",
+		},
+	}
+
+	templates := make([]templateSetting, 0, len(siteTemplates))
+	templates = append(templates, siteTemplates...)
+	for _, tpl := range templates {
+		*tpl.template = template.Must(template.ParseFiles(baseTemplate, filepath.Join(templateDirectory, tpl.file)))
+	}
+
+	return SiteTemplates{
+		map[string]*template.Template{
+			"home":            homeTemplate,
+			"about":           aboutTemplate,
+			"help":            helpTemplate,
+			"privacy":         privacyTemplate,
+			"terms":           termsTemplate,
+			"messageBoard":    messageBoardTemplate,
+			"conversionTable": conversionTableTemplate,
+			"category":        categoryTemplate,
+			"calculation":     calculationTemplate,
+			"notFound":        notFoundTemplate,
+			"serverError":     serverErrorTemplate,
+		},
+		bpool.NewBufferPool(32),
+	}
 }
 
 // Render writes into a bytes.Buffer before writing to the http.ResponseWriter to catch any errors resulting from
