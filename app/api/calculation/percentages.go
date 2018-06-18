@@ -8,15 +8,16 @@ func getPercentagesTplDir() string {
 	return filepath.Join(getTplDir(), "percentages")
 }
 
-// ChangeByPercentage outputs the proof and answer of calculating the change of a number by percentage.
+// ChangeByPercentage outputs the proof and answer of calculating the change
+// of a number by percentage.
 func ChangeByPercentage(n float64, p float64) (string, error) {
 	/*
 		ChangeByPercentage:
 		Increase/Decrease a number by a percentage.
 		(n / 100) * p + n
 
-		First work out 1% of 250, 250 ÷ 100 = 2.5 then multiply the answer by 23, because there
-		was a 23% increase. 2.5 × 23 = 57.5.
+		First work out 1% of 250, 250 ÷ 100 = 2.5 then multiply the answer by 23,
+		because there was a 23% increase. 2.5 × 23 = 57.5.
 	*/
 	onePercent := n / 100
 	addValue := onePercent * p
@@ -48,8 +49,8 @@ func ChangeByPercentage(n float64, p float64) (string, error) {
 	return parseTemplate(tplFile, data)
 }
 
-// NumberFromPercentage outputs the proof and answer of calculating finding the result of a percentage
-// corresponding to a number.
+// NumberFromPercentage outputs the proof and answer of calculating finding the
+// result of a percentage corresponding to a number.
 func NumberFromPercentage(p float64, n float64) (string, error) {
 	/*
 		Find the value of the percentage of a number.
@@ -73,7 +74,8 @@ func NumberFromPercentage(p float64, n float64) (string, error) {
 	return parseTemplate(tplFile, data)
 }
 
-// PercentageChange outputs the proof and answer of calculating the percentage change from one number to another.
+// PercentageChange outputs the proof and answer of calculating the percentage
+// change from one number to another.
 func PercentageChange(n float64, newN float64) (string, error) {
 	/*
 		Find the percentage change from one number to another.
@@ -100,7 +102,8 @@ func PercentageChange(n float64, newN float64) (string, error) {
 	return parseTemplate(tplFile, data)
 }
 
-// PercentageFromNumber outputs the proof and answer of calculating the percentage of a number of a total number.
+// PercentageFromNumber outputs the proof and answer of calculating the
+// percentage of a number of a total number.
 func PercentageFromNumber(n float64, totalN float64) (string, error) {
 	/*
 		Find the percentage of a number of a total number.

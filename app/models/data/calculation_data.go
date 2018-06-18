@@ -1,4 +1,4 @@
-package models
+package data
 
 import (
 	"fmt"
@@ -7,10 +7,11 @@ import (
 	"reflect"
 
 	"github.com/robertjeffs/mathfever-go/app/api/mathematics"
+	"github.com/robertjeffs/mathfever-go/app/models/types"
 )
 
 var (
-	calculations = []Calculation{
+	calculations = []types.Calculation{
 		// Networking
 		{
 			"Binary to Decimal",
@@ -18,7 +19,7 @@ var (
 			"/category/networking/binary-to-decimal",
 			"binary-to-decimal",
 			generateInputInfo(mathematics.BinaryToDecimalAPI{}),
-			generateExample(mathematics.BinaryToDecimalAPI{"10101"}.ExecuteMath()),
+			generateExample(mathematics.BinaryToDecimalAPI{Binary: "10101"}.ExecuteMath()),
 			&mathematics.BinaryToDecimalAPI{},
 			"Networking",
 			"/category/networking",
@@ -29,7 +30,7 @@ var (
 			"/category/networking/binary-to-hexadecimal",
 			"binary-to-hexadecimal",
 			generateInputInfo(mathematics.BinaryToHexadecimalAPI{}),
-			generateExample(mathematics.BinaryToHexadecimalAPI{"10111"}.ExecuteMath()),
+			generateExample(mathematics.BinaryToHexadecimalAPI{Binary: "10111"}.ExecuteMath()),
 			&mathematics.BinaryToHexadecimalAPI{},
 			"Networking",
 			"/category/networking",
@@ -40,7 +41,7 @@ var (
 			"/category/networking/decimal-to-binary",
 			"decimal-to-binary",
 			generateInputInfo(mathematics.DecimalToBinaryAPI{}),
-			generateExample(mathematics.DecimalToBinaryAPI{21}.ExecuteMath()),
+			generateExample(mathematics.DecimalToBinaryAPI{Decimal: 21}.ExecuteMath()),
 			&mathematics.DecimalToBinaryAPI{},
 			"Networking",
 			"/category/networking",
@@ -51,7 +52,7 @@ var (
 			"/category/networking/decimal-to-hexadecimal",
 			"decimal-to-hexadecimal",
 			generateInputInfo(mathematics.DecimalToHexadecimalAPI{}),
-			generateExample(mathematics.DecimalToHexadecimalAPI{92}.ExecuteMath()),
+			generateExample(mathematics.DecimalToHexadecimalAPI{Decimal: 92}.ExecuteMath()),
 			&mathematics.DecimalToHexadecimalAPI{},
 			"Networking",
 			"/category/networking",
@@ -62,7 +63,7 @@ var (
 			"/category/networking/hexadecimal-to-binary",
 			"hexadecimal-to-binary",
 			generateInputInfo(mathematics.HexadecimalToBinaryAPI{}),
-			generateExample(mathematics.HexadecimalToBinaryAPI{"6BA"}.ExecuteMath()),
+			generateExample(mathematics.HexadecimalToBinaryAPI{Hexadecimal: "6BA"}.ExecuteMath()),
 			&mathematics.HexadecimalToBinaryAPI{},
 			"Networking",
 			"/category/networking",
@@ -73,7 +74,7 @@ var (
 			"/category/networking/hexadecimal-to-decimal",
 			"hexadecimal-to-decimal",
 			generateInputInfo(mathematics.HexadecimalToDecimalAPI{}),
-			generateExample(mathematics.HexadecimalToDecimalAPI{"6BA"}.ExecuteMath()),
+			generateExample(mathematics.HexadecimalToDecimalAPI{Hexadecimal: "6BA"}.ExecuteMath()),
 			&mathematics.HexadecimalToDecimalAPI{},
 			"Networking",
 			"/category/networking",
@@ -86,7 +87,7 @@ var (
 			"/category/numbers/find-if-number-is-a-prime-number",
 			"find-if-number-is-a-prime-number",
 			generateInputInfo(mathematics.IsPrimeAPI{}),
-			generateExample(mathematics.IsPrimeAPI{129}.ExecuteMath()),
+			generateExample(mathematics.IsPrimeAPI{Number: 129}.ExecuteMath()),
 			&mathematics.IsPrimeAPI{},
 			"Primes and Factors",
 			"/category/numbers",
@@ -97,7 +98,7 @@ var (
 			"/category/numbers/highest-common-factor",
 			"highest-common-factor",
 			generateInputInfo(mathematics.HighestCommonFactorAPI{}),
-			generateExample(mathematics.HighestCommonFactorAPI{600, 752}.ExecuteMath()),
+			generateExample(mathematics.HighestCommonFactorAPI{Num1: 600, Num2: 752}.ExecuteMath()),
 			&mathematics.HighestCommonFactorAPI{},
 			"Primes and Factors",
 			"/category/numbers",
@@ -108,7 +109,7 @@ var (
 			"/category/numbers/lowest-common-multiple",
 			"lowest-common-multiple",
 			generateInputInfo(mathematics.LowestCommonMultipleAPI{}),
-			generateExample(mathematics.LowestCommonMultipleAPI{600, 752}.ExecuteMath()),
+			generateExample(mathematics.LowestCommonMultipleAPI{Num1: 600, Num2: 752}.ExecuteMath()),
 			&mathematics.LowestCommonMultipleAPI{},
 			"Primes and Factors",
 			"/category/numbers",
@@ -121,7 +122,7 @@ var (
 			"/category/percentages/change-number-by-percentage",
 			"change-number-by-percentage",
 			generateInputInfo(mathematics.ChangeByPercentageAPI{}),
-			generateExample(mathematics.ChangeByPercentageAPI{900, 65}.ExecuteMath()),
+			generateExample(mathematics.ChangeByPercentageAPI{Number: 900, Percentage: 65}.ExecuteMath()),
 			&mathematics.ChangeByPercentageAPI{},
 			"Percentages",
 			"/category/percentages",
@@ -132,7 +133,7 @@ var (
 			"/category/percentages/get-number-from-a-percentage",
 			"get-number-from-a-percentage",
 			generateInputInfo(mathematics.NumberFromPercentageAPI{}),
-			generateExample(mathematics.NumberFromPercentageAPI{600, 752}.ExecuteMath()),
+			generateExample(mathematics.NumberFromPercentageAPI{Percentage: 600, Number: 752}.ExecuteMath()),
 			&mathematics.NumberFromPercentageAPI{},
 			"Percentages",
 			"/category/percentages",
@@ -143,7 +144,7 @@ var (
 			"/category/percentages/find-percentage-difference-of-two-numbers",
 			"find-percentage-difference-of-two-numbers",
 			generateInputInfo(mathematics.PercentageChangeAPI{}),
-			generateExample(mathematics.PercentageChangeAPI{400, 540}.ExecuteMath()),
+			generateExample(mathematics.PercentageChangeAPI{Number: 400, NewNumber: 540}.ExecuteMath()),
 			&mathematics.PercentageChangeAPI{},
 			"Percentages",
 			"/category/percentages",
@@ -154,7 +155,7 @@ var (
 			"/category/percentages/find-percentages-of-a-number",
 			"find-percentages-of-a-number",
 			generateInputInfo(mathematics.PercentageFromNumberAPI{}),
-			generateExample(mathematics.PercentageFromNumberAPI{585, 900}.ExecuteMath()),
+			generateExample(mathematics.PercentageFromNumberAPI{Number: 585, TotalNumber: 900}.ExecuteMath()),
 			&mathematics.PercentageFromNumberAPI{},
 			"Percentages",
 			"/category/percentages",
@@ -167,7 +168,7 @@ var (
 			"/category/total-surface-area/pythagorean-theorem",
 			"pythagorean-theorem",
 			generateInputInfo(mathematics.TsaPythagoreanTheoremAPI{}),
-			generateExample(mathematics.TsaPythagoreanTheoremAPI{25, 17}.ExecuteMath()),
+			generateExample(mathematics.TsaPythagoreanTheoremAPI{SideA: 25, SideB: 17}.ExecuteMath()),
 			&mathematics.TsaPythagoreanTheoremAPI{},
 			"Total Surface Area",
 			"/category/total-surface-area",
@@ -178,7 +179,7 @@ var (
 			"/category/total-surface-area/cone",
 			"cone",
 			generateInputInfo(mathematics.TsaConeAPI{}),
-			generateExample(mathematics.TsaConeAPI{3, 5}.ExecuteMath()),
+			generateExample(mathematics.TsaConeAPI{Radius: 3, SlantHeight: 5}.ExecuteMath()),
 			&mathematics.TsaConeAPI{},
 			"Total Surface Area",
 			"/category/total-surface-area",
@@ -189,7 +190,7 @@ var (
 			"/category/total-surface-area/cube",
 			"cube",
 			generateInputInfo(mathematics.TsaCubeAPI{}),
-			generateExample(mathematics.TsaCubeAPI{3}.ExecuteMath()),
+			generateExample(mathematics.TsaCubeAPI{Length: 3}.ExecuteMath()),
 			&mathematics.TsaCubeAPI{},
 			"Total Surface Area",
 			"/category/total-surface-area",
@@ -200,7 +201,7 @@ var (
 			"/category/total-surface-area/cylinder",
 			"cylinder",
 			generateInputInfo(mathematics.TsaCylinderAPI{}),
-			generateExample(mathematics.TsaCylinderAPI{2, 5}.ExecuteMath()),
+			generateExample(mathematics.TsaCylinderAPI{Radius: 2, Height: 5}.ExecuteMath()),
 			&mathematics.TsaCylinderAPI{},
 			"Total Surface Area",
 			"/category/total-surface-area",
@@ -211,7 +212,7 @@ var (
 			"/category/total-surface-area/rectangular-prism",
 			"rectangular-prism",
 			generateInputInfo(mathematics.TsaRectangularPrismAPI{}),
-			generateExample(mathematics.TsaRectangularPrismAPI{2, 4, 3}.ExecuteMath()),
+			generateExample(mathematics.TsaRectangularPrismAPI{Height: 2, Length: 4, Width: 3}.ExecuteMath()),
 			&mathematics.TsaRectangularPrismAPI{},
 			"Total Surface Area",
 			"/category/total-surface-area",
@@ -222,7 +223,7 @@ var (
 			"/category/total-surface-area/sphere",
 			"sphere",
 			generateInputInfo(mathematics.TsaSphereAPI{}),
-			generateExample(mathematics.TsaSphereAPI{1}.ExecuteMath()),
+			generateExample(mathematics.TsaSphereAPI{Radius: 1}.ExecuteMath()),
 			&mathematics.TsaSphereAPI{},
 			"Total Surface Area",
 			"/category/total-surface-area",
@@ -233,7 +234,7 @@ var (
 			"/category/total-surface-area/square-based-triangle",
 			"square-based-triangle",
 			generateInputInfo(mathematics.TsaSquareBaseTriangleAPI{}),
-			generateExample(mathematics.TsaSquareBaseTriangleAPI{4, 6}.ExecuteMath()),
+			generateExample(mathematics.TsaSquareBaseTriangleAPI{BaseLength: 4, Height: 6}.ExecuteMath()),
 			&mathematics.TsaSquareBaseTriangleAPI{},
 			"Total Surface Area",
 			"/category/total-surface-area",
@@ -241,15 +242,16 @@ var (
 	}
 )
 
-func generateInputInfo(input mathematics.Mathematics) (inputs []CalculationInput) {
+func generateInputInfo(input mathematics.Mathematics) []types.CalculationInput {
 	val := reflect.ValueOf(input)
 
+	var inputs []types.CalculationInput
 	for i := 0; i < val.Type().NumField(); i++ {
-		var data CalculationInput
+		var data types.CalculationInput
 		if val.Type().Field(i).Tag.Get("name") == "" {
 			log.Fatalf("Error: %s struct must have 'name' tag", val.Type().Name())
 		} else {
-			data = CalculationInput{
+			data = types.CalculationInput{
 				Name: val.Type().Field(i).Tag.Get("name"),
 				Tag:  val.Type().Field(i).Tag.Get("json"),
 			}
@@ -268,4 +270,8 @@ func generateExample(s string, err error) template.HTML {
 		log.Fatalln("error when generating an example for calculation:", err)
 	}
 	return template.HTML(s)
+}
+
+func GetCalculationData() []types.Calculation {
+	return calculations
 }

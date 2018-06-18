@@ -2,29 +2,22 @@ package models
 
 import (
 	"errors"
+
+	"github.com/robertjeffs/mathfever-go/app/models/data"
+	"github.com/robertjeffs/mathfever-go/app/models/types"
 )
 
-// Category holds information about a category of calculations.
-type Category struct {
-	Name         string        `json:"name"`         // name of the category
-	Slug         string        `json:"slug"`         // slug of the category
-	URL          string        `json:"url"`          // url of the category
-	ImageURL     string        `json:"image_url"`    // url of the image for category
-	Description  string        `json:"description"`  // description of the category
-	Calculations []Calculation `json:"calculations"` // the calculations belonging to the category
-}
-
 // GetAllCategories returns all categories.
-func GetAllCategories() []Category {
-	return categories
+func GetAllCategories() []types.Category {
+	return data.GetCategoryData()
 }
 
 // GetCategoryBySlug returns a single category matching the given slug.
-func GetCategoryBySlug(slug string) (category Category, err error) {
-	for _, category := range GetAllCategories() {
+func GetCategoryBySlug(slug string) (types.Category, error) {
+	for _, category := range data.GetCategoryData() {
 		if category.Slug == slug {
 			return category, nil
 		}
 	}
-	return category, errors.New("category does not exist")
+	return types.Category{}, errors.New("category does not exist")
 }

@@ -6,7 +6,8 @@ import (
 
 // Mathematics type is for standardising the execution of calculation functions.
 type Mathematics interface {
-	// ExecuteMath returns a calculation function's string output and an error if validation or template error occurs.
+	// ExecuteMath returns a calculation function's string output and an error
+	// if validation or template error occurs.
 	ExecuteMath() (string, error)
 }
 

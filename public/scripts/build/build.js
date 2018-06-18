@@ -86,7 +86,8 @@ define("util/validate", ["require", "exports", "util/display"], function (requir
                         return [form, false];
                     }
                     var currentPageURL = window.location.pathname;
-                    if (currentPageURL.indexOf("percentages") !== -1 || currentPageURL.indexOf("total-surface-area") !== -1) {
+                    if (currentPageURL.indexOf("percentages") !== -1 ||
+                        currentPageURL.indexOf("total-surface-area") !== -1) {
                         form[key] = parseFloat(form[key]);
                     }
                     else {
@@ -105,7 +106,7 @@ define("util/ajax", ["require", "exports", "util/display"], function (require, e
     exports.submitAjax = function (data) {
         var spinner = document.getElementById("loading-spinner-container");
         var currentURL = window.location.pathname;
-        var index = currentURL.lastIndexOf('/');
+        var index = currentURL.lastIndexOf("/");
         var calculationSlug = currentURL.substring(index + 1);
         var request = new XMLHttpRequest();
         request.open("POST", "/api/calculation?calculation=" + calculationSlug, true);

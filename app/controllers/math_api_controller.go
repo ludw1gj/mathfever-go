@@ -12,35 +12,29 @@ import (
 	"github.com/robertjeffs/mathfever-go/app/models"
 )
 
-type errorJson struct {
+type errorJSON struct {
 	Error string `json:"error"`
 }
 
-type MathAPIController struct{}
-
-func NewMathAPIController() *MathAPIController {
-	return &MathAPIController{}
-}
-
-// APINotFoundHandler writes a JSON error with a 404 status to the ResponseWriter.
-func (MathAPIController) NotFoundHandler(w http.ResponseWriter, _ *http.Request) {
+// NotFoundHandler writes a JSON error with a 404 status to the ResponseWriter.
+func NotFoundHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusNotFound)
 
-	json.NewEncoder(w).Encode(errorJson{"api route not found"})
+	json.NewEncoder(w).Encode(errorJSON{"api route not found"})
 }
 
 // ProcessCalculationHandler decodes the Request's JSON values into a type Mathematics struct, verifies that it has the
 // correct fields and value types, and executes the associated calculation's math function writing the result as a
 // JSON response to the ResponseWriter.
-func (mc MathAPIController) ProcessCalculationHandler(w http.ResponseWriter, r *http.Request) {
+func ProcessCalculationHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	calculationSlug := r.URL.Query().Get("calculation")
 	calculation, err := models.GetCalculationBySlug(calculationSlug)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(errorJson{err.Error()})
+		json.NewEncoder(w).Encode(errorJSON{err.Error()})
 		return
 	}
 
@@ -49,15 +43,15 @@ func (mc MathAPIController) ProcessCalculationHandler(w http.ResponseWriter, r *
 	err = decoder.Decode(&calculation.Math)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(errorJson{mc.generateJsonError(calculation.Math).Error()})
+		json.NewEncoder(w).Encode(errorJSON{verifyJSONInput(calculation.Math).Error()})
 		return
 	}
 
 	// verify input
-	err = mc.verifyJsonInput(calculation.Math)
+	err = verifyJSONInput(calculation.Math)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(errorJson{err.Error()})
+		json.NewEncoder(w).Encode(errorJSON{err.Error()})
 		return
 	}
 
@@ -65,7 +59,7 @@ func (mc MathAPIController) ProcessCalculationHandler(w http.ResponseWriter, r *
 	s, err := calculation.Math.ExecuteMath()
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(errorJson{err.Error()})
+		json.NewEncoder(w).Encode(errorJSON{err.Error()})
 		return
 	}
 	json.NewEncoder(w).Encode(struct {
@@ -73,7 +67,7 @@ func (mc MathAPIController) ProcessCalculationHandler(w http.ResponseWriter, r *
 	}{s})
 }
 
-func (MathAPIController) generateJsonError(apiInput mathematics.Mathematics) error {
+func generateJSONError(apiInput mathematics.Mathematics) error {
 	val := reflect.ValueOf(apiInput)
 	v := reflect.Indirect(val)
 
@@ -92,7 +86,7 @@ func (MathAPIController) generateJsonError(apiInput mathematics.Mathematics) err
 	return errors.New(buf.String())
 }
 
-func (mc MathAPIController) verifyJsonInput(apiInput mathematics.Mathematics) error {
+func verifyJSONInput(apiInput mathematics.Mathematics) error {
 	val := reflect.ValueOf(apiInput)
 	v := reflect.Indirect(val)
 
@@ -100,15 +94,15 @@ func (mc MathAPIController) verifyJsonInput(apiInput mathematics.Mathematics) er
 		switch v.Field(i).Type().Kind() {
 		case reflect.String:
 			if v.Field(i).String() == "" {
-				return mc.generateJsonError(apiInput)
+				return generateJSONError(apiInput)
 			}
 		case reflect.Int:
 			if v.Field(i).Int() == 0 {
-				return mc.generateJsonError(apiInput)
+				return generateJSONError(apiInput)
 			}
 		case reflect.Float64:
 			if v.Field(i).Float() == 0 {
-				return mc.generateJsonError(apiInput)
+				return generateJSONError(apiInput)
 			}
 		}
 	}

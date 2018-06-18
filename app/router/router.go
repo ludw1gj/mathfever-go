@@ -18,8 +18,7 @@ func Load() *mux.Router {
 	r.PathPrefix("/public/").Handler(http.StripPrefix("/public/", fs))
 
 	// controllers
-	sc := controllers.NewSiteController(templates.NewSiteTemplates())
-	mc := controllers.NewMathAPIController()
+	sc := controllers.SiteController{Tmpls: templates.CreateSiteTemplates()}
 
 	// site routes
 	r.HandleFunc("/", sc.HomePageHandler).Methods("GET")
@@ -35,8 +34,8 @@ func Load() *mux.Router {
 
 	// api routes
 	apiRouter := r.PathPrefix("/api").Subrouter()
-	apiRouter.HandleFunc("/calculation", mc.ProcessCalculationHandler).Methods("POST")
-	apiRouter.NotFoundHandler = http.HandlerFunc(mc.NotFoundHandler)
+	apiRouter.HandleFunc("/calculation", controllers.ProcessCalculationHandler).Methods("POST")
+	apiRouter.NotFoundHandler = http.HandlerFunc(controllers.NotFoundHandler)
 
 	return r
 }

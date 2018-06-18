@@ -14,7 +14,7 @@ func getNetworkingTplDir() string {
 }
 
 // BinaryToDecimal outputs the proof and answer of a binary to decimal conversion.
-func BinaryToDecimal(binary string) (s string, err error) {
+func BinaryToDecimal(binary string) (string, error) {
 	const base = 2
 	lenBinary := len(binary)
 
@@ -61,7 +61,7 @@ func BinaryToDecimal(binary string) (s string, err error) {
 }
 
 // BinaryToHexadecimal outputs the proof and answer of a binary to hexadecimal conversion.
-func BinaryToHexadecimal(binary string) (s string, err error) {
+func BinaryToHexadecimal(binary string) (string, error) {
 	zeroedBinary := binary
 	nLength := len(zeroedBinary)
 
@@ -84,7 +84,7 @@ func BinaryToHexadecimal(binary string) (s string, err error) {
 	for _, i := range groupedBinary {
 		decimalAnswer, err := strconv.ParseInt(i, 2, 0)
 		if err != nil {
-			return s, fmt.Errorf("incorrect input: is not a binary number: %s", binary)
+			return "", fmt.Errorf("incorrect input: is not a binary number: %s", binary)
 		}
 		fmt.Fprintf(&proof, "(%s)<sub>2</sub> = (%d)<sub>10</sub> = (%X)<sub>16</sub><br>",
 			i, decimalAnswer, decimalAnswer)
@@ -117,7 +117,7 @@ func DecimalToHexadecimal(decimal int) (string, error) {
 	return decimalToBinaryHexadecimal(decimal, 16)
 }
 
-func decimalToBinaryHexadecimal(decimal int, base int) (s string, err error) {
+func decimalToBinaryHexadecimal(decimal int, base int) (string, error) {
 	decimalInt := decimal
 
 	var remainders []int
@@ -168,7 +168,7 @@ func decimalToBinaryHexadecimal(decimal int, base int) (s string, err error) {
 }
 
 // HexadecimalToBinary outputs the proof and answer of a hexadecimal to binary conversion.
-func HexadecimalToBinary(hexadecimal string) (s string, err error) {
+func HexadecimalToBinary(hexadecimal string) (string, error) {
 	var binaries bytes.Buffer
 	var proof bytes.Buffer
 
@@ -177,7 +177,7 @@ func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 		decimalChar, err := strconv.ParseInt(string(char), 16, 0)
 		if err != nil {
 			log.Println(err)
-			return s, err
+			return "", err
 		}
 
 		binary := fmt.Sprintf("%b", decimalChar)
@@ -212,18 +212,19 @@ func HexadecimalToBinary(hexadecimal string) (s string, err error) {
 }
 
 // HexadecimalToDecimal outputs the proof and answer of a hexadecimal to decimal conversion.
-func HexadecimalToDecimal(hexadecimal string) (s string, err error) {
+func HexadecimalToDecimal(hexadecimal string) (string, error) {
 	hexLength := len(hexadecimal) - 1
 
 	var decimals []int64
 	var proof1 bytes.Buffer
 	var proof2Buf [4]bytes.Buffer
 	var answer int64
+
 	for _, char := range hexadecimal {
 		decimal, err := strconv.ParseInt(string(char), 16, 0)
 		if err != nil {
 			log.Println(err)
-			return s, err
+			return "", err
 		}
 		decimals = append(decimals, decimal)
 		power := int64(math.Pow(16, float64(hexLength)))

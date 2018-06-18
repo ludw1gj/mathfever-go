@@ -9,10 +9,12 @@ func getTSATplDir() string {
 	return filepath.Join(getTplDir(), "tsa")
 }
 
-// TSAPythagoreanTheorem outputs the proof and answer of finding the hypotenuse using the pythagorean theorem.
+// TSAPythagoreanTheorem outputs the proof and answer of finding the hypotenuse
+// using the pythagorean theorem.
 func TSAPythagoreanTheorem(a float64, b float64) (string, error) {
 	/*
-		Use the Pythagorean Theorem to find side lengths (a or b), or the hypotenuse (c) of a right-angle triangle.
+		Use the Pythagorean Theorem to find side lengths (a or b), or the
+		hypotenuse (c) of a right-angle triangle.
 
 		Pythagorean Theorem: right-angle triangle with side lengths (a, b) and hypotenuse (c).
 		a^2 + b^2 = c^2
@@ -136,7 +138,8 @@ func TsaCylinder(radius float64, height float64) (string, error) {
 	return parseTemplate(tplFile, data)
 }
 
-// TsaRectangularPrism outputs the proof and answer of finding the total surface area of a rectangular prism.
+// TsaRectangularPrism outputs the proof and answer of finding the total
+// surface area of a rectangular prism.
 func TsaRectangularPrism(height float64, length float64, width float64) (string, error) {
 	/*
 		Find the Total Surface Area of a rectangular prism, with the equation:
@@ -181,7 +184,8 @@ func TsaSphere(radius float64) (string, error) {
 	return parseTemplate(tplFile, data)
 }
 
-// TsaSquareBaseTriangle outputs the proof and answer of finding the total surface area of a square base triangle.
+// TsaSquareBaseTriangle outputs the proof and answer of finding the total
+// surface area of a square base triangle.
 func TsaSquareBaseTriangle(baseLength float64, height float64) (string, error) {
 	/*
 		Find the Total Surface Area of a square based triangle, with the equation:

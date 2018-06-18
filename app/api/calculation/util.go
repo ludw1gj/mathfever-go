@@ -13,17 +13,17 @@ func getTplDir() string {
 	return filepath.Join("app", "views", "calculation")
 }
 
-func parseTemplate(filename string, data interface{}) (s string, err error) {
+func parseTemplate(filename string, data interface{}) (string, error) {
 	tpl, err := template.ParseFiles(filename)
 	if err != nil {
 		log.Println(err)
-		return s, errors.New("internal system error: parse template error")
+		return "", errors.New("internal system error: parse template error")
 	}
 	var b bytes.Buffer
 	err = tpl.Execute(&b, data)
 	if err != nil {
 		log.Println(err)
-		return s, errors.New("internal system error: template execute error")
+		return "", errors.New("internal system error: template execute error")
 	}
 	return b.String(), nil
 }
@@ -59,7 +59,9 @@ func findElementFrequency(X []int) map[int]int {
 	return m
 }
 
-func findCommonIntegers(X, Y []int) (common []int) {
+func findCommonIntegers(X, Y []int) []int {
+	var common []int
+
 	for i, x := range X {
 		for _, y := range Y {
 			if x == y {
@@ -69,5 +71,5 @@ func findCommonIntegers(X, Y []int) (common []int) {
 			}
 		}
 	}
-	return
+	return common
 }

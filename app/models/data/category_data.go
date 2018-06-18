@@ -1,9 +1,14 @@
-package models
+package data
 
-import "log"
+import (
+	"errors"
+	"log"
+
+	"github.com/robertjeffs/mathfever-go/app/models/types"
+)
 
 var (
-	categories = []Category{
+	categories = []types.Category{
 		{
 			"Networking",
 			"networking",
@@ -46,10 +51,27 @@ var (
 	}
 )
 
-func getCalculationsForCategory(category string) []Calculation {
+func getCalculationsForCategory(category string) []types.Calculation {
+	getCalculationsByCategoryName := func(categoryName string) ([]types.Calculation, error) {
+		var calcs []types.Calculation
+		for _, calculation := range GetCalculationData() {
+			if calculation.Category == categoryName {
+				calcs = append(calcs, calculation)
+			}
+		}
+		if len(calcs) == 0 {
+			return calcs, errors.New("no calculations found, category name may be incorrect")
+		}
+		return calcs, nil
+	}
+
 	calcs, err := getCalculationsByCategoryName(category)
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
 	return calcs
+}
+
+func GetCategoryData() []types.Category {
+	return categories
 }
