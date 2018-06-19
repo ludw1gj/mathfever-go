@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "amd",
+    "module": "System",
     "target": "es5",
     "outFile": "./public/scripts/build/build.js",
     "removeComments": true,
@@ -8,10 +8,6 @@
     "noImplicitReturns": true,
     "noImplicitAny": false
   },
-  "include": [
-    "./public/scripts/src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["./public/scripts/src/**/*"],
+  "exclude": ["node_modules"]
 }
