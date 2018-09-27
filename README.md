@@ -12,10 +12,10 @@ oxtoacart/bpool
 # Get the code and dependencies
 go get github.com/gorilla/mux
 go get github.com/oxtoacart/bpool
-go get github.com/robertjeffs/mathfever-go
+go get github.com/ludw1gj/mathfever-go
 
-# Navigate to the github.com/robertjeffs/mathfever-go directory
-cd {GO-PATH}/github.com/robertjeffs/mathfever-go
+# Navigate to the github.com/ludw1gj/mathfever-go directory
+cd {GO-PATH}/github.com/ludw1gj/mathfever-go
 
 # To run the project without building (access via localhost:8000)
 go run main.go
