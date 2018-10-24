@@ -2,5 +2,6 @@
 .idea
 
 # Other
+main
 /mathfever-go
 .DS_Store
