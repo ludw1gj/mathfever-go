@@ -11,11 +11,11 @@ RUN go get github.com/oxtoacart/bpool
 RUN apk del .build-deps
 
 # Copy files and install
-COPY . /go/src/github.com/robertjeffs/mathfever-go
-RUN go install github.com/robertjeffs/mathfever-go
+COPY . /go/src/github.com/ludw1gj/mathfever-go
+RUN go install github.com/ludw1gj/mathfever-go
 
 # Set working directory so relative go templates work properly
-WORKDIR /go/src/github.com/robertjeffs/mathfever-go
+WORKDIR /go/src/github.com/ludw1gj/mathfever-go
 
 # Run app and expose port
 ENTRYPOINT /go/bin/mathfever-go

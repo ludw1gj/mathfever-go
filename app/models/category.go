@@ -3,8 +3,8 @@ package models
 import (
 	"errors"
 
-	"github.com/robertjeffs/mathfever-go/app/models/data"
-	"github.com/robertjeffs/mathfever-go/app/models/types"
+	"github.com/ludw1gj/mathfever-go/app/models/data"
+	"github.com/ludw1gj/mathfever-go/app/models/types"
 )
 
 // GetAllCategories returns all categories.

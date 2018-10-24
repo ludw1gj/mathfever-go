@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/robertjeffs/mathfever-go/app/models"
-	"github.com/robertjeffs/mathfever-go/app/templates"
+	"github.com/ludw1gj/mathfever-go/app/models"
+	"github.com/ludw1gj/mathfever-go/app/templates"
 )
 
 // SiteController contains handlers methods and templates they render.

@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"reflect"
 
-	"github.com/robertjeffs/mathfever-go/app/api/mathematics"
-	"github.com/robertjeffs/mathfever-go/app/models"
+	"github.com/ludw1gj/mathfever-go/app/api/mathematics"
+	"github.com/ludw1gj/mathfever-go/app/models"
 )
 
 type errorJSON struct {

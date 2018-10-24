@@ -1,7 +1,7 @@
 package mathematics
 
 import (
-	"github.com/robertjeffs/mathfever-go/app/api/calculation"
+	"github.com/ludw1gj/mathfever-go/app/api/calculation"
 )
 
 // Mathematics type is for standardising the execution of calculation functions.

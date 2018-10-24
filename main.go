@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/robertjeffs/mathfever-go/app/router"
+	"github.com/ludw1gj/mathfever-go/app/router"
 )
 
 func main() {

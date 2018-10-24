@@ -3,7 +3,7 @@ package types
 import (
 	"html/template"
 
-	"github.com/robertjeffs/mathfever-go/app/api/mathematics"
+	"github.com/ludw1gj/mathfever-go/app/api/mathematics"
 )
 
 // Calculation holds information about a calculation

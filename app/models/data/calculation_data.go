@@ -6,8 +6,8 @@ import (
 	"log"
 	"reflect"
 
-	"github.com/robertjeffs/mathfever-go/app/api/mathematics"
-	"github.com/robertjeffs/mathfever-go/app/models/types"
+	"github.com/ludw1gj/mathfever-go/app/api/mathematics"
+	"github.com/ludw1gj/mathfever-go/app/models/types"
 )
 
 var (

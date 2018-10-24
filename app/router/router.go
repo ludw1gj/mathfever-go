@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/robertjeffs/mathfever-go/app/controllers"
-	"github.com/robertjeffs/mathfever-go/app/templates"
+	"github.com/ludw1gj/mathfever-go/app/controllers"
+	"github.com/ludw1gj/mathfever-go/app/templates"
 )
 
 // Load returns a router instance with routes and a file server.
