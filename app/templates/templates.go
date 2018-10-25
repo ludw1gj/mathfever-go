@@ -120,6 +120,7 @@ func Render(w http.ResponseWriter, st SiteTemplates, name string, serverStatus i
 	// Ensure the template exists in the map.
 	tpl, ok := st.templates[name]
 	if !ok {
+		log.Println("incorrect template name queried in templates map: ", name)
 		renderError(w, st)
 		return
 	}
@@ -130,7 +131,7 @@ func Render(w http.ResponseWriter, st SiteTemplates, name string, serverStatus i
 
 	err := tpl.ExecuteTemplate(buffer, "base.gohtml", data)
 	if err != nil {
-		log.Println("template render errror: ", err.Error())
+		log.Println("template render error: ", err.Error())
 		renderError(w, st)
 		return
 	}

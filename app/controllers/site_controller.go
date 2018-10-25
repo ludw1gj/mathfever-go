@@ -74,5 +74,5 @@ func (sc SiteController) CalculationPageHandler(w http.ResponseWriter, r *http.R
 
 // NotFoundPageHandler returns a 404 error to the client and renders the not found page.
 func (sc SiteController) NotFoundPageHandler(w http.ResponseWriter, _ *http.Request) {
-	templates.Render(w, sc.Tmpls, "notFoundPage", http.StatusNotFound, nil)
+	templates.Render(w, sc.Tmpls, "notFound", http.StatusNotFound, nil)
 }
