@@ -10,43 +10,43 @@ import (
 var (
 	categories = []types.Category{
 		{
-			"Networking",
-			"networking",
-			"/category/networking",
-			"/public/images/category/networking.jpg",
-			"Calculations that you might use for Networking/Computer Science: Binary to Decimal, Binary " +
+			Name:     "Networking",
+			Slug:     "networking",
+			URL:      "/category/networking",
+			ImageURL: "/public/images/category/networking.jpg",
+			Description: "Calculations that you might use for Networking/Computer Science: Binary to Decimal, Binary " +
 				"to Hexadecimal, Decimal to Binary, Decimal to Hexadecimal, Hexadecimal to Binary, and " +
 				"Hexadecimal to Decimal.",
-			getCalculationsForCategory("Networking"),
+			Calculations: getCalculationsForCategory("Networking"),
 		},
 		{
-			"Primes and Factors",
-			"primes-and-factors",
-			"/category/primes-and-factors",
-			"/public/images/category/numbers.jpg",
-			"Calculations about numbers! Find Highest Common Factor, find Lowest Common Multiple, and " +
+			Name:     "Primes and Factors",
+			Slug:     "primes-and-factors",
+			URL:      "/category/primes-and-factors",
+			ImageURL: "/public/images/category/numbers.jpg",
+			Description: "Calculations about numbers! Find Highest Common Factor, find Lowest Common Multiple, and " +
 				"figuring out Prime Numbers.",
-			getCalculationsForCategory("Primes and Factors"),
+			Calculations: getCalculationsForCategory("Primes and Factors"),
 		},
 		{
-			"Percentages",
-			"percentages",
-			"/category/percentages",
-			"/public/images/category/percentages.jpg",
-			"Calculations for percentages! Find the value from a percentage, find a percentage from a " +
+			Name:     "Percentages",
+			Slug:     "percentages",
+			URL:      "/category/percentages",
+			ImageURL: "/public/images/category/percentages.jpg",
+			Description: "Calculations for percentages! Find the value from a percentage, find a percentage from a " +
 				"value, or find the percentage change between two values.",
-			getCalculationsForCategory("Percentages"),
+			Calculations: getCalculationsForCategory("Percentages"),
 		},
 		{
-			"Total Surface Area",
-			"total-surface-area",
-			"/category/total-surface-area",
-			"/public/images/category/tsa.jpg",
-			"Calculations that you might use for Total Surface Area: Pythagorean Theorem (also known as " +
+			Name:     "Total Surface Area",
+			Slug:     "total-surface-area",
+			URL:      "/category/total-surface-area",
+			ImageURL: "/public/images/category/tsa.jpg",
+			Description: "Calculations that you might use for Total Surface Area: Pythagorean Theorem (also known as " +
 				"Pythagoras's Theorem), Total Surface Area of Cone, Total Surface Area of Cube, Total Surface " +
 				"Area of Cylinder, Total Surface Area of Rectangular Prism, Total Surface Area of Sphere, and " +
 				"Total Surface Area of Square Based Triangle.",
-			getCalculationsForCategory("Total Surface Area"),
+			Calculations: getCalculationsForCategory("Total Surface Area"),
 		},
 	}
 )
@@ -72,6 +72,7 @@ func getCalculationsForCategory(category string) []types.Calculation {
 	return calcs
 }
 
+// GetCategoryData gets all data of categories.
 func GetCategoryData() []types.Category {
 	return categories
 }

@@ -30,12 +30,12 @@ func validateFloat(positiveOnly bool, floats ...float64) error {
 		case false:
 			if n > 999999999999 {
 				return fmt.Errorf("please enter a valid decimal number, greater than 0 and less than "+
-					"1'000'000'000'000: %d", n)
+					"1'000'000'000'000: %f", n)
 			}
 		case true:
 			if n < 1 || n > 999999999999 {
 				return fmt.Errorf("please enter a valid decimal number, greater than 0 and less than "+
-					"1'000'000'000'000: %d", n)
+					"1'000'000'000'000: %f", n)
 			}
 		}
 	}
