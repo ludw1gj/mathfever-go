@@ -17,20 +17,26 @@ func Load() *mux.Router {
 	fs := http.FileServer(http.Dir("./public"))
 	r.PathPrefix("/public/").Handler(http.StripPrefix("/public/", fs))
 
-	// controllers
-	sc := controllers.SiteController{Tmpls: templates.CreateSiteTemplates()}
+	siteTmpls := templates.CreateSiteTemplates()
+
+	handlerWrapper := func(siteHandler controllers.SiteHandler) func(http.ResponseWriter,
+		*http.Request) {
+		return func(w http.ResponseWriter, r *http.Request) {
+			siteHandler(w, r, siteTmpls)
+		}
+	}
 
 	// site routes
-	r.HandleFunc("/", sc.HomePageHandler).Methods("GET")
-	r.HandleFunc("/about", sc.AboutPageHandler).Methods("GET")
-	r.HandleFunc("/help", sc.HelpPageHandler).Methods("GET")
-	r.HandleFunc("/privacy", sc.PrivacyPageHandler).Methods("GET")
-	r.HandleFunc("/terms", sc.TermsPageHandler).Methods("GET")
-	r.HandleFunc("/message-board", sc.MessageBoardPageHandler).Methods("GET")
-	r.HandleFunc("/category/networking/conversion-table", sc.ConversionTablePageHandler).Methods("GET")
-	r.HandleFunc("/category/{category}", sc.CategoryPageHandler).Methods("GET")
-	r.HandleFunc("/category/{category}/{calculation}", sc.CalculationPageHandler).Methods("GET")
-	r.NotFoundHandler = http.HandlerFunc(sc.NotFoundPageHandler)
+	r.HandleFunc("/", handlerWrapper(controllers.HomePageHandler)).Methods("GET")
+	r.HandleFunc("/about", handlerWrapper(controllers.AboutPageHandler)).Methods("GET")
+	r.HandleFunc("/help", handlerWrapper(controllers.HelpPageHandler)).Methods("GET")
+	r.HandleFunc("/privacy", handlerWrapper(controllers.PrivacyPageHandler)).Methods("GET")
+	r.HandleFunc("/terms", handlerWrapper(controllers.TermsPageHandler)).Methods("GET")
+	r.HandleFunc("/message-board", handlerWrapper(controllers.MessageBoardPageHandler)).Methods("GET")
+	r.HandleFunc("/category/networking/conversion-table", handlerWrapper(controllers.ConversionTablePageHandler)).Methods("GET")
+	r.HandleFunc("/category/{category}", handlerWrapper(controllers.CategoryPageHandler)).Methods("GET")
+	r.HandleFunc("/category/{category}/{calculation}", handlerWrapper(controllers.CalculationPageHandler)).Methods("GET")
+	r.NotFoundHandler = http.HandlerFunc(handlerWrapper(controllers.NotFoundPageHandler))
 
 	// api routes
 	apiRouter := r.PathPrefix("/api").Subrouter()
